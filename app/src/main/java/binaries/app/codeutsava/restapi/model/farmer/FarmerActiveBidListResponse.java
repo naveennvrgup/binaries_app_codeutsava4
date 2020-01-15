@@ -13,8 +13,13 @@ public class FarmerActiveBidListResponse implements Serializable {
     public String description;
     public String deadline;
     public Buyer buyer;
+    public Type type;
 
-    class Buyer {
+    public class Type {
+        public String type;
+    }
+
+    public class Buyer {
 
         public String name;
         public String contact;

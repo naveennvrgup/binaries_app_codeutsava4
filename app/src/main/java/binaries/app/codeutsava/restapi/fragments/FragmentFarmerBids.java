@@ -4,6 +4,8 @@ package binaries.app.codeutsava.restapi.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.adapters.AdapterActiveBid;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
@@ -28,7 +31,8 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentFarmerBids extends Fragment {
-    TextView textView;
+    RecyclerView recyclerView;
+    AdapterActiveBid mAdapter;
 
     public FragmentFarmerBids() {
         // Required empty public constructor
@@ -39,8 +43,11 @@ public class FragmentFarmerBids extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_farmer_bids, container, false);
+        View view = inflater.inflate(R.layout.fragment_farmer_bids, container, false);
+        recyclerView = view.findViewById(R.id.ABRecyclerView);
+
         getFarmerActiveBids();
+
 
         return view;
     }
@@ -52,7 +59,12 @@ public class FragmentFarmerBids extends Fragment {
         call.enqueue(new Callback<List<FarmerActiveBidListResponse>>() {
             @Override
             public void onResponse(Call<List<FarmerActiveBidListResponse>> call, Response<List<FarmerActiveBidListResponse>> response) {
-                Toast.makeText(getContext(), response.body().toString(), Toast.LENGTH_LONG).show();
+                mAdapter = new AdapterActiveBid(response.body(), getContext());
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+
+                //Toast.makeText(getContext(), response.body().toString(), Toast.LENGTH_LONG).show();
             }
 
             @Override
