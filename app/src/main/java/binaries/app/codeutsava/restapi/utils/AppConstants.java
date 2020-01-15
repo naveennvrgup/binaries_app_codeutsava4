@@ -6,6 +6,7 @@ public class AppConstants {
     public static final String LOGIN_URL = "user/rest-auth/login/";
     public static final String FARMER_DETAIL_URL="user/farmer-detail/";
     public static final String FARMER_BID_LIST_URL="transaction/active_bid/";
+    public static final String FARMER_PRODUCE_LIST_URL="transaction/produce/";
 
 
     //TOKEN
