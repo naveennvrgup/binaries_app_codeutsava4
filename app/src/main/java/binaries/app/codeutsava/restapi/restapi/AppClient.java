@@ -5,6 +5,7 @@ import android.app.Activity;
 
 import java.util.concurrent.TimeUnit;
 
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -28,7 +29,7 @@ public class AppClient {
         OkHttpClient client = httpClient.build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(" ").client(client)
+                .baseUrl(AppConstants.BASE_URL).client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
