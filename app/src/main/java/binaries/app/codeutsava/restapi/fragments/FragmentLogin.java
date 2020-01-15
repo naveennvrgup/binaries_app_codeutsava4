@@ -26,7 +26,7 @@ import retrofit2.Response;
  */
 public class FragmentLogin extends Fragment {
     EditText editTextUsername, editTextPassword;
-    Button buttonLogin;
+    Button buttonLogin,buttonLoginToSignup;
     LoginPayload loginPayload;
 
     public FragmentLogin() {
@@ -40,9 +40,10 @@ public class FragmentLogin extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        editTextUsername=view.findViewById(R.id.authUsernameEditText);
-        editTextPassword=view.findViewById(R.id.authPasswordEditText);
-        buttonLogin=view.findViewById(R.id.authLoginBtn);
+        editTextUsername=view.findViewById(R.id.loginUsernameEditText);
+        editTextPassword=view.findViewById(R.id.loginPasswordEditText);
+        buttonLogin=view.findViewById(R.id.loginBtn);
+        buttonLoginToSignup=view.findViewById(R.id.loginToSignupFragBtn);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override

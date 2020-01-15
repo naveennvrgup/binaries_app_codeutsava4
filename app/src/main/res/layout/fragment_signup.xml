@@ -16,7 +16,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/authHelloThere"
+                android:id="@+id/signupHelloThere"
                 style="@style/AuthBoldTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -24,120 +24,127 @@
                 android:text="Hello there" />
 
             <TextView
-                android:id="@+id/authLoginTitle"
+                android:id="@+id/signupTitle"
                 style="@style/AuthBoldTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/authHelloThere"
+                android:layout_below="@id/signupHelloThere"
                 android:text="Join us!!" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/authUsernameTextInputLayout"
+                android:id="@+id/signupUsernameTextInputLayout"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/authLoginTitle"
+                android:layout_below="@id/signupTitle"
                 android:layout_marginTop="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/signupUsernameEditText"
                     android:hint="Username" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/authPasswordTextInputLayout"
+                android:id="@+id/signupPasswordTextInputLayout"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/authUsernameTextInputLayout">
+                android:layout_below="@+id/signupUsernameTextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/signupPasswordEditText"
                     android:hint="Password" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/authContactTextInputLayout"
+                android:id="@+id/signupContactTextInputLayout"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/authPasswordTextInputLayout">
+                android:layout_below="@id/signupPasswordTextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/signupContactEditText"
                     android:hint="Contact" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/authAddressTextInputLayout"
+                android:id="@+id/signupAddressTextInputLayout"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/authContactTextInputLayout">
+                android:layout_below="@+id/signupContactTextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/signupAddressEditText"
                     android:hint="Address" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/authCityTextInputLayout"
+                android:id="@+id/signupCityTextInputLayout"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/authAddressTextInputLayout">
+                android:layout_below="@id/signupAddressTextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/signupCityEditText"
                     android:hint="City" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/authStateTextInputLayout"
+                android:id="@+id/signupStateTextInputLayout"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/authCityTextInputLayout">
+                android:layout_below="@id/signupCityTextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/signupStateEditText"
                     android:hint="State" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/authAdhaarTextInputLayout"
+                android:id="@+id/signupAdhaarTextInputLayout"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/authStateTextInputLayout">
+                android:layout_below="@+id/signupStateTextInputLayout">
 
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/signupAdhaarEditText"
                     android:hint="Adhaar no" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <EditText
-                android:id="@+id/authDOB"
+                android:id="@+id/signupDOB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/authAdhaarTextInputLayout"
+                android:layout_below="@+id/signupAdhaarTextInputLayout"
                 android:layout_marginTop="10dp"
                 android:ems="10"
                 android:hint="Date of Birth"
@@ -145,26 +152,26 @@
 
 
             <Spinner
-                android:id="@+id/authUserTypeSpinner"
-                android:layout_below="@id/authDOB"
+                android:id="@+id/signupUserTypeSpinner"
+                android:layout_below="@id/signupDOB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <Button
-                android:id="@+id/authSignupBtn"
+                android:id="@+id/signupBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/authUserTypeSpinner"
+                android:layout_below="@id/signupUserTypeSpinner"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:text="Signup" />
 
 
             <Button
-                android:id="@+id/authToLoginFragBtn"
+                android:id="@+id/signupToLoginFragBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/authSignupBtn"
+                android:layout_below="@id/signupBtn"
                 android:layout_marginTop="30dp"
                 android:text="Own a account? Login" />
 

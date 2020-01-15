@@ -7,7 +7,7 @@
     tools:context=".restapi.fragments.FragmentLogin">
 
     <TextView
-        android:id="@+id/authWelcomeBack"
+        android:id="@+id/loginWelcomeBack"
         style="@style/AuthBoldTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,36 +17,36 @@
         android:text="Welcome Back" />
 
     <TextView
-        android:id="@+id/authLoginTitle"
+        android:id="@+id/loginLoginTitle"
         style="@style/AuthBoldTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/authWelcomeBack"
+        android:layout_below="@+id/loginWelcomeBack"
         android:text="Login!!" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/authUsernameTextInputLayout"
+        android:id="@+id/loginUsernameTextInputLayout"
 
-        android:layout_below="@+id/authLoginTitle"
+        android:layout_below="@+id/loginLoginTitle"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/authUsernameEditText"
+            android:id="@+id/loginUsernameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Phone Number" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/authPasswordTextInputLayout"
+        android:id="@+id/loginPasswordTextInputLayout"
 
-        android:layout_below="@+id/authUsernameTextInputLayout"
+        android:layout_below="@+id/loginUsernameTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/authPasswordEditText"
+            android:id="@+id/loginPasswordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password" />
@@ -54,16 +54,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/authLoginBtn"
+        android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/authPasswordTextInputLayout"
+        android:layout_below="@+id/loginPasswordTextInputLayout"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:text="Login" />
 
     <Button
-        android:id="@+id/authToSignupFragBtn"
+        android:id="@+id/loginToSignupFragBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
