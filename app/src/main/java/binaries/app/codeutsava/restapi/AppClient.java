@@ -3,12 +3,14 @@ package binaries.app.codeutsava.restapi.restapi;
 
 import android.app.Activity;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import binaries.app.codeutsava.restapi.utils.AppConstants;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -31,6 +33,7 @@ public class AppClient {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppConstants.BASE_URL).client(client)
                 .addConverterFactory(GsonConverterFactory.create())
+
                 .build();
 
         return retrofit.create(serviceClass);
@@ -58,6 +61,17 @@ public class AppClient {
 
     private OkHttpClient.Builder getOKHttpClient() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+
+        httpClient.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request=chain.request()
+                        .newBuilder()
+                        .addHeader("Authorization",AppConstants.TEMP_FARM_TOKEN)
+                        .build();
+                return chain.proceed(request);
+            }
+        });
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
