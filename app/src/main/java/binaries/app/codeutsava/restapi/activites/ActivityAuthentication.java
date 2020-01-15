@@ -32,7 +32,7 @@ public class ActivityAuthentication extends AppCompatActivity {
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                Toast.makeText(getApplicationContext(), response.body().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), response.body().getKey(), Toast.LENGTH_LONG).show();
             }
 
             @Override

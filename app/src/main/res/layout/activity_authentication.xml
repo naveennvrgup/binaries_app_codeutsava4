@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/authLoginFragment"
-        tools:layout="@layout/fragment_login"
-        android:name="binaries.app.codeutsava.restapi.fragments.FragmentLogin"
+        tools:layout="@layout/fragment_signup"
+        android:name="binaries.app.codeutsava.restapi.fragments.FragmentSignup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>
