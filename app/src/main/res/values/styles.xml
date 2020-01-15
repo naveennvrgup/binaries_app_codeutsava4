@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AuthBoldTitle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">40dp</item>
+    </style>
+
 </resources>

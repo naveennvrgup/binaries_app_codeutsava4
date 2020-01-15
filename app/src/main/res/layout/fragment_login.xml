@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".restapi.fragments.FragmentLogin">
+
+    <TextView
+        android:id="@+id/authWelcomeBack"
+        style="@style/AuthBoldTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="43dp"
+        android:text="Welcome Back" />
+
+    <TextView
+        android:id="@+id/authLoginTitle"
+        style="@style/AuthBoldTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/authWelcomeBack"
+        android:layout_alignStart="@+id/authWelcomeBack"
+        android:layout_marginTop="10dp"
+        android:text="Login!!" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/authUsernameTextInputLayout"
+
+        android:layout_below="@+id/authLoginTitle"
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="50dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/authPasswordTextInputLayout"
+
+        android:layout_below="@+id/authUsernameTextInputLayout"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="50dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/authLoginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/authPasswordTextInputLayout"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="Login" />
+
+    <Button
+        android:id="@+id/authToSignupFragBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="Don't have account? Signup" />
+
+
+</RelativeLayout>
