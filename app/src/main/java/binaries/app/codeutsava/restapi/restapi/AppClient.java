@@ -1,4 +1,4 @@
-package binaries.app.codeutsava.restapi;
+package binaries.app.codeutsava.restapi.restapi;
 
 
 import android.app.Activity;
