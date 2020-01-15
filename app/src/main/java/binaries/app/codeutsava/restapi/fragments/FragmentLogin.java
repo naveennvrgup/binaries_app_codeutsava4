@@ -74,10 +74,6 @@ public class FragmentLogin extends Fragment {
         loginPayload.setUsername(editTextUsername.getText().toString());
         loginPayload.setPassword(editTextUsername.getText().toString());
 
-        loginPayload.setUsername("8940073123");
-        loginPayload.setPassword("jervismk2");
-
-
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
         Call<LoginResponse> call = apiServices.sendLoginRequest(loginPayload);
 
