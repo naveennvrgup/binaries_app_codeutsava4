@@ -1,4 +1,4 @@
-package binaries.app.codeutsava.restapi.activites;
+package binaries.app.codeutsava.activites;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,12 +7,6 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import binaries.app.codeutsava.R;
-import binaries.app.codeutsava.restapi.fragments.FragmentLogin;
-import binaries.app.codeutsava.restapi.fragments.FragmentSignup;
-import binaries.app.codeutsava.restapi.model.auth.LoginPayload;
-import binaries.app.codeutsava.restapi.model.auth.LoginResponse;
-import binaries.app.codeutsava.restapi.restapi.APIServices;
-import binaries.app.codeutsava.restapi.restapi.AppClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,10 +18,10 @@ public class ActivityAuthentication extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
 
-        FragmentLogin fragmentLogin=new FragmentLogin();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.authFrameLayout,fragmentLogin)
-                .commit();
+//        FragmentLogin fragmentLogin=new FragmentLogin();
+//        getSupportFragmentManager().beginTransaction()
+//                .add(R.id.authFrameLayout,fragmentLogin)
+//                .commit();
 
 
 //        LoginPayload loginPayload=new LoginPayload();

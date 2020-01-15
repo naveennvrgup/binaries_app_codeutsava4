@@ -1,4 +1,4 @@
-package binaries.app.codeutsava.restapi.fragments;
+package binaries.app.codeutsava.fragments;
 
 
 import android.content.Context;
@@ -46,16 +46,16 @@ public class FragmentLogin extends Fragment {
         buttonLoginToSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
-                FragmentSignup fragmentSignup=new FragmentSignup();
-
-                fragmentManager.beginTransaction()
-                        .add(R.id.authFrameLayout,fragmentSignup)
-                        .commit();
-
-                fragmentManager.beginTransaction()
-                        .remove(fragmentManager.findFragmentById(R.id.authFrameLayout))
-                        .commit();
+//                FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+//                FragmentSignup fragmentSignup=new FragmentSignup();
+//
+//                fragmentManager.beginTransaction()
+//                        .add(R.id.authFrameLayout,fragmentSignup)
+//                        .commit();
+//
+//                fragmentManager.beginTransaction()
+//                        .remove(fragmentManager.findFragmentById(R.id.authFrameLayout))
+//                        .commit();
             }
         });
 

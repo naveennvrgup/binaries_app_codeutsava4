@@ -1,4 +1,4 @@
-package binaries.app.codeutsava.restapi.fragments;
+package binaries.app.codeutsava.fragments;
 
 
 import android.content.Context;
@@ -50,22 +50,22 @@ public class FragmentSignup extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerUserType.setAdapter(adapter);
 
-        buttonToLoginFrag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
-                FragmentLogin fragmentLogin=new FragmentLogin();
-
-                fragmentManager.beginTransaction()
-                        .add(R.id.authFrameLayout, fragmentLogin)
-                        .commit();
-
-                FragmentSignup fragmentSignup=(FragmentSignup)fragmentManager.findFragmentById(R.id.authFrameLayout);
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .remove(fragmentSignup)
-                        .commit();
-            }
-        });
+//        buttonToLoginFrag.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+////                FragmentLogin fragmentLogin=new binaries.app.codeutsava.restapi.fragments.FragmentLogin();
+////
+////                fragmentManager.beginTransaction()
+////                        .add(R.id.authFrameLayout, fragmentLogin)
+////                        .commit();
+////
+////                FragmentSignup fragmentSignup=(FragmentSignup)fragmentManager.findFragmentById(R.id.authFrameLayout);
+////                getActivity().getSupportFragmentManager().beginTransaction()
+////                        .remove(fragmentSignup)
+////                        .commit();
+////            }
+////        });
 
         return view;
     }
