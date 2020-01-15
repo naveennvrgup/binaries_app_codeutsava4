@@ -4,72 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3d315b"
-    tools:context=".restapi.activites.ActivityFarmer">
+    android:background="@color/dashboardBg"
+    tools:context=".restapi.activites.ActivityFarmer"
+    android:id="@+id/farmerDashboard">
     <ImageView
+        android:id="@+id/menu_icon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/menu_icon" />
 
-    <LinearLayout
-        android:id="@+id/bottom_menu"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="4dp"
-            android:layout_marginStart="165dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/line" />
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        app:cardCornerRadius="14dp">
 
         <LinearLayout
+            android:id="@+id/bottomFarmerMenu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:background="#FFFFFF">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/farmer_icon" />
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="4dp"
+                android:layout_marginStart="140dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/line" />
 
             <LinearLayout
+                android:id="@+id/farmerMenuUserData"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="10dp"
+                android:padding="6dp"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/farmer_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:text="Rushikesh Pupale"
-                    android:textSize="18dp" />
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/farmer_icon"
+                    android:padding="0dp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Farmer"
-                    android:textSize="14dp" />
-                <!-- Put the farmer icon and foodgrain image here -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/farmer_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:text="Rushikesh Pupale"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Farmer"
+                        android:textSize="14dp" />
+                    <!-- Put the farmer icon and foodgrain image here -->
+                </LinearLayout>
+
             </LinearLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/farmerMenuRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp"/>
+
         </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/farmer_menu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
 </RelativeLayout>
