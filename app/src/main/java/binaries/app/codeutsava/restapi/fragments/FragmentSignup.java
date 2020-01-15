@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,11 +25,6 @@ public class FragmentSignup extends Fragment {
     EditText editTextUsername, editTextPassword, editTextContact, editTextAddress,
             editTextCity, editTextState, editTextAdhaar, editTextDOB;
     Button buttonLogin, buttonToLoginFrag;
-    Context context;
-
-    public FragmentSignup() {
-        // Required empty public constructor
-    }
 
 
     @Override
@@ -49,10 +45,27 @@ public class FragmentSignup extends Fragment {
         buttonLogin= view.findViewById(R.id.signupBtn);
         buttonToLoginFrag= view.findViewById(R.id.signupToLoginFragBtn);
 
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-//                R.array.user_types, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerUserType.setAdapter(adapter);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.user_types, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUserType.setAdapter(adapter);
+
+        buttonToLoginFrag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+                FragmentLogin fragmentLogin=new FragmentLogin();
+
+                fragmentManager.beginTransaction()
+                        .add(R.id.authFrameLayout, fragmentLogin)
+                        .commit();
+
+                FragmentSignup fragmentSignup=(FragmentSignup)fragmentManager.findFragmentById(R.id.authFrameLayout);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .remove(fragmentSignup)
+                        .commit();
+            }
+        });
 
         return view;
     }

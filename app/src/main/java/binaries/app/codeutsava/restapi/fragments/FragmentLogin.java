@@ -1,9 +1,11 @@
 package binaries.app.codeutsava.restapi.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,12 +28,9 @@ import retrofit2.Response;
  */
 public class FragmentLogin extends Fragment {
     EditText editTextUsername, editTextPassword;
-    Button buttonLogin,buttonLoginToSignup;
+    Button buttonLogin, buttonLoginToSignup;
     LoginPayload loginPayload;
-
-    public FragmentLogin() {
-        // Required empty public constructor
-    }
+    Context context;
 
 
     @Override
@@ -40,38 +39,47 @@ public class FragmentLogin extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        editTextUsername=view.findViewById(R.id.loginUsernameEditText);
-        editTextPassword=view.findViewById(R.id.loginPasswordEditText);
-        buttonLogin=view.findViewById(R.id.loginBtn);
-        buttonLoginToSignup=view.findViewById(R.id.loginToSignupFragBtn);
+        editTextUsername = view.findViewById(R.id.loginUsernameEditText);
+        editTextPassword = view.findViewById(R.id.loginPasswordEditText);
+        buttonLogin = view.findViewById(R.id.loginBtn);
+        buttonLoginToSignup = view.findViewById(R.id.loginToSignupFragBtn);
 
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+        buttonLoginToSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginApiCall();
+                FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+                FragmentSignup fragmentSignup=new FragmentSignup();
+
+                fragmentManager.beginTransaction()
+                        .add(R.id.authFrameLayout,fragmentSignup)
+                        .commit();
+
+                fragmentManager.beginTransaction()
+                        .remove(fragmentManager.findFragmentById(R.id.authFrameLayout))
+                        .commit();
             }
         });
 
         return view;
     }
 
-    private void loginApiCall(){
+    private void loginApiCall() {
         loginPayload.setUsername(editTextUsername.getText().toString());
         loginPayload.setPassword(editTextUsername.getText().toString());
 
-        APIServices apiServices= AppClient.getInstance().createService(APIServices.class);
+        APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
         Call<LoginResponse> call = apiServices.sendLoginRequest(loginPayload);
 
 
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                Toast.makeText(getContext(),response.body().toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), response.body().toString(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(getContext(),t.getMessage().toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), t.getMessage().toString(), Toast.LENGTH_LONG).show();
             }
         });
 

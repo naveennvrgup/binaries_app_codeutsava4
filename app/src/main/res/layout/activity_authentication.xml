@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".restapi.activites.ActivityAuthentication">
 
-    <fragment
-        android:id="@+id/authLoginFragment"
-        tools:layout="@layout/fragment_signup"
-        android:name="binaries.app.codeutsava.restapi.fragments.FragmentSignup"
+    <FrameLayout
+        android:id="@+id/authFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>

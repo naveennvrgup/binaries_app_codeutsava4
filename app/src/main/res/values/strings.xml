@@ -7,6 +7,7 @@
         <item>Warehouse Owner</item>
         <item>NGO</item>
         <item>Delivery Partner</item>
+        <item>Center Administrator</item>
     </string-array>
 
 </resources>
