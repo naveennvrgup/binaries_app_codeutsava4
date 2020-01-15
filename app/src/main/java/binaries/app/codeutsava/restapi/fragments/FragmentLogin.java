@@ -29,7 +29,6 @@ import retrofit2.Response;
 public class FragmentLogin extends Fragment {
     EditText editTextUsername, editTextPassword;
     Button buttonLogin, buttonLoginToSignup;
-    LoginPayload loginPayload;
     Context context;
 
 
@@ -60,12 +59,24 @@ public class FragmentLogin extends Fragment {
             }
         });
 
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginApiCall();
+            }
+        });
+
         return view;
     }
 
-    private void loginApiCall() {
+    public void loginApiCall() {
+        LoginPayload loginPayload=new LoginPayload();
         loginPayload.setUsername(editTextUsername.getText().toString());
         loginPayload.setPassword(editTextUsername.getText().toString());
+
+        loginPayload.setUsername("8940073123");
+        loginPayload.setPassword("jervismk2");
+
 
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
         Call<LoginResponse> call = apiServices.sendLoginRequest(loginPayload);
@@ -74,7 +85,7 @@ public class FragmentLogin extends Fragment {
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                Toast.makeText(getContext(), response.body().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), response.body().getKey(), Toast.LENGTH_LONG).show();
             }
 
             @Override
