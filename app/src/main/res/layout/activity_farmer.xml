@@ -5,52 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".restapi.activites.ActivityFarmer">
-
-
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <Button
-            android:id="@+id/producebtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="produce" />
-
-        <Button
-            android:id="@+id/ordersbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="orders" />
-
-        <Button
-            android:id="@+id/activebidsbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="active bids" />
-
-        <Button
-            android:id="@+id/notificationsbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="notifications" />
-
-        <Button
-            android:id="@+id/farmerdetailbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="crop+cycle+revenue(dashboard)" />
-
-        <Button
-            android:id="@+id/farmerdetailbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="farmerdetail" />
-
-        <Button
-            android:id="@+id/infobtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="info" />
-    </LinearLayout>
+        android:id="@+id/farmerFL"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
