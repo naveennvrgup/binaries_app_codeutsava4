@@ -1,4 +1,4 @@
-package binaries.app.codeutsava.restapi.activites;
+package binaries.app.codeutsava.restapi.fragments;
 
 
 import android.os.Bundle;
