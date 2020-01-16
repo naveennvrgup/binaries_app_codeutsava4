@@ -26,7 +26,6 @@ public class FragmentFarmerMenu extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_farmer, container, false);
-        recyclerView = view.findViewById(R.id.farmerMenuRecyclerView);
 
         mAdapter = new AdapterFarmerMenu(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
