@@ -8,22 +8,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
 import binaries.app.codeutsava.R;
-import binaries.app.codeutsava.restapi.fragments.FragmentFarmerBids;
-import binaries.app.codeutsava.restapi.fragments.FragmentFarmerDetail;
-import binaries.app.codeutsava.restapi.fragments.FragmentFarmerFindWarehouse;
-import binaries.app.codeutsava.restapi.fragments.FragmentFarmerMenu;
-import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduce;
+import binaries.app.codeutsava.restapi.fragments.FragmentFarmerBottomSheet;
 
 public class ActivityFarmer extends AppCompatActivity {
 
     ImageView menuButton;
-    boolean menuVisible = false;
-    LinearLayout farmermenuLayout;
-    LinearLayout farmerMenuUserData;
-    RecyclerView farmerMenuRecycler;
+    BottomSheetBehavior sheetBehavior;
+    RelativeLayout bottomSheet;
+
+
 
 
     @Override
@@ -31,17 +31,26 @@ public class ActivityFarmer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmer);
 
-//        FragmentFarmerDetail farmerDetail = new FragmentFarmerDetail();
-//        FragmentFarmerBids farmerBids = new FragmentFarmerBids();
-//        FragmentFarmerProduce frament = new FragmentFarmerProduce();
-        FragmentFarmerFindWarehouse farmerFindWarehouse = new FragmentFarmerFindWarehouse();
-//        FragmentFarmerMenu farmerMenu = new FragmentFarmerMenu();
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.farmerDashboard, farmerFindWarehouse)
-                .commit();
+        bottomSheet = findViewById(R.id.farmerBottomSheet);
+        sheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        menuButton=findViewById(R.id.farmerMenuIcon);
 
+
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                BottomSheetDialogFragment bottomSheetDialogFragment=new FragmentFarmerBottomSheet();
+                bottomSheetDialogFragment.show(getSupportFragmentManager(),"farmerBottomSheet");
+            }
+        });
 
 
     }
+
+    private Context getActivity() {
+        return  ActivityFarmer.this;
+    }
+
 }
