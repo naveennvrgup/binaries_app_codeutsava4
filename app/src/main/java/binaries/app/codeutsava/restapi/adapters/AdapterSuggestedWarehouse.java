@@ -13,13 +13,17 @@ import java.util.Arrays;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.model.farmer.FarmerFindWarehouseResponse;
 
 public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSuggestedWarehouse.ViewHolder> {
-    List<String> warehouseList;
+//    List<String> warehouseList;
+    FarmerFindWarehouseResponse farmerFindWarehouseResponse;
+    List<FarmerFindWarehouseResponse.WarehouseResponse> warehouseList;
     Context context;
 
-    public AdapterSuggestedWarehouse(Context context) {
-        this.warehouseList = Arrays.asList("Profile", "Report Produce", "Find Warehouse", "Profile", "Report Produce");
+    public AdapterSuggestedWarehouse(List<FarmerFindWarehouseResponse.WarehouseResponse>warehouseList, Context context) {
+//        this.warehouseList = Arrays.asList("Profile", "Report Produce", "Find Warehouse", "Profile", "Report Produce");
+        this.warehouseList = warehouseList;
         this.context = context;
     }
 
@@ -34,9 +38,10 @@ public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSugge
 
     @Override
     public void onBindViewHolder(@NonNull AdapterSuggestedWarehouse.ViewHolder holder, int position) {
-        String currWarehouse = warehouseList.get(position);
+        FarmerFindWarehouseResponse.WarehouseResponse currWarehouse = warehouseList.get(position);
 
-        holder.warehouseName.setText(currWarehouse);
+        holder.warehouseName.setText(Integer.toString(currWarehouse.whid));
+        holder.warehouseCost.setText(Double.toString(currWarehouse.price));
 
     }
 

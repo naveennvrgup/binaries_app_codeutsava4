@@ -51,20 +51,20 @@ public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
 
         LinearLayout gotoWarehouse = view.findViewById(R.id.farmerGotoWarehouse);
 
-        gotoWarehouse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-
-                FragmentFarmerFindWarehouse warehouse = new FragmentFarmerFindWarehouse();
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.farmerFragments, warehouse)
-                        .addToBackStack("none")
-                        .commit();
-
-            }
-        });
+//        gotoWarehouse.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dismiss();
+//
+//                FragmentFarmerFindWarehouse warehouse = new FragmentFarmerFindWarehouse();
+//                getActivity().getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.farmerFragments, warehouse)
+//                        .addToBackStack("none")
+//                        .commit();
+//
+//            }
+//        });
 
         LinearLayout gotoProduceList = view.findViewById(R.id.farmergotoProduceList);
 

@@ -7,6 +7,7 @@ public class AppConstants {
     public static final String FARMER_DETAIL_URL="user/farmer-detail/";
     public static final String FARMER_BID_LIST_URL="transaction/active_bid/";
     public static final String FARMER_PRODUCE_LIST_URL="transaction/produce/";
+    public static final String FARMER_FIND_WAREHOUSE_LIST_URL="user/findWarehouse";
 
 
     //TOKEN

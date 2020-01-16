@@ -6,12 +6,14 @@ import binaries.app.codeutsava.restapi.model.auth.LoginPayload;
 import binaries.app.codeutsava.restapi.model.auth.LoginResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
+import binaries.app.codeutsava.restapi.model.farmer.FarmerFindWarehouseResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
 import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface APIServices {
     @POST(AppConstants.LOGIN_URL)
@@ -25,4 +27,7 @@ public interface APIServices {
 
     @GET(AppConstants.FARMER_PRODUCE_LIST_URL)
     Call<List<FarmerProduceResponse>> getFarmerProduceList();
+
+    @GET(AppConstants.FARMER_FIND_WAREHOUSE_LIST_URL + "/{quantity}"+"/{produceid}")
+    Call<FarmerFindWarehouseResponse> getFarmerFindWarehouseList(@Path("quantity")String quantity, @Path("produceid")String produceid);
 }

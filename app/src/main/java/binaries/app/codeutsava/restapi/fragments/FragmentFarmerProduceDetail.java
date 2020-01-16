@@ -77,11 +77,15 @@ public class FragmentFarmerProduceDetail extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-                FragmentFarmerFindWarehouse findWarehousefragment = new FragmentFarmerFindWarehouse();
+                FragmentFarmerFindWarehouse findWarehousefragment = new FragmentFarmerFindWarehouse(
+                        Integer.parseInt(produce.id),
+                        Double.parseDouble(produce.quantity)
+                );
 //
 //                getActivity().getSupportFragmentManager()
 //                        .beginTransaction()
 //                        .remove(getActivity().getSupportFragmentManager().beginTransaction().)
+
 
                 findWarehousefragment.show(getActivity().getSupportFragmentManager(), "warehouse");
             }
