@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import binaries.app.codeutsava.R;
-import binaries.app.codeutsava.restapi.adapters.AdapterFarmerMenu;
+
 import binaries.app.codeutsava.restapi.adapters.AdapterSuggestedWarehouse;
 
 public  class  FragmentFarmerFindWarehouse extends Fragment {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,13 +11,13 @@
         android:layout_height="match_parent"
         android:id="@+id/farmerDashboard"/>
     <ImageView
-        android:id="@+id/menu_icon"
+        android:id="@+id/farmer_menu_icon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/menu_icon" />
 
-
-</RelativeLayout>
+    <include layout="@layout/farmer_sheet_menu"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

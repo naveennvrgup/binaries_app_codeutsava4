@@ -34,8 +34,7 @@ public class ActivityFarmer extends AppCompatActivity {
 
         bottomSheet = findViewById(R.id.farmerBottomSheet);
         sheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        menuButton=findViewById(R.id.farmerMenuIcon);
-
+        menuButton=findViewById(R.id.farmer_menu_icon);
 
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
