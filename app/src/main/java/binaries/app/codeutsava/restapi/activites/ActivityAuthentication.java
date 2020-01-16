@@ -1,9 +1,17 @@
 package binaries.app.codeutsava.restapi.activites;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.PopupMenu;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import binaries.app.codeutsava.R;
@@ -18,37 +26,64 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ActivityAuthentication extends AppCompatActivity {
+    private ScrollView signInScrollView, signUpScrollView;
+    private TextView textSignIn, textSignUp;
+    private CardView authProceed;
+    private Button authDropDown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
 
-        FragmentLogin fragmentLogin=new FragmentLogin();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.authFrameLayout,fragmentLogin)
-                .commit();
+        initViews();
+        setUpOnClickListeners();
+    }
 
+    private void initViews() {
+        signInScrollView = findViewById(R.id.auth_scroll_sign_in);
+        signUpScrollView = findViewById(R.id.auth_scroll_sign_up);
 
-//        LoginPayload loginPayload=new LoginPayload();
-//        loginPayload.setUsername("8940073123");
-//        loginPayload.setPassword("jervismk2");
-//
-//        APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-//        Call<LoginResponse> call = apiServices.sendLoginRequest(loginPayload);
-//
-//
-//        call.enqueue(new Callback<LoginResponse>() {
-//            @Override
-//            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-//                Toast.makeText(getApplicationContext(), response.body().getKey(), Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<LoginResponse> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(), t.getMessage().toString(), Toast.LENGTH_LONG).show();
-//            }
-//        });
+        textSignIn = findViewById(R.id.auth_text_sign_in);
+        textSignUp = findViewById(R.id.auth_text_sign_up);
 
+        authProceed = findViewById(R.id.auth_proceed);
+
+        authDropDown = findViewById(R.id.auth_menu_drop_down);
+    }
+
+    private void setUpOnClickListeners() {
+        textSignIn.setOnClickListener(view -> {
+            signInScrollView.setVisibility(View.VISIBLE);
+
+            textSignIn.setTextColor(getResources().getColor(android.R.color.black));
+            textSignUp.setTextColor(getResources().getColor(android.R.color.darker_gray));
+            signUpScrollView.animate().alpha(0).setDuration(300).setInterpolator(new DecelerateInterpolator()).start();
+            signInScrollView.animate().alpha(1.0f).setDuration(300).setInterpolator(new AccelerateInterpolator()).start();
+
+            signUpScrollView.setVisibility(View.GONE);
+        });
+
+        textSignUp.setOnClickListener(view -> {
+            signUpScrollView.setVisibility(View.VISIBLE);
+
+            textSignIn.setTextColor(getResources().getColor(android.R.color.darker_gray));
+            textSignUp.setTextColor(getResources().getColor(android.R.color.black));
+            signUpScrollView.animate().alpha(1.0f).setDuration(300).setInterpolator(new AccelerateInterpolator()).start();
+            signInScrollView.animate().alpha(0).setDuration(300).setInterpolator(new DecelerateInterpolator()).start();
+
+            signInScrollView.setVisibility(View.GONE);
+        });
+
+        authDropDown.setOnClickListener(view -> {
+            PopupMenu popupMenu = new PopupMenu(ActivityAuthentication.this, authDropDown);
+            popupMenu.getMenuInflater().inflate(R.menu.menu_auth_choice, popupMenu.getMenu());
+            popupMenu.setOnMenuItemClickListener(menuItem -> {
+                authDropDown.setText(menuItem.getTitle());
+                return true;
+            });
+
+            popupMenu.show();
+        });
     }
 }
