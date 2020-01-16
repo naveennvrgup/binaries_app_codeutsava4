@@ -1,5 +1,20 @@
 <resources>
     <string name="app_name">BinariesAppCodeutsava4</string>
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda aut beatae cum dignissimos doloribus ducimus eum, fugiat hic id, molestias porro quia, repudiandae. Delectus in sed veniam. Praesentium, reprehenderit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda aut beatae cum dignissimos doloribus ducimus eum, fugiat hic id, molestias porro quia, repudiandae. Delectus in sed veniam. Praesentium, reprehenderit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda aut beatae cum dignissimos doloribus ducimus eum, fugiat hic id, molestias porro quia, repudiandae. Delectus in sed veniam. Praesentium, reprehenderit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda aut beatae cum dignissimos doloribus ducimus eum, fugiat hic id, molestias porro quia, repudiandae. Delectus in sed veniam. Praesentium, reprehenderit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda aut beatae cum dignissimos doloribus ducimus eum, fugiat hic id, molestias porro quia, repudiandae. Delectus in sed veniam. Praesentium, reprehenderit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda aut beatae cum dignissimos doloribus ducimus eum, fugiat hic id, molestias porro quia, repudiandae. Delectus in sed veniam. Praesentium, reprehenderit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda aut beatae cum dignissimos doloribus ducimus eum, fugiat hic id, molestias porro quia, repudiandae. Delectus in sed veniam. Praesentium, reprehenderit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda aut beatae cum dignissimos doloribus ducimus eum, fugiat hic id, molestias porro quia, repudiandae. Delectus in sed veniam. Praesentium, reprehenderit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda aut beatae cum dignissimos doloribus ducimus eum, fugiat hic id, molestias porro quia, repudiandae. Delectus in sed veniam. Praesentium, reprehenderit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda aut beatae cum dignissimos doloribus ducimus eum, fugiat hic id, molestias porro quia, repudiandae. Delectus in sed veniam. Praesentium, reprehenderit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda aut beatae cum dignissimos doloribus ducimus eum, fugiat hic id, molestias porro quia, repudiandae. Delectus in sed veniam. Praesentium, reprehenderit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda aut beatae cum dignissimos doloribus ducimus eum, fugiat hic id, molestias porro quia, repudiandae. Delectus in sed veniam. Praesentium, reprehenderit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda aut beatae cum dignissimos doloribus ducimus eum, fugiat hic id, molestias porro quia, repudiandae. Delectus in sed veniam. Praesentium, reprehenderit.
+    </string>
 
     <string-array name="user_types">
         <item>Farmer</item>

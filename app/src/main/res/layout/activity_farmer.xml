@@ -8,14 +8,13 @@
     tools:context=".restapi.activites.ActivityFarmer"
     android:id="@+id/farmerDashboard">
     <ImageView
-        android:id="@+id/menu_icon"
+        android:id="@+id/farmerMenuIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/menu_icon" />
 
-    <include layout='@layout/fragment_bottom_sheet'/>
-
+    <include layout="@layout/farmer_sheet_menu"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
