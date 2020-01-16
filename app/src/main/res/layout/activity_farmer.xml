@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/farmerDashboard"/>
+        android:id="@+id/farmerFragments"/>
     <ImageView
         android:id="@+id/farmer_menu_icon"
         android:layout_width="45dp"

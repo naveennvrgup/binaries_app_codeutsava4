@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,6 +48,23 @@ public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
 
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view= inflater.inflate(R.layout.farmer_sheet_menu,null, false);
+
+        LinearLayout gotoWarehouse = view.findViewById(R.id.farmerGotoWarehouse);
+
+        gotoWarehouse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+
+                FragmentFarmerFindWarehouse warehouse = new FragmentFarmerFindWarehouse();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.farmerFragments, warehouse)
+                        .addToBackStack("none")
+                        .commit();
+
+            }
+        });
 
         dialog.setContentView(view);
 
