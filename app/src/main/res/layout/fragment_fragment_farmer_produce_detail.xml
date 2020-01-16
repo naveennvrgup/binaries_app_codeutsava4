@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".restapi.fragments.FragmentFarmerProduceDetail"
+    android:background="@color/dashboardBg"
+    android:id="@+id/produceDetailFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Produce Detail View"
+        android:textSize="24dp"
+        android:textAlignment="center"
+        android:layout_marginTop="24dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FoodGrain"
+                android:textSize="18dp"
+                android:id="@+id/produceFoodgrainName"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quantity: "
+                    android:textSize="20dp"
+                    android:id="@+id/produceQuantity"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Grade: "
+                    android:textSize="20dp"
+                    android:id="@+id/produceGrade"/>
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: "
+                android:textSize="20dp"
+                android:id="@+id/producePrice"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date: "
+                android:textSize="20dp"
+                android:id="@+id/produceDate"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Find me a warehouse to store this!"
+                android:id="@+id/findWarehousebutton"
+                android:background="@color/colorPrimaryDark"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

@@ -1,9 +1,12 @@
 package binaries.app.codeutsava.restapi.fragments;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -26,11 +29,31 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentLogin extends Fragment {
+public class FragmentLogin extends DialogFragment {
     EditText editTextUsername, editTextPassword;
     Button buttonLogin, buttonLoginToSignup;
     Context context;
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Light_NoTitleBar);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        Dialog dialog = getDialog();
+
+        if(dialog != null){
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.MATCH_PARENT;
+
+            dialog.getWindow().setLayout(width, height);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

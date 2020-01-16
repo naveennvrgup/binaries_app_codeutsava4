@@ -1,44 +1,65 @@
 package binaries.app.codeutsava.restapi.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduceDetail;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
 
 public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHolder> {
     List<FarmerProduceResponse> produces;
-    Context context;
+    Activity activity;
+    FragmentManager fragManager;
 
-    public AdapterProduce(List<FarmerProduceResponse>  produces, Context context) {
+    public void setFragManager(FragmentManager fragManager) {
+        this.fragManager = fragManager;
+    }
+
+    public AdapterProduce(List<FarmerProduceResponse> produces, Activity activity) {
         this.produces = produces;
-        this.context = context;
+        this.activity = activity;
     }
 
     @NonNull
     @Override
     public AdapterProduce.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.farmer_produce_row, parent, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.farmer_produce_row, null);
 
         return new AdapterProduce.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdapterProduce.ViewHolder holder, int position) {
-        FarmerProduceResponse produce= produces.get(position);
+        FarmerProduceResponse produce = produces.get(position);
 
         holder.demo.setText(produce.toString());
+        holder.parent.setOnClickListener(v -> {
+            FarmerProduceResponse currProduceData = produces.get(position);
+
+            Bundle args = new Bundle();
+            args.putSerializable("produce", currProduceData);
+
+            FragmentFarmerProduceDetail produceDetail = new FragmentFarmerProduceDetail();
+            produceDetail.setArguments(args);
+            produceDetail.show(fragManager, "produce");
+        });
     }
 
     @Override
@@ -46,15 +67,15 @@ public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHold
         return produces.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
-    TextView demo;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        TextView demo;
+        RelativeLayout parent;
 
-
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            demo=itemView.findViewById(R.id.farmer_produce_demo);
-
+            demo = itemView.findViewById(R.id.farmer_produce_demo);
+            parent = itemView.findViewById(R.id.farmer_produce_main_lay);
         }
     }
 }

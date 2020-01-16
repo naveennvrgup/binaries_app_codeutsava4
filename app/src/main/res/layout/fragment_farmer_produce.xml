@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".restapi.fragments.FragmentFarmerProduce">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".restapi.fragments.FragmentFarmerBids"
+    android:background="@color/dashboardBg">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/produceListTitle">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="List of your Produces"
+            android:layout_marginTop="16dp"
+            android:textSize="20dp"/>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/produceListTitle">
 
-</FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="40dp"
+            android:id="@+id/farmerProduceListRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

@@ -94,6 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:id="@+id/farmergotoProduceList"
                 android:paddingBottom="4dp">
 
                 <ImageView
@@ -105,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Produce"
+                    android:text="My Produce"
                     android:textSize="24dp" />
 
             </LinearLayout>

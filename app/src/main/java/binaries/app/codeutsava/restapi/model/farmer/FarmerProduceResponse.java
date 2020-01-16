@@ -1,9 +1,17 @@
 package binaries.app.codeutsava.restapi.model.farmer;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class FarmerProduceResponse implements Serializable {
     public String id;
+    public String grade;
+    public String quantity;
+    public String price;
+    public String date;
+    public Location location;
+    public FoodGrain type;
 
     @Override
     public String toString() {
@@ -13,25 +21,44 @@ public class FarmerProduceResponse implements Serializable {
                 ", quantity='" + quantity + '\'' +
                 ", price='" + price + '\'' +
                 ", date='" + date + '\'' +
-                ", loc=" + loc +
+                ", loc=" + location +
+                ", foodgrain="+ type+'\''+
                 '}';
     }
 
-    public String grade;
-    public String quantity;
-    public String price;
-    public String date;
-    public Location loc;
 
     public class Location {
+        public int id;
         public String xloc;
         public String yloc;
+        public int centre;
 
         @Override
         public String toString() {
             return "Location{" +
+                    "id='"+id+'\''+
                     "xloc='" + xloc + '\'' +
                     ", yloc='" + yloc + '\'' +
+                    ",centre='"+centre+'\''+
+                    '}';
+        }
+    }
+
+    public  class  FoodGrain {
+        public String type;
+        public int life;
+
+        public FoodGrain(String name, int life) {
+            this.type = name;
+            this.life = life;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return "FoodGrain{" +
+                    "name='" + type + '\'' +
+                    ", life='" + life + '\'' +
                     '}';
         }
     }

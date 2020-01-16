@@ -66,6 +66,25 @@ public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
             }
         });
 
+        LinearLayout gotoProduceList = view.findViewById(R.id.farmergotoProduceList);
+
+        gotoProduceList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+//
+//                FragmentFarmerProduce produceList = new FragmentFarmerProduce();
+//                getActivity().getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.farmerFragments, produceList)
+//                        .addToBackStack("none")
+//                        .commit();
+
+                FragmentFarmerProduce produce = new FragmentFarmerProduce();
+                produce.show(getActivity().getSupportFragmentManager(), "farmer_produce");
+            }
+        });
+
         dialog.setContentView(view);
 
 

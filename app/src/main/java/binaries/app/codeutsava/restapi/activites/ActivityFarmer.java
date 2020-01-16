@@ -17,7 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerBottomSheet;
 
-public class ActivityFarmer extends AppCompatActivity {
+public class ActivityFarmer extends AppCompatActivity{
 
     ImageView menuButton;
     BottomSheetBehavior sheetBehavior;

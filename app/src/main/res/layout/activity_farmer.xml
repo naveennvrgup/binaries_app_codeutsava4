@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     android:background="@color/dashboardBg"
     tools:context=".restapi.activites.ActivityFarmer">
+
     <FrameLayout
+        android:id="@+id/farmerFragments"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/farmerFragments"/>
+        android:layout_height="match_parent" />
+
     <ImageView
         android:id="@+id/farmer_menu_icon"
         android:layout_width="45dp"
@@ -18,6 +20,6 @@
         android:layout_marginTop="10dp"
         android:src="@drawable/menu_icon" />
 
-    <include layout="@layout/farmer_sheet_menu"/>
+    <include layout="@layout/farmer_sheet_menu" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

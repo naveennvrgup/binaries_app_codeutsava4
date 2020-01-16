@@ -1,9 +1,12 @@
 package binaries.app.codeutsava.restapi.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,12 +19,32 @@ import binaries.app.codeutsava.R;
 
 import binaries.app.codeutsava.restapi.adapters.AdapterSuggestedWarehouse;
 
-public  class  FragmentFarmerFindWarehouse extends Fragment {
+public  class  FragmentFarmerFindWarehouse extends DialogFragment {
     RecyclerView recyclerView;
     AdapterSuggestedWarehouse mAdapter;
 
     public FragmentFarmerFindWarehouse(){
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Light_NoTitleBar);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        Dialog dialog = getDialog();
+
+        if(dialog != null){
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.MATCH_PARENT;
+
+            dialog.getWindow().setLayout(width, height);
+        }
     }
 
     public  View onCreateView(LayoutInflater inflater, ViewGroup container,
