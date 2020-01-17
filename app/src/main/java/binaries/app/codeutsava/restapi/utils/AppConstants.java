@@ -13,6 +13,6 @@ public class AppConstants {
     public static final String BUYER_FOODGRAIN_LIST_URL="user/foodgrains/";
 
     //TOKEN
-    public static final String TEMP_FARM_TOKEN="Token f16d56389f0b0e2b15d97f111e8eea6dcc924c2a";
+    public static final String TEMP_FARM_TOKEN="Token e18c1176030015840b1f2cf59c2e6909456b6108";
 
 }

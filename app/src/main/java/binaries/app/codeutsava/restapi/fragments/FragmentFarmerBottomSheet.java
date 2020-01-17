@@ -56,14 +56,16 @@ public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
             public void onClick(View v) {
                 dismiss();
 
-                FragmentFarmerReportProduce farmerReportProduceFragment = new FragmentFarmerReportProduce();
+                FragmentFarmerFoodGrainList farmerFoodGrainList = new FragmentFarmerFoodGrainList();
+
+//                FragmentFarmerReportProduce farmerReportProduceFragment = new FragmentFarmerReportProduce();
 //                getActivity().getSupportFragmentManager()
 //                        .beginTransaction()
 //                        .replace(R.id.farmerFragments, farmerReportProduceFragment)
 //                        .addToBackStack("farmerReportProduceFragment")
 //                        .commit();
 
-                farmerReportProduceFragment.show(getActivity().getSupportFragmentManager(), "farmer_produce");
+                farmerFoodGrainList.show(getActivity().getSupportFragmentManager(), "farmer_produce");
 
             }
         });

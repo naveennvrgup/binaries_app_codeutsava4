@@ -61,6 +61,8 @@ public  class  FragmentFarmerReportProduce extends DialogFragment {
 
         View view = inflater.inflate(R.layout.fragment_farmer_report_produce, container, false);
 
+        int foodgrainId = (Integer) getArguments().getSerializable("id");
+
         reportProduceGrade = (EditText) view.findViewById(R.id.reportProduceGrade);
         reportProducePrice = (EditText) view.findViewById(R.id.reportProducePrice);
         reportProduceQuantity = (EditText) view.findViewById(R.id.reportProduceQuantity);
@@ -69,8 +71,9 @@ public  class  FragmentFarmerReportProduce extends DialogFragment {
         reportProduceSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 ReportProducePayload reportProducePayload = new ReportProducePayload();
-                reportProducePayload.setFid(1);
+                reportProducePayload.setFid(foodgrainId);
                 reportProducePayload.setGrade(reportProduceGrade.getText().toString());
                 reportProducePayload.setPrice(Double.parseDouble(reportProducePrice.getText().toString()));
                 reportProducePayload.setQuantity(Double.parseDouble(reportProduceQuantity.getText().toString()));
