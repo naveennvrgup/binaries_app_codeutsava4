@@ -2,6 +2,7 @@ package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.activites.ActivityFarmerOrders;
+import binaries.app.codeutsava.restapi.fragments.FarmerOrderAcceptDialog;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
@@ -74,27 +76,34 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
     }
 
     void approveApiCall(int id, int position) {
-        ApproveOrderPayload payload = new ApproveOrderPayload();
+        FarmerOrderAcceptDialog dialog = new FarmerOrderAcceptDialog(
+                activity,orders,id,position,AdapterFarmerOrder.this);
 
-
-        APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<Boolean> call = apiServices.approveOrder(id,payload);
-
-        call.enqueue(new Callback<Boolean>() {
+        dialog.setOnCustomClickListener(new FarmerOrderAcceptDialog.OnCustomClickListener() {
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    orders.get(position).approved=true;
-                    notifyItemChanged(position);
-                    Toast.makeText(activity, "approved", Toast.LENGTH_LONG).show();
-                }
-            }
+            public void onClick(String get_from) {
+                ApproveOrderPayload payload = new ApproveOrderPayload();
+                payload.get_from=get_from;
 
-            @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                Toast.makeText(activity, t.getMessage().toString(), Toast.LENGTH_LONG).show();
+                APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
+                Call<Boolean> call = apiServices.approveOrder(id,payload);
+
+                call.enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        orders.get(position).approved=true;
+                        notifyItemChanged(position);
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+                        Toast.makeText(activity,t.getMessage().toString(),Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
+        dialog.show();
     }
 
     void rejectApiCall(int id, int position) {
@@ -105,8 +114,8 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    orders.get(position).approved=false;
-                    notifyItemChanged(position);
+                    orders.remove(position);
+                    notifyItemRemoved(position);
                     Toast.makeText(activity, "rejected the order", Toast.LENGTH_LONG).show();
                 }
             }

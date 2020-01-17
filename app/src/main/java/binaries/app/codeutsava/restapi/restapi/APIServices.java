@@ -56,8 +56,8 @@ public interface APIServices {
     @GET("transaction/farmerOrders/")
     Call<List<BuyerOrderListResponse>> getFarmerOrders();
 
-    @GET("transaction/approveOrder/{id}/")
-    Call<Boolean> approveOrder(@Path("id") int id, ApproveOrderPayload payload);
+    @POST("transaction/approveOrder/{id}/")
+    Call<Boolean> approveOrder(@Path("id") int id,@Body ApproveOrderPayload payload);
 
     @GET("transaction/rejectOrder/{id}/")
     Call<Boolean> rejectOrder(@Path("id") int id);
