@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,18 +19,21 @@ import java.util.List;
 import java.util.Random;
 
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.fragments.FragmentBuyerFoodgrainDetail;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 
 public class AdapterFoodgrain extends RecyclerView.Adapter<AdapterFoodgrain.ViewHolder> {
     Activity activity;
     List<BuyerFoodgrainResponse> ldata;
     List<Drawable> imgs;
+    FragmentManager fragmentManager;
 
-    public AdapterFoodgrain(Activity activity, List<BuyerFoodgrainResponse> ldata) {
+    public AdapterFoodgrain(Activity activity, List<BuyerFoodgrainResponse> ldata, FragmentManager fragmentManager) {
         this.activity = activity;
         this.ldata = ldata;
-
+        this.fragmentManager = fragmentManager;
         imgs = new ArrayList<>();
+
     }
 
     @NonNull
@@ -63,6 +67,14 @@ public class AdapterFoodgrain extends RecyclerView.Adapter<AdapterFoodgrain.View
         Glide.with(activity)
                 .load(imgs.get(rand.nextInt(imgs.size())))
                 .into(holder.foogImg);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentBuyerFoodgrainDetail detail = new FragmentBuyerFoodgrainDetail();
+                detail.show(fragmentManager,"some");
+            }
+        });
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -63,6 +64,16 @@ public class FragmentBuyerBottomSheet extends BottomSheetDialogFragment {
         }
 
 
+        attachFragToLink(view,R.id.buyerGotoHome,new FragmentBuyerHome());
+    }
 
+    public void attachFragToLink(View view,int id, DialogFragment frag){
+        LinearLayout btn= view.findViewById(id);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                frag.show(getActivity().getSupportFragmentManager(),"something");
+            }
+        });
     }
 }

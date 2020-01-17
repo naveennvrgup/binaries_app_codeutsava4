@@ -1,8 +1,6 @@
 package binaries.app.codeutsava.restapi.fragments;
 
-
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -26,11 +23,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentBuyerHome extends DialogFragment {
+public class FragmentBuyerFoodgrainDetail extends DialogFragment {
     RecyclerView recyclerView;
     AdapterFoodgrain mAdapter;
 
-    public FragmentBuyerHome() {
+    public FragmentBuyerFoodgrainDetail() {
         // Required empty public constructor
     }
 
@@ -58,11 +55,11 @@ public class FragmentBuyerHome extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_buyer_home, container, false);
-        recyclerView = view.findViewById(R.id.BHRecyclerView);
+        View view = inflater.inflate(R.layout.fragment_foodgrain_detail, container, false);
+        recyclerView = view.findViewById(R.id.recyclerView);
 
 
-        callAPI();
+//        callAPI();
         return view;
     }
 
