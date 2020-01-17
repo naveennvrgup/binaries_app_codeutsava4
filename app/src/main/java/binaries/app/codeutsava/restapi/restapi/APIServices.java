@@ -44,4 +44,12 @@ public interface APIServices {
     @GET("transaction/buyerOrders/")
     Call<List<BuyerOrderListResponse>> getBuyerOrders();
 
+    @GET("transaction/farmerOrders/")
+    Call<List<BuyerOrderListResponse>> getFarmerOrders();
+
+    @GET("transaction/approveOrder/{id}/")
+    Call<Boolean> approveOrder(@Path("id") int id);
+
+    @GET("transaction/rejectOrder/{id}/")
+    Call<Boolean> rejectOrder(@Path("id") int id);
 }

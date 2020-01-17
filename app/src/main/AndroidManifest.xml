@@ -11,8 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".restapi.activites.ActivityBuyerOrders"></activity>
-        <activity android:name=".restapi.activites.ActivityBuyer">
+        <activity android:name=".restapi.activites.ActivityFarmerOrders"></activity>
+        <activity android:name=".restapi.activites.ActivityBuyerOrders" />
+        <activity android:name=".restapi.activites.ActivityBuyer" />
+        <activity android:name=".restapi.activites.ActivityFarmer" />
+        <activity android:name=".restapi.activites.ActivityAuthentication" />
+        <activity android:name=".restapi.activites.ActivitySplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -20,9 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".restapi.activites.ActivityFarmer" />
-        <activity android:name=".restapi.activites.ActivityAuthentication" />
-        <activity android:name=".restapi.activites.ActivitySplashScreen"></activity>
     </application>
 
 </manifest>
