@@ -6,6 +6,8 @@ import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.auth.LoginPayload;
 import binaries.app.codeutsava.restapi.model.auth.LoginResponse;
 import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
+import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
+import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
@@ -20,8 +22,8 @@ public interface APIServices {
     @POST(AppConstants.LOGIN_URL)
     Call<LoginResponse> sendLoginRequest(@Body LoginPayload loginPayload);
 
-    @POST(AppConstants.LOGIN_URL)
-    Call<LoginResponse> sendLoginRequest(@Body LoginPayload loginPayload);
+    @POST("transaction/placeOrder/")
+    Call<PlaceOrderResponse> placeOrderRequest(@Body PlaceOrderPayload orderPayload);
 
     @GET(AppConstants.FARMER_DETAIL_URL)
     Call<FarmerDetailResponse> getFarmerDetail();

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
@@ -33,7 +36,11 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
     AdapterFarmer mAdapter;
     TextView fg_name,fg_price;
     ImageView fg_img;
+    EditText editTextQuantity;
+    Button setQuantityBtn;
     BuyerFoodgrainResponse foodgrain;
+    int quantity;
+    boolean showFamers=false;
 
     public FragmentBuyerFoodgrainDetail() {
         // Required empty public constructor
@@ -69,6 +76,19 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
         fg_name=view.findViewById(R.id.name);
         fg_img=view.findViewById(R.id.food_img);
         fg_price=view.findViewById(R.id.price);
+        editTextQuantity=view.findViewById(R.id.quantity_input);
+        setQuantityBtn=view.findViewById(R.id.setQuantitybtn);
+
+
+        setQuantityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                quantity=Integer.parseInt(editTextQuantity.getText().toString());
+                callAPI();
+            }
+        });
+
+
 
         foodgrain=(BuyerFoodgrainResponse) getArguments().getSerializable("foodgrain");
         fg_name.setText(foodgrain.type);
@@ -77,7 +97,6 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
                 .load(R.drawable.f8)
                 .into(fg_img);
 
-        callAPI();
         return view;
     }
 
@@ -89,8 +108,16 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
         call.enqueue(new Callback<List<FarmerResponse>>() {
             @Override
             public void onResponse(Call<List<FarmerResponse>> call, Response<List<FarmerResponse>> response) {
-                mAdapter = new AdapterFarmer(getActivity().getSupportFragmentManager(),
-                        response.body(),getActivity(),foodgrain);
+                List<FarmerResponse> filteredFamers = new ArrayList<>();
+
+                for(FarmerResponse farmer :response.body()){
+                    if(farmer.quantity>=quantity)
+                        filteredFamers.add(farmer);
+                }
+
+                mAdapter = new AdapterFarmer(getActivity().getSupportFragmentManager(),foodgrain.id,
+                        filteredFamers,getActivity(),
+                        foodgrain,quantity);
                 recyclerView.setAdapter(mAdapter);
                 recyclerView.setLayoutManager(new GridLayoutManager(
                         getActivity(),1,GridLayoutManager.VERTICAL,false));
