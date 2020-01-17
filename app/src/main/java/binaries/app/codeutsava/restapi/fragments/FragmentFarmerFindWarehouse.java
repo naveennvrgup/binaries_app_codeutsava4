@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.List;
@@ -33,11 +35,11 @@ import retrofit2.Response;
 public  class  FragmentFarmerFindWarehouse extends DialogFragment {
     RecyclerView recyclerView;
     AdapterSuggestedWarehouse mAdapter;
-    int produce_id,quantity;
+    int produce_id, quantity;
 
     public FragmentFarmerFindWarehouse(int produce_id, double quantity) {
         this.produce_id = produce_id;
-        this.quantity = (int)quantity+1;
+        this.quantity = (int) quantity + 1;
     }
 
     @Override
@@ -52,7 +54,7 @@ public  class  FragmentFarmerFindWarehouse extends DialogFragment {
 
         Dialog dialog = getDialog();
 
-        if(dialog != null){
+        if (dialog != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
 
@@ -60,8 +62,8 @@ public  class  FragmentFarmerFindWarehouse extends DialogFragment {
         }
     }
 
-    public  View onCreateView(LayoutInflater inflater, ViewGroup container,
-                              Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fragment_farmer_find_warehouse, container, false);
         recyclerView = view.findViewById(R.id.warehouseResultRecyclerView);
 
@@ -74,13 +76,13 @@ public  class  FragmentFarmerFindWarehouse extends DialogFragment {
 
     }
 
-    public void  getWarehousePrediction() {
+    public void getWarehousePrediction() {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<FarmerFindWarehouseResponse> call = apiServices.getFarmerFindWarehouseList(Integer.toString(produce_id),Integer.toString(quantity));
+        Call<FarmerFindWarehouseResponse> call = apiServices.getFarmerFindWarehouseList(Integer.toString(produce_id), Integer.toString(quantity));
         call.enqueue(new Callback<FarmerFindWarehouseResponse>() {
             @Override
             public void onResponse(Call<FarmerFindWarehouseResponse> call, Response<FarmerFindWarehouseResponse> response) {
-                mAdapter = new AdapterSuggestedWarehouse(response.body().data, getActivity());
+                mAdapter = new AdapterSuggestedWarehouse(response.body().data, getActivity(), getActivity(),getFragmentManager());
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
@@ -95,4 +97,7 @@ public  class  FragmentFarmerFindWarehouse extends DialogFragment {
 
     }
 
+
+
 }
+

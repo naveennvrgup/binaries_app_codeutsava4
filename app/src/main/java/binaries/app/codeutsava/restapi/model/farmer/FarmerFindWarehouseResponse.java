@@ -13,7 +13,7 @@ public class FarmerFindWarehouseResponse implements Serializable {
         public double price;
         public double locx;
         public double locy;
-        public double availstrage;
+        public double availstorage;
         public int centre;
         public String owner;
         public String sector;
