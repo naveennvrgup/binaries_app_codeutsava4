@@ -87,8 +87,14 @@
                 android:text="Warehouse Sector"
                 android:textSize="16dp" />
 
+
         </LinearLayout>
 
+        <EditText
+            android:id="@+id/storageTransactionQuantityInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter Quantity of Produce to Store"/>
 
 
         <LinearLayout

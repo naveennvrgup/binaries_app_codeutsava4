@@ -11,6 +11,7 @@ public class AppConstants {
     public static final String FARMER_FIND_WAREHOUSE_LIST_URL="user/findWarehouse";
     public static final String FARMER_REPORT_PRODUCE_URL="transaction/report_produce/";
     public static final String BUYER_FOODGRAIN_LIST_URL="user/foodgrains/";
+    public static final String CREATE_STORAGE_TRANSACTION_URL="transaction/storagetransaction/";
 
     //TOKEN
     public static final String TEMP_FARM_TOKEN="Token e18c1176030015840b1f2cf59c2e6909456b6108";
