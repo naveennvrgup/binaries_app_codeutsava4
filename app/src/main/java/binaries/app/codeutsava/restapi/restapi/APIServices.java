@@ -5,6 +5,7 @@ import java.util.List;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.auth.LoginPayload;
 import binaries.app.codeutsava.restapi.model.auth.LoginResponse;
+import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
 import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
@@ -39,5 +40,8 @@ public interface APIServices {
 
     @GET(AppConstants.BUYER_FOODGRAIN_LIST_URL+"{id}/")
     Call<List<FarmerResponse>> getBuyerFarmerList(@Path("id")int id);
+
+    @GET("transaction/buyerOrders/")
+    Call<List<BuyerOrderListResponse>> getBuyerOrders();
 
 }
