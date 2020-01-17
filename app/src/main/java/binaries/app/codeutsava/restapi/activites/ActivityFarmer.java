@@ -18,6 +18,7 @@ import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.fragments.FragmentBuyerBottomSheet;
 import binaries.app.codeutsava.restapi.fragments.FragmentBuyerHome;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerBottomSheet;
+import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduce;
 
 public class ActivityFarmer extends AppCompatActivity{
 
@@ -38,8 +39,8 @@ public class ActivityFarmer extends AppCompatActivity{
         sheetBehavior = BottomSheetBehavior.from(bottomSheet);
         menuButton=findViewById(R.id.farmer_menu_icon);
 
-        FragmentBuyerHome buyerHome = new FragmentBuyerHome();
-        buyerHome.show(getSupportFragmentManager(),"buyerhome");
+        FragmentFarmerProduce frag = new FragmentFarmerProduce();
+        frag.show(getSupportFragmentManager(),"buyerhome");
 
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
