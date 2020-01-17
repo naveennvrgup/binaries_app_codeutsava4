@@ -1,6 +1,8 @@
 package binaries.app.codeutsava.restapi.model.buyer;
 
-public class BuyerFoodgrainResponse {
+import java.io.Serializable;
+
+public class BuyerFoodgrainResponse implements Serializable {
     public int id;
     public String type;
     public String price;

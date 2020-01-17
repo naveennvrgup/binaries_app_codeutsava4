@@ -2,6 +2,7 @@ package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,8 +72,12 @@ public class AdapterFoodgrain extends RecyclerView.Adapter<AdapterFoodgrain.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putSerializable("foodgrain", data);
+
                 FragmentBuyerFoodgrainDetail detail = new FragmentBuyerFoodgrainDetail();
-                detail.show(fragmentManager,"some");
+                detail.setArguments(args);
+                detail.show(fragmentManager, "some");
             }
         });
     }
