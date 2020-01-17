@@ -49,19 +49,23 @@ public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view= inflater.inflate(R.layout.farmer_sheet_menu,null, false);
 
-        LinearLayout gotoWarehouse = view.findViewById(R.id.farmerGotoWarehouse);
+        LinearLayout farmerReportProduce = view.findViewById(R.id.farmerReportProduce);
 
-        gotoWarehouse.setOnClickListener(new View.OnClickListener() {
+        farmerReportProduce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
 
-                FragmentFarmerFindWarehouse warehouse = new FragmentFarmerFindWarehouse();
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.farmerFragments, warehouse)
-                        .addToBackStack("none")
-                        .commit();
+                FragmentFarmerFoodGrainList farmerFoodGrainList = new FragmentFarmerFoodGrainList();
+
+//                FragmentFarmerReportProduce farmerReportProduceFragment = new FragmentFarmerReportProduce();
+//                getActivity().getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.farmerFragments, farmerReportProduceFragment)
+//                        .addToBackStack("farmerReportProduceFragment")
+//                        .commit();
+
+                farmerFoodGrainList.show(getActivity().getSupportFragmentManager(), "farmer_produce");
 
             }
         });

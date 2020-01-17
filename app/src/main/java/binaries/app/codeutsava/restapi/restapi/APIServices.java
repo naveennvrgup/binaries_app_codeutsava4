@@ -12,7 +12,9 @@ import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
 import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
+import binaries.app.codeutsava.restapi.model.farmer.FarmerFindWarehouseResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
+import binaries.app.codeutsava.restapi.model.farmer.ReportProducePayload;
 import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -35,6 +37,12 @@ public interface APIServices {
 
     @GET(AppConstants.FARMER_PRODUCE_LIST_URL)
     Call<List<FarmerProduceResponse>> getFarmerProduceList();
+
+    @GET(AppConstants.FARMER_FIND_WAREHOUSE_LIST_URL + "/{quantity}"+"/{produceid}")
+    Call<FarmerFindWarehouseResponse> getFarmerFindWarehouseList(@Path("quantity")String quantity, @Path("produceid")String produceid);
+
+    @POST(AppConstants.FARMER_REPORT_PRODUCE_URL)
+    Call<FarmerProduceResponse> postFarmerProduce(@Body ReportProducePayload reportProducePayload);
 
     @GET(AppConstants.BUYER_FOODGRAIN_LIST_URL)
     Call<List<BuyerFoodgrainResponse>> getBuyerFoodgrainList();

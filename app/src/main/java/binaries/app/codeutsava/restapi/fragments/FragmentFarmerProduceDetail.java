@@ -54,6 +54,7 @@ public class FragmentFarmerProduceDetail extends DialogFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+
         FarmerProduceResponse produce = (FarmerProduceResponse) getArguments().getSerializable("produce");
 
 
@@ -77,11 +78,15 @@ public class FragmentFarmerProduceDetail extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-                FragmentFarmerFindWarehouse findWarehousefragment = new FragmentFarmerFindWarehouse();
+                FragmentFarmerFindWarehouse findWarehousefragment = new FragmentFarmerFindWarehouse(
+                        Integer.parseInt(produce.id),
+                        Double.parseDouble(produce.quantity)
+                );
 //
 //                getActivity().getSupportFragmentManager()
 //                        .beginTransaction()
 //                        .remove(getActivity().getSupportFragmentManager().beginTransaction().)
+
 
                 findWarehousefragment.show(getActivity().getSupportFragmentManager(), "warehouse");
             }
