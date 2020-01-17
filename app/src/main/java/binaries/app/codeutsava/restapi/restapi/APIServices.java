@@ -2,6 +2,7 @@ package binaries.app.codeutsava.restapi.restapi;
 
 import java.util.List;
 
+import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.auth.LoginPayload;
 import binaries.app.codeutsava.restapi.model.auth.LoginResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
@@ -25,4 +26,7 @@ public interface APIServices {
 
     @GET(AppConstants.FARMER_PRODUCE_LIST_URL)
     Call<List<FarmerProduceResponse>> getFarmerProduceList();
+
+    @GET(AppConstants.BUYER_FOODGRAIN_LIST_URL)
+    Call<List<BuyerFoodgrainResponse>> getBuyerFoodgrainList();
 }
