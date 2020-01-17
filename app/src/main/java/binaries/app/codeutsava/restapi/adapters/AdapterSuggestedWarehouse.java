@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.fragments.CustomDialogClass;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerFindWarehouseResponse;
 
 public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSuggestedWarehouse.ViewHolder> {
@@ -59,6 +60,7 @@ public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSugge
 
             Bundle args = new Bundle();
             args.putSerializable("whid", currWarehouse.whid);
+            args.putSerializable("whname", currWarehouse.whname);
             args.putSerializable("whdis",currWarehouse.distance);
             args.putSerializable("whprice",currWarehouse.price);
             args.putSerializable("whcentre",currWarehouse.centre);
@@ -67,22 +69,25 @@ public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSugge
             args.putSerializable("whavl",currWarehouse.availstorage);
 
 
-            View view = LayoutInflater.from(activity).inflate(R.layout.warehouse_transaction_custom_dialog_box,null,false);
-            AlertDialog dialog = new AlertDialog.Builder(activity)
-                    .setView(view)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+//            View view = LayoutInflater.from(activity).inflate(R.layout.warehouse_transaction_custom_dialog_box,null,false);
+//            AlertDialog dialog = new AlertDialog.Builder(activity)
+//                    .setView(view)
+//                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//
+//                        }
+//                    })
+//                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.dismiss();
+//                        }
+//                    }).create();
+//            dialog.show();
 
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    }).create();
-            dialog.show();
+            CustomDialogClass cdd=new CustomDialogClass(activity,args);
+            cdd.show();
 //
 //            FragmentFarmerProduceDetail produceDetail = new FragmentFarmerProduceDetail();
 //            produceDetail.setArguments(args);

@@ -54,6 +54,7 @@ public class FragmentFarmerProduceDetail extends DialogFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+
         FarmerProduceResponse produce = (FarmerProduceResponse) getArguments().getSerializable("produce");
 
 

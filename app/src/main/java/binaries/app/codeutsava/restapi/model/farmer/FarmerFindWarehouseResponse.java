@@ -9,6 +9,7 @@ public class FarmerFindWarehouseResponse implements Serializable {
 
     public class WarehouseResponse {
         public int whid;
+        public String whname;
         public double distance;
         public double price;
         public double locx;

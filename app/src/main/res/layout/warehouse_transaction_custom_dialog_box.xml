@@ -2,7 +2,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3E80B4">
+    android:background="#3E80B4"
+    android:gravity="center"
+    android:id="@+id/confirmWarehouseDialog">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -10,7 +12,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txt_dia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -19,24 +20,76 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/warehouseDialogCentre"
+            android:text="Warehouse Centre"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/warehouseDialogName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="WareHouse Name"
-                android:textSize="24dp" />
+                android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/warehouseDialogPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Price"
-                android:textSize="24dp" />
+                android:textSize="16dp" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/warehouseDialogOwner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WareHouse Owner"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/warehouseDialogFreeSpace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Free Space"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/warehouseDialogDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WareHouse Distance"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/warehouseDialogSector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Warehouse Sector"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -44,6 +97,35 @@
             android:layout_gravity="center"
             android:background="#3E80B4"
             android:orientation="horizontal"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#3E80B4"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btnConfirmWarehouseTransaction"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:background="@android:color/white"
+                android:clickable="true"
+                android:text="Yes"
+                android:textColor="#5DBCD2"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnCancelWarehouseTransaction"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:background="@android:color/white"
+                android:clickable="true"
+                android:text="No"
+                android:textColor="#5DBCD2"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
 
