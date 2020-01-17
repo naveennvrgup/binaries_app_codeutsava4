@@ -16,15 +16,14 @@
         tools:targetApi="m">
 
         <activity android:name=".restapi.activites.ActivityBuyer">
+        </activity>
+        <activity android:name=".restapi.activites.ActivityFarmer" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".restapi.activites.ActivityFarmer" />
         <activity android:name=".restapi.activites.ActivityAuthentication" />
         <activity android:name=".restapi.activites.ActivitySplashScreen"/>
 

@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".restapi.fragments.FragmentFarmerBids"
-    android:background="@color/dashboardBg">
+    android:background="@color/dashboardBg"
+    tools:context=".restapi.fragments.FragmentFarmerBids">
+
     <LinearLayout
+        android:id="@+id/produceListTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/produceListTitle">
+        android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="List of your Produces"
+            android:layout_margin="16dp"
             android:layout_marginTop="16dp"
-            android:textSize="20dp"/>
-
-
+            android:fontFamily="@font/roboto_slab"
+            android:text="List of your Produces"
+            android:textColor="@android:color/white"
+            android:textSize="32sp" />
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="20dp"
+        android:layout_below="@+id/produceListTitle"
         android:layout_marginTop="15dp"
-        android:layout_below="@+id/produceListTitle">
-
+        app:cardCornerRadius="20dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="40dp"
             android:id="@+id/farmerProduceListRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp" />
     </androidx.cardview.widget.CardView>
-
 </RelativeLayout>

@@ -39,10 +39,10 @@ import retrofit2.Response;
 public class FragmentBuyerFoodgrainDetail extends DialogFragment {
     private RecyclerView recyclerView;
     private AdapterFarmer mAdapter;
-    private TextView fg_name, fg_price;
+    private TextView fg_name, fg_price, searchText;
     private ImageView fg_img;
     private TextInputEditText editTextQuantity;
-    private CardView setQuantityBtn;
+    private Button setQuantityBtn;
     private BuyerFoodgrainResponse foodgrain;
     private ProgressBar progressBar;
     private int quantity;
@@ -82,14 +82,23 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
         editTextQuantity = view.findViewById(R.id.quantity_input);
         setQuantityBtn = view.findViewById(R.id.setQuantitybtn);
         progressBar = view.findViewById(R.id.buyer_foodgrain_det_progress);
+        searchText = view.findViewById(R.id.buyer_food_det_search_text);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mAdapter = new AdapterFarmer(getActivity().getSupportFragmentManager(), getActivity(), foodgrain, quantity);
+        recyclerView.setNestedScrollingEnabled(true);
         recyclerView.setAdapter(mAdapter);
 
         setQuantityBtn.setOnClickListener(v -> {
-            quantity = Integer.parseInt(editTextQuantity.getText().toString());
-            progressBar.setVisibility(View.VISIBLE);
-            callAPI();
+
+            if(!editTextQuantity.getText().toString().isEmpty()){
+                quantity = Integer.parseInt(editTextQuantity.getText().toString());
+                progressBar.setVisibility(View.VISIBLE);
+
+                callAPI();
+            } else {
+                Toast.makeText(getContext(), "Empty values.", Toast.LENGTH_LONG).show();
+            }
         });
 
 
@@ -116,6 +125,7 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
                 if (response.isSuccessful() && response.body() != null && getActivity() != null) {
 
                     progressBar.setVisibility(View.GONE);
+                    searchText.setVisibility(View.VISIBLE);
 
                     List<FarmerResponse> filteredFarmers = new ArrayList<>();
 
@@ -124,8 +134,7 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
                             filteredFarmers.add(farmer);
                     }
 
-                    mAdapter = new AdapterFarmer(getActivity().getSupportFragmentManager(), foodgrain.id, filteredFarmers, getActivity(), foodgrain, quantity);
-                    mAdapter.notifyDataSetChanged();
+                    mAdapter.setData(foodgrain.id, filteredFarmers);
                 }
             }
 
@@ -135,5 +144,4 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
             }
         });
     }
-
 }

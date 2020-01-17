@@ -33,6 +33,7 @@
             android:layout_height="match_parent"
             android:layout_below="@id/buyer_tab_strip"
             android:layout_marginTop="30dp"
+            android:orientation="vertical"
             android:background="@drawable/drawble_buyer_main">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -46,8 +47,8 @@
 
     <ImageView
         android:id="@+id/buyer_menu_icon"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_margin="16dp"
         android:src="@drawable/menu_icon" />
 

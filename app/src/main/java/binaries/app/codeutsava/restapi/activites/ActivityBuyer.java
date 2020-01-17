@@ -3,8 +3,10 @@ package binaries.app.codeutsava.restapi.activites;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +15,15 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
 import java.util.List;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.adapters.AdapterBuyerTop;
 import binaries.app.codeutsava.restapi.adapters.AdapterFoodgrain;
+import binaries.app.codeutsava.restapi.fragments.FragmentBuyerBottomSheet;
+import binaries.app.codeutsava.restapi.fragments.FragmentFarmerBottomSheet;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
@@ -57,6 +63,11 @@ public class ActivityBuyer extends AppCompatActivity {
         recyclerViewList = findViewById(R.id.recycler_buyer_list);
         recyclerViewList.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerViewList.setAdapter(new AdapterFoodgrain(this, null, null));
+
+        findViewById(R.id.buyer_menu_icon).setOnClickListener(view -> {
+            BottomSheetDialogFragment bottomSheetDialogFragment = new FragmentBuyerBottomSheet();
+            bottomSheetDialogFragment.show(getSupportFragmentManager(), "buyerBottomSheet");
+        });
     }
 
 

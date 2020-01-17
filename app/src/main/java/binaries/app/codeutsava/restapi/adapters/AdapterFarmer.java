@@ -27,28 +27,30 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder> {
-    FragmentManager fragmentManager;
-    List<FarmerResponse> ldata;
-    BuyerFoodgrainResponse foodgrain;
-    Activity activity;
-    int quantity, foodgrain_id;
+    private FragmentManager fragmentManager;
+    private List<FarmerResponse> ldata;
+    private BuyerFoodgrainResponse foodgrain;
+    private Activity activity;
+    private int quantity, foodgrain_id;
 
-    public AdapterFarmer(FragmentManager fragmentManager, int foodgrain_id,
-                         List<FarmerResponse> ldata, Activity activity,
-                         BuyerFoodgrainResponse foodgrain, int quantity) {
+    public AdapterFarmer(FragmentManager fragmentManager, Activity activity, BuyerFoodgrainResponse foodgrain, int quantity) {
         this.fragmentManager = fragmentManager;
-        this.ldata = ldata;
         this.activity = activity;
         this.foodgrain = foodgrain;
         this.quantity = quantity;
+    }
+
+    public void setData(int foodgrain_id, List<FarmerResponse> ldata){
         this.foodgrain_id = foodgrain_id;
+        this.ldata = ldata;
+
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(activity);
-        View view = inflater.inflate(R.layout.recycler_farmer, parent, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.recycler_farmer, parent, false);
 
         return new ViewHolder(view);
     }
@@ -56,11 +58,13 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        FarmerResponse data = ldata.get(position);
+        if(ldata != null){
+            FarmerResponse data = ldata.get(position);
 
-        holder.name.setText(data.farmer.name);
-        holder.price.setText("Rs. " + data.price);
-        holder.chooseBtn.setOnClickListener(v -> placeOrder(data));
+            holder.name.setText(data.farmer.name);
+            holder.price.setText("Rs. " + data.price);
+            holder.chooseBtn.setOnClickListener(v -> placeOrder(data));
+        }
     }
 
     private void placeOrder(FarmerResponse data) {
@@ -68,7 +72,6 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
         payload.farmer_contact = data.farmer.contact;
         payload.foodgrain_id = foodgrain_id;
         payload.quantity = quantity;
-
 
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
         Call<PlaceOrderResponse> call = apiServices.placeOrderRequest(payload);
@@ -88,7 +91,6 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
         });
 
     }
-
 
     @Override
     public int getItemCount() {

@@ -10,14 +10,22 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.adapters.AdapterRecyclerViewBottomSheet;
 
 public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
+
+    private RecyclerView recyclerView;
+    private List<AdapterRecyclerViewBottomSheet.Items> itemsList = new ArrayList<>();
 
     //Bottom Sheet Callback
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
@@ -27,7 +35,6 @@ public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
             if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                 dismiss();
             }
-
         }
 
         @Override
@@ -38,7 +45,6 @@ public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.BottomSheetDialog);
     }
 
@@ -46,58 +52,26 @@ public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
     public void setupDialog(@NonNull Dialog dialog, int style) {
         super.setupDialog(dialog, style);
 
-        LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view= inflater.inflate(R.layout.farmer_sheet_menu,null, false);
-
-        LinearLayout gotoWarehouse = view.findViewById(R.id.farmerGotoWarehouse);
-
-        gotoWarehouse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-
-                FragmentFarmerFindWarehouse warehouse = new FragmentFarmerFindWarehouse();
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.farmerFragments, warehouse)
-                        .addToBackStack("none")
-                        .commit();
-
-            }
-        });
-
-        LinearLayout gotoProduceList = view.findViewById(R.id.farmergotoProduceList);
-
-        gotoProduceList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-//
-//                FragmentFarmerProduce produceList = new FragmentFarmerProduce();
-//                getActivity().getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.farmerFragments, produceList)
-//                        .addToBackStack("none")
-//                        .commit();
-
-                FragmentFarmerProduce produce = new FragmentFarmerProduce();
-                produce.show(getActivity().getSupportFragmentManager(), "farmer_produce");
-            }
-        });
-
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.farmer_sheet_menu, null, false);
         dialog.setContentView(view);
-
 
         //Set the coordinator layout behavior
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) view.getParent()).getLayoutParams();
         CoordinatorLayout.Behavior behavior = params.getBehavior();
 
         //Set callback
-        if (behavior != null && behavior instanceof BottomSheetBehavior) {
+        if (behavior instanceof BottomSheetBehavior) {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
         }
 
+        for(int i = 0; i < 7; i++){
+            itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Sample Text", R.drawable.buy));
+        }
 
-
+        recyclerView = dialog.findViewById(R.id.recycler_farmer_sheet);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setNestedScrollingEnabled(true);
+        recyclerView.setAdapter(new AdapterRecyclerViewBottomSheet(getActivity(), itemsList));
     }
 }

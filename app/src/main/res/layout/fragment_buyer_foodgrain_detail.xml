@@ -70,7 +70,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/quantity_input"
@@ -82,7 +84,6 @@
 
             <!--Proceed Button-->
             <androidx.cardview.widget.CardView
-                android:id="@+id/setQuantitybtn"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_below="@id/quantity_input_lay"
@@ -98,6 +99,7 @@
                 app:cardElevation="8dp">
 
                 <Button
+                    android:id="@+id/setQuantitybtn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/gradient_button"
@@ -108,6 +110,18 @@
 
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/buyer_food_det_search_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="Search Results: "
+            android:textColor="#2C2C2C"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -121,11 +135,11 @@
 
             <ProgressBar
                 android:id="@+id/buyer_foodgrain_det_progress"
+                style="@android:style/Widget.Material.ProgressBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:visibility="gone" />
         </RelativeLayout>
-
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
