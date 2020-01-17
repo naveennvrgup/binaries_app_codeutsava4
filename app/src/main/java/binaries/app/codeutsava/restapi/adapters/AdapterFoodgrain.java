@@ -64,7 +64,6 @@ public class AdapterFoodgrain extends RecyclerView.Adapter<AdapterFoodgrain.View
         Random rand = new Random();
 
         holder.name.setText(data.type);
-        holder.price.setText("Rs. "+data.price);
         Glide.with(activity)
                 .load(imgs.get(rand.nextInt(imgs.size())))
                 .into(holder.foogImg);
@@ -88,14 +87,13 @@ public class AdapterFoodgrain extends RecyclerView.Adapter<AdapterFoodgrain.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, price;
+        public TextView name;
         public ImageView foogImg;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.BDfoodname);
-            price = itemView.findViewById(R.id.BDfoodprice);
             foogImg = itemView.findViewById(R.id.BDimageView);
 
         }

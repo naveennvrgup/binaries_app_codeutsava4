@@ -60,7 +60,7 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
         FarmerResponse data = ldata.get(position);
 
         holder.name.setText(data.farmer.name);
-        holder.quanity.setText(String.valueOf(data.quantity));
+        holder.price.setText("Rs. "+String.valueOf(data.price));
 
 
         holder.chooseBtn.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +108,7 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView avatar;
-        TextView name, quanity;
+        TextView name, price;
         Button chooseBtn;
 
         public ViewHolder(@NonNull View itemView) {
@@ -116,7 +116,7 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
 
             avatar = itemView.findViewById(R.id.avatar);
             name = itemView.findViewById(R.id.farmer_name);
-            quanity = itemView.findViewById(R.id.quantity);
+            price= itemView.findViewById(R.id.price);
             chooseBtn = itemView.findViewById(R.id.choose_button);
         }
     }

@@ -3,6 +3,7 @@ package binaries.app.codeutsava.restapi.model.buyer;
 public class FarmerResponse {
     public Farmer farmer;
     public int quantity;
+    public int price;
 
     public class Farmer {
         public String name;
