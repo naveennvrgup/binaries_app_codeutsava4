@@ -9,6 +9,7 @@ import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
 import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
+import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
@@ -48,7 +49,7 @@ public interface APIServices {
     Call<List<BuyerOrderListResponse>> getFarmerOrders();
 
     @GET("transaction/approveOrder/{id}/")
-    Call<Boolean> approveOrder(@Path("id") int id);
+    Call<Boolean> approveOrder(@Path("id") int id, ApproveOrderPayload payload);
 
     @GET("transaction/rejectOrder/{id}/")
     Call<Boolean> rejectOrder(@Path("id") int id);

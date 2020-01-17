@@ -1,6 +1,7 @@
 package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.activites.ActivityFarmerOrders;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
+import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
 import retrofit2.Call;
@@ -72,8 +74,11 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
     }
 
     void approveApiCall(int id, int position) {
+        ApproveOrderPayload payload = new ApproveOrderPayload();
+
+
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<Boolean> call = apiServices.approveOrder(id);
+        Call<Boolean> call = apiServices.approveOrder(id,payload);
 
         call.enqueue(new Callback<Boolean>() {
             @Override
