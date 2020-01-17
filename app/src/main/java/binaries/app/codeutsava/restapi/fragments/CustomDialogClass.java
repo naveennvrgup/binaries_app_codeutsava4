@@ -3,6 +3,7 @@ package binaries.app.codeutsava.restapi.fragments;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.activites.ActivityFarmer;
+import binaries.app.codeutsava.restapi.activites.ActivitySplashScreen;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionPayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
@@ -106,6 +109,10 @@ public class CustomDialogClass extends Dialog implements
                 });
 
 //                Toast.makeText(getContext(),"Warehouse transaction request sent successfully", Toast.LENGTH_LONG).show();
+//                startActivity(new Intent(ActivitySplashScreen.this, ActivityFarmer.class));
+
+                Intent i = new Intent(c, ActivityFarmer.class);
+                c.startActivity(i);
                 c.finish();
                 break;
             case R.id.btnCancelWarehouseTransaction:
