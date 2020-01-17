@@ -47,8 +47,8 @@ public class FragmentBuyerBottomSheet extends BottomSheetDialogFragment {
     public void setupDialog(@NonNull Dialog dialog, int style) {
         super.setupDialog(dialog, style);
 
-        LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view= inflater.inflate(R.layout.buyer_sheet_menu,null, false);
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.buyer_sheet_menu, null, false);
 
 
         dialog.setContentView(view);
@@ -64,16 +64,6 @@ public class FragmentBuyerBottomSheet extends BottomSheetDialogFragment {
         }
 
 
-        attachFragToLink(view,R.id.buyerGotoHome,new FragmentBuyerHome());
-    }
-
-    public void attachFragToLink(View view,int id, DialogFragment frag){
-        LinearLayout btn= view.findViewById(id);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                frag.show(getActivity().getSupportFragmentManager(),"something");
-            }
-        });
+        //   attachFragToLink(view,R.id.buyerGotoHome,new FragmentBuyerHome());
     }
 }

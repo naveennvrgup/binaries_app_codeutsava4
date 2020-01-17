@@ -1,51 +1,88 @@
 package binaries.app.codeutsava.restapi.activites;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 import binaries.app.codeutsava.R;
-import binaries.app.codeutsava.restapi.fragments.FragmentBuyerBottomSheet;
-import binaries.app.codeutsava.restapi.fragments.FragmentBuyerHome;
-import binaries.app.codeutsava.restapi.fragments.FragmentFarmerBottomSheet;
+import binaries.app.codeutsava.restapi.adapters.AdapterBuyerTop;
+import binaries.app.codeutsava.restapi.adapters.AdapterFoodgrain;
+import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
+import binaries.app.codeutsava.restapi.restapi.APIServices;
+import binaries.app.codeutsava.restapi.restapi.AppClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class ActivityBuyer extends AppCompatActivity{
+public class ActivityBuyer extends AppCompatActivity {
 
-    ImageView menuButton;
-    BottomSheetBehavior sheetBehavior;
-    RelativeLayout bottomSheet;
+    private RecyclerView recyclerViewTop, recyclerViewList;
+    private AdapterFoodgrain adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buyer);
 
-        FragmentBuyerHome buyerHome = new FragmentBuyerHome();
-        buyerHome.show(getSupportFragmentManager(),"buyerhome");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.dashboardBg));
+        }
 
+        initViews();
+        callAPI();
+    }
 
-        menuButton=findViewById(R.id.buyer_menu_icon);
-        menuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    private void initViews() {
+        recyclerViewTop = findViewById(R.id.buyer_tab_strip);
+        recyclerViewTop.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewTop.setAdapter(new AdapterBuyerTop(this));
+        recyclerViewTop.setNestedScrollingEnabled(true);
+        recyclerViewTop.setHasFixedSize(true);
+        recyclerViewTop.setAdapter(new AdapterBuyerTop(this));
 
-                BottomSheetDialogFragment bottomSheetDialogFragment=new FragmentBuyerBottomSheet();
-                bottomSheetDialogFragment.show(getSupportFragmentManager(),"farmerBottomSheet");
-            }
-        });
-
-
+        recyclerViewList = findViewById(R.id.recycler_buyer_list);
+        recyclerViewList.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerViewList.setAdapter(new AdapterFoodgrain(this, null, null));
     }
 
 
+    public void callAPI() {
+        APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
+
+        Call<List<BuyerFoodgrainResponse>> call = apiServices.getBuyerFoodgrainList();
+        call.enqueue(new Callback<List<BuyerFoodgrainResponse>>() {
+            @Override
+            public void onResponse(Call<List<BuyerFoodgrainResponse>> call, Response<List<BuyerFoodgrainResponse>> response) {
+
+                Log.d("DEBUG", "API CALL SUCCESS");
+
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        adapter = new AdapterFoodgrain(ActivityBuyer.this, response.body(), getSupportFragmentManager());
+                        recyclerViewList.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<BuyerFoodgrainResponse>> call, Throwable t) {
+                Toast.makeText(ActivityBuyer.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }

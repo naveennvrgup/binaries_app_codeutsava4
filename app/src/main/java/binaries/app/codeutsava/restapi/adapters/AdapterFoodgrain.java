@@ -59,43 +59,47 @@ public class AdapterFoodgrain extends RecyclerView.Adapter<AdapterFoodgrain.View
 
     @Override
     public void onBindViewHolder(@NonNull AdapterFoodgrain.ViewHolder holder, int position) {
-        BuyerFoodgrainResponse data = ldata.get(position);
+        BuyerFoodgrainResponse data = null;
 
-        Random rand = new Random();
+        if (ldata != null) {
+            data = ldata.get(position);
+            Random rand = new Random();
 
-        holder.name.setText(data.type);
-        Glide.with(activity)
-                .load(imgs.get(rand.nextInt(imgs.size())))
-                .into(holder.foogImg);
+            holder.name.setText(data.type);
+            Glide.with(activity)
+                    .load(imgs.get(rand.nextInt(imgs.size())))
+                    .into(holder.foodImg);
+        }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        BuyerFoodgrainResponse finalData = data;
+
+        holder.itemView.setOnClickListener(v -> {
+            FragmentBuyerFoodgrainDetail detail = new FragmentBuyerFoodgrainDetail();
+
+            if (ldata != null) {
                 Bundle args = new Bundle();
-                args.putSerializable("foodgrain", data);
-
-                FragmentBuyerFoodgrainDetail detail = new FragmentBuyerFoodgrainDetail();
+                args.putSerializable("foodgrain", finalData);
                 detail.setArguments(args);
-                detail.show(fragmentManager, "some");
             }
+
+            detail.show(fragmentManager, "some");
         });
     }
 
     @Override
     public int getItemCount() {
-        return ldata.size();
+        return (ldata == null) ? 1 : ldata.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView name;
-        public ImageView foogImg;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView name;
+        private ImageView foodImg;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.BDfoodname);
-            foogImg = itemView.findViewById(R.id.BDimageView);
-
+            foodImg = itemView.findViewById(R.id.BDimageView);
         }
     }
 }

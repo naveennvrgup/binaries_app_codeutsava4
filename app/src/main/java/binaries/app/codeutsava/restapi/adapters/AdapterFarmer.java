@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
-import binaries.app.codeutsava.restapi.fragments.FragmentBuyerHome;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
@@ -55,24 +53,17 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FarmerResponse data = ldata.get(position);
 
         holder.name.setText(data.farmer.name);
-        holder.price.setText("Rs. "+String.valueOf(data.price));
-
-
-        holder.chooseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                placeOrder(data);
-            }
-        });
-
+        holder.price.setText("Rs. " + data.price);
+        holder.chooseBtn.setOnClickListener(v -> placeOrder(data));
     }
 
-    public void placeOrder(FarmerResponse data) {
+    private void placeOrder(FarmerResponse data) {
         PlaceOrderPayload payload = new PlaceOrderPayload();
         payload.farmer_contact = data.farmer.contact;
         payload.foodgrain_id = foodgrain_id;
@@ -85,15 +76,14 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
         call.enqueue(new Callback<PlaceOrderResponse>() {
             @Override
             public void onResponse(Call<PlaceOrderResponse> call, Response<PlaceOrderResponse> response) {
-                FragmentBuyerHome home = new FragmentBuyerHome();
-                fragmentManager.popBackStack();
-                fragmentManager.popBackStack();
-                home.show(fragmentManager, "something");
+                if (response.isSuccessful() && response.body() != null) {
+                    // TODO: Route back to home screen again
+                }
             }
 
             @Override
             public void onFailure(Call<PlaceOrderResponse> call, Throwable t) {
-                Toast.makeText(activity, t.getMessage().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -102,21 +92,20 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
 
     @Override
     public int getItemCount() {
-
-        return ldata.size();
+        return ldata == null ? 0 : ldata.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         ImageView avatar;
         TextView name, price;
         Button chooseBtn;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             avatar = itemView.findViewById(R.id.avatar);
             name = itemView.findViewById(R.id.farmer_name);
-            price= itemView.findViewById(R.id.price);
+            price = itemView.findViewById(R.id.price);
             chooseBtn = itemView.findViewById(R.id.choose_button);
         }
     }

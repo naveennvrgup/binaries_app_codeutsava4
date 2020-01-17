@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/buyerBottomSheet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
     android:fitsSystemWindows="true"
     app:behavior_hideable="true"
     app:behavior_peekHeight="0dp"
-    android:background="@android:color/transparent"
-    android:id="@+id/buyerBottomSheet"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <androidx.cardview.widget.CardView
@@ -70,10 +70,10 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/buyerGotoHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/buyerGotoHome"
                 android:paddingBottom="4dp">
 
                 <ImageView
@@ -89,7 +89,6 @@
                     android:textSize="24dp" />
 
             </LinearLayout>
-
 
 
         </LinearLayout>
