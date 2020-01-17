@@ -15,6 +15,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.fragments.FragmentBuyerBottomSheet;
+import binaries.app.codeutsava.restapi.fragments.FragmentBuyerHome;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerBottomSheet;
 
 public class ActivityFarmer extends AppCompatActivity{
@@ -35,6 +37,9 @@ public class ActivityFarmer extends AppCompatActivity{
         sheetBehavior = BottomSheetBehavior.from(bottomSheet);
         menuButton=findViewById(R.id.farmer_menu_icon);
 
+//        FragmentBuyerHome buyerHome = new FragmentBuyerHome();
+//        buyerHome.show(getSupportFragmentManager(),"buyerhome");
+
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,8 +52,5 @@ public class ActivityFarmer extends AppCompatActivity{
 
     }
 
-    private Context getActivity() {
-        return  ActivityFarmer.this;
-    }
 
 }
