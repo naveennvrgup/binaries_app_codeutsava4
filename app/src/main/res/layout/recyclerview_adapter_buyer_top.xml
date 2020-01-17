@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/recycler_buyer_top_card"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="28dp"
+    android:layout_marginEnd="28dp"
+    app:cardCornerRadius="16dp">
+
+    <TextView
+        android:id="@+id/recycler_buyer_top_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="12dp"
+        android:fontFamily="@font/roboto_slab"
+        android:text="Sample Text"
+        android:textAlignment="center"
+        android:background="@android:color/transparent"
+        android:textColor="@color/dashboardBg"
+        android:textStyle="bold" />
+
+</androidx.cardview.widget.CardView>

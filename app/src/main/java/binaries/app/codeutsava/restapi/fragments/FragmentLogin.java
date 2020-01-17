@@ -66,28 +66,28 @@ public class FragmentLogin extends DialogFragment {
         buttonLogin = view.findViewById(R.id.loginBtn);
         buttonLoginToSignup = view.findViewById(R.id.loginToSignupFragBtn);
 
-        buttonLoginToSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
-                FragmentSignup fragmentSignup=new FragmentSignup();
-
-                fragmentManager.beginTransaction()
-                        .add(R.id.authFrameLayout,fragmentSignup)
-                        .commit();
-
-                fragmentManager.beginTransaction()
-                        .remove(fragmentManager.findFragmentById(R.id.authFrameLayout))
-                        .commit();
-            }
-        });
-
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginApiCall();
-            }
-        });
+//        buttonLoginToSignup.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+//                FragmentSignup fragmentSignup=new FragmentSignup();
+//
+//                fragmentManager.beginTransaction()
+//                        .add(R.id.authFrameLayout,fragmentSignup)
+//                        .commit();
+//
+//                fragmentManager.beginTransaction()
+//                        .remove(fragmentManager.findFragmentById(R.id.authFrameLayout))
+//                        .commit();
+//            }
+//        });
+//
+//        buttonLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                loginApiCall();
+//            }
+//        });
 
         return view;
     }
