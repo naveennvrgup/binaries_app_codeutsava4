@@ -2,6 +2,7 @@ package binaries.app.codeutsava.restapi.activites;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +36,8 @@ public class ActivityBuyer extends AppCompatActivity {
     private void initViews(){
         recyclerView = findViewById(R.id.buyer_tab_strip);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new AdapterBuyerTop(this));
         recyclerView.setNestedScrollingEnabled(true);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(new AdapterBuyerTop(this));
     }
 }

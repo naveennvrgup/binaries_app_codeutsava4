@@ -15,11 +15,13 @@ import java.util.List;
 
 import binaries.app.codeutsava.R;
 
+import static android.view.View.GONE;
+
 public class AdapterBuyerTop extends RecyclerView.Adapter<AdapterBuyerTop.MyViewHolder> {
 
     private Context context;
     private List<String> items = new ArrayList<>();
-    private int rowIndex = -1;
+    private int rowIndex = 0;
 
     public AdapterBuyerTop(Context context) {
         this.context = context;
@@ -47,10 +49,14 @@ public class AdapterBuyerTop extends RecyclerView.Adapter<AdapterBuyerTop.MyView
             notifyDataSetChanged();
         });
 
+        if(position != 0) holder.view.setVisibility(GONE);
+        holder.buyerText.setText(items.get(position));
+
+
         if (rowIndex != position) {
             holder.buyerMainCard.setCardBackgroundColor(context.getResources().getColor(android.R.color.transparent));
             holder.buyerText.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
-            holder.buyerText.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
+            holder.buyerText.setTextColor(context.getResources().getColor(android.R.color.white));
 
         } else {
             holder.buyerMainCard.setCardBackgroundColor(context.getResources().getColor(android.R.color.white));
@@ -67,12 +73,15 @@ public class AdapterBuyerTop extends RecyclerView.Adapter<AdapterBuyerTop.MyView
     class MyViewHolder extends RecyclerView.ViewHolder {
         CardView buyerMainCard;
         TextView buyerText;
+        View view;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             buyerMainCard = itemView.findViewById(R.id.recycler_buyer_top_card);
             buyerText = itemView.findViewById(R.id.recycler_buyer_top_text);
+
+            view = itemView.findViewById(R.id.recycler_buyer_view);
         }
     }
 }
