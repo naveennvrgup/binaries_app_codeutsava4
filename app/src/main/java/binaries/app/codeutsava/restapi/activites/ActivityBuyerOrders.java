@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +25,7 @@ import binaries.app.codeutsava.restapi.fragments.FragmentBuyerBottomSheet;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,7 +63,8 @@ public class ActivityBuyerOrders extends AppCompatActivity {
 
     public void makeApiCall() {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<List<BuyerOrderListResponse>> call = apiServices.getBuyerOrders();
+        Call<List<BuyerOrderListResponse>> call = apiServices.getBuyerOrders(
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("token", AppConstants.TEMP_FARM_TOKEN));
 
         call.enqueue(new Callback<List<BuyerOrderListResponse>>() {
             @Override

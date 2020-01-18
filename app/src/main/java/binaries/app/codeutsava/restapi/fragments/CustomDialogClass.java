@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.preference.PreferenceManager;
+
 import com.google.android.material.textfield.TextInputEditText;
 
 import binaries.app.codeutsava.R;
@@ -22,6 +24,7 @@ import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionPa
 import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -97,7 +100,9 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
                 payload.setWarehouseid(whid);
 
                 APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-                Call<FarmerWarehouseTransactionResponse> call = apiServices.postStorageTransaction(payload);
+                Call<FarmerWarehouseTransactionResponse> call = apiServices.postStorageTransaction(
+                        PreferenceManager.getDefaultSharedPreferences(getContext()).getString("token", AppConstants.TEMP_FARM_TOKEN), payload);
+
                 call.enqueue(new Callback<FarmerWarehouseTransactionResponse>() {
                     @Override
                     public void onResponse(Call<FarmerWarehouseTransactionResponse> call, Response<FarmerWarehouseTransactionResponse> response) {
@@ -109,9 +114,6 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
                         Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-
-//                Toast.makeText(getContext(),"Warehouse transaction request sent successfully", Toast.LENGTH_LONG).show();
-//                startActivity(new Intent(ActivitySplashScreen.this, ActivityFarmer.class));
 
                 Intent i = new Intent(c, ActivityFarmer.class);
                 c.startActivity(i);

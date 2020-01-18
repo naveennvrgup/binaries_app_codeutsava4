@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,6 +39,7 @@ import binaries.app.codeutsava.restapi.fragments.FragmentFarmerBottomSheet;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDashboardRecommedationResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -92,7 +94,8 @@ public class ActivityFarmer extends AppCompatActivity {
 
     private void getGraph() {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<List<List<String>>> call = apiServices.getGraphDetails();
+        Call<List<List<String>>> call = apiServices.getGraphDetails(
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("token", AppConstants.TEMP_FARM_TOKEN));
 
         call.enqueue(new Callback<List<List<String>>>() {
             @Override
@@ -167,7 +170,9 @@ public class ActivityFarmer extends AppCompatActivity {
 
     private void getRecommendations() {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<FarmerDashboardRecommedationResponse> call = apiServices.getFarmerRecommendation();
+        Call<FarmerDashboardRecommedationResponse> call = apiServices.getFarmerRecommendation(
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("token", AppConstants.TEMP_FARM_TOKEN)
+        );
 
         call.enqueue(new Callback<FarmerDashboardRecommedationResponse>() {
             @Override

@@ -34,15 +34,13 @@ public class AppClient {
         return retrofit.create(serviceClass);
     }
 
-
-
     private OkHttpClient.Builder getOKHttpClient() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
         httpClient.addInterceptor(chain -> {
             Request request=chain.request()
                     .newBuilder()
-                    .addHeader("Authorization", AppConstants.TEMP_FARM_TOKEN)
+//                    .addHeader("Authorization", AppConstants.TEMP_FARM_TOKEN)
                     .build();
             return chain.proceed(request);
         });

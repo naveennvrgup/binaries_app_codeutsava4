@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -74,7 +76,8 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
             payload.get_from = get_from;
 
             APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-            Call<Boolean> call = apiServices.approveOrder(id, payload);
+            Call<Boolean> call = apiServices.approveOrder(
+                    PreferenceManager.getDefaultSharedPreferences(activity).getString("token", AppConstants.TEMP_FARM_TOKEN), id, payload);
 
             call.enqueue(new Callback<Boolean>() {
                 @Override
@@ -97,7 +100,8 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
 
     void rejectApiCall(int id, int position) {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<Boolean> call = apiServices.rejectOrder(id);
+        Call<Boolean> call = apiServices.rejectOrder(
+                PreferenceManager.getDefaultSharedPreferences(activity).getString("token", AppConstants.TEMP_FARM_TOKEN), id);
 
         call.enqueue(new Callback<Boolean>() {
             @Override

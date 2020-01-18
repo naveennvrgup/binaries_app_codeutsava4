@@ -1,10 +1,5 @@
 package binaries.app.codeutsava.restapi.activites;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,24 +8,28 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.PopupMenu;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.preference.PreferenceManager;
+
+import com.google.android.material.textfield.TextInputEditText;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import binaries.app.codeutsava.R;
-import binaries.app.codeutsava.restapi.fragments.FragmentLogin;
-import binaries.app.codeutsava.restapi.fragments.FragmentSignup;
 import binaries.app.codeutsava.restapi.model.auth.LoginPayload;
 import binaries.app.codeutsava.restapi.model.auth.LoginResponse;
 import binaries.app.codeutsava.restapi.model.auth.SignupPayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,26 +40,15 @@ public class ActivityAuthentication extends AppCompatActivity {
     private CardView authProceed;
     private Button authDropDown, authProceedButton;
     private boolean showSignup = true;
-    EditText signupname;
-    EditText signuppassword;
-    EditText signupcontact;
-    private Map<String,String> usertypechoices;
+    private TextInputEditText signupname, signInContact, signInPass;
+    private TextInputEditText signuppassword;
+    private TextInputEditText signupcontact;
+    private Map<String, String> usertypechoices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
-
-        SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
-        String token = preferences.getString("token",null);
-        String userType = preferences.getString("userType",null);
-
-        if(token!=null){
-            AppClient.token = token;
-            AppClient.token = "Token " + token;
-            AppClient.userType = userType;
-            gotocorrectActivity(userType);
-        }
 
         initViews();
         setUpOnClickListeners();
@@ -80,25 +68,22 @@ public class ActivityAuthentication extends AppCompatActivity {
         signupcontact = findViewById(R.id.signupcontact);
         signuppassword = findViewById(R.id.signuppassword);
 
+        signInContact = findViewById(R.id.sign_in_contact);
+        signInPass = findViewById(R.id.sign_in_pass);
+
         usertypechoices = new HashMap<>();
-        usertypechoices.put("Who are you?","FAR");
-        usertypechoices.put("Farmer","BUY");
-        usertypechoices.put("Buyer","WHO");
-        usertypechoices.put("Warehouse Owner","NGO");
-        usertypechoices.put("Administrator","ADM");
-        usertypechoices.put("Delivery","DVR");
+        usertypechoices.put("Who are you?", "FAR");
+        usertypechoices.put("Farmer", "BUY");
+        usertypechoices.put("Buyer", "WHO");
+        usertypechoices.put("Warehouse Owner", "NGO");
+        usertypechoices.put("Administrator", "ADM");
+        usertypechoices.put("Delivery", "DVR");
 
         authDropDown = findViewById(R.id.auth_menu_drop_down);
 
-        authProceedButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (showSignup) {
-                    dosignupcall();
-                } else {
-                    dologincall();
-                }
-            }
+        authProceedButton.setOnClickListener(v -> {
+            if (showSignup) dosignupcall();
+            else dologincall();
         });
     }
 
@@ -111,98 +96,102 @@ public class ActivityAuthentication extends AppCompatActivity {
         payload.contact = signupcontact.getText().toString();
         payload.role = usertypechoices.get(authDropDown.getText().toString());
 
-
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<SignupPayload> call = apiServices.sendSignupRequest(payload);
+        Call<SignupPayload> call = apiServices.sendSignupRequest(
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("token", AppConstants.TEMP_FARM_TOKEN), payload);
 
         call.enqueue(new Callback<SignupPayload>() {
             @Override
             public void onResponse(Call<SignupPayload> call, Response<SignupPayload> response) {
 
-                if(response.body().contact!=null){
-                    Toast.makeText(ActivityAuthentication.this,
-                            "Signup success. Please login", Toast.LENGTH_LONG).show();
-
+                if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(ActivityAuthentication.this, "Signup success. Please login", Toast.LENGTH_LONG).show();
                     toLogin();
-                }else{
-                    Toast.makeText(ActivityAuthentication.this,"login failed",Toast.LENGTH_LONG).show();
+
+                } else {
+                    Toast.makeText(ActivityAuthentication.this, "login failed", Toast.LENGTH_LONG).show();
                 }
 
             }
 
             @Override
             public void onFailure(Call<SignupPayload> call, Throwable t) {
-                Toast.makeText(ActivityAuthentication.this, t.getMessage().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityAuthentication.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
     }
 
-    void gotocorrectActivity(String role){
-        if(role=="FAR"){
-            startActivity(new Intent(ActivityAuthentication.this, ActivityFarmer.class));
-            finish();
-        }else if(role=="BUY"){
-            startActivity(new Intent(ActivityAuthentication.this, ActivityBuyer.class));
-            finish();
+    void goToDash(String role) {
+        switch (role) {
+            case "FAR":
+                Intent intent = new Intent(ActivityAuthentication.this, ActivityFarmer.class);
+                startActivity(intent);
+                finish();
+                break;
+
+            case "BUY":
+                intent = new Intent(ActivityAuthentication.this, ActivityBuyer.class);
+                startActivity(intent);
+                finish();
+                break;
         }
     }
 
-    void routetodashboard(String token){
+    void routetodashboard() {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        apiServices.getFarmerDetail()
+        apiServices.getUserDetail(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("token", AppConstants.TEMP_FARM_TOKEN))
                 .enqueue(new Callback<FarmerDetailResponse>() {
-                    @Override
-                    public void onResponse(Call<FarmerDetailResponse> call, Response<FarmerDetailResponse> response) {
-                        if(response.isSuccessful() && response.body()!=null){
+            @Override
+            public void onResponse(Call<FarmerDetailResponse> call, Response<FarmerDetailResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+                    editor.putString("role", response.body().getRole());
+                    editor.apply();
 
-                            SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
-                            preferences.edit()
-                                    .putString("token", "Token " + token)
-                                    .putString("userType",response.body().getRole())
-                                    .commit();
-                            AppClient.token = "Token " + token;
-                            AppClient.userType = response.body().getRole();
+                    goToDash(response.body().getRole());
+                }
+            }
 
-                            gotocorrectActivity(AppClient.userType);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<FarmerDetailResponse> call, Throwable t) {
-                        Toast.makeText(ActivityAuthentication.this,"something went wrong",Toast.LENGTH_LONG).show();
-                    }
-                });
+            @Override
+            public void onFailure(Call<FarmerDetailResponse> call, Throwable t) {
+                Toast.makeText(ActivityAuthentication.this, "something went wrong", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     void dologincall() {
         LoginPayload payload = new LoginPayload();
 
-        payload.setUsername(signupcontact.getText().toString());
-        payload.setPassword(signuppassword.getText().toString());
-
+        payload.setUsername(signInContact.getText().toString());
+        payload.setPassword(signInPass.getText().toString());
 
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<LoginResponse> call = apiServices.sendLoginRequest(payload);
+        Call<LoginResponse> call = apiServices.sendLoginRequest(
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("token", AppConstants.TEMP_FARM_TOKEN), payload);
 
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(ActivityAuthentication.this, "login success", Toast.LENGTH_LONG).show();
 
-                    Toast.makeText(ActivityAuthentication.this,
-                            "login success", Toast.LENGTH_LONG).show();
+                    SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+                    editor.putString("token", "Token " + response.body().getKey());
+                    editor.putBoolean("logged_in", true);
+                    editor.apply();
 
-                    routetodashboard(response.body().getKey());
-                }else{
-                    Toast.makeText(ActivityAuthentication.this,"login failed",Toast.LENGTH_LONG).show();
+                    routetodashboard();
+
+                } else {
+                    Toast.makeText(ActivityAuthentication.this, "login failed", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(ActivityAuthentication.this, t.getMessage().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityAuthentication.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -220,9 +209,7 @@ public class ActivityAuthentication extends AppCompatActivity {
     }
 
     private void setUpOnClickListeners() {
-        textSignIn.setOnClickListener(view -> {
-            toLogin();
-        });
+        textSignIn.setOnClickListener(view -> toLogin());
 
         textSignUp.setOnClickListener(view -> {
             signUpScrollView.setVisibility(View.VISIBLE);

@@ -9,11 +9,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.activites.ActivityAuthentication;
 import binaries.app.codeutsava.restapi.activites.ActivityBuyer;
 import binaries.app.codeutsava.restapi.activites.ActivityBuyerOrders;
 import binaries.app.codeutsava.restapi.activites.ActivityFarmerOrders;
@@ -69,6 +71,14 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
                         break;
 
                     case "Log Out":
+                        PreferenceManager.getDefaultSharedPreferences(activity)
+                                .edit()
+                                .clear()
+                                .putBoolean("logged_in", false)
+                                .apply();
+
+                        myIntent = new Intent(activity, ActivityAuthentication.class);
+                        activity.startActivity(myIntent);
                         break;
 
                     // FARMER PRODUCE

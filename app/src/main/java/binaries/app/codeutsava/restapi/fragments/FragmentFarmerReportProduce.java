@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -24,6 +25,7 @@ import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
 import binaries.app.codeutsava.restapi.model.farmer.ReportProducePayload;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -77,7 +79,8 @@ public  class  FragmentFarmerReportProduce extends DialogFragment {
             reportProducePayload.setPrice(Double.parseDouble(reportProducePrice.getText().toString()));
             reportProducePayload.setQuantity(Double.parseDouble(reportProduceQuantity.getText().toString()));
             APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-            Call<FarmerProduceResponse> call = apiServices.postFarmerProduce(reportProducePayload);
+            Call<FarmerProduceResponse> call = apiServices.postFarmerProduce(
+                    PreferenceManager.getDefaultSharedPreferences(getContext()).getString("token", AppConstants.TEMP_FARM_TOKEN), reportProducePayload);
 
             call.enqueue(new Callback<FarmerProduceResponse>() {
                 @Override
