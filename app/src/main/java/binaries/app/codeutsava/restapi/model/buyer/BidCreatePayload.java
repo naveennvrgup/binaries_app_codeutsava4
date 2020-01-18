@@ -4,6 +4,6 @@ import java.io.Serializable;
 
 public class BidCreatePayload implements Serializable {
     public String foodgrain;
-    public int quantity;
+    public String quantity;
     public String description;
 }

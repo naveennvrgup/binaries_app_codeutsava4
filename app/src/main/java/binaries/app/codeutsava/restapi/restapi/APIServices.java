@@ -4,7 +4,6 @@ import java.util.List;
 
 import binaries.app.codeutsava.restapi.model.auth.SignupPayload;
 import binaries.app.codeutsava.restapi.model.buyer.BidCreatePayload;
-import binaries.app.codeutsava.restapi.model.buyer.BidResponse;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.auth.LoginPayload;
 import binaries.app.codeutsava.restapi.model.auth.LoginResponse;
@@ -75,23 +74,23 @@ public interface APIServices {
     @GET("user/")
     Call<SignupPayload> sendSignupRequest(@Body SignupPayload payload);
 
-    @GET("transaction/createBid/")
-    Call<BidResponse> createBid(BidCreatePayload payload);
+    @POST("/transaction/createBid/")
+    Call<FarmerActiveBidListResponse> createBid(BidCreatePayload payload);
 
-    @GET("transaction/farmerResponseBideList/")
-    Call<SignupPayload> getFarmerResponseBideList();
+//    @GET("transaction/farmerResponseBideList/")
+//    Call<SignupPayload> getFarmerResponseBideList();
 
     @GET("transaction/pastBidsList/")
-    Call<SignupPayload> getPastBidsList();
+    Call<List<FarmerActiveBidListResponse>> getPastBidsList();
 
-    @GET("transaction/farmerActiveBidList/")
-    Call<SignupPayload> getFarmerActiveBidList();
-
-    @GET("transaction/farmerPlaceBid/")
-    Call<SignupPayload> farmerPlaceBid();
-
-    @GET("transaction/approveBid/")
-    Call<SignupPayload> approveBid();
+//    @GET("transaction/farmerActiveBidList/")
+//    Call<SignupPayload> getFarmerActiveBidList();
+//
+//    @GET("transaction/farmerPlaceBid/")
+//    Call<SignupPayload> farmerPlaceBid();
+//
+//    @GET("transaction/approveBid/")
+//    Call<SignupPayload> approveBid();
 
 
 

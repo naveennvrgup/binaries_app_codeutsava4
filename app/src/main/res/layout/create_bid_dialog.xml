@@ -48,15 +48,10 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/buyercreatebidbutton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/createbidbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="submit" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="submit" />
 </LinearLayout>

@@ -70,7 +70,7 @@ public class AppClient {
             public Response intercept(Chain chain) throws IOException {
                 Request request=chain.request()
                         .newBuilder()
-                        .addHeader("Authorization",token)
+                        .addHeader("Authorization",AppConstants.TEMP_FARM_TOKEN)
                         .build();
                 return chain.proceed(request);
             }
