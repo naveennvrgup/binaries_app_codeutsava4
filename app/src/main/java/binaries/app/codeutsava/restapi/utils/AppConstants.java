@@ -2,7 +2,8 @@ package binaries.app.codeutsava.restapi.utils;
 
 public class AppConstants {
     //URL's
-    public static final String BASE_URL = "http://192.168.43.218:8000/";
+    public static final String BASE_URL = "http://172.22.136.127:8000/"; // naveen
+//    public static final String BASE_URL = "http://172.22.136.127:8000/";
     public static final String LOGIN_URL = "user/rest-auth/login/";
     public static final String FARMER_DETAIL_URL="user/farmer-detail/";
     public static final String FARMER_BID_LIST_URL="transaction/active_bid/";
@@ -13,6 +14,6 @@ public class AppConstants {
     public static final String CREATE_STORAGE_TRANSACTION_URL="transaction/storagetransaction/";
 
     //TOKEN
-    public static final String TEMP_FARM_TOKEN="Token dbd96bd83a9e6ef3ade6ff1f431d93a965026d23";
+    public static final String TEMP_FARM_TOKEN="Token 5aa58dd96ddf0d7e00a638e333ae030557472c83";
 
 }

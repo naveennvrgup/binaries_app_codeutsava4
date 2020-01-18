@@ -1,6 +1,7 @@
 package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.activites.ActivityBuyerOrders;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
@@ -80,7 +82,11 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
             @Override
             public void onResponse(Call<PlaceOrderResponse> call, Response<PlaceOrderResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // TODO: Route back to home screen again
+                    fragmentManager.popBackStack();
+                    fragmentManager.popBackStack();
+                    activity.startActivity(new Intent(
+                            activity, ActivityBuyerOrders.class
+                    ));
                 }
             }
 

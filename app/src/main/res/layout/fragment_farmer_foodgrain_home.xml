@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dashboardBg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_buyer_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="CatVideos"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="28sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/buyer_tab_strip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_buyer_info"
+            android:layout_marginTop="36dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/buyer_tab_strip"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            android:background="@drawable/drawble_buyer_main">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_farmer_foodgrain_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/farmer_menu_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/menu_icon" />
+
+    <include layout="@layout/farmer_sheet_menu" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

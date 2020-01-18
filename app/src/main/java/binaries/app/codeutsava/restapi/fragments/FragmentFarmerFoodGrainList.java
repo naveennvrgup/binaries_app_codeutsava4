@@ -54,8 +54,8 @@ public class FragmentFarmerFoodGrainList extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_buyer_home, container, false);
-        recyclerView = view.findViewById(R.id.BHRecyclerView);
+        View view = inflater.inflate(R.layout.fragment_farmer_foodgrain_home, container, false);
+        recyclerView = view.findViewById(R.id.recycler_farmer_foodgrain_list);
 
 
         callAPI();

@@ -5,10 +5,17 @@ import java.util.List;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.auth.LoginPayload;
 import binaries.app.codeutsava.restapi.model.auth.LoginResponse;
+import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
+import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
+import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
+import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
+import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerFindWarehouseResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
+import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionPayload;
+import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionResponse;
 import binaries.app.codeutsava.restapi.model.farmer.ReportProducePayload;
 import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
@@ -20,6 +27,9 @@ import retrofit2.http.Path;
 public interface APIServices {
     @POST(AppConstants.LOGIN_URL)
     Call<LoginResponse> sendLoginRequest(@Body LoginPayload loginPayload);
+
+    @POST("transaction/placeOrder/")
+    Call<PlaceOrderResponse> placeOrderRequest(@Body PlaceOrderPayload payload);
 
     @GET(AppConstants.FARMER_DETAIL_URL)
     Call<FarmerDetailResponse> getFarmerDetail();

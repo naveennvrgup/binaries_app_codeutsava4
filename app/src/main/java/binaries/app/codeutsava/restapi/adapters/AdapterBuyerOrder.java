@@ -43,7 +43,6 @@ public class AdapterBuyerOrder extends RecyclerView.Adapter<AdapterBuyerOrder.Vi
         holder.quantity.setText(String.valueOf(orderListResponse.quantity));
         holder.price.setText(String.valueOf(orderListResponse.price));
         holder.foodgraintype.setText(orderListResponse.foodgraintype);
-        holder.transno.setText(orderListResponse.transno);
         holder.approved.setText(Boolean.toString(orderListResponse.approved));
     }
 
@@ -53,17 +52,15 @@ public class AdapterBuyerOrder extends RecyclerView.Adapter<AdapterBuyerOrder.Vi
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView seller, quantity, price, foodgraintype, transno, approved;
+        TextView seller, quantity, price, foodgraintype, approved;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-
             seller = itemView.findViewById(R.id.bo_farmer);
             quantity = itemView.findViewById(R.id.bo_quantity);
-            price = itemView.findViewById(R.id.bo_farmer);
+            price = itemView.findViewById(R.id.bo_price);
             foodgraintype = itemView.findViewById(R.id.bo_graintype);
-            transno = itemView.findViewById(R.id.bo_trans_no);
             approved = itemView.findViewById(R.id.bo_approved);
         }
     }
