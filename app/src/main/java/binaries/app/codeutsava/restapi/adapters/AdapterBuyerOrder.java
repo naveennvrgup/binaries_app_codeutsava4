@@ -29,8 +29,7 @@ public class AdapterBuyerOrder extends RecyclerView.Adapter<AdapterBuyerOrder.Vi
     @NonNull
     @Override
     public AdapterBuyerOrder.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity)
-                .inflate(R.layout.recyler_buyer_order_row, parent, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.recyler_buyer_order_row, parent, false);
 
         return new ViewHolder(view);
     }

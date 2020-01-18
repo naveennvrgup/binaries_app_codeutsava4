@@ -62,19 +62,18 @@ public class FragmentBuyerBottomSheet extends BottomSheetDialogFragment {
         CoordinatorLayout.Behavior behavior = params.getBehavior();
 
         //Set callback
-        if (behavior != null && behavior instanceof BottomSheetBehavior) {
+        if (behavior instanceof BottomSheetBehavior) {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
         }
 
-
-        for (int i = 0; i < 7; i++) {
-            itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Sample Text", R.drawable.buy));
-        }
+        itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Home"));
+        itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Orders"));
+        itemsList.add(new AdapterRecyclerViewBottomSheet.Items("About Us"));
+        itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Log Out"));
 
         recyclerView = dialog.findViewById(R.id.recycler_buyer_bottom_sheet);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setNestedScrollingEnabled(true);
         recyclerView.setAdapter(new AdapterRecyclerViewBottomSheet(getActivity(), itemsList));
-        //   attachFragToLink(view,R.id.buyerGotoHome,new FragmentBuyerHome());
     }
 }

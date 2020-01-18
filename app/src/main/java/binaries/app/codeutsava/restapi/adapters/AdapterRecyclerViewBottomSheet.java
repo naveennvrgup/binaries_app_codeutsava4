@@ -1,25 +1,30 @@
 package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.activites.ActivityBuyer;
+import binaries.app.codeutsava.restapi.activites.ActivityBuyerOrders;
+import binaries.app.codeutsava.restapi.fragments.FragmentFarmerFoodGrainList;
+import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduce;
+import binaries.app.codeutsava.restapi.fragments.FragmentFarmerReportProduce;
 
 public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<AdapterRecyclerViewBottomSheet.MyViewHolder> {
 
     private List<Items> itemsList;
     private Activity activity;
+    private Intent myIntent;
 
     public AdapterRecyclerViewBottomSheet(Activity activity, List<Items> itemsList) {
         this.activity = activity;
@@ -36,8 +41,48 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         if (itemsList != null) {
-            Glide.with(activity).load(itemsList.get(position).getItemImageID()).into(holder.bottomImage);
             holder.bottomText.setText(itemsList.get(position).getItemName());
+            holder.itemView.setOnClickListener(view -> {
+
+                switch (itemsList.get(position).itemName) {
+
+                    // FOR BUYER
+                    case "Home":
+                        if (!(activity instanceof ActivityBuyer)) {
+                            myIntent = new Intent(activity, ActivityBuyer.class);
+                            activity.startActivity(myIntent);
+                            activity.finish();
+                        }
+
+                        break;
+
+                    case "Orders":
+                        if (!(activity instanceof ActivityBuyerOrders)) {
+                            myIntent = new Intent(activity, ActivityBuyerOrders.class);
+                            activity.startActivity(myIntent);
+                            activity.finish();
+                        }
+
+                        break;
+
+                    case "About Us":
+                        break;
+
+                    case "Log Out":
+                        break;
+
+                    // FARMER PRODUCE
+                    case "Report Produce":
+                        FragmentFarmerFoodGrainList fragmentFarmerFoodGrainList = new FragmentFarmerFoodGrainList();
+                        fragmentFarmerFoodGrainList.show(((AppCompatActivity) activity).getSupportFragmentManager(), "farmerReportProduce");
+                        break;
+
+                    case "My Produce":
+                        FragmentFarmerProduce frag = new FragmentFarmerProduce();
+                        frag.show(((AppCompatActivity) activity).getSupportFragmentManager(), "farmerProduce");
+                        break;
+                }
+            });
         }
     }
 
@@ -49,23 +94,19 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView bottomText;
-        ImageView bottomImage;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            bottomImage = itemView.findViewById(R.id.recycler_bottom_sheet_image);
             bottomText = itemView.findViewById(R.id.recycler_bottom_sheet_text);
         }
     }
 
     public static class Items {
         private String itemName;
-        private int itemImageID;
 
-        public Items(String itemName, int itemImageID) {
+        public Items(String itemName) {
             this.itemName = itemName;
-            this.itemImageID = itemImageID;
         }
 
         String getItemName() {
@@ -76,12 +117,5 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
             this.itemName = itemName;
         }
 
-        int getItemImageID() {
-            return itemImageID;
-        }
-
-        public void setItemImageID(int itemImageID) {
-            this.itemImageID = itemImageID;
-        }
     }
 }

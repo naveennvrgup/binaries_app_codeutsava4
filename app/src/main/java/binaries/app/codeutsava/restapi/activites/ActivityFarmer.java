@@ -44,9 +44,6 @@ public class ActivityFarmer extends AppCompatActivity {
         sheetBehavior = BottomSheetBehavior.from(bottomSheet);
         menuButton = findViewById(R.id.farmer_menu_icon);
 
-        FragmentFarmerProduce frag = new FragmentFarmerProduce();
-        frag.show(getSupportFragmentManager(), "buyerhome");
-
         menuButton.setOnClickListener(v -> {
             BottomSheetDialogFragment bottomSheetDialogFragment = new FragmentFarmerBottomSheet();
             bottomSheetDialogFragment.show(getSupportFragmentManager(), "farmerBottomSheet");

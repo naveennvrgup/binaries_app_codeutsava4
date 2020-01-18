@@ -65,20 +65,17 @@ public class AdapterFarmerFoodgrainList extends RecyclerView.Adapter<AdapterFarm
                 .load(imgs.get(rand.nextInt(imgs.size())))
                 .into(holder.foogImg);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.itemView.setOnClickListener(v -> {
 
-                int currFoodgrainDataid = ldata.get(position).id;
+            int currFoodgrainDataid = ldata.get(position).id;
 
-                Bundle args = new Bundle();
-                args.putSerializable("id",currFoodgrainDataid);
+            Bundle args = new Bundle();
+            args.putSerializable("id",currFoodgrainDataid);
 
-                FragmentFarmerReportProduce farmerReportProduceFragment = new FragmentFarmerReportProduce();
-                farmerReportProduceFragment.setArguments(args);
+            FragmentFarmerReportProduce farmerReportProduceFragment = new FragmentFarmerReportProduce();
+            farmerReportProduceFragment.setArguments(args);
 
-                farmerReportProduceFragment.show(fragmentManager,"some");
-            }
+            farmerReportProduceFragment.show(fragmentManager,"some");
         });
     }
 

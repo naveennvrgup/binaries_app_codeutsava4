@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -24,9 +24,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.view.View.GONE;
+
 public class FragmentFarmerFoodGrainList extends DialogFragment {
     RecyclerView recyclerView;
     AdapterFarmerFoodgrainList mAdapter;
+    ProgressBar progressBar;
+
     public FragmentFarmerFoodGrainList() {
     }
 
@@ -51,37 +55,33 @@ public class FragmentFarmerFoodGrainList extends DialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_farmer_foodgrain_home, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_farmer_food_grain_list, container, false);
         recyclerView = view.findViewById(R.id.recycler_farmer_foodgrain_list);
-
+        progressBar = view.findViewById(R.id.far_food_list_progress);
 
         callAPI();
         return view;
     }
 
-    public void callAPI() {
+    private void callAPI() {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
 
         Call<List<BuyerFoodgrainResponse>> call = apiServices.getBuyerFoodgrainList();
         call.enqueue(new Callback<List<BuyerFoodgrainResponse>>() {
             @Override
             public void onResponse(Call<List<BuyerFoodgrainResponse>> call, Response<List<BuyerFoodgrainResponse>> response) {
-                mAdapter = new AdapterFarmerFoodgrainList(getActivity(), response.body(),getActivity().getSupportFragmentManager());
+                mAdapter = new AdapterFarmerFoodgrainList(getActivity(), response.body(), getActivity().getSupportFragmentManager());
+
+                progressBar.setVisibility(GONE);
                 recyclerView.setAdapter(mAdapter);
-                recyclerView.setLayoutManager(new GridLayoutManager(
-                        getActivity(),2,GridLayoutManager.VERTICAL,false));
+                recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                 mAdapter.notifyDataSetChanged();
-
-//                Toast.makeText(getContext(), response.body().toString(), Toast.LENGTH_LONG).show();
-
             }
 
             @Override
             public void onFailure(Call<List<BuyerFoodgrainResponse>> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

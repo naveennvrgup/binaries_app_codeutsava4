@@ -1,53 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dashboardBg"
+    android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
-        <LinearLayout
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:id="@+id/farmer_report_prod_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/arrow" />
+
+        <TextView
+            android:id="@+id/text_buyer_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:fontFamily="@font/roboto_slab"
+            android:text="Report Produce"
+            android:textColor="@android:color/white"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-            <EditText
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Price"
-                android:id="@+id/reportProducePrice"
-                android:paddingTop="10dp"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"/>
-            <EditText
-                android:hint="Quantity"
-                android:id="@+id/reportProduceQuantity"
-                android:paddingTop="10dp"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"/>
-            <EditText
-                android:hint="Grade"
-                android:id="@+id/reportProduceGrade"
-                android:paddingTop="10dp"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"/>
-            <TextView
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="80dp"
-                android:layout_marginBottom="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:id="@+id/reportProduceSubmit"/>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/drawble_buyer_main"
+        android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/reportProducePrice"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:hint="Price"
+            android:paddingTop="10dp" />
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        <EditText
+            android:id="@+id/reportProduceQuantity"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:hint="Quantity"
+            android:paddingTop="10dp" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/reportProduceGrade"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:hint="Grade"
+            android:paddingTop="10dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="66dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="66dp"
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp">
+
+            <Button
+                android:id="@+id/reportProduceSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_button"
+                android:fontFamily="@font/roboto_slab"
+                android:text="SUBMIT"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</LinearLayout>

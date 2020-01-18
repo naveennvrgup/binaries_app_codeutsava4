@@ -3,54 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dashboardBg">
+    android:background="@color/dashboardBg"
+    tools:context=".restapi.activites.ActivityBuyer">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/far_food_list_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="16dp"
+            android:src="@drawable/arrow" />
+
         <TextView
-            android:id="@+id/text_buyer_info"
+            android:id="@+id/far_food_grain_list_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/far_food_list_back"
             android:fontFamily="@font/roboto_slab"
-            android:text="CatVideos"
-            android:textAlignment="center"
+            android:text="Foodgrain List"
             android:textColor="@android:color/white"
-            android:textSize="28sp" />
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/buyer_tab_strip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text_buyer_info"
-            android:layout_marginTop="36dp" />
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/buyer_tab_strip"
+            android:layout_below="@id/far_food_grain_list_info"
             android:layout_marginTop="30dp"
-            android:orientation="vertical"
             android:background="@drawable/drawble_buyer_main">
+
+            <ProgressBar
+                android:id="@+id/far_food_list_progress"
+                style="@android:style/Widget.Material.ProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_farmer_foodgrain_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp" />
-        </LinearLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/farmer_menu_icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="16dp"
-        android:src="@drawable/menu_icon" />
-
-    <include layout="@layout/farmer_sheet_menu" />
+    <include layout="@layout/buyer_sheet_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

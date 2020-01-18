@@ -38,8 +38,6 @@ public  class  FragmentFarmerReportProduce extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Light_NoTitleBar);
-
-
     }
 
     @Override
@@ -56,59 +54,49 @@ public  class  FragmentFarmerReportProduce extends DialogFragment {
         }
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_farmer_report_produce, container, false);
 
         int foodgrainId = (Integer) getArguments().getSerializable("id");
 
-        reportProduceGrade = (EditText) view.findViewById(R.id.reportProduceGrade);
-        reportProducePrice = (EditText) view.findViewById(R.id.reportProducePrice);
-        reportProduceQuantity = (EditText) view.findViewById(R.id.reportProduceQuantity);
-        reportProduceSubmit = (TextView) view.findViewById(R.id.reportProduceSubmit);
+        reportProduceGrade = view.findViewById(R.id.reportProduceGrade);
+        reportProducePrice = view.findViewById(R.id.reportProducePrice);
+        reportProduceQuantity = view.findViewById(R.id.reportProduceQuantity);
+        reportProduceSubmit = view.findViewById(R.id.reportProduceSubmit);
 
-        reportProduceSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        reportProduceSubmit.setOnClickListener(v -> {
 
-                ReportProducePayload reportProducePayload = new ReportProducePayload();
-                reportProducePayload.setFid(foodgrainId);
-                reportProducePayload.setGrade(reportProduceGrade.getText().toString());
-                reportProducePayload.setPrice(Double.parseDouble(reportProducePrice.getText().toString()));
-                reportProducePayload.setQuantity(Double.parseDouble(reportProduceQuantity.getText().toString()));
-                APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-                Call<FarmerProduceResponse> call = apiServices.postFarmerProduce(reportProducePayload);
+            ReportProducePayload reportProducePayload = new ReportProducePayload();
+            reportProducePayload.setFid(foodgrainId);
+            reportProducePayload.setGrade(reportProduceGrade.getText().toString());
+            reportProducePayload.setPrice(Double.parseDouble(reportProducePrice.getText().toString()));
+            reportProducePayload.setQuantity(Double.parseDouble(reportProduceQuantity.getText().toString()));
+            APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
+            Call<FarmerProduceResponse> call = apiServices.postFarmerProduce(reportProducePayload);
 
-                call.enqueue(new Callback<FarmerProduceResponse>() {
-                    @Override
-                    public void onResponse(Call<FarmerProduceResponse> call, Response<FarmerProduceResponse> response) {
-                        Bundle args = new Bundle();
-                        FarmerProduceResponse produce = response.body();
-                        args.putSerializable("produce", produce);
+            call.enqueue(new Callback<FarmerProduceResponse>() {
+                @Override
+                public void onResponse(Call<FarmerProduceResponse> call, Response<FarmerProduceResponse> response) {
+                    Bundle args = new Bundle();
+                    FarmerProduceResponse produce = response.body();
+                    args.putSerializable("produce", produce);
 
-                        FragmentFarmerProduceDetail produceDetail = new FragmentFarmerProduceDetail();
-                        produceDetail.setArguments(args);
+                    FragmentFarmerProduceDetail produceDetail = new FragmentFarmerProduceDetail();
+                    produceDetail.setArguments(args);
 
-                        produceDetail.show(getFragmentManager(), "produce");
+                    produceDetail.show(getFragmentManager(), "produce");
 
-                    }
+                }
 
-                    @Override
-                    public void onFailure(Call<FarmerProduceResponse> call, Throwable t) {
-                        Toast.makeText(getContext(), t.getMessage().toString(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                @Override
+                public void onFailure(Call<FarmerProduceResponse> call, Throwable t) {
+                    Toast.makeText(getContext(), t.getMessage().toString(), Toast.LENGTH_LONG).show();
+                }
+            });
 
-            }
         });
 
-
-
-
-
-
         return view;
-
     }
 }
