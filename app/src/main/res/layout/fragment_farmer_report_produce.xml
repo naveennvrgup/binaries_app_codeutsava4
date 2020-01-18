@@ -27,11 +27,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_slab"
-            android:text="Report Produce"
+            android:text="Enter Details"
             android:textColor="@android:color/white"
             android:textSize="28sp"
             android:textStyle="bold" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -41,37 +40,59 @@
         android:background="@drawable/drawble_buyer_main"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/reportProducePrice"
-            android:layout_width="200dp"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Price"
-            android:paddingTop="10dp" />
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="24dp">
 
-        <EditText
-            android:id="@+id/reportProduceQuantity"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:hint="Quantity"
-            android:paddingTop="10dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reportProducePrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Price"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/reportProduceGrade"
-            android:layout_width="200dp"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:hint="Grade"
-            android:paddingTop="10dp" />
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reportProduceQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Quantity (kgs)"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reportProduceGrade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Grade"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginStart="66dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="54dp"
             android:layout_marginEnd="66dp"
             android:layout_marginBottom="12dp"
             android:clickable="true"
@@ -90,6 +111,5 @@
                 android:textStyle="bold" />
 
         </androidx.cardview.widget.CardView>
-
     </LinearLayout>
 </LinearLayout>

@@ -10,19 +10,21 @@ import android.widget.RelativeLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.charts.Cartesian;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import binaries.app.codeutsava.R;
-import binaries.app.codeutsava.restapi.fragments.FragmentBuyerBottomSheet;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerBottomSheet;
-import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduce;
 
 public class ActivityFarmer extends AppCompatActivity {
 
     ImageView menuButton;
     BottomSheetBehavior sheetBehavior;
     RelativeLayout bottomSheet;
+    AnyChartView chartView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +45,20 @@ public class ActivityFarmer extends AppCompatActivity {
         bottomSheet = findViewById(R.id.farmerBottomSheet);
         sheetBehavior = BottomSheetBehavior.from(bottomSheet);
         menuButton = findViewById(R.id.farmer_menu_icon);
+        chartView = findViewById(R.id.graph);
 
         menuButton.setOnClickListener(v -> {
             BottomSheetDialogFragment bottomSheetDialogFragment = new FragmentFarmerBottomSheet();
             bottomSheetDialogFragment.show(getSupportFragmentManager(), "farmerBottomSheet");
         });
+
+        initGraph();
+    }
+
+    private void initGraph(){
+        chartView.setProgressBar(findViewById(R.id.graph_progress));
+
+        Cartesian cartesian = AnyChart.line();
+        cartesian.animation(true);
     }
 }

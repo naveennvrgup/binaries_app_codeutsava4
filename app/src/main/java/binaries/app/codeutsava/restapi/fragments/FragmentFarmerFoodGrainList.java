@@ -60,6 +60,8 @@ public class FragmentFarmerFoodGrainList extends DialogFragment {
         recyclerView = view.findViewById(R.id.recycler_farmer_foodgrain_list);
         progressBar = view.findViewById(R.id.far_food_list_progress);
 
+        view.findViewById(R.id.far_food_list_back).setOnClickListener(view1 -> dismiss());
+
         callAPI();
         return view;
     }

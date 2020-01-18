@@ -1,136 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/confirmWarehouseDialog"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#3E80B4"
-    android:gravity="center"
-    android:id="@+id/confirmWarehouseDialog">
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    app:cardCornerRadius="16dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:text="Confirm Your Warehouse Transaction ?"
-            android:textSize="20dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="Confirm Transaction?"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/warehouseDialogCentre"
-            android:text="Warehouse Centre"/>
-
-        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_margin="4dp"
+            android:fontFamily="@font/average_sans"
+            android:text="Warehouse Centre"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
 
             <TextView
                 android:id="@+id/warehouseDialogName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/average_sans"
                 android:text="WareHouse Name"
-                android:textSize="16dp" />
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/warehouseDialogPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/average_sans"
                 android:text="Price"
-                android:textSize="16dp" />
+                android:textSize="18sp" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_margin="4dp">
 
             <TextView
                 android:id="@+id/warehouseDialogOwner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/average_sans"
                 android:text="WareHouse Owner"
-                android:textSize="16dp" />
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/warehouseDialogFreeSpace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/average_sans"
                 android:text="Free Space"
-                android:textSize="16dp" />
+                android:textSize="18sp" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_margin="4dp">
 
             <TextView
                 android:id="@+id/warehouseDialogDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/average_sans"
                 android:text="WareHouse Distance"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/warehouseDialogSector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/average_sans"
                 android:text="Warehouse Sector"
                 android:textSize="16dp" />
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/storageTransactionQuantityInput"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Quantity of Produce to Store"/>
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="12dp">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/storageTransactionQuantityInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Quantity to Store?"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#3E80B4"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="#3E80B4"
-            android:orientation="horizontal" >
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnConfirmWarehouseTransaction"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:background="@android:color/white"
-                android:clickable="true"
-                android:text="Yes"
-                android:textColor="#5DBCD2"
-                android:textStyle="bold" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginEnd="24dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="2dp">
 
-            <Button
-                android:id="@+id/btnCancelWarehouseTransaction"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:background="@android:color/white"
-                android:clickable="true"
-                android:text="No"
-                android:textColor="#5DBCD2"
-                android:textStyle="bold" />
+                <Button
+                    android:id="@+id/btnConfirmWarehouseTransaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient_button"
+                    android:text="YES"
+                    android:textColor="@android:color/white" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="2dp">
+
+                <Button
+                    android:id="@+id/btnCancelWarehouseTransaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient_button"
+                    android:text="NO"
+                    android:textColor="@android:color/white" />
+
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </LinearLayout>
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dashboardBg"
+    tools:context=".restapi.activites.ActivityBuyer">
+
+    <ImageView
+        android:id="@+id/find_ware_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/arrow" />
+
+    <TextView
+        android:id="@+id/find_ware_top_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@id/find_ware_back"
+        android:fontFamily="@font/roboto_slab"
+        android:text="Suggested Warehouses"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/find_ware_back">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/drawble_buyer_main">
+
+            <ProgressBar
+                android:id="@+id/frag_far_find_ware_progress"
+                style="@android:style/Widget.Material.ProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/warehouseResultRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_marginTop="24dp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -38,10 +38,9 @@ public class FarmerOrderAcceptDialog extends Dialog {
         void onClick(String get_from);
     }
 
-    public FarmerOrderAcceptDialog(Activity a, List<BuyerOrderListResponse> orders, int order_id,
-                                   int position, AdapterFarmerOrder adapterFarmerOrder) {
+    public FarmerOrderAcceptDialog(Activity a, List<BuyerOrderListResponse> orders, int order_id, int position, AdapterFarmerOrder adapterFarmerOrder) {
         super(a);
-        // TODO Auto-generated constructor stub
+
         this.c = a;
         this.adapterFarmerOrder = adapterFarmerOrder;
     }
@@ -53,20 +52,9 @@ public class FarmerOrderAcceptDialog extends Dialog {
 
         setContentView(R.layout.farmer_accept_dialog);
 
-        fromproduce = (Button) findViewById(R.id.ao_fromproduce);
-        fromwarehouse = (Button) findViewById(R.id.ao_fromwarehouse);
-        fromproduce.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCustomClickListener.onClick("produce");
-            }
-        });
-        fromwarehouse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCustomClickListener.onClick("warehouse");
-            }
-        });
-
+        fromproduce = findViewById(R.id.ao_fromproduce);
+        fromwarehouse = findViewById(R.id.ao_fromwarehouse);
+        fromproduce.setOnClickListener(v -> onCustomClickListener.onClick("produce"));
+        fromwarehouse.setOnClickListener(v -> onCustomClickListener.onClick("warehouse"));
     }
 }

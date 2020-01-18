@@ -8,6 +8,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
+        multiDexEnabled true
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -62,4 +63,7 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottieVersion"
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
+
+    //Graph
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
 }

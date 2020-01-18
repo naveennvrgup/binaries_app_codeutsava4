@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -62,9 +62,11 @@ public class FragmentFarmerProduce extends DialogFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_farmer_produce, container, false);
         recyclerView = view.findViewById(R.id.farmerProduceListRecyclerView);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+
+        view.findViewById(R.id.frag_far_prod_back).setOnClickListener(view1 -> dismiss());
 
         getFarmerProduceList();
-
 
         return view;
     }
@@ -79,7 +81,7 @@ public class FragmentFarmerProduce extends DialogFragment {
                 if (response.isSuccessful() && response.body() != null) {
                     mAdapter = new AdapterProduce(response.body(), getActivity());
                     mAdapter.setFragManager(getFragmentManager());
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
                     recyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
                 }

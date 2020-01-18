@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import java.util.List;
 
 import binaries.app.codeutsava.R;
@@ -28,7 +30,7 @@ import retrofit2.Response;
 
 public  class  FragmentFarmerReportProduce extends DialogFragment {
     TextView reportProduceSubmit;
-    EditText reportProducePrice, reportProduceQuantity, reportProduceGrade;
+    TextInputEditText reportProducePrice, reportProduceQuantity, reportProduceGrade;
 
     public FragmentFarmerReportProduce() {
 
@@ -64,6 +66,8 @@ public  class  FragmentFarmerReportProduce extends DialogFragment {
         reportProducePrice = view.findViewById(R.id.reportProducePrice);
         reportProduceQuantity = view.findViewById(R.id.reportProduceQuantity);
         reportProduceSubmit = view.findViewById(R.id.reportProduceSubmit);
+
+        view.findViewById(R.id.farmer_report_prod_back).setOnClickListener(view1 -> dismiss());
 
         reportProduceSubmit.setOnClickListener(v -> {
 

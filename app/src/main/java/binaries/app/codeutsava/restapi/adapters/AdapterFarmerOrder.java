@@ -1,22 +1,21 @@
 package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import binaries.app.codeutsava.R;
-import binaries.app.codeutsava.restapi.activites.ActivityFarmerOrders;
 import binaries.app.codeutsava.restapi.fragments.FarmerOrderAcceptDialog;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
@@ -25,8 +24,6 @@ import binaries.app.codeutsava.restapi.restapi.AppClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import java.util.List;
 
 public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.ViewHolder> {
     List<BuyerOrderListResponse> orders;
@@ -42,8 +39,7 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
     @NonNull
     @Override
     public AdapterFarmerOrder.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity)
-                .inflate(R.layout.recycler_farmer_order, parent, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.recycler_farmer_order, parent, false);
 
         return new ViewHolder(view);
     }
@@ -54,54 +50,47 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
 
         holder.buyer.setText(orderListResponse.buyer);
         holder.quantity.setText(String.valueOf(orderListResponse.quantity));
-        holder.price.setText(String.valueOf(orderListResponse.price));
+        holder.price.setText("Price: " + orderListResponse.price);
         holder.foodgraintype.setText(orderListResponse.foodgraintype);
-        holder.transno.setText(orderListResponse.transno);
-        holder.approved.setText(Boolean.toString(orderListResponse.approved));
+        holder.transno.setText("TN: " + orderListResponse.transno);
 
+        if (orderListResponse.approved) {
+            holder.approved.setText("Transaction Approved");
+            holder.layout.setVisibility(View.GONE);
+        } else {
+            holder.approved.setTextColor(activity.getResources().getColor(R.color.colorYellow));
+            holder.approved.setText("Awaiting Approval");
+        }
 
-        holder.approve.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                approveApiCall(orderListResponse.id,position);
-            }
-        });
-
-        holder.reject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rejectApiCall(orderListResponse.id,position);
-            }
-        });
+        holder.approve.setOnClickListener(v -> approveApiCall(orderListResponse.id, position));
+        holder.reject.setOnClickListener(v -> rejectApiCall(orderListResponse.id, position));
     }
 
     void approveApiCall(int id, int position) {
-        FarmerOrderAcceptDialog dialog = new FarmerOrderAcceptDialog(
-                activity,orders,id,position,AdapterFarmerOrder.this);
+        FarmerOrderAcceptDialog dialog = new FarmerOrderAcceptDialog(activity, orders, id, position, AdapterFarmerOrder.this);
 
-        dialog.setOnCustomClickListener(new FarmerOrderAcceptDialog.OnCustomClickListener() {
-            @Override
-            public void onClick(String get_from) {
-                ApproveOrderPayload payload = new ApproveOrderPayload();
-                payload.get_from=get_from;
+        dialog.setOnCustomClickListener(get_from -> {
+            ApproveOrderPayload payload = new ApproveOrderPayload();
+            payload.get_from = get_from;
 
-                APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-                Call<Boolean> call = apiServices.approveOrder(id,payload);
+            APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
+            Call<Boolean> call = apiServices.approveOrder(id, payload);
 
-                call.enqueue(new Callback<Boolean>() {
-                    @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                        orders.get(position).approved=true;
-                        notifyItemChanged(position);
-                        dialog.dismiss();
-                    }
+            call.enqueue(new Callback<Boolean>() {
+                @Override
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    orders.get(position).approved = true;
+                    notifyItemChanged(position);
+                    dialog.dismiss();
 
-                    @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
-                        Toast.makeText(activity,t.getMessage().toString(),Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
+                    Toast.makeText(activity, "You accepted the Order.", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onFailure(Call<Boolean> call, Throwable t) {
+                    Toast.makeText(activity, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
         });
         dialog.show();
     }
@@ -116,13 +105,14 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
                 if (response.isSuccessful() && response.body() != null) {
                     orders.remove(position);
                     notifyItemRemoved(position);
-                    Toast.makeText(activity, "rejected the order", Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(activity, "You rejected the Order.", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                Toast.makeText(activity, t.getMessage().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -135,10 +125,10 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView buyer, quantity, price, foodgraintype, transno, approved;
         Button approve, reject;
+        LinearLayout layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
 
             buyer = itemView.findViewById(R.id.fo_buyer);
             quantity = itemView.findViewById(R.id.fo_quantity);
@@ -148,7 +138,7 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
             approved = itemView.findViewById(R.id.fo_approved);
             approve = itemView.findViewById(R.id.fo_accept_btn);
             reject = itemView.findViewById(R.id.fo_reject_btn);
-
+            layout = itemView.findViewById(R.id.recycler_farm_ord_lay);
         }
     }
 }

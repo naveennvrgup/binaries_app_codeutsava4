@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/recyclerSuggestedWarehouse"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:padding="8dp"
-    android:id="@+id/recyclerSuggestedWarehouse"
     app:cardCornerRadius="24dp"
     app:cardElevation="4dp">
 
@@ -43,17 +43,36 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/warehouseCost"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/roboto_slab"
-                android:maxLines="1"
-                android:text="Price"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/warehouseCost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_slab"
+                    android:maxLines="1"
+                    android:text="Price"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/warehouseDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_slab"
+                    android:maxLines="1"
+                    android:text="Distance"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
