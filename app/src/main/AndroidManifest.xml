@@ -14,9 +14,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".restapi.activites.ActivityBuyerBidsList"></activity>
-        <activity android:name=".restapi.activites.ActivityBuyer"></activity>
-        <activity android:name=".restapi.activites.ActivityFarmer"></activity>
+        <activity
+            android:name=".restapi.activites.ActivityFarmerBids"
+            android:label="@string/title_activity_farmer_bids"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".restapi.activites.ActivityBuyerBidsList" />
+        <activity android:name=".restapi.activites.ActivityBuyer" />
+        <activity android:name=".restapi.activites.ActivityFarmer" />
         <activity android:name=".restapi.activites.ActivityBuyerOrders" />
         <activity android:name=".restapi.activites.ActivityFarmerOrders" />
         <activity android:name=".restapi.activites.ActivityAuthentication" />

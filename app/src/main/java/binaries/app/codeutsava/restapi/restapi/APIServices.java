@@ -83,12 +83,12 @@ public interface APIServices {
     @GET("transaction/pastBidsList/")
     Call<List<FarmerActiveBidListResponse>> getPastBidsList();
 
-//    @GET("transaction/farmerActiveBidList/")
-//    Call<SignupPayload> getFarmerActiveBidList();
-//
-//    @GET("transaction/farmerPlaceBid/")
-//    Call<SignupPayload> farmerPlaceBid();
-//
+    @GET("transaction/farmerActiveBidList/")
+    Call<List<FarmerActiveBidListResponse>> getFarmerActiveBidList();
+
+    @GET("transaction/farmerPlaceBid/")
+    Call<Boolean> farmerPlaceBid();
+
 //    @GET("transaction/approveBid/")
 //    Call<SignupPayload> approveBid();
 
