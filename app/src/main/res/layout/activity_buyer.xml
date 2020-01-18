@@ -9,6 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
             android:id="@+id/text_buyer_info"
             android:layout_width="match_parent"
@@ -24,29 +25,33 @@
             android:id="@+id/buyer_tab_strip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_buyer_info" />
+            android:layout_below="@id/text_buyer_info"
+            android:layout_marginTop="36dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/buyer_tab_strip"
             android:layout_marginTop="30dp"
+            android:orientation="vertical"
             android:background="@drawable/drawble_buyer_main">
 
-            <FrameLayout
-                android:id="@+id/farmerFragments"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_buyer_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp" />
         </LinearLayout>
 
     </RelativeLayout>
+
     <ImageView
         android:id="@+id/buyer_menu_icon"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="16dp"
         android:src="@drawable/menu_icon" />
 
-    <include layout="@layout/farmer_sheet_menu" />
+    <include layout="@layout/buyer_sheet_menu" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

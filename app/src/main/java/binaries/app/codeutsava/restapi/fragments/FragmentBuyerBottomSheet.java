@@ -2,25 +2,29 @@ package binaries.app.codeutsava.restapi.fragments;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import binaries.app.codeutsava.R;
-import binaries.app.codeutsava.restapi.activites.ActivityBuyerOrders;
+import binaries.app.codeutsava.restapi.adapters.AdapterRecyclerViewBottomSheet;
 
 public class FragmentBuyerBottomSheet extends BottomSheetDialogFragment {
+
+    private RecyclerView recyclerView;
+    private List<AdapterRecyclerViewBottomSheet.Items> itemsList = new ArrayList<>();
 
     //Bottom Sheet Callback
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
@@ -30,7 +34,6 @@ public class FragmentBuyerBottomSheet extends BottomSheetDialogFragment {
             if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                 dismiss();
             }
-
         }
 
         @Override
@@ -52,9 +55,7 @@ public class FragmentBuyerBottomSheet extends BottomSheetDialogFragment {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.buyer_sheet_menu, null, false);
 
-
         dialog.setContentView(view);
-
 
         //Set the coordinator layout behavior
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) view.getParent()).getLayoutParams();
@@ -66,22 +67,14 @@ public class FragmentBuyerBottomSheet extends BottomSheetDialogFragment {
         }
 
 
-        view.findViewById(R.id.buyerGotoHome)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        FragmentBuyerHome home = new FragmentBuyerHome();
-                        home.show(getActivity().getSupportFragmentManager(), "something");
-                    }
-                });
+        for (int i = 0; i < 7; i++) {
+            itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Sample Text", R.drawable.buy));
+        }
 
-        view.findViewById(R.id.buyerGotoOrders)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(getActivity(), ActivityBuyerOrders.class));
-                    }
-                });
+        recyclerView = dialog.findViewById(R.id.recycler_buyer_bottom_sheet);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setNestedScrollingEnabled(true);
+        recyclerView.setAdapter(new AdapterRecyclerViewBottomSheet(getActivity(), itemsList));
+        //   attachFragToLink(view,R.id.buyerGotoHome,new FragmentBuyerHome());
     }
-
 }

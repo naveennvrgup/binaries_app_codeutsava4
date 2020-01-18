@@ -39,8 +39,8 @@ public interface APIServices {
     @GET(AppConstants.BUYER_FOODGRAIN_LIST_URL)
     Call<List<BuyerFoodgrainResponse>> getBuyerFoodgrainList();
 
-    @GET(AppConstants.BUYER_FOODGRAIN_LIST_URL+"{id}/")
-    Call<List<FarmerResponse>> getBuyerFarmerList(@Path("id")int id);
+    @GET(AppConstants.BUYER_FOODGRAIN_LIST_URL + "{id}/")
+    Call<List<FarmerResponse>> getBuyerFarmerList(@Path("id") int id);
 
     @GET("transaction/buyerOrders/")
     Call<List<BuyerOrderListResponse>> getBuyerOrders();

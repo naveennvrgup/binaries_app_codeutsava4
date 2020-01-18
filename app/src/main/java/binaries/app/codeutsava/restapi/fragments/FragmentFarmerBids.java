@@ -71,11 +71,10 @@ public class FragmentFarmerBids extends DialogFragment {
 
         getFarmerActiveBids();
 
-
         return view;
     }
 
-    public void getFarmerActiveBids() {
+    private void getFarmerActiveBids() {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
         Call<List<FarmerActiveBidListResponse>> call = apiServices.getActiveBidList();
 
@@ -92,7 +91,7 @@ public class FragmentFarmerBids extends DialogFragment {
 
             @Override
             public void onFailure(Call<List<FarmerActiveBidListResponse>> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

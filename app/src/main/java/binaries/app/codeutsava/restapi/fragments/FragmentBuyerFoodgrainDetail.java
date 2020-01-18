@@ -8,15 +8,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,15 +37,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FragmentBuyerFoodgrainDetail extends DialogFragment {
-    RecyclerView recyclerView;
-    AdapterFarmer mAdapter;
-    TextView fg_name,fg_price;
-    ImageView fg_img;
-    EditText editTextQuantity;
-    Button setQuantityBtn;
-    BuyerFoodgrainResponse foodgrain;
-    int quantity;
-    boolean showFamers=false;
+    private RecyclerView recyclerView;
+    private AdapterFarmer mAdapter;
+    private TextView fg_name, fg_price, searchText;
+    private ImageView fg_img;
+    private TextInputEditText editTextQuantity;
+    private Button setQuantityBtn;
+    private BuyerFoodgrainResponse foodgrain;
+    private ProgressBar progressBar;
+    private int quantity;
 
     public FragmentBuyerFoodgrainDetail() {
         // Required empty public constructor
@@ -67,71 +72,76 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_buyer_foodgrain_detail, container, false);
-        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.buyer_food_det_recycler_view);
 
-        fg_name=view.findViewById(R.id.name);
-        fg_img=view.findViewById(R.id.food_img);
-        fg_price=view.findViewById(R.id.price);
-        editTextQuantity=view.findViewById(R.id.quantity_input);
-        setQuantityBtn=view.findViewById(R.id.setQuantitybtn);
+        fg_name = view.findViewById(R.id.name);
+        fg_img = view.findViewById(R.id.food_img);
+        fg_price = view.findViewById(R.id.price);
+        editTextQuantity = view.findViewById(R.id.quantity_input);
+        setQuantityBtn = view.findViewById(R.id.setQuantitybtn);
+        progressBar = view.findViewById(R.id.buyer_foodgrain_det_progress);
+        searchText = view.findViewById(R.id.buyer_food_det_search_text);
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mAdapter = new AdapterFarmer(getActivity().getSupportFragmentManager(), getActivity(), foodgrain, quantity);
+        recyclerView.setNestedScrollingEnabled(true);
+        recyclerView.setAdapter(mAdapter);
 
-        setQuantityBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                quantity=Integer.parseInt(editTextQuantity.getText().toString());
+        setQuantityBtn.setOnClickListener(v -> {
+
+            if(!editTextQuantity.getText().toString().isEmpty()){
+                quantity = Integer.parseInt(editTextQuantity.getText().toString());
+                progressBar.setVisibility(View.VISIBLE);
+
                 callAPI();
+            } else {
+                Toast.makeText(getContext(), "Empty values.", Toast.LENGTH_LONG).show();
             }
         });
 
 
+        foodgrain = (BuyerFoodgrainResponse) getArguments().getSerializable("foodgrain");
 
-        foodgrain=(BuyerFoodgrainResponse) getArguments().getSerializable("foodgrain");
-        fg_name.setText(foodgrain.type);
-        fg_price.setText(foodgrain.price);
-        Glide.with(getActivity())
-                .load(R.drawable.f8)
-                .into(fg_img);
+        if (foodgrain != null && getActivity() != null) {
+            fg_name.setText(foodgrain.type);
+            fg_price.setText(foodgrain.price);
+
+            Glide.with(getActivity()).load(R.drawable.f8).into(fg_img);
+        }
 
         return view;
     }
 
 
-    public void callAPI() {
+    private void callAPI() {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-
         Call<List<FarmerResponse>> call = apiServices.getBuyerFarmerList(foodgrain.id);
+
         call.enqueue(new Callback<List<FarmerResponse>>() {
             @Override
             public void onResponse(Call<List<FarmerResponse>> call, Response<List<FarmerResponse>> response) {
-                List<FarmerResponse> filteredFamers = new ArrayList<>();
+                if (response.isSuccessful() && response.body() != null && getActivity() != null) {
 
-                for(FarmerResponse farmer :response.body()){
-                    if(farmer.quantity>=quantity)
-                        filteredFamers.add(farmer);
+                    progressBar.setVisibility(View.GONE);
+                    searchText.setVisibility(View.VISIBLE);
+
+                    List<FarmerResponse> filteredFarmers = new ArrayList<>();
+
+                    for (FarmerResponse farmer : response.body()) {
+                        if (farmer.quantity >= quantity)
+                            filteredFarmers.add(farmer);
+                    }
+
+                    mAdapter.setData(foodgrain.id, filteredFarmers);
                 }
-
-                mAdapter = new AdapterFarmer(getActivity().getSupportFragmentManager(),foodgrain.id,
-                        filteredFamers,getActivity(),
-                        foodgrain,quantity);
-                recyclerView.setAdapter(mAdapter);
-                recyclerView.setLayoutManager(new GridLayoutManager(
-                        getActivity(),1,GridLayoutManager.VERTICAL,false));
-                mAdapter.notifyDataSetChanged();
-
-//                Toast.makeText(getContext(), response.body().toString(), Toast.LENGTH_LONG).show();
-
             }
 
             @Override
             public void onFailure(Call<List<FarmerResponse>> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
-
 }

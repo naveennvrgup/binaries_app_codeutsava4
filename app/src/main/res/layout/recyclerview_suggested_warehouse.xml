@@ -1,35 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/recyclerSuggestedWarehouse">
+    android:layout_margin="8dp"
+    android:padding="8dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="4dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="4dp">
+        android:padding="8dp">
+
         <ImageView
             android:id="@+id/wareHouseIcon"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/corn_icon"></ImageView>
-        <TextView
-            android:id="@+id/wareHouseName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Produce"
-            android:textSize="24dp"
-            android:paddingHorizontal="6dp"
-            />
-        <TextView
-            android:id="@+id/warehouseCost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Price"
-            android:textSize="14dp"></TextView>
-    </LinearLayout>
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/corn_icon" />
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/wareHouseName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto_slab"
+                android:maxLines="1"
+                android:text="Produce"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/warehouseCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto_slab"
+                android:maxLines="1"
+                android:text="Price"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

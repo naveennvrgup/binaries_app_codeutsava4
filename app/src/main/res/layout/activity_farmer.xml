@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dashboardBg"
     tools:context=".restapi.activites.ActivityFarmer">
 
-    <FrameLayout
-        android:id="@+id/farmerFragments"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <ImageView
         android:id="@+id/farmer_menu_icon"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/menu_icon" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/buyer_tab_strip"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/drawble_buyer_main">
+
+    </LinearLayout>
+
     <include layout="@layout/farmer_sheet_menu" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

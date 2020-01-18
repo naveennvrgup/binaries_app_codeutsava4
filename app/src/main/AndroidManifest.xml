@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="binaries.app.codeutsava">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,19 +11,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".restapi.activites.ActivityFarmerOrders"></activity>
-        <activity android:name=".restapi.activites.ActivityBuyerOrders" />
-        <activity android:name=".restapi.activites.ActivityBuyer" />
-        <activity android:name=".restapi.activites.ActivityFarmer" />
-        <activity android:name=".restapi.activites.ActivityAuthentication" />
-        <activity android:name=".restapi.activites.ActivitySplashScreen">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+
+        <activity android:name=".restapi.activites.ActivityBuyer">
+        </activity>
+        <activity android:name=".restapi.activites.ActivityFarmer" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".restapi.activites.ActivityAuthentication" />
+        <activity android:name=".restapi.activites.ActivitySplashScreen"/>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
