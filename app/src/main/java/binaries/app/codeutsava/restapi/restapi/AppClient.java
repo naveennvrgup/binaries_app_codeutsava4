@@ -17,6 +17,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppClient {
     private static AppClient mInstance;
+    public static String token=null;
+    public static String userType=null;
+
 
     private AppClient() {
     }
@@ -67,7 +70,7 @@ public class AppClient {
             public Response intercept(Chain chain) throws IOException {
                 Request request=chain.request()
                         .newBuilder()
-                        .addHeader("Authorization",AppConstants.TEMP_FARM_TOKEN)
+                        .addHeader("Authorization",token)
                         .build();
                 return chain.proceed(request);
             }
