@@ -3,6 +3,8 @@ package binaries.app.codeutsava.restapi.restapi;
 import java.util.List;
 
 import binaries.app.codeutsava.restapi.model.auth.SignupPayload;
+import binaries.app.codeutsava.restapi.model.buyer.BidCreatePayload;
+import binaries.app.codeutsava.restapi.model.buyer.BidResponse;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.auth.LoginPayload;
 import binaries.app.codeutsava.restapi.model.auth.LoginResponse;
@@ -70,7 +72,33 @@ public interface APIServices {
     @POST(AppConstants.CREATE_STORAGE_TRANSACTION_URL)
     Call<FarmerWarehouseTransactionResponse> postStorageTransaction(@Body FarmerWarehouseTransactionPayload farmerWarehouseTransactionPayload);
 
-    @POST("user/")
+    @GET("user/")
     Call<SignupPayload> sendSignupRequest(@Body SignupPayload payload);
+
+    @GET("transaction/createBid/")
+    Call<BidResponse> createBid(BidCreatePayload payload);
+
+    @GET("transaction/farmerResponseBideList/")
+    Call<SignupPayload> getFarmerResponseBideList();
+
+    @GET("transaction/pastBidsList/")
+    Call<SignupPayload> getPastBidsList();
+
+    @GET("transaction/farmerActiveBidList/")
+    Call<SignupPayload> getFarmerActiveBidList();
+
+    @GET("transaction/farmerPlaceBid/")
+    Call<SignupPayload> farmerPlaceBid();
+
+    @GET("transaction/approveBid/")
+    Call<SignupPayload> approveBid();
+
+
+
+
+
+
+
+
 
 }

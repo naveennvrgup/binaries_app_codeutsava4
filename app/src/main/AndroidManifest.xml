@@ -14,19 +14,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-
-        <activity android:name=".restapi.activites.ActivityBuyer">
-        </activity>
-        <activity android:name=".restapi.activites.ActivityFarmer" >
-
-        </activity>
-        <activity android:name=".restapi.activites.ActivityBuyerOrders"/>
-        <activity android:name=".restapi.activites.ActivityFarmerOrders"/>
+        <activity android:name=".restapi.activites.ActivityBuyerBidsList"></activity>
+        <activity android:name=".restapi.activites.ActivityBuyer"></activity>
+        <activity android:name=".restapi.activites.ActivityFarmer"></activity>
+        <activity android:name=".restapi.activites.ActivityBuyerOrders" />
+        <activity android:name=".restapi.activites.ActivityFarmerOrders" />
         <activity android:name=".restapi.activites.ActivityAuthentication" />
         <activity android:name=".restapi.activites.ActivitySplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
