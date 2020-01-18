@@ -74,6 +74,7 @@ public interface APIServices {
 
     @GET("transaction/getFarmerStoredWarehouse")
     Call<List<FarmerStorageTransactionResponse>> getFarmerStorageTransaction();
+
     Call<FarmerWarehouseTransactionResponse> postStorageTransaction(@Header("Authorization") String token, @Body FarmerWarehouseTransactionPayload farmerWarehouseTransactionPayload);
 
     @POST("user/")
