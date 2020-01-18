@@ -100,8 +100,7 @@ public class FragmentLogin extends DialogFragment {
         loginPayload.setPassword(editTextUsername.getText().toString());
 
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<LoginResponse> call = apiServices.sendLoginRequest(
-                PreferenceManager.getDefaultSharedPreferences(getContext()).getString("token", AppConstants.TEMP_FARM_TOKEN), loginPayload);
+        Call<LoginResponse> call = apiServices.sendLoginRequest(loginPayload);
 
 
         call.enqueue(new Callback<LoginResponse>() {

@@ -65,7 +65,8 @@
                         android:id="@+id/graph_progress"
                         style="@android:style/Widget.Material.ProgressBar"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 

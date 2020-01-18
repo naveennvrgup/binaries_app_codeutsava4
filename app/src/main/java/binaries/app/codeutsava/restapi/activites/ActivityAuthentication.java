@@ -167,8 +167,7 @@ public class ActivityAuthentication extends AppCompatActivity {
         payload.setPassword(signInPass.getText().toString());
 
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<LoginResponse> call = apiServices.sendLoginRequest(
-                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("token", AppConstants.TEMP_FARM_TOKEN), payload);
+        Call<LoginResponse> call = apiServices.sendLoginRequest(payload);
 
         call.enqueue(new Callback<LoginResponse>() {
             @Override

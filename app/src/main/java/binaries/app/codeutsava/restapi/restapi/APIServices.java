@@ -31,7 +31,7 @@ import retrofit2.http.Path;
 public interface APIServices {
 
     @POST(AppConstants.LOGIN_URL)
-    Call<LoginResponse> sendLoginRequest(@Header("Authorization") String token, @Body LoginPayload loginPayload);
+    Call<LoginResponse> sendLoginRequest(@Body LoginPayload loginPayload);
 
     @POST("transaction/placeOrder/")
     Call<PlaceOrderResponse> placeOrderRequest(@Header("Authorization") String token, @Body PlaceOrderPayload payload);
@@ -69,12 +69,10 @@ public interface APIServices {
     @GET("transaction/rejectOrder/{id}/")
     Call<Boolean> rejectOrder(@Header("Authorization") String token, @Path("id") int id);
 
-    @POST(AppConstants.CREATE_STORAGE_TRANSACTION_URL)
-    Call<FarmerWarehouseTransactionResponse> postStorageTransaction(@Body FarmerWarehouseTransactionPayload farmerWarehouseTransactionPayload);
-
     @GET("transaction/getFarmerStoredWarehouse")
-    Call<List<FarmerStorageTransactionResponse>> getFarmerStorageTransaction();
+    Call<List<FarmerStorageTransactionResponse>> getFarmerStorageTransaction(@Header("Authorization") String token);
 
+    @POST(AppConstants.CREATE_STORAGE_TRANSACTION_URL)
     Call<FarmerWarehouseTransactionResponse> postStorageTransaction(@Header("Authorization") String token, @Body FarmerWarehouseTransactionPayload farmerWarehouseTransactionPayload);
 
     @POST("user/")

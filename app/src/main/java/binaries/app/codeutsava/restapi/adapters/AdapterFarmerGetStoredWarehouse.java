@@ -1,7 +1,6 @@
 package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +12,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import binaries.app.codeutsava.R;
-import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduceDetail;
-import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerStorageTransactionResponse;
 
 public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<AdapterFarmerGetStoredWarehouse.ViewHolder> {
@@ -51,48 +47,34 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
         if (produces != null) {
             FarmerStorageTransactionResponse produce = produces.get(position);
 
-
-            holder.whName.setText(produce.whName + " ");
+            holder.whName.setText(produce.whName);
             holder.whQuantity.setText("Quantity: " + produce.quantity);
-            holder.whFoodgrain.setText("Foodgrain: " + produce.foodgrain);
+            holder.whFoodgrain.setText(produce.foodgrain);
             holder.whDate.setText("Date: " + produce.date);
-            holder.whCost.setText("Cost: "+ produce.cost);
+            holder.whCost.setText("Price: " + produce.cost);
 
             long diffDays = getDateDifference(produce.date);
-            Log.v("prod",Integer.toString(produce.fgDeadline));
-            Log.v("diff",Long.toString(diffDays));
+            Log.v("prod", Integer.toString(produce.fgDeadline));
+            Log.v("diff", Long.toString(diffDays));
             //deadline before 60 days
 
-            if(diffDays+60 >=produce.fgDeadline){
-                Log.v("case1","case1");
-                holder.whDeadline.setText("Your foodgrain may perish in "+Long.toString(produce.fgDeadline-diffDays)+" days");
+            if (diffDays + 60 >= produce.fgDeadline) {
+                Log.v("case1", "case1");
+                holder.whDeadline.setText("Grain may perish in " + (produce.fgDeadline - diffDays) + " days");
                 holder.whDeadline.setTextColor(activity.getResources().getColor(R.color.colorRed));
-            }
-            else {
-                Log.v("case2","case2");
+            } else {
+                Log.v("case2", "case2");
                 holder.whDeadline.setVisibility(View.GONE);
             }
-
-
-//            holder.itemView.setOnClickListener(v -> {
-//                FarmerStorageTransactionResponse currProduceData = produces.get(position);
-//
-//                Bundle args = new Bundle();
-//                args.putSerializable("produce", currProduceData);
-//
-//                FragmentFarmerProduceDetail produceDetail = new FragmentFarmerProduceDetail();
-//                produceDetail.setArguments(args);
-//                produceDetail.show(fragManager, "....");
-//            });
         }
     }
 
-    public long getDateDifference(String startDate) {
+    private long getDateDifference(String startDate) {
         Date endDate = Calendar.getInstance().getTime();
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-DD-MM");
             return TimeUnit.MILLISECONDS.toDays(endDate.getTime() - dateFormat.parse(startDate).getTime());
-        }catch (Exception e){
+        } catch (Exception e) {
             return 0;
         }
     }
