@@ -15,6 +15,7 @@ import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerFindWarehouseResponse;
+import binaries.app.codeutsava.restapi.model.farmer.FarmerPlaceBidPayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionPayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionResponse;
@@ -86,8 +87,8 @@ public interface APIServices {
     @GET("transaction/farmerActiveBidList/")
     Call<List<FarmerActiveBidListResponse>> getFarmerActiveBidList();
 
-    @GET("transaction/farmerPlaceBid/")
-    Call<Boolean> farmerPlaceBid();
+    @POST("transaction/farmerPlaceBid/")
+    Call<Boolean> farmerPlaceBid(@Body FarmerPlaceBidPayload payload);
 
 //    @GET("transaction/approveBid/")
 //    Call<SignupPayload> approveBid();
