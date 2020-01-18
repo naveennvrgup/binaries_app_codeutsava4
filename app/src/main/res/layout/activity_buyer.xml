@@ -14,9 +14,10 @@
             android:id="@+id/text_buyer_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/roboto_slab"
             android:text="CatVideos"
+            android:textStyle="bold"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="28sp" />
@@ -28,20 +29,26 @@
             android:layout_below="@id/text_buyer_info"
             android:layout_marginTop="36dp" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/buyer_tab_strip"
             android:layout_marginTop="30dp"
-            android:orientation="vertical"
             android:background="@drawable/drawble_buyer_main">
+
+            <ProgressBar
+                android:id="@+id/act_buy_progress"
+                style="@android:style/Widget.Material.ProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_buyer_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp" />
-        </LinearLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
 

@@ -1,18 +1,13 @@
 package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,13 +15,12 @@ import java.util.List;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduceDetail;
-import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
 
 public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHolder> {
-    List<FarmerProduceResponse> produces;
-    Activity activity;
-    FragmentManager fragManager;
+    private List<FarmerProduceResponse> produces;
+    private Activity activity;
+    private FragmentManager fragManager;
 
     public void setFragManager(FragmentManager fragManager) {
         this.fragManager = fragManager;
@@ -47,35 +41,42 @@ public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull AdapterProduce.ViewHolder holder, int position) {
-        FarmerProduceResponse produce = produces.get(position);
+        if (produces != null) {
+            FarmerProduceResponse produce = produces.get(position);
 
-        holder.demo.setText(produce.toString());
-        holder.parent.setOnClickListener(v -> {
-            FarmerProduceResponse currProduceData = produces.get(position);
+            holder.fgName.setText(produce.type.type);
+            holder.fgGrade.setText("Grade: " + produce.grade);
+            holder.fgPrice.setText("Price: " + produce.price);
+            holder.fgDate.setText("Date: " + produce.date);
 
-            Bundle args = new Bundle();
-            args.putSerializable("produce", currProduceData);
+            holder.itemView.setOnClickListener(v -> {
+                FarmerProduceResponse currProduceData = produces.get(position);
 
-            FragmentFarmerProduceDetail produceDetail = new FragmentFarmerProduceDetail();
-            produceDetail.setArguments(args);
-            produceDetail.show(fragManager, "produce");
-        });
+                Bundle args = new Bundle();
+                args.putSerializable("produce", currProduceData);
+
+                FragmentFarmerProduceDetail produceDetail = new FragmentFarmerProduceDetail();
+                produceDetail.setArguments(args);
+                produceDetail.show(fragManager, "....");
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
-        return produces.size();
+        return produces == null ? 0 : produces.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView demo;
-        RelativeLayout parent;
+        TextView fgName, fgPrice, fgGrade, fgDate;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            demo = itemView.findViewById(R.id.farmer_produce_demo);
-            parent = itemView.findViewById(R.id.farmer_produce_main_lay);
+            fgName = itemView.findViewById(R.id.food_prod_row_name);
+            fgPrice = itemView.findViewById(R.id.food_prod_row_price);
+            fgGrade = itemView.findViewById(R.id.food_prod_row_grade);
+            fgDate = itemView.findViewById(R.id.food_prod_row_date);
         }
     }
 }

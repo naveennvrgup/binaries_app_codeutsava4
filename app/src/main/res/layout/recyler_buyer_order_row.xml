@@ -1,69 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:padding="8dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/buyer_order_img_lay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp">
 
             <ImageView
                 android:id="@+id/buyer_order_img"
-                android:src="@mipmap/ic_launcher_round"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/f1" />
+        </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/bo_graintype"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/buyer_order_img"
-                android:text="TextView" />
+        <TextView
+            android:id="@+id/bo_graintype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_toEndOf="@id/buyer_order_img_lay"
+            android:ellipsize="end"
+            android:fontFamily="@font/average_sans"
+            android:maxLines="1"
+            android:text="Grain"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/bo_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/bo_graintype"
-                android:layout_toRightOf="@+id/buyer_order_img"
-                android:text="TextView" />
+        <TextView
+            android:id="@+id/bo_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bo_graintype"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="2dp"
+            android:layout_toEndOf="@id/buyer_order_img_lay"
+            android:ellipsize="end"
+            android:fontFamily="@font/average_sans"
+            android:maxLines="1"
+            android:text="Price"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/bo_quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/bo_price"
-                android:layout_toRightOf="@+id/buyer_order_img"
-                android:text="TextView" />
+        <TextView
+            android:id="@+id/bo_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bo_price"
+            android:layout_margin="2dp"
+            android:layout_toEndOf="@id/buyer_order_img_lay"
+            android:ellipsize="end"
+            android:fontFamily="@font/average_sans"
+            android:maxLines="1"
+            android:text="Quantity"
+            android:textAlignment="viewEnd"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/bo_trans_no"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/bo_quantity"
-                android:layout_toRightOf="@+id/buyer_order_img"
-                android:text="TextView" />
+        <TextView
+            android:id="@+id/bo_trans_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buyer_order_img_lay"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="2dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/average_sans"
+            android:maxLines="1"
+            android:text="Transaction Number"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/bo_approved"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/bo_trans_no"
-                android:layout_toRightOf="@+id/buyer_order_img"
-                android:text="TextView" />
+        <TextView
+            android:id="@+id/bo_approved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bo_trans_no"
+            android:layout_margin="2dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_slab"
+            android:maxLines="1"
+            android:text="Transaction Approved"
+            android:textColor="@color/colorGreen"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/bo_farmer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/bo_trans_no"
-                android:layout_toRightOf="@+id/buyer_order_img"
-                android:text="TextView" />
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+        <TextView
+            android:id="@+id/bo_farmer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bo_trans_no"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="2dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_slab"
+            android:maxLines="1"
+            android:text="Farmer Name"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -88,7 +88,7 @@ public class AdapterFoodgrain extends RecyclerView.Adapter<AdapterFoodgrain.View
 
     @Override
     public int getItemCount() {
-        return (ldata == null) ? 1 : ldata.size();
+        return (ldata == null) ? 0 : ldata.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

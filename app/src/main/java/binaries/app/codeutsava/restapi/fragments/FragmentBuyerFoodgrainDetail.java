@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,6 +34,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.view.View.GONE;
+
 public class FragmentBuyerFoodgrainDetail extends DialogFragment {
     private RecyclerView recyclerView;
     private AdapterFarmer mAdapter;
@@ -46,6 +46,8 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
     private BuyerFoodgrainResponse foodgrain;
     private ProgressBar progressBar;
     private int quantity;
+    private TextInputLayout layout;
+    private CardView buttonCard;
 
     public FragmentBuyerFoodgrainDetail() {
         // Required empty public constructor
@@ -84,6 +86,9 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
         progressBar = view.findViewById(R.id.buyer_foodgrain_det_progress);
         searchText = view.findViewById(R.id.buyer_food_det_search_text);
 
+        layout = view.findViewById(R.id.quantity_input_lay);
+        buttonCard = view.findViewById(R.id.setQuantitybtnLay);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new AdapterFarmer(getActivity().getSupportFragmentManager(), getActivity(), foodgrain, quantity);
         recyclerView.setNestedScrollingEnabled(true);
@@ -91,14 +96,13 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
 
         setQuantityBtn.setOnClickListener(v -> {
 
-            if(!editTextQuantity.getText().toString().isEmpty()){
+            if (!editTextQuantity.getText().toString().isEmpty()) {
                 quantity = Integer.parseInt(editTextQuantity.getText().toString());
                 progressBar.setVisibility(View.VISIBLE);
 
                 callAPI();
-            } else {
-                Toast.makeText(getContext(), "Empty values.", Toast.LENGTH_LONG).show();
-            }
+
+            } else Toast.makeText(getContext(), "Empty values.", Toast.LENGTH_LONG).show();
         });
 
 
@@ -110,6 +114,8 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
 
             Glide.with(getActivity()).load(R.drawable.f8).into(fg_img);
         }
+
+        view.findViewById(R.id.buyer_food_grain_det_back).setOnClickListener(view1 -> dismiss());
 
         return view;
     }
@@ -124,7 +130,7 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
             public void onResponse(Call<List<FarmerResponse>> call, Response<List<FarmerResponse>> response) {
                 if (response.isSuccessful() && response.body() != null && getActivity() != null) {
 
-                    progressBar.setVisibility(View.GONE);
+                    progressBar.setVisibility(GONE);
                     searchText.setVisibility(View.VISIBLE);
 
                     List<FarmerResponse> filteredFarmers = new ArrayList<>();

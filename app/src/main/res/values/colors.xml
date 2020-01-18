@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="dashboardBg">#e6433a</color>
     <color name="colorTranslucent">#D2E6433A</color>
+    <color name="colorYellow">#FFEB3B</color>
+    <color name="colorGreen">#4CAF50</color>
 </resources>

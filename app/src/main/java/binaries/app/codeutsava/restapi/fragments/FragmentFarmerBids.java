@@ -3,6 +3,10 @@ package binaries.app.codeutsava.restapi.fragments;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -10,20 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.adapters.AdapterActiveBid;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
-import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
 import retrofit2.Call;
@@ -54,7 +49,7 @@ public class FragmentFarmerBids extends DialogFragment {
 
         Dialog dialog = getDialog();
 
-        if(dialog != null){
+        if (dialog != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
 
@@ -63,11 +58,11 @@ public class FragmentFarmerBids extends DialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_farmer_bids, container, false);
         recyclerView = view.findViewById(R.id.ABRecyclerView);
+
+        view.findViewById(R.id.frag_far_prod_back).setOnClickListener(view1 -> dismiss());
 
         getFarmerActiveBids();
 
@@ -85,8 +80,6 @@ public class FragmentFarmerBids extends DialogFragment {
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
-
-                //Toast.makeText(getContext(), response.body().toString(), Toast.LENGTH_LONG).show();
             }
 
             @Override

@@ -65,9 +65,9 @@ public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
         }
 
-        for(int i = 0; i < 7; i++){
-            itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Sample Text", R.drawable.buy));
-        }
+        itemsList.add(new AdapterRecyclerViewBottomSheet.Items("My Produce"));
+        itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Report Produce"));
+        itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Received Orders"));
 
         recyclerView = dialog.findViewById(R.id.recycler_farmer_sheet);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

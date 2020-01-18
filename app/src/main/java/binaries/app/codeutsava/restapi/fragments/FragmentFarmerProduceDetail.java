@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
@@ -47,11 +46,9 @@ public class FragmentFarmerProduceDetail extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        /* Inflate the layout for this fragment */
-
         FarmerProduceResponse produce = (FarmerProduceResponse) getArguments().getSerializable("produce");
+        View productDetailView = inflater.inflate(R.layout.fragment_farmer_produce_detail, container, false);
 
-        View productDetailView = inflater.inflate(R.layout.fragment_fragment_farmer_produce_detail, container, false);
         producePrice = productDetailView.findViewById(R.id.producePrice);
         produceDate = productDetailView.findViewById(R.id.produceDate);
         produceGrade = productDetailView.findViewById(R.id.produceGrade);
@@ -59,22 +56,20 @@ public class FragmentFarmerProduceDetail extends DialogFragment {
         produceQuantity = productDetailView.findViewById(R.id.produceQuantity);
         findWarehouseButton = productDetailView.findViewById(R.id.findWarehousebutton);
 
-        //setting the texts
-        producePrice.setText("Price: " + produce.price);
-        produceDate.setText("Date: " + produce.date);
-        produceFoodgrain.setText("FoodGrain: " + produce.type.type);
-        produceGrade.setText("Grade: " + produce.grade);
-        produceQuantity.setText("Quantity: " + produce.quantity);
+        if (produce != null) {
+            // setting the texts
+            producePrice.setText("Price: " + produce.price);
+            produceDate.setText("Date: " + produce.date);
+            produceFoodgrain.setText("FoodGrain: " + produce.type.type);
+            produceGrade.setText("Grade: " + produce.grade);
+            produceQuantity.setText("Quantity: " + produce.quantity);
+        }
+
+        productDetailView.findViewById(R.id.frag_far_prod_det_back).setOnClickListener(view -> dismiss());
 
         findWarehouseButton.setOnClickListener(v -> {
-
-            FragmentFarmerFindWarehouse findWarehousefragment = new FragmentFarmerFindWarehouse(Integer.parseInt(produce.id),Double.parseDouble(produce.quantity));
-//
-//                getActivity().getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .remove(getActivity().getSupportFragmentManager().beginTransaction().)
-
-            findWarehousefragment.show(getActivity().getSupportFragmentManager(), "warehouse");
+            FragmentFarmerFindWarehouse findWareHouseFragment = new FragmentFarmerFindWarehouse(Integer.parseInt(produce.id), Double.parseDouble(produce.quantity));
+            findWareHouseFragment.show(getActivity().getSupportFragmentManager(), "warehouse");
         });
 
         return productDetailView;

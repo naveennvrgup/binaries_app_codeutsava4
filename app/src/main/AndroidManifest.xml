@@ -15,21 +15,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
 
-        <activity android:name=".restapi.activites.ActivityBuyer">
-        </activity>
-        <activity android:name=".restapi.activites.ActivityFarmer" >
-
-        </activity>
-        <activity android:name=".restapi.activites.ActivityBuyerOrders"/>
-        <activity android:name=".restapi.activites.ActivityFarmerOrders"/>
-        <activity android:name=".restapi.activites.ActivityAuthentication" />
-        <activity android:name=".restapi.activites.ActivitySplashScreen">
+        <activity android:name=".restapi.activites.ActivityBuyer"></activity>
+        <activity android:name=".restapi.activites.ActivityFarmer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".restapi.activites.ActivityBuyerOrders" />
+        <activity android:name=".restapi.activites.ActivityFarmerOrders" />
+        <activity android:name=".restapi.activites.ActivityAuthentication" />
+        <activity android:name=".restapi.activites.ActivitySplashScreen" />
 
         <meta-data
             android:name="preloaded_fonts"

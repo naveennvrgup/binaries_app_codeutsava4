@@ -17,9 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppClient {
     private static AppClient mInstance;
-    public static String token=null;
-    public static String userType=null;
-
 
     private AppClient() {
     }
@@ -42,38 +39,17 @@ public class AppClient {
         return retrofit.create(serviceClass);
     }
 
-    public <S> S createServiceWithAuth(Class<S> serviceClass, Activity activity) {
-        Interceptor interceptorReq = chain -> {
-            Request request = chain.request().newBuilder().build();
-            return chain.proceed(request);
-        };
-
-        OkHttpClient.Builder httpClient = getOKHttpClient();
-        httpClient.addInterceptor(interceptorReq);
-        OkHttpClient okHttpClient = httpClient.build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(AppConstants.BASE_URL)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        return retrofit.create(serviceClass);
-    }
 
 
     private OkHttpClient.Builder getOKHttpClient() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
-        httpClient.addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request=chain.request()
-                        .newBuilder()
-                        .addHeader("Authorization",token)
-                        .build();
-                return chain.proceed(request);
-            }
+        httpClient.addInterceptor(chain -> {
+            Request request=chain.request()
+                    .newBuilder()
+                    .addHeader("Authorization", AppConstants.TEMP_FARM_TOKEN)
+                    .build();
+            return chain.proceed(request);
         });
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();

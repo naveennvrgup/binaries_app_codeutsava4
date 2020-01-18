@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +22,6 @@ import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.adapters.AdapterBuyerTop;
 import binaries.app.codeutsava.restapi.adapters.AdapterFoodgrain;
 import binaries.app.codeutsava.restapi.fragments.FragmentBuyerBottomSheet;
-import binaries.app.codeutsava.restapi.fragments.FragmentFarmerBottomSheet;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
@@ -83,6 +81,8 @@ public class ActivityBuyer extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
+                        findViewById(R.id.act_buy_progress).setVisibility(View.GONE);
+
                         adapter = new AdapterFoodgrain(ActivityBuyer.this, response.body(), getSupportFragmentManager());
                         recyclerViewList.setAdapter(adapter);
                         adapter.notifyDataSetChanged();

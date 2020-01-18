@@ -22,10 +22,9 @@ public class FarmerProduceResponse implements Serializable {
                 ", price='" + price + '\'' +
                 ", date='" + date + '\'' +
                 ", loc=" + location +
-                ", foodgrain="+ type+'\''+
+                ", foodgrain=" + type + '\'' +
                 '}';
     }
-
 
     public class Location {
         public int id;
@@ -36,15 +35,15 @@ public class FarmerProduceResponse implements Serializable {
         @Override
         public String toString() {
             return "Location{" +
-                    "id='"+id+'\''+
+                    "id='" + id + '\'' +
                     "xloc='" + xloc + '\'' +
                     ", yloc='" + yloc + '\'' +
-                    ",centre='"+centre+'\''+
+                    ",centre='" + centre + '\'' +
                     '}';
         }
     }
 
-    public  class  FoodGrain {
+    public class FoodGrain {
         public String type;
         public int life;
 
