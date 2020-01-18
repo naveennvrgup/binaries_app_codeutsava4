@@ -16,6 +16,7 @@ import binaries.app.codeutsava.restapi.model.farmer.FarmerDashboardRecommedation
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerFindWarehouseResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
+import binaries.app.codeutsava.restapi.model.farmer.FarmerStorageTransactionResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionPayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionResponse;
 import binaries.app.codeutsava.restapi.model.farmer.ReportProducePayload;
@@ -69,6 +70,10 @@ public interface APIServices {
     Call<Boolean> rejectOrder(@Header("Authorization") String token, @Path("id") int id);
 
     @POST(AppConstants.CREATE_STORAGE_TRANSACTION_URL)
+    Call<FarmerWarehouseTransactionResponse> postStorageTransaction(@Body FarmerWarehouseTransactionPayload farmerWarehouseTransactionPayload);
+
+    @GET("transaction/getFarmerStoredWarehouse")
+    Call<List<FarmerStorageTransactionResponse>> getFarmerStorageTransaction();
     Call<FarmerWarehouseTransactionResponse> postStorageTransaction(@Header("Authorization") String token, @Body FarmerWarehouseTransactionPayload farmerWarehouseTransactionPayload);
 
     @POST("user/")

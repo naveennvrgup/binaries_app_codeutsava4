@@ -21,6 +21,7 @@ import binaries.app.codeutsava.restapi.activites.ActivityBuyerOrders;
 import binaries.app.codeutsava.restapi.activites.ActivityFarmerOrders;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerFoodGrainList;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduce;
+import binaries.app.codeutsava.restapi.fragments.FragmentGetStoredWarehouse;
 
 public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<AdapterRecyclerViewBottomSheet.MyViewHolder> {
 
@@ -98,6 +99,11 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
                             activity.startActivity(myIntent);
                         }
 
+                        break;
+
+                    case "My Warehouse Stores":
+                        FragmentGetStoredWarehouse fragmentGetStoredWarehouse = new FragmentGetStoredWarehouse();
+                        fragmentGetStoredWarehouse.show(((AppCompatActivity) activity).getSupportFragmentManager(), "getStoredWarehouse");
                         break;
                 }
             });
