@@ -10,10 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
-
-import java.util.List;
 
 public class AdapterBuyerOrder extends RecyclerView.Adapter<AdapterBuyerOrder.ViewHolder> {
     List<BuyerOrderListResponse> orders;
@@ -42,7 +42,13 @@ public class AdapterBuyerOrder extends RecyclerView.Adapter<AdapterBuyerOrder.Vi
         holder.quantity.setText(String.valueOf(orderListResponse.quantity));
         holder.price.setText(String.valueOf(orderListResponse.price));
         holder.foodgraintype.setText(orderListResponse.foodgraintype);
-        holder.approved.setText(Boolean.toString(orderListResponse.approved));
+
+        if (orderListResponse.approved) {
+            holder.approved.setText("Transaction Approved.");
+        } else {
+            holder.approved.setTextColor(activity.getResources().getColor(R.color.colorYellow));
+            holder.approved.setText("Awaiting Response");
+        }
     }
 
     @Override

@@ -16,9 +16,9 @@ import java.util.List;
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.activites.ActivityBuyer;
 import binaries.app.codeutsava.restapi.activites.ActivityBuyerOrders;
+import binaries.app.codeutsava.restapi.activites.ActivityFarmerOrders;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerFoodGrainList;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduce;
-import binaries.app.codeutsava.restapi.fragments.FragmentFarmerReportProduce;
 
 public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<AdapterRecyclerViewBottomSheet.MyViewHolder> {
 
@@ -80,6 +80,14 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
                     case "My Produce":
                         FragmentFarmerProduce frag = new FragmentFarmerProduce();
                         frag.show(((AppCompatActivity) activity).getSupportFragmentManager(), "farmerProduce");
+                        break;
+
+                    case "Received Orders":
+                        if (!(activity instanceof ActivityFarmerOrders)) {
+                            myIntent = new Intent(activity, ActivityFarmerOrders.class);
+                            activity.startActivity(myIntent);
+                        }
+
                         break;
                 }
             });
