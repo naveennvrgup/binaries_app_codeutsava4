@@ -5,11 +5,6 @@ import java.util.List;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.auth.LoginPayload;
 import binaries.app.codeutsava.restapi.model.auth.LoginResponse;
-import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
-import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
-import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
-import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
-import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerFindWarehouseResponse;
@@ -25,9 +20,6 @@ import retrofit2.http.Path;
 public interface APIServices {
     @POST(AppConstants.LOGIN_URL)
     Call<LoginResponse> sendLoginRequest(@Body LoginPayload loginPayload);
-
-    @POST("transaction/placeOrder/")
-    Call<PlaceOrderResponse> placeOrderRequest(@Body PlaceOrderPayload orderPayload);
 
     @GET(AppConstants.FARMER_DETAIL_URL)
     Call<FarmerDetailResponse> getFarmerDetail();
@@ -61,4 +53,7 @@ public interface APIServices {
 
     @GET("transaction/rejectOrder/{id}/")
     Call<Boolean> rejectOrder(@Path("id") int id);
+
+    @POST(AppConstants.CREATE_STORAGE_TRANSACTION_URL)
+    Call<FarmerWarehouseTransactionResponse> postStorageTransaction(@Body FarmerWarehouseTransactionPayload farmerWarehouseTransactionPayload);
 }

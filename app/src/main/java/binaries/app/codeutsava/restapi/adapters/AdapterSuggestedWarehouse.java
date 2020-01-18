@@ -26,17 +26,18 @@ public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSugge
 //    List<String> warehouseList;
     FarmerFindWarehouseResponse farmerFindWarehouseResponse;
     List<FarmerFindWarehouseResponse.WarehouseResponse> warehouseList;
+    int produce_id;
     Context context;
     Activity activity;
     FragmentManager fragmentManager;
 
     public AdapterSuggestedWarehouse(List<FarmerFindWarehouseResponse.WarehouseResponse>warehouseList,
-                                     Context context, Activity activity, FragmentManager fragmentManager) {
-//        this.warehouseList = Arrays.asList("Profile", "Report Produce", "Find Warehouse", "Profile", "Report Produce");
+                                     int produce_id, Context context, Activity activity, FragmentManager fragmentManager) {
         this.warehouseList = warehouseList;
         this.context = context;
         this.activity = activity;
         this.fragmentManager =fragmentManager;
+        this.produce_id = produce_id;
     }
 
     @NonNull
@@ -56,8 +57,6 @@ public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSugge
         holder.warehouseCost.setText(Double.toString(currWarehouse.price));
 
         holder.parent.setOnClickListener(v -> {
-//            FarmerFindWarehouseResponse.WarehouseResponse currWarehouse = warehouseList.get(position);
-
             Bundle args = new Bundle();
             args.putSerializable("whid", currWarehouse.whid);
             args.putSerializable("whname", currWarehouse.whname);
@@ -67,31 +66,10 @@ public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSugge
             args.putSerializable("whsector",currWarehouse.sector);
             args.putSerializable("whowner",currWarehouse.owner);
             args.putSerializable("whavl",currWarehouse.availstorage);
-
-
-//            View view = LayoutInflater.from(activity).inflate(R.layout.warehouse_transaction_custom_dialog_box,null,false);
-//            AlertDialog dialog = new AlertDialog.Builder(activity)
-//                    .setView(view)
-//                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//
-//                        }
-//                    })
-//                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    }).create();
-//            dialog.show();
+            args.putSerializable("produce_id", produce_id);
 
             CustomDialogClass cdd=new CustomDialogClass(activity,args);
             cdd.show();
-//
-//            FragmentFarmerProduceDetail produceDetail = new FragmentFarmerProduceDetail();
-//            produceDetail.setArguments(args);
-//            produceDetail.show(fragManager, "produce");
         });
 
     }

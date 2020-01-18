@@ -10,6 +10,7 @@ public class AppConstants {
     public static final String FARMER_FIND_WAREHOUSE_LIST_URL="user/findWarehouse";
     public static final String FARMER_REPORT_PRODUCE_URL="transaction/report_produce/";
     public static final String BUYER_FOODGRAIN_LIST_URL="user/foodgrains/";
+    public static final String CREATE_STORAGE_TRANSACTION_URL="transaction/storagetransaction/";
 
     //TOKEN
     public static final String TEMP_FARM_TOKEN="Token dbd96bd83a9e6ef3ade6ff1f431d93a965026d23";

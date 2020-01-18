@@ -82,7 +82,7 @@ public  class  FragmentFarmerFindWarehouse extends DialogFragment {
         call.enqueue(new Callback<FarmerFindWarehouseResponse>() {
             @Override
             public void onResponse(Call<FarmerFindWarehouseResponse> call, Response<FarmerFindWarehouseResponse> response) {
-                mAdapter = new AdapterSuggestedWarehouse(response.body().data, getActivity(), getActivity(),getFragmentManager());
+                mAdapter = new AdapterSuggestedWarehouse(response.body().data, produce_id, getActivity(), getActivity(),getFragmentManager());
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
