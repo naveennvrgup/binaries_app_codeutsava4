@@ -75,7 +75,7 @@ public interface APIServices {
     Call<SignupPayload> sendSignupRequest(@Body SignupPayload payload);
 
     @POST("/transaction/createBid/")
-    Call<FarmerActiveBidListResponse> createBid(BidCreatePayload payload);
+    Call<FarmerActiveBidListResponse> createBid(@Body BidCreatePayload payload);
 
 //    @GET("transaction/farmerResponseBideList/")
 //    Call<SignupPayload> getFarmerResponseBideList();
