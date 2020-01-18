@@ -11,6 +11,7 @@ import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
 import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
+import binaries.app.codeutsava.restapi.model.farmer.FarmerDashboardRecommedationResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerFindWarehouseResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
@@ -66,4 +67,10 @@ public interface APIServices {
 
     @POST(AppConstants.CREATE_STORAGE_TRANSACTION_URL)
     Call<FarmerWarehouseTransactionResponse> postStorageTransaction(@Body FarmerWarehouseTransactionPayload farmerWarehouseTransactionPayload);
+
+    @GET(AppConstants.GRAPH_URL)
+    Call<List<List<String>>> getGraphDetails();
+
+    @GET(AppConstants.FARMER_RECOMMENDATION_URL)
+    Call<FarmerDashboardRecommedationResponse> getFarmerRecommendation();
 }
