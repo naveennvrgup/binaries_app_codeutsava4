@@ -9,6 +9,7 @@ import binaries.app.codeutsava.restapi.model.auth.LoginPayload;
 import binaries.app.codeutsava.restapi.model.auth.LoginResponse;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
 import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
+import binaries.app.codeutsava.restapi.model.buyer.PlaceBidResponse;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
 import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
@@ -78,8 +79,8 @@ public interface APIServices {
     @POST("/transaction/createBid/")
     Call<FarmerActiveBidListResponse> createBid(@Body BidCreatePayload payload);
 
-//    @GET("transaction/farmerResponseBideList/")
-//    Call<SignupPayload> getFarmerResponseBideList();
+    @GET("transaction/farmerPlacedBids/{id}/")
+    Call<List<PlaceBidResponse>> getFarmerResponseBideList(@Path("id") String bid);
 
     @GET("transaction/pastBidsList/")
     Call<List<FarmerActiveBidListResponse>> getPastBidsList();
@@ -90,8 +91,8 @@ public interface APIServices {
     @POST("transaction/farmerPlaceBid/")
     Call<Boolean> farmerPlaceBid(@Body FarmerPlaceBidPayload payload);
 
-//    @GET("transaction/approveBid/")
-//    Call<SignupPayload> approveBid();
+    @GET("transaction/approveBid/{id}/")
+    Call<String> approveBid(@Path("id") String id);
 
 
 

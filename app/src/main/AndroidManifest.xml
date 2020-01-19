@@ -14,10 +14,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".restapi.activites.ActivityBuyerBidDetail"></activity>
         <activity
             android:name=".restapi.activites.ActivityFarmerBids"
             android:label="@string/title_activity_farmer_bids"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".restapi.activites.ActivityBuyerBidsList" />
         <activity android:name=".restapi.activites.ActivityBuyer" />
         <activity android:name=".restapi.activites.ActivityFarmer" />
