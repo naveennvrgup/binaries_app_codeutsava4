@@ -41,7 +41,7 @@ import static android.view.View.GONE;
 public class FragmentBuyerFoodgrainDetail extends DialogFragment {
     private RecyclerView recyclerView;
     private AdapterFarmer mAdapter;
-    private TextView fg_name, fg_price, searchText;
+    private TextView fg_name, searchText;
     private ImageView fg_img;
     private TextInputEditText editTextQuantity;
     private Button setQuantityBtn;
@@ -82,7 +82,6 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
 
         fg_name = view.findViewById(R.id.name);
         fg_img = view.findViewById(R.id.food_img);
-        fg_price = view.findViewById(R.id.price);
         editTextQuantity = view.findViewById(R.id.quantity_input);
         setQuantityBtn = view.findViewById(R.id.setQuantitybtn);
         progressBar = view.findViewById(R.id.buyer_foodgrain_det_progress);
@@ -112,7 +111,6 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
 
         if (foodgrain != null && getActivity() != null) {
             fg_name.setText(foodgrain.type);
-            fg_price.setText(foodgrain.price);
 
             Glide.with(getActivity()).load(R.drawable.f8).into(fg_img);
         }
@@ -143,7 +141,7 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
                             filteredFarmers.add(farmer);
                     }
 
-                    mAdapter.setData(foodgrain.id, filteredFarmers);
+                    mAdapter.setData(foodgrain.id, filteredFarmers, quantity);
                 }
             }
 

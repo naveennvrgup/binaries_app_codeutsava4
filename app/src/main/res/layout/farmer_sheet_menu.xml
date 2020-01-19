@@ -44,7 +44,7 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="24dp"
                     android:src="@drawable/farmer_icon" />
 
                 <LinearLayout
@@ -54,6 +54,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/far_sheet_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
@@ -67,9 +68,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Farmer"
+                        android:fontFamily="@font/average_sans"
+                        android:text="FARMER"
                         android:textColor="@android:color/darker_gray"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
                     <!-- Put the farmer icon and foodgrain image here -->
                 </LinearLayout>
             </LinearLayout>

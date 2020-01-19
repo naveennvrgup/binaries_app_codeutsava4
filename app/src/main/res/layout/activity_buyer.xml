@@ -10,17 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/buyer_menu_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="16dp"
+            android:src="@drawable/menu_icon" />
+
         <TextView
             android:id="@+id/text_buyer_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@id/buyer_menu_icon"
             android:fontFamily="@font/roboto_slab"
-            android:text="CatVideos"
-            android:textStyle="bold"
-            android:textAlignment="center"
+            android:text="Home"
             android:textColor="@android:color/white"
-            android:textSize="28sp" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/buyer_tab_strip"
@@ -51,13 +58,6 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/buyer_menu_icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="16dp"
-        android:src="@drawable/menu_icon" />
 
     <include layout="@layout/buyer_sheet_menu" />
 

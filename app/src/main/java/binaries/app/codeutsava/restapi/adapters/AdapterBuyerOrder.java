@@ -39,11 +39,12 @@ public class AdapterBuyerOrder extends RecyclerView.Adapter<AdapterBuyerOrder.Vi
         BuyerOrderListResponse orderListResponse = orders.get(position);
 
         holder.seller.setText(orderListResponse.seller);
-        holder.quantity.setText(String.valueOf(orderListResponse.quantity));
-        holder.price.setText(String.valueOf(orderListResponse.price));
+        holder.quantity.setText("Quantity: " + orderListResponse.quantity);
+        holder.price.setText("Price: " + orderListResponse.price);
         holder.foodgraintype.setText(orderListResponse.foodgraintype);
 
         if (orderListResponse.approved) {
+            holder.approved.setTextColor(activity.getResources().getColor(R.color.colorGreen));
             holder.approved.setText("Transaction Approved.");
         } else {
             holder.approved.setTextColor(activity.getResources().getColor(R.color.colorYellow));

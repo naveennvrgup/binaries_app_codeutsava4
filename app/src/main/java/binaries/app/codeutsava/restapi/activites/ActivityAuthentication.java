@@ -146,6 +146,7 @@ public class ActivityAuthentication extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
                     editor.putString("role", response.body().getRole());
+                    editor.putString("name", response.body().getName());
                     editor.apply();
 
                     goToDash(response.body().getRole());

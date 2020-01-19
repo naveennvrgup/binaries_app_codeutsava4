@@ -5,11 +5,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -76,5 +77,8 @@ public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setNestedScrollingEnabled(true);
         recyclerView.setAdapter(new AdapterRecyclerViewBottomSheet(getActivity(), itemsList));
+
+        ((TextView) view.findViewById(R.id.far_sheet_name))
+                .setText(PreferenceManager.getDefaultSharedPreferences(getContext()).getString("name", "User"));
     }
 }

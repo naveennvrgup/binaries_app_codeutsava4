@@ -44,9 +44,10 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
         this.quantity = quantity;
     }
 
-    public void setData(int foodgrain_id, List<FarmerResponse> ldata){
+    public void setData(int foodgrain_id, List<FarmerResponse> ldata, int quantity) {
         this.foodgrain_id = foodgrain_id;
         this.ldata = ldata;
+        this.quantity = quantity;
 
         notifyDataSetChanged();
     }
@@ -62,12 +63,15 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if(ldata != null){
+        if (ldata != null) {
             FarmerResponse data = ldata.get(position);
 
             holder.name.setText(data.farmer.name);
             holder.price.setText("Rs. " + data.price);
-            holder.chooseBtn.setOnClickListener(v -> placeOrder(data));
+            holder.chooseBtn.setOnClickListener(v -> {
+                holder.chooseBtn.setEnabled(false);
+                placeOrder(data);
+            });
         }
     }
 
@@ -87,9 +91,8 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
                 if (response.isSuccessful() && response.body() != null) {
                     fragmentManager.popBackStack();
                     fragmentManager.popBackStack();
-                    activity.startActivity(new Intent(
-                            activity, ActivityBuyerOrders.class
-                    ));
+
+                    activity.startActivity(new Intent(activity, ActivityBuyerOrders.class));
                 }
             }
 

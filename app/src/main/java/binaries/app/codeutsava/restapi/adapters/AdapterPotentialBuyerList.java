@@ -46,17 +46,6 @@ public class AdapterPotentialBuyerList extends RecyclerView.Adapter<AdapterPoten
 
             holder.bName.setText(produce.name);
             holder.bContact.setText("Contact: " + produce.contact);
-
-            holder.itemView.setOnClickListener(v -> {
-                PotentialBuyerResponse currProduceData = produces.get(position);
-
-                Bundle args = new Bundle();
-                args.putSerializable("produce", currProduceData);
-
-                FragmentFarmerProduceDetail produceDetail = new FragmentFarmerProduceDetail();
-                produceDetail.setArguments(args);
-                produceDetail.show(fragManager, "....");
-            });
         }
     }
 
