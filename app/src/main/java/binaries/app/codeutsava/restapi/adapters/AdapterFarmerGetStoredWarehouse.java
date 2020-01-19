@@ -1,6 +1,7 @@
 package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import binaries.app.codeutsava.R;
+
+import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduceDetail;
+import binaries.app.codeutsava.restapi.fragments.FragmentPotentialBuyerList;
+import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
+
 import binaries.app.codeutsava.restapi.model.farmer.FarmerStorageTransactionResponse;
 
 public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<AdapterFarmerGetStoredWarehouse.ViewHolder> {
@@ -62,12 +68,40 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
                 Log.v("case1", "case1");
                 holder.whDeadline.setText("Grain may perish in " + (produce.fgDeadline - diffDays) + " days");
                 holder.whDeadline.setTextColor(activity.getResources().getColor(R.color.colorRed));
+
+
+                holder.itemView.setOnClickListener(v -> {
+                FarmerStorageTransactionResponse currProduceData = produces.get(position);
+
+                Bundle args = new Bundle();
+                args.putSerializable("foodgrain", currProduceData.foodgrain);
+
+                FragmentPotentialBuyerList buyerList = new FragmentPotentialBuyerList();
+                buyerList.setArguments(args);
+                buyerList.show(fragManager, "....");
+            });
+
+
+
+
+            }
+            else {
+                Log.v("case2","case2");
+                holder.whDeadline.setVisibility(View.GONE);
+            }
+
+
+
+
             } else {
                 Log.v("case2", "case2");
                 holder.whDeadline.setVisibility(View.GONE);
             }
+
         }
-    }
+
+
+
 
     private long getDateDifference(String startDate) {
         Date endDate = Calendar.getInstance().getTime();
