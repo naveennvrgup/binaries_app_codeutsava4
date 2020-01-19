@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,7 @@ import binaries.app.codeutsava.restapi.adapters.AdapterFarmerGetStoredWarehouse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerStorageTransactionResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,9 +59,7 @@ public class FragmentGetStoredWarehouse extends DialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_farmer_get_stored_warehouse, container, false);
         recyclerView = view.findViewById(R.id.farmerStorageTransactionListRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
@@ -73,7 +73,9 @@ public class FragmentGetStoredWarehouse extends DialogFragment {
 
     private void getFarmerStorageTransaction() {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<List<FarmerStorageTransactionResponse>> call = apiServices.getFarmerStorageTransaction();
+        Call<List<FarmerStorageTransactionResponse>> call = apiServices.getFarmerStorageTransaction(
+                PreferenceManager.getDefaultSharedPreferences(getContext()).getString("token", AppConstants.TEMP_FARM_TOKEN)
+        );
 
         call.enqueue(new Callback<List<FarmerStorageTransactionResponse>>() {
             @Override

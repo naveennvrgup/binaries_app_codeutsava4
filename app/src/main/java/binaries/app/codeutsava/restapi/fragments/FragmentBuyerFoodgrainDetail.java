@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +31,7 @@ import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -123,7 +125,8 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
 
     private void callAPI() {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<List<FarmerResponse>> call = apiServices.getBuyerFarmerList(foodgrain.id);
+        Call<List<FarmerResponse>> call = apiServices.getBuyerFarmerList(
+                PreferenceManager.getDefaultSharedPreferences(getContext()).getString("token", AppConstants.TEMP_FARM_TOKEN), foodgrain.id);
 
         call.enqueue(new Callback<List<FarmerResponse>>() {
             @Override

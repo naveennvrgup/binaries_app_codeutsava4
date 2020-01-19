@@ -34,7 +34,7 @@ public class AdapterPotentialBuyerList extends RecyclerView.Adapter<AdapterPoten
     @NonNull
     @Override
     public AdapterPotentialBuyerList.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.fragment_potential_buyer, null);
+        View view = LayoutInflater.from(activity).inflate(R.layout.potential_buyer_recyclerview, null);
 
         return new AdapterPotentialBuyerList.ViewHolder(view);
     }
@@ -45,7 +45,7 @@ public class AdapterPotentialBuyerList extends RecyclerView.Adapter<AdapterPoten
             PotentialBuyerResponse produce = produces.get(position);
 
             holder.bName.setText(produce.name);
-            holder.bContact.setText("Grade: " + produce.contact);
+            holder.bContact.setText("Contact: " + produce.contact);
 
             holder.itemView.setOnClickListener(v -> {
                 PotentialBuyerResponse currProduceData = produces.get(position);

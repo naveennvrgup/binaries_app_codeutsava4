@@ -67,6 +67,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signupname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
@@ -80,6 +81,7 @@
                 android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signuppassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Password"
@@ -93,6 +95,7 @@
                 android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signupcontact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Contact"
@@ -107,6 +110,7 @@
                 android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signupaddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Address"
@@ -120,6 +124,7 @@
                 android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signupcity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="City"
@@ -133,6 +138,7 @@
                 android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signupstate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="State"
@@ -146,6 +152,7 @@
                 android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signupdob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="DOB"
@@ -160,6 +167,7 @@
                 android:layout_marginBottom="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signupaadhar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Aadhar Number"
@@ -205,6 +213,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/sign_in_contact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Contact Number"
@@ -219,6 +228,7 @@
                 android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/sign_in_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Password"
@@ -241,6 +251,7 @@
         app:cardElevation="16dp">
 
         <Button
+            android:id="@+id/auth_proceed_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/gradient_button"

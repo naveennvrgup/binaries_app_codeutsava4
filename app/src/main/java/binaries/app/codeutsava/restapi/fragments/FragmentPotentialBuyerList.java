@@ -61,7 +61,7 @@ public class FragmentPotentialBuyerList extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_farmer_produce, container, false);
+        View view = inflater.inflate(R.layout.fragment_potential_buyer, container, false);
         recyclerView = view.findViewById(R.id.potentialBuyerListRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
 

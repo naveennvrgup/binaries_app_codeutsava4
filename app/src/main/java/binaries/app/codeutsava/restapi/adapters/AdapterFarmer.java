@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -24,6 +25,7 @@ import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -76,7 +78,8 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
         payload.quantity = quantity;
 
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<PlaceOrderResponse> call = apiServices.placeOrderRequest(payload);
+        Call<PlaceOrderResponse> call = apiServices.placeOrderRequest(
+                PreferenceManager.getDefaultSharedPreferences(activity).getString("token", AppConstants.TEMP_FARM_TOKEN), payload);
 
         call.enqueue(new Callback<PlaceOrderResponse>() {
             @Override

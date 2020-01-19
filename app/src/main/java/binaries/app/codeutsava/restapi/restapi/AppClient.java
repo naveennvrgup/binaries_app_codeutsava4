@@ -1,16 +1,11 @@
 package binaries.app.codeutsava.restapi.restapi;
 
 
-import android.app.Activity;
-
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import binaries.app.codeutsava.restapi.utils.AppConstants;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -39,15 +34,13 @@ public class AppClient {
         return retrofit.create(serviceClass);
     }
 
-
-
     private OkHttpClient.Builder getOKHttpClient() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
         httpClient.addInterceptor(chain -> {
             Request request=chain.request()
                     .newBuilder()
-                    .addHeader("Authorization", AppConstants.TEMP_FARM_TOKEN)
+//                    .addHeader("Authorization", AppConstants.TEMP_FARM_TOKEN)
                     .build();
             return chain.proceed(request);
         });

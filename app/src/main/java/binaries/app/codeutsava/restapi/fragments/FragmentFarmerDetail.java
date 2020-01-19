@@ -3,21 +3,22 @@ package binaries.app.codeutsava.restapi.fragments;
 
 import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
+
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,7 +47,7 @@ public class FragmentFarmerDetail extends DialogFragment {
 
         Dialog dialog = getDialog();
 
-        if(dialog != null){
+        if (dialog != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
 
@@ -73,9 +74,10 @@ public class FragmentFarmerDetail extends DialogFragment {
         return view;
     }
 
-    public void getFarmerDetail() {
+    private void getFarmerDetail() {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<FarmerDetailResponse> call = apiServices.getFarmerDetail();
+        Call<FarmerDetailResponse> call = apiServices.getUserDetail(
+                PreferenceManager.getDefaultSharedPreferences(getContext()).getString("token", AppConstants.TEMP_FARM_TOKEN));
 
         call.enqueue(new Callback<FarmerDetailResponse>() {
             @Override
@@ -92,7 +94,7 @@ public class FragmentFarmerDetail extends DialogFragment {
 
             @Override
             public void onFailure(Call<FarmerDetailResponse> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

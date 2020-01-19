@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +21,7 @@ import binaries.app.codeutsava.restapi.adapters.AdapterSuggestedWarehouse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerFindWarehouseResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -72,7 +74,9 @@ public class FragmentFarmerFindWarehouse extends DialogFragment {
     private void getWarehousePrediction() {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
 
-        Call<FarmerFindWarehouseResponse> call = apiServices.getFarmerFindWarehouseList(Integer.toString(produce_id), Integer.toString(quantity));
+        Call<FarmerFindWarehouseResponse> call = apiServices.getFarmerFindWarehouseList(
+                PreferenceManager.getDefaultSharedPreferences(getContext()).getString("token", AppConstants.TEMP_FARM_TOKEN), Integer.toString(produce_id), Integer.toString(quantity));
+
         call.enqueue(new Callback<FarmerFindWarehouseResponse>() {
             @Override
             public void onResponse(Call<FarmerFindWarehouseResponse> call, Response<FarmerFindWarehouseResponse> response) {
