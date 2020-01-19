@@ -57,6 +57,7 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
         holder.transno.setText("TN: " + orderListResponse.transno);
 
         if (orderListResponse.approved) {
+            holder.approved.setTextColor(activity.getResources().getColor(R.color.colorGreen));
             holder.approved.setText("Transaction Approved");
             holder.layout.setVisibility(View.GONE);
         } else {

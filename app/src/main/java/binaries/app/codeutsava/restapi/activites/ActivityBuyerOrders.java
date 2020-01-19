@@ -1,5 +1,6 @@
 package binaries.app.codeutsava.restapi.activites;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -86,5 +87,12 @@ public class ActivityBuyerOrders extends AppCompatActivity {
                 Toast.makeText(ActivityBuyerOrders.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ActivityBuyerOrders.this, ActivityBuyer.class);
+        startActivity(intent);
+        finish();
     }
 }

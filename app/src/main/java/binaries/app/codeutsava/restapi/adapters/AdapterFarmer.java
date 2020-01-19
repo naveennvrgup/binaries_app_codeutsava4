@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,12 +71,19 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
             holder.price.setText("Rs. " + data.price);
             holder.chooseBtn.setOnClickListener(v -> {
                 holder.chooseBtn.setEnabled(false);
-                placeOrder(data);
+                holder.chooseBtn
+                        .animate()
+                        .alpha(0.0f)
+                        .setDuration(200)
+                        .setInterpolator(new AccelerateDecelerateInterpolator())
+                        .start();
+
+                placeOrder(data, holder.chooseBtn);
             });
         }
     }
 
-    private void placeOrder(FarmerResponse data) {
+    private void placeOrder(FarmerResponse data, Button buy) {
         PlaceOrderPayload payload = new PlaceOrderPayload();
         payload.farmer_contact = data.farmer.contact;
         payload.foodgrain_id = foodgrain_id;
@@ -93,12 +101,20 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
                     fragmentManager.popBackStack();
 
                     activity.startActivity(new Intent(activity, ActivityBuyerOrders.class));
+                    activity.finish();
                 }
             }
 
             @Override
             public void onFailure(Call<PlaceOrderResponse> call, Throwable t) {
                 Toast.makeText(activity, t.getMessage(), Toast.LENGTH_LONG).show();
+
+                buy.setEnabled(true);
+                buy.animate()
+                        .alpha(1.0f)
+                        .setDuration(200)
+                        .setInterpolator(new AccelerateDecelerateInterpolator())
+                        .start();
             }
         });
 
