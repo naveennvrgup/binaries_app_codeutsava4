@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduceDetail;
+import binaries.app.codeutsava.restapi.fragments.FragmentPotentialBuyerList;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerStorageTransactionResponse;
 
@@ -67,6 +68,21 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
                 Log.v("case1","case1");
                 holder.whDeadline.setText("Your foodgrain may perish in "+Long.toString(produce.fgDeadline-diffDays)+" days");
                 holder.whDeadline.setTextColor(activity.getResources().getColor(R.color.colorRed));
+
+                holder.itemView.setOnClickListener(v -> {
+                FarmerStorageTransactionResponse currProduceData = produces.get(position);
+
+                Bundle args = new Bundle();
+                args.putSerializable("foodgrain", currProduceData.foodgrain);
+
+                FragmentPotentialBuyerList buyerList = new FragmentPotentialBuyerList();
+                buyerList.setArguments(args);
+                buyerList.show(fragManager, "....");
+            });
+
+
+
+
             }
             else {
                 Log.v("case2","case2");
@@ -74,16 +90,7 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
             }
 
 
-//            holder.itemView.setOnClickListener(v -> {
-//                FarmerStorageTransactionResponse currProduceData = produces.get(position);
-//
-//                Bundle args = new Bundle();
-//                args.putSerializable("produce", currProduceData);
-//
-//                FragmentFarmerProduceDetail produceDetail = new FragmentFarmerProduceDetail();
-//                produceDetail.setArguments(args);
-//                produceDetail.show(fragManager, "....");
-//            });
+
         }
     }
 
