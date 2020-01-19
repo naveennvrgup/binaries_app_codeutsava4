@@ -55,6 +55,7 @@ public class ActivityFarmerOrders extends AppCompatActivity {
 
     void fetchOrders() {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
+
         Call<List<BuyerOrderListResponse>> call = apiServices.getFarmerOrders(
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("token", AppConstants.TEMP_FARM_TOKEN));
 

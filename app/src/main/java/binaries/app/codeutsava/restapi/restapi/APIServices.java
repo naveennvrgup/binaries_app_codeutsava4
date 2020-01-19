@@ -97,7 +97,7 @@ public interface APIServices {
     @POST("/transaction/createBid/")
     Call<FarmerActiveBidListResponse> createBid(@Header("Authorization") String token, @Body BidCreatePayload payload);
 
-    @GET("transaction/farmerResponseBidList/{id}/")
+    @GET("transaction/farmerPlacedBids/{id}/")
     Call<List<PlaceBidResponse>> getFarmerResponseBideList(@Header("Authorization") String token, @Path("id") String id);
 
     @GET("transaction/pastBidsList/")

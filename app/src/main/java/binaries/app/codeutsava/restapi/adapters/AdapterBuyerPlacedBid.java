@@ -49,7 +49,7 @@ public class AdapterBuyerPlacedBid extends RecyclerView.Adapter<AdapterBuyerPlac
         holder.description.setText(pbid.description);
         holder.farmer.setText(pbid.farmer);
         holder.price.setText(pbid.price);
-        holder.bid.setText(pbid.bid);
+//        holder.bid.setText(pbid.bid);
 
         holder.approveorderbtn.setOnClickListener(v -> AppClient.getInstance().createService(APIServices.class)
                 .approveBid(PreferenceManager.getDefaultSharedPreferences(activity).getString("token", AppConstants.TEMP_FARM_TOKEN),
@@ -81,13 +81,12 @@ public class AdapterBuyerPlacedBid extends RecyclerView.Adapter<AdapterBuyerPlac
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView bid, farmer, price, description;
+        TextView farmer, price, description;
         Button approveorderbtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            bid = itemView.findViewById(R.id.bpbid_bid);
             farmer = itemView.findViewById(R.id.bpbid_farmer);
             price = itemView.findViewById(R.id.bpbid_price);
             description = itemView.findViewById(R.id.bpbid_description);

@@ -78,16 +78,17 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
                         .setInterpolator(new AccelerateDecelerateInterpolator())
                         .start();
 
-                placeOrder(data, holder.chooseBtn);
+                placeOrder(data, data.produce_id, holder.chooseBtn);
             });
         }
     }
 
-    private void placeOrder(FarmerResponse data, Button buy) {
+    private void placeOrder(FarmerResponse data, int produce_id, Button buy) {
         PlaceOrderPayload payload = new PlaceOrderPayload();
         payload.farmer_contact = data.farmer.contact;
         payload.foodgrain_id = foodgrain_id;
         payload.quantity = quantity;
+        payload.produce_id = produce_id;
 
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
         Call<PlaceOrderResponse> call = apiServices.placeOrderRequest(

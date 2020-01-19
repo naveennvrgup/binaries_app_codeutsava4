@@ -1,64 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="4dp">
+    android:padding="8dp">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        app:cardCornerRadius="16dp"
+        android:layout_margin="4dp"
+        app:cardElevation="4dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/average_sans"
-            android:text="Deliver from?"
-            android:textColor="@android:color/black"
-            android:textSize="24sp" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <TextView
-            android:id="@+id/bpbid_bid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/bpbid_farmer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/bpbid_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/bpbid_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="2dp">
-
-            <Button
-                android:id="@+id/bpbid_approve_pbid_btn"
+            <TextView
+                android:id="@+id/bpbid_farmer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/gradient_button"
-                android:text="Approve"
-                android:textColor="@android:color/white" />
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/average_sans"
+                android:text="Farmer Name"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bpbid_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/average_sans"
+                android:text="Price"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bpbid_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/average_sans"
+                android:text="Description"
+                android:textSize="18sp" />
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="2dp">
+
+                <Button
+                    android:id="@+id/bpbid_approve_pbid_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient_button"
+                    android:text="Approve"
+                    android:textColor="@android:color/white" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

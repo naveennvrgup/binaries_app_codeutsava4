@@ -51,7 +51,7 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
         BuyerOrderListResponse orderListResponse = orders.get(position);
 
         holder.buyer.setText(orderListResponse.buyer);
-        holder.quantity.setText(String.valueOf(orderListResponse.quantity));
+        holder.quantity.setText("Quantity: " + orderListResponse.quantity);
         holder.price.setText("Price: " + orderListResponse.price);
         holder.foodgraintype.setText(orderListResponse.foodgraintype);
         holder.transno.setText("TN: " + orderListResponse.transno);

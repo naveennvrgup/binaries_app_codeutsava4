@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -67,7 +68,7 @@ public class ActivityBuyerBidDetail extends AppCompatActivity {
                     public void onResponse(Call<List<PlaceBidResponse>> call, Response<List<PlaceBidResponse>> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             adapterBuyerPlacedBid = new AdapterBuyerPlacedBid(ActivityBuyerBidDetail.this, response.body());
-                            recyclerView.setLayoutManager(new LinearLayoutManager(ActivityBuyerBidDetail.this));
+                            recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1));
                             recyclerView.setAdapter(adapterBuyerPlacedBid);
                             adapterBuyerPlacedBid.notifyDataSetChanged();
                         }

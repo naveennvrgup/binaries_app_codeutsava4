@@ -4,6 +4,7 @@ public class FarmerResponse {
     public Farmer farmer;
     public int quantity;
     public int price;
+    public int produce_id;
 
     public class Farmer {
         public String name;
