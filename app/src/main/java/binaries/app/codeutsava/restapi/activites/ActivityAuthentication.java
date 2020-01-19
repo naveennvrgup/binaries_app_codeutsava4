@@ -72,10 +72,9 @@ public class ActivityAuthentication extends AppCompatActivity {
         signInPass = findViewById(R.id.sign_in_pass);
 
         usertypechoices = new HashMap<>();
-        usertypechoices.put("Who are you?", "FAR");
-        usertypechoices.put("Farmer", "BUY");
-        usertypechoices.put("Buyer", "WHO");
-        usertypechoices.put("Warehouse Owner", "NGO");
+        usertypechoices.put("Farmer", "FAR");
+        usertypechoices.put("Buyer", "BUY");
+        usertypechoices.put("Warehouse Owner", "WHO");
         usertypechoices.put("Administrator", "ADM");
         usertypechoices.put("Delivery", "DVR");
 

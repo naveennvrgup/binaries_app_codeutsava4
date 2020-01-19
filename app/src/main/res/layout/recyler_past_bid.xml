@@ -1,99 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:padding="8dp">
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/getFarmerStoredWarehouse"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
         android:layout_margin="8dp"
-        android:padding="4dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="4dp">
+        app:cardElevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="12dp">
 
             <ImageView
-                android:id="@+id/wareHouseIcon"
+                android:id="@+id/bpb_food_img"
                 android:layout_width="66dp"
                 android:layout_height="66dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/corn_icon" />
+                android:src="@drawable/f1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/fstoredWareHouseName"
+                    android:id="@+id/bpb_foodgrain"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/roboto_slab"
                     android:maxLines="1"
-                    android:text="Warehouse Name"
+                    android:text="FoodGrain"
                     android:textColor="@android:color/black"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/fstoredWareHouseDeadline"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:fontFamily="@font/roboto_slab"
-                    android:text="Deadline is about to reach"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <TextView
-                        android:id="@+id/fstoredWarehouseFoodgrain"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/roboto_slab"
-                        android:maxLines="1"
-                        android:text="Foodgrain"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/fstoredWarehouseCost"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="4dp"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/roboto_slab"
-                        android:maxLines="1"
-                        android:text="Price"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/fstoredWarehouseQuantity"
+                    android:id="@+id/bpb_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -105,18 +58,50 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/fstoredWarehouseDate"
+                    android:id="@+id/bpb_transno"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/roboto_slab"
                     android:maxLines="1"
-                    android:text="Date"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:text="Trans No."
+                    android:textSize="14sp" />
 
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                    <TextView
+                        android:id="@+id/bpb_deadline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/roboto_slab"
+                        android:maxLines="1"
+                        android:text="Deadline"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/bpb_isactive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/roboto_slab"
+                        android:maxLines="1"
+                        android:text="Active"
+                        android:textColor="@color/colorGreen"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

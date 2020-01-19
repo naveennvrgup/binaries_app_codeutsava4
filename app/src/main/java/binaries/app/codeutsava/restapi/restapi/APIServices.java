@@ -2,6 +2,9 @@ package binaries.app.codeutsava.restapi.restapi;
 
 import java.util.List;
 
+import binaries.app.codeutsava.restapi.model.auth.SignupPayload;
+import binaries.app.codeutsava.restapi.model.buyer.BidCreatePayload;
+import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.auth.LoginPayload;
 import binaries.app.codeutsava.restapi.model.auth.LoginResponse;
 import binaries.app.codeutsava.restapi.model.auth.SignupPayload;
@@ -15,6 +18,7 @@ import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDashboardRecommedationResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDetailResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerFindWarehouseResponse;
+import binaries.app.codeutsava.restapi.model.farmer.FarmerPlaceBidPayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerStorageTransactionResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionPayload;
@@ -83,4 +87,31 @@ public interface APIServices {
 
     @GET(AppConstants.FARMER_RECOMMENDATION_URL)
     Call<FarmerDashboardRecommedationResponse> getFarmerRecommendation(@Header("Authorization") String token);
+
+    @POST("/transaction/createBid/")
+    Call<FarmerActiveBidListResponse> createBid(@Header("Authorization") String token, @Body BidCreatePayload payload);
+
+//    @GET("transaction/farmerResponseBideList/")
+//    Call<SignupPayload> getFarmerResponseBideList();
+
+    @GET("transaction/pastBidsList/")
+    Call<List<FarmerActiveBidListResponse>> getPastBidsList(@Header("Authorization") String token);
+
+    @GET("transaction/farmerActiveBidList/")
+    Call<List<FarmerActiveBidListResponse>> getFarmerActiveBidList(@Header("Authorization") String token);
+
+    @POST("transaction/farmerPlaceBid/")
+    Call<Boolean> farmerPlaceBid(@Header("Authorization") String token, @Body FarmerPlaceBidPayload payload);
+
+//    @GET("transaction/approveBid/")
+//    Call<SignupPayload> approveBid();
+
+
+
+
+
+
+
+
+
 }

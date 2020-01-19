@@ -1,12 +1,10 @@
 package binaries.app.codeutsava.restapi.model.farmer;
 
-import com.google.gson.annotations.Expose;
-
 import java.io.Serializable;
 
 public class FarmerActiveBidListResponse implements Serializable {
     public String id;
-    public String isActive;
+    public boolean isActive;
     public String transno;
     public String quantity;
     public String nbids;

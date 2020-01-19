@@ -17,7 +17,9 @@ import java.util.List;
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.activites.ActivityAuthentication;
 import binaries.app.codeutsava.restapi.activites.ActivityBuyer;
+import binaries.app.codeutsava.restapi.activites.ActivityBuyerBidsList;
 import binaries.app.codeutsava.restapi.activites.ActivityBuyerOrders;
+import binaries.app.codeutsava.restapi.activites.ActivityFarmerBids;
 import binaries.app.codeutsava.restapi.activites.ActivityFarmerOrders;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerFoodGrainList;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduce;
@@ -105,6 +107,21 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
                         FragmentGetStoredWarehouse fragmentGetStoredWarehouse = new FragmentGetStoredWarehouse();
                         fragmentGetStoredWarehouse.show(((AppCompatActivity) activity).getSupportFragmentManager(), "getStoredWarehouse");
                         break;
+
+                    case "My Bids":
+                        if (!(activity instanceof ActivityBuyerBidsList)) {
+                            myIntent = new Intent(activity, ActivityBuyerBidsList.class);
+                            activity.startActivity(myIntent);
+                        }
+                        break;
+
+                    case "Active Bids":
+                        if (!(activity instanceof ActivityFarmerBids)) {
+                            myIntent = new Intent(activity, ActivityFarmerBids.class);
+                            activity.startActivity(myIntent);
+                        }
+                        break;
+
                 }
             });
         }

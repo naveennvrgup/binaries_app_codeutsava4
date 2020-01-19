@@ -28,7 +28,8 @@
             android:fontFamily="@font/average_sans"
             android:text="SAMPLE TEXT"
             android:textAlignment="center"
+            android:textAllCaps="true"
             android:textColor="@android:color/black"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
