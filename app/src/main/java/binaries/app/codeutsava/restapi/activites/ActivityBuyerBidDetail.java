@@ -1,6 +1,7 @@
 package binaries.app.codeutsava.restapi.activites;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import binaries.app.codeutsava.restapi.model.buyer.PlaceBidResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,7 +53,7 @@ public class ActivityBuyerBidDetail extends AppCompatActivity {
 
     void get_pbids(String bid){
         AppClient.getInstance().createService(APIServices.class)
-                .getFarmerResponseBideList(bid)
+                .getFarmerResponseBideList(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("token", AppConstants.TEMP_FARM_TOKEN), bid)
                 .enqueue(new Callback<List<PlaceBidResponse>>() {
                     @Override
                     public void onResponse(Call<List<PlaceBidResponse>> call, Response<List<PlaceBidResponse>> response) {

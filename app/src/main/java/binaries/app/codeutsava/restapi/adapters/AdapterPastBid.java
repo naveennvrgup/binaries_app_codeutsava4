@@ -47,33 +47,23 @@ public class AdapterPastBid extends RecyclerView.Adapter<AdapterPastBid.ViewHold
 
             if (bid.isActive) {
                 holder.isActive.setText("Active");
+                holder.itemView.setOnClickListener(v -> {
+                    Intent intent = new Intent(activity, ActivityBuyerBidDetail.class);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("bid", bid);
+                    intent.putExtras(bundle);
+
+                    activity.startActivity(intent);
+                    activity.finish();
+                });
+
             } else {
                 holder.isActive.setTextColor(activity.getResources().getColor(android.R.color.holo_red_dark));
                 holder.isActive.setText("Inactive");
             }
         }
-        holder.deadline.setText(bid.deadline);
-        holder.foodgrain.setText(bid.type.type);
-        holder.quantity.setText(bid.quantity);
-        holder.transno.setText(bid.transno);
 
-        if(bid.isActive=="false"){
-            holder.itemView.setBackgroundColor(
-                    activity.getResources().getColor(R.color.colorAccent)
-            );
-            return;
-        }
-
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(activity,ActivityBuyerBidDetail.class);
-
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("bid", bid);
-            intent.putExtras(bundle);
-
-            activity.getBaseContext().startActivity(intent);
-            activity.finish();
-        });
     }
 
     @Override

@@ -2,15 +2,14 @@ package binaries.app.codeutsava.restapi.restapi;
 
 import java.util.List;
 
-import binaries.app.codeutsava.restapi.model.auth.SignupPayload;
-import binaries.app.codeutsava.restapi.model.buyer.BidCreatePayload;
-import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.auth.LoginPayload;
 import binaries.app.codeutsava.restapi.model.auth.LoginResponse;
 import binaries.app.codeutsava.restapi.model.auth.SignupPayload;
+import binaries.app.codeutsava.restapi.model.buyer.BidCreatePayload;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
 import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
+import binaries.app.codeutsava.restapi.model.buyer.PlaceBidResponse;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
 import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
@@ -98,8 +97,8 @@ public interface APIServices {
     @POST("/transaction/createBid/")
     Call<FarmerActiveBidListResponse> createBid(@Header("Authorization") String token, @Body BidCreatePayload payload);
 
-//    @GET("transaction/farmerResponseBideList/")
-//    Call<SignupPayload> getFarmerResponseBideList();
+    @GET("transaction/farmerResponseBidList/{id}/")
+    Call<List<PlaceBidResponse>> getFarmerResponseBideList(@Header("Authorization") String token, @Path("id") String id);
 
     @GET("transaction/pastBidsList/")
     Call<List<FarmerActiveBidListResponse>> getPastBidsList(@Header("Authorization") String token);
@@ -110,6 +109,6 @@ public interface APIServices {
     @POST("transaction/farmerPlaceBid/")
     Call<Boolean> farmerPlaceBid(@Header("Authorization") String token, @Body FarmerPlaceBidPayload payload);
 
-//    @GET("transaction/approveBid/")
-//    Call<SignupPayload> approveBid();
+    @GET("transaction/approveBid/{id}/")
+    Call<String> approveBid(@Header("Authorization") String token, @Path("id") String id);
 }
