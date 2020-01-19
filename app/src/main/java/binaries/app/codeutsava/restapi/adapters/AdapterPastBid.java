@@ -1,6 +1,8 @@
 package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.activites.ActivityBuyerBidDetail;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 
 public class AdapterPastBid extends RecyclerView.Adapter<AdapterPastBid.ViewHolder> {
@@ -49,6 +52,28 @@ public class AdapterPastBid extends RecyclerView.Adapter<AdapterPastBid.ViewHold
                 holder.isActive.setText("Inactive");
             }
         }
+        holder.deadline.setText(bid.deadline);
+        holder.foodgrain.setText(bid.type.type);
+        holder.quantity.setText(bid.quantity);
+        holder.transno.setText(bid.transno);
+
+        if(bid.isActive=="false"){
+            holder.itemView.setBackgroundColor(
+                    activity.getResources().getColor(R.color.colorAccent)
+            );
+            return;
+        }
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(activity,ActivityBuyerBidDetail.class);
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("bid", bid);
+            intent.putExtras(bundle);
+
+            activity.getBaseContext().startActivity(intent);
+            activity.finish();
+        });
     }
 
     @Override
