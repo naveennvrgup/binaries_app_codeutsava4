@@ -48,63 +48,61 @@ public class AdapterFarmerBids extends RecyclerView.Adapter<AdapterFarmerBids.Vi
         FarmerActiveBidListResponse bid = bids.get(position);
 
         holder.foodgrain.setText(bid.type.type);
-        holder.quantity.setText(bid.quantity);
-        holder.deadline.setText(bid.deadline);
-        holder.transno.setText(bid.transno);
+        holder.quantity.setText("Quantity: " + bid.quantity);
+        holder.deadline.setText("Deadline: " + bid.deadline);
+        holder.transno.setText("TN: " + bid.transno);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                View view = LayoutInflater.from(activity).inflate(R.layout.farmer_place_bid_dialog, null);
-                builder.setView(view);
+        holder.itemView.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            View view = LayoutInflater.from(activity).inflate(R.layout.farmer_place_bid_dialog, null);
+            builder.setView(view);
 
-                TextView foodgrain, quantity, desc, deadline;
-                TextInputEditText farmer_price, farmer_desc;
+            TextView foodgrain, quantity, desc, deadline;
+            TextInputEditText farmer_price, farmer_desc;
 
-                foodgrain = view.findViewById(R.id.fdialog_foodgrain);
-                quantity = view.findViewById(R.id.fdialog_qauntity);
-                desc = view.findViewById(R.id.fdialog_desc);
-                deadline = view.findViewById(R.id.fdialog_deadline);
+            foodgrain = view.findViewById(R.id.fdialog_foodgrain);
+            quantity = view.findViewById(R.id.fdialog_qauntity);
+            desc = view.findViewById(R.id.fdialog_desc);
+            deadline = view.findViewById(R.id.fdialog_deadline);
 
-                foodgrain.setText(bid.type.type);
-                quantity.setText(bid.quantity);
-                desc.setText(bid.description);
-                deadline.setText(bid.deadline);
+            foodgrain.setText(bid.type.type);
+            quantity.setText("Quantity: " + bid.quantity);
+            desc.setText(bid.description);
+            deadline.setText("Deadline: " + bid.deadline);
 
-                farmer_price = view.findViewById(R.id.farmer_bid_edittext);
-                farmer_desc = view.findViewById(R.id.farmer_bid_description_edit_text);
+            farmer_price = view.findViewById(R.id.farmer_bid_edittext);
+            farmer_desc = view.findViewById(R.id.farmer_bid_description_edit_text);
 
-                builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+            builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
 
-                builder.setPositiveButton("Place bid", (dialog, which) -> {
-                    FarmerPlaceBidPayload payload = new FarmerPlaceBidPayload();
-                    payload.bidno = bid.id;
-                    payload.description = farmer_desc.getText().toString();
-                    payload.price = farmer_price.getText().toString();
+            builder.setPositiveButton("Place bid", (dialog, which) -> {
+                FarmerPlaceBidPayload payload = new FarmerPlaceBidPayload();
+                payload.bidno = bid.id;
+                payload.description = farmer_desc.getText().toString();
+                payload.price = farmer_price.getText().toString();
 
-                    AppClient.getInstance().createService(APIServices.class)
-                            .farmerPlaceBid(PreferenceManager.getDefaultSharedPreferences(activity).getString("token", AppConstants.TEMP_FARM_TOKEN),
-                                    payload)
+                AppClient.getInstance().createService(APIServices.class)
+                        .farmerPlaceBid(PreferenceManager.getDefaultSharedPreferences(activity).getString("token", AppConstants.TEMP_FARM_TOKEN),
+                                payload)
 
-                            .enqueue(new Callback<Boolean>() {
-                                @Override
-                                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                                    if (response.isSuccessful()) {
-                                        dialog.dismiss();
-                                        holder.itemView.setBackgroundColor(activity.getResources().getColor(R.color.colorAccent));
-                                    }
+                        .enqueue(new Callback<Boolean>() {
+                            @Override
+                            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                                if (response.isSuccessful()) {
+                                    dialog.dismiss();
+                                    holder.itemView.setBackgroundColor(activity.getResources().getColor(R.color.colorAccent));
+                                    holder.itemView.setEnabled(false);
                                 }
+                            }
 
-                                @Override
-                                public void onFailure(Call<Boolean> call, Throwable t) {
-                                    Toast.makeText(activity, t.getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            });
-                });
+                            @Override
+                            public void onFailure(Call<Boolean> call, Throwable t) {
+                                Toast.makeText(activity, t.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+            });
 
-                builder.create().show();
-            }
+            builder.create().show();
         });
     }
 

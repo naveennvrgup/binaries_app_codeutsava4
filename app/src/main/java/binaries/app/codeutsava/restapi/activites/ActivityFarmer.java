@@ -30,6 +30,7 @@ import com.anychart.graphics.vector.Stroke;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,21 +107,20 @@ public class ActivityFarmer extends AppCompatActivity {
                     Cartesian cartesian = AnyChart.line();
 
                     cartesian.animation(true);
-                    //cartesian.padding(10d, 20d, 5d, 20d);
 
                     cartesian.crosshair().enabled(true);
                     cartesian.crosshair().yLabel(true).yStroke((Stroke) null, null, null, (String) null, (String) null);
 
                     cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
-                    cartesian.title("Profit (Last Year): ");
+                    cartesian.title("Past Year Profit: ");
 
-                    cartesian.yAxis(0).title("Amount Earned");
+                    cartesian.yAxis(0).title("Amount Earned (x1000)");
                     cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
 
                     List<DataEntry> seriesData = new ArrayList<>();
 
                     for (List<String> data : graphData) {
-                        seriesData.add(new CustomDataEntry(data.get(0),
+                        seriesData.add(new CustomDataEntry(data.get(0).toUpperCase(),
                                 Double.valueOf(data.get(1)),
                                 Double.valueOf(data.get(2)),
                                 Double.valueOf(data.get(3))));

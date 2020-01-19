@@ -1,9 +1,15 @@
 package binaries.app.codeutsava.restapi.activites;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,13 +30,25 @@ public class ActivityFarmerBids extends AppCompatActivity {
     RecyclerView recyclerView;
     AdapterFarmerBids adapterFarmerBids;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmer_bids);
 
-        recyclerView = findViewById(R.id.buyer_bids_recycler);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.dashboardBg));
+        }
+
+        recyclerView = findViewById(R.id.farmer_bids_recycler);
+
+        findViewById(R.id.act_farm_bid_back).setOnClickListener(view -> {
+            Intent intent = new Intent(ActivityFarmerBids.this, ActivityFarmer.class);
+            startActivity(intent);
+            finish();
+        });
 
         getbids();
     }
