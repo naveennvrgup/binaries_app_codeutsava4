@@ -21,7 +21,7 @@
             android:padding="8dp">
 
             <ImageView
-                android:id="@+id/wareHouseIcon"
+                android:id="@+id/farm_store_ware_icon"
                 android:layout_width="66dp"
                 android:layout_height="66dp"
                 android:layout_marginStart="16dp"

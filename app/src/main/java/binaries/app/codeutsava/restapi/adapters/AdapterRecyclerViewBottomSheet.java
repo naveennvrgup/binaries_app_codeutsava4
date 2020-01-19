@@ -105,6 +105,7 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
 
                     case "My Warehouse Stores":
                         FragmentGetStoredWarehouse fragmentGetStoredWarehouse = new FragmentGetStoredWarehouse();
+                        fragmentGetStoredWarehouse.setIsWaste(false);
                         fragmentGetStoredWarehouse.show(((AppCompatActivity) activity).getSupportFragmentManager(), "getStoredWarehouse");
                         break;
 
@@ -122,6 +123,11 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
                         }
                         break;
 
+                    case "Manage Waste":
+                        FragmentGetStoredWarehouse fragmentGetStoredWarehouse2 = new FragmentGetStoredWarehouse();
+                        fragmentGetStoredWarehouse2.setIsWaste(true);
+                        fragmentGetStoredWarehouse2.show(((AppCompatActivity) activity).getSupportFragmentManager(), "getStoredWarehouse2");
+                        break;
                 }
             });
         }

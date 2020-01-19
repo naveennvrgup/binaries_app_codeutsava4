@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,17 +20,16 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import binaries.app.codeutsava.R;
-
-import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduceDetail;
 import binaries.app.codeutsava.restapi.fragments.FragmentPotentialBuyerList;
-import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
-
 import binaries.app.codeutsava.restapi.model.farmer.FarmerStorageTransactionResponse;
 
 public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<AdapterFarmerGetStoredWarehouse.ViewHolder> {
     private List<FarmerStorageTransactionResponse> produces;
     private Activity activity;
     private FragmentManager fragManager;
+    private boolean waste = false;
+    private String[] names = {"Manure Waste", "E-Waste", "Other Waste"};
+
 
     public void setFragManager(FragmentManager fragManager) {
         this.fragManager = fragManager;
@@ -59,54 +59,61 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
             holder.whDate.setText("Date: " + produce.date);
             holder.whCost.setText("Price: " + produce.cost);
 
+            if (waste) {
+                holder.image.setVisibility(View.GONE);
+                holder.whName.setText(names[position % 3]);
+                holder.whFoodgrain.setVisibility(View.GONE);
+                holder.whDate.setVisibility(View.GONE);
+                holder.whCost.setVisibility(View.GONE);
+                holder.whDeadline.setVisibility(View.GONE);
+
+                holder.itemView.setOnClickListener(view -> {
+                    FragmentPotentialBuyerList buyerSHGList = new FragmentPotentialBuyerList();
+
+                    buyerSHGList.setIsWaste(waste);
+                    buyerSHGList.show(fragManager, "SHGList");
+                });
+            }
+
             long diffDays = getDateDifference(produce.date);
-            Log.v("prod", Integer.toString(produce.fgDeadline));
-            Log.v("diff", Long.toString(diffDays));
-            //deadline before 60 days
 
             if (diffDays + 60 >= produce.fgDeadline) {
-                Log.v("case1", "case1");
+                Log.v("case1", String.valueOf(diffDays));
+
                 holder.whDeadline.setText("Grain may perish in " + (produce.fgDeadline - diffDays) + " days");
                 holder.whDeadline.setTextColor(activity.getResources().getColor(R.color.colorRed));
 
 
                 holder.itemView.setOnClickListener(v -> {
-                FarmerStorageTransactionResponse currProduceData = produces.get(position);
+                    FarmerStorageTransactionResponse currProduceData = produces.get(position);
 
-                Bundle args = new Bundle();
-                args.putSerializable("foodgrain", currProduceData.foodgrain);
+                    Bundle args = new Bundle();
+                    args.putSerializable("foodgrain", currProduceData.foodgrain);
 
-                FragmentPotentialBuyerList buyerList = new FragmentPotentialBuyerList();
-                buyerList.setArguments(args);
-                buyerList.show(fragManager, "....");
-            });
-
-
-
-
-            }
-            else {
-                Log.v("case2","case2");
-                holder.whDeadline.setVisibility(View.GONE);
-            }
-
-
-
+                    FragmentPotentialBuyerList buyerList = new FragmentPotentialBuyerList();
+                    buyerList.setArguments(args);
+                    buyerList.show(fragManager, "....");
+                });
 
             } else {
                 Log.v("case2", "case2");
                 holder.whDeadline.setVisibility(View.GONE);
             }
 
+        } else {
+            Log.v("case2", "case2");
+            holder.whDeadline.setVisibility(View.GONE);
         }
+    }
 
-
-
+    public void setIsWaste(boolean waste) {
+        this.waste = waste;
+    }
 
     private long getDateDifference(String startDate) {
         Date endDate = Calendar.getInstance().getTime();
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-DD-MM");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
             return TimeUnit.MILLISECONDS.toDays(endDate.getTime() - dateFormat.parse(startDate).getTime());
         } catch (Exception e) {
             return 0;
@@ -120,6 +127,7 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView whName, whQuantity, whCost, whDate, whFoodgrain, whDeadline;
+        ImageView image;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -130,6 +138,7 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
             whDate = itemView.findViewById(R.id.fstoredWarehouseDate);
             whQuantity = itemView.findViewById(R.id.fstoredWarehouseQuantity);
             whDeadline = itemView.findViewById(R.id.fstoredWareHouseDeadline);
+            image = itemView.findViewById(R.id.farm_store_ware_icon);
         }
     }
 }

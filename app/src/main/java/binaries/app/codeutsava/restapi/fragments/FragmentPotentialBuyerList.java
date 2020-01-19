@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
@@ -32,6 +34,7 @@ public class FragmentPotentialBuyerList extends DialogFragment {
     RecyclerView recyclerView;
     AdapterPotentialBuyerList mAdapter;
     public String foodgrain;
+    private boolean waste;
 
     public FragmentPotentialBuyerList() {
         // Required empty public constructor
@@ -59,16 +62,33 @@ public class FragmentPotentialBuyerList extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_potential_buyer, container, false);
+
         recyclerView = view.findViewById(R.id.potentialBuyerListRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
-        foodgrain = getArguments().getSerializable("foodgrain").toString();
+        if (!waste) foodgrain = getArguments().getSerializable("foodgrain").toString();
 
         view.findViewById(R.id.frag_pot_back).setOnClickListener(view1 -> dismiss());
+        ((TextView) view.findViewById(R.id.frag_pot_buy_top)).setText(waste ? "Waste Management Groups" : "Potential Buyers");
 
-        getPotentialBuyerList();
+        if (!waste)
+            getPotentialBuyerList();
+
+        else {
+            List<PotentialBuyerResponse> responses = new ArrayList<>();
+
+            responses.add(new PotentialBuyerResponse("Green Committee", "92159378623"));
+            responses.add(new PotentialBuyerResponse("R3", "99043759623"));
+            responses.add(new PotentialBuyerResponse("Mother Earth", "95392608623"));
+            responses.add(new PotentialBuyerResponse("Waste Dispatchers", "9082638623"));
+
+            mAdapter = new AdapterPotentialBuyerList(responses, getActivity());
+            mAdapter.setFragManager(getFragmentManager());
+
+            recyclerView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+        }
 
         return view;
     }
@@ -96,4 +116,7 @@ public class FragmentPotentialBuyerList extends DialogFragment {
         });
     }
 
+    public void setIsWaste(boolean waste) {
+        this.waste = waste;
+    }
 }

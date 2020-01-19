@@ -79,10 +79,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginBottom="16dp"
                     android:layout_weight="1"
-                    android:padding="8dp"
+                    android:padding="6dp"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="4dp">
 
@@ -97,9 +97,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="@font/roboto_slab"
-                            android:text="Crop Sugesstions: "
+                            android:text="Crop Suggestions: "
                             android:textColor="@android:color/black"
-                            android:textSize="14sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <androidx.recyclerview.widget.RecyclerView
@@ -112,12 +112,12 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:layout_weight="1"
-                    android:padding="8dp"
+                    android:padding="6dp"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="4dp">
 
@@ -134,7 +134,7 @@
                             android:fontFamily="@font/roboto_slab"
                             android:text="Deficit Crops: "
                             android:textColor="@android:color/black"
-                            android:textSize="14sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <androidx.recyclerview.widget.RecyclerView

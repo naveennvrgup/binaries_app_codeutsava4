@@ -71,6 +71,7 @@ public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Received Orders"));
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("My Warehouse Stores"));
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Active Bids"));
+        itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Manage Waste"));
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Log Out"));
 
         recyclerView = dialog.findViewById(R.id.recycler_farmer_sheet);
