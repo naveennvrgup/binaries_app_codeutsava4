@@ -7,6 +7,9 @@
     android:layout_marginTop="8dp"
     android:layout_marginEnd="16dp"
     android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
@@ -24,13 +27,13 @@
             android:src="@drawable/f1" />
 
         <View
-            android:layout_marginTop="12dp"
             android:id="@+id/rbo_line"
-            android:layout_marginEnd="6dp"
             android:layout_width="0.5dp"
-            android:background="@android:color/darker_gray"
+            android:layout_height="100dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="6dp"
             android:layout_toEndOf="@id/buyer_order_img"
-            android:layout_height="100dp" />
+            android:background="@android:color/darker_gray" />
 
         <TextView
             android:id="@+id/bo_trans_no"
@@ -66,16 +69,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/bo_approved"
             android:layout_marginStart="2dp"
-            android:layout_marginEnd="2dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="2dp"
             android:layout_toEndOf="@id/rbo_line"
             android:ellipsize="end"
             android:fontFamily="@font/average_sans"
             android:maxLines="1"
-            android:textStyle="bold"
             android:text="Farmer Name"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/bo_graintype"

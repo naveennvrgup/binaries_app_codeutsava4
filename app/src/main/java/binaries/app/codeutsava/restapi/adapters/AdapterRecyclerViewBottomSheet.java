@@ -138,7 +138,7 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
         return itemsList == null ? 0 : itemsList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView bottomText;
 

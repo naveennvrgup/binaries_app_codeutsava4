@@ -4,6 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="16dp"
     app:cardElevation="8dp">
 
@@ -21,21 +24,21 @@
             android:src="@drawable/f2" />
 
         <View
-            android:layout_marginTop="12dp"
             android:id="@+id/rfo_line"
             android:layout_width="0.5dp"
-            android:background="@android:color/darker_gray"
+            android:layout_height="100dp"
+            android:layout_marginTop="12dp"
             android:layout_toEndOf="@id/fo_img"
-            android:layout_height="100dp" />
+            android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:id="@+id/fro_lay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:paddingLeft="4dp"
             android:layout_toEndOf="@+id/rfo_line"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="4dp">
 
             <TextView
                 android:id="@+id/fo_trans_no"

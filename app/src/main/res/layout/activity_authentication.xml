@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBEBEF">
+    android:background="#EBEBEF"
+    android:paddingTop="24dp">
 
     <LinearLayout
         android:id="@+id/auth_top"
