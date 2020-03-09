@@ -34,31 +34,31 @@ import retrofit2.http.Path;
 
 public interface APIServices {
 
-    @POST(AppConstants.LOGIN_URL)
+    @POST("user/rest-auth/login/")
     Call<LoginResponse> sendLoginRequest(@Body LoginPayload loginPayload);
 
     @POST("transaction/placeOrder/")
     Call<PlaceOrderResponse> placeOrderRequest(@Header("Authorization") String token, @Body PlaceOrderPayload payload);
 
-    @GET(AppConstants.FARMER_DETAIL_URL)
+    @GET("user/farmer-detail/")
     Call<FarmerDetailResponse> getUserDetail(@Header("Authorization") String token);
 
-    @GET(AppConstants.FARMER_BID_LIST_URL)
+    @GET("transaction/active_bid/")
     Call<List<FarmerActiveBidListResponse>> getActiveBidList(@Header("Authorization") String token);
 
-    @GET(AppConstants.FARMER_PRODUCE_LIST_URL)
+    @GET("transaction/produce/")
     Call<List<FarmerProduceResponse>> getFarmerProduceList(@Header("Authorization") String token);
 
-    @GET(AppConstants.FARMER_FIND_WAREHOUSE_LIST_URL + "/{quantity}" + "/{produceid}")
+    @GET("user/findWarehouse" + "/{quantity}" + "/{produceid}")
     Call<FarmerFindWarehouseResponse> getFarmerFindWarehouseList(@Header("Authorization") String token, @Path("quantity") String quantity, @Path("produceid") String produceid);
 
-    @POST(AppConstants.FARMER_REPORT_PRODUCE_URL)
+    @POST("transaction/report_produce/")
     Call<FarmerProduceResponse> postFarmerProduce(@Header("Authorization") String token, @Body ReportProducePayload reportProducePayload);
 
-    @GET(AppConstants.BUYER_FOODGRAIN_LIST_URL)
+    @GET("user/foodgrains/")
     Call<List<BuyerFoodgrainResponse>> getBuyerFoodgrainList(@Header("Authorization") String token);
 
-    @GET(AppConstants.BUYER_FOODGRAIN_LIST_URL + "{id}/")
+    @GET("user/foodgrains/" + "{id}/")
     Call<List<FarmerResponse>> getBuyerFarmerList(@Header("Authorization") String token, @Path("id") int id);
 
     @GET("transaction/buyerOrders/")
@@ -76,7 +76,7 @@ public interface APIServices {
     @GET("transaction/getFarmerStoredWarehouse")
     Call<List<FarmerStorageTransactionResponse>> getFarmerStorageTransaction(@Header("Authorization") String token);
 
-    @POST(AppConstants.CREATE_STORAGE_TRANSACTION_URL)
+    @POST("transaction/storagetransaction/")
     Call<FarmerWarehouseTransactionResponse> postStorageTransaction(@Header("Authorization") String token, @Body FarmerWarehouseTransactionPayload farmerWarehouseTransactionPayload);
 
     @GET("transaction/getFarmerStoredWarehouse")
@@ -88,10 +88,10 @@ public interface APIServices {
     @POST("user/")
     Call<SignupPayload> sendSignupRequest(@Header("Authorization") String token, @Body SignupPayload payload);
 
-    @GET(AppConstants.GRAPH_URL)
+    @GET("transaction/farmerDashboardGraph/")
     Call<List<List<String>>> getGraphDetails(@Header("Authorization") String token);
 
-    @GET(AppConstants.FARMER_RECOMMENDATION_URL)
+    @GET("user/getFarmerAI/")
     Call<FarmerDashboardRecommedationResponse> getFarmerRecommendation(@Header("Authorization") String token);
 
     @POST("/transaction/createBid/")
