@@ -2,6 +2,7 @@ package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.Slide;
 
 import java.util.List;
 
@@ -39,7 +41,9 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.recyclerview_bottom_sheet, null);
+        View view = LayoutInflater.from(activity).inflate(R.layout.recyclerview_bottom_sheet, parent, false);
+        RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        view.setLayoutParams(lp);
         return new MyViewHolder(view);
     }
 
@@ -87,11 +91,15 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
                     // FARMER PRODUCE
                     case "Report Produce":
                         FragmentFarmerFoodGrainList fragmentFarmerFoodGrainList = new FragmentFarmerFoodGrainList();
+                        fragmentFarmerFoodGrainList.setEnterTransition(new Slide(Gravity.RIGHT));
+                        fragmentFarmerFoodGrainList.setExitTransition(new Slide(Gravity.LEFT));
                         fragmentFarmerFoodGrainList.show(((AppCompatActivity) activity).getSupportFragmentManager(), "farmerReportProduce");
                         break;
 
                     case "My Produce":
                         FragmentFarmerProduce frag = new FragmentFarmerProduce();
+                        frag.setEnterTransition(new Slide(Gravity.END));
+                        frag.setExitTransition(new Slide(Gravity.START));
                         frag.show(((AppCompatActivity) activity).getSupportFragmentManager(), "farmerProduce");
                         break;
 
@@ -105,6 +113,8 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
 
                     case "My Warehouse Stores":
                         FragmentGetStoredWarehouse fragmentGetStoredWarehouse = new FragmentGetStoredWarehouse();
+                        fragmentGetStoredWarehouse.setEnterTransition(new Slide(Gravity.END));
+                        fragmentGetStoredWarehouse.setExitTransition(new Slide(Gravity.START));
                         fragmentGetStoredWarehouse.show(((AppCompatActivity) activity).getSupportFragmentManager(), "getStoredWarehouse");
                         break;
 
@@ -115,7 +125,7 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
                         }
                         break;
 
-                    case "Active Bids":
+                    case "Bulk Orders":
                         if (!(activity instanceof ActivityFarmerBids)) {
                             myIntent = new Intent(activity, ActivityFarmerBids.class);
                             activity.startActivity(myIntent);

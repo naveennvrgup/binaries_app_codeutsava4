@@ -3,14 +3,17 @@ package binaries.app.codeutsava.restapi.adapters;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.Slide;
 
 import java.util.List;
 
@@ -35,8 +38,9 @@ public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHold
     @NonNull
     @Override
     public AdapterProduce.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.farmer_produce_row, null);
-
+        View view = LayoutInflater.from(activity).inflate(R.layout.farmer_produce_row, parent, false);
+        RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        view.setLayoutParams(params);
         return new ViewHolder(view);
     }
 
@@ -50,6 +54,8 @@ public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHold
             holder.fgPrice.setText(Html.fromHtml("<b>₹:  </b>" + produce.price));
             holder.fgDate.setText(Html.fromHtml("<b>Date: </b>" + produce.date));
 
+            // TODO: Add dynamic image loading from APIs URLs
+
             holder.itemView.setOnClickListener(v -> {
                 FarmerProduceResponse currProduceData = produces.get(position);
 
@@ -57,6 +63,8 @@ public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHold
                 args.putSerializable("produce", currProduceData);
 
                 FragmentFarmerProduceDetail produceDetail = new FragmentFarmerProduceDetail();
+                produceDetail.setEnterTransition(new Slide(Gravity.END));
+                produceDetail.setExitTransition(new Slide(Gravity.START));
                 produceDetail.setArguments(args);
                 produceDetail.show(fragManager, "....");
             });
@@ -70,6 +78,7 @@ public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHold
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView fgName, fgPrice, fgGrade, fgDate;
+        ImageView fgImage;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +87,7 @@ public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHold
             fgPrice = itemView.findViewById(R.id.food_prod_row_price);
             fgGrade = itemView.findViewById(R.id.food_prod_row_grade);
             fgDate = itemView.findViewById(R.id.food_prod_row_date);
+            fgImage = itemView.findViewById(R.id.food_prod_row_img);
         }
     }
 }

@@ -3,8 +3,10 @@ package binaries.app.codeutsava.restapi.activites;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +30,7 @@ import retrofit2.Response;
 public class ActivityFarmerOrders extends BaseActivity {
     AdapterFarmerOrder mAdapter;
     RecyclerView recyclerView;
+    TextView recOrdEmptyText;
 
     @Override
     protected int getLayoutResID() {
@@ -45,6 +48,8 @@ public class ActivityFarmerOrders extends BaseActivity {
             startActivity(myIntent);
             finish();
         });
+
+        recOrdEmptyText = findViewById(R.id.farm_ord_empty_text);
 
         fetchOrders();
     }
@@ -65,11 +70,15 @@ public class ActivityFarmerOrders extends BaseActivity {
                     recyclerView.setLayoutManager(new LinearLayoutManager(ActivityFarmerOrders.this));
                     mAdapter.notifyDataSetChanged();
                 }
+
+                if(!response.isSuccessful() || response.body() == null)
+                    recOrdEmptyText.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailure(Call<List<BuyerOrderListResponse>> call, Throwable t) {
                 Toast.makeText(ActivityFarmerOrders.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                recOrdEmptyText.setVisibility(View.VISIBLE);
             }
         });
     }

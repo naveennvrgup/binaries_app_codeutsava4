@@ -60,9 +60,9 @@ public class FragmentFarmerProduceDetail extends DialogFragment {
             // setting the texts
             producePrice.setText("Price: " + produce.price);
             produceDate.setText("Date: " + produce.date);
-            produceFoodgrain.setText("FoodGrain: " + produce.type.type);
+            produceFoodgrain.setText("Foodgrain: " + produce.type.type);
             produceGrade.setText("Grade: " + produce.grade);
-            produceQuantity.setText("Quantity: " + produce.quantity);
+            produceQuantity.setText("Qty: " + produce.quantity);
         }
 
         productDetailView.findViewById(R.id.frag_far_prod_det_back).setOnClickListener(view -> dismiss());

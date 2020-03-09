@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -33,9 +36,9 @@ import retrofit2.Response;
 public class FragmentFarmerProduce extends DialogFragment {
     private RecyclerView recyclerView;
     private AdapterProduce mAdapter;
+    private TextView farmProdEmptyText;
 
     public FragmentFarmerProduce() {
-        // Required empty public constructor
     }
 
     @Override
@@ -59,14 +62,14 @@ public class FragmentFarmerProduce extends DialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_farmer_produce, container, false);
         recyclerView = view.findViewById(R.id.farmerProduceListRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
         view.findViewById(R.id.frag_far_prod_back).setOnClickListener(view1 -> dismiss());
+        farmProdEmptyText = view.findViewById(R.id.farm_prod_empty_text);
 
         getFarmerProduceList();
 
@@ -88,11 +91,15 @@ public class FragmentFarmerProduce extends DialogFragment {
                     recyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
                 }
+
+                if(!response.isSuccessful() || response.body() == null)
+                    farmProdEmptyText.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailure(Call<List<FarmerProduceResponse>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                farmProdEmptyText.setVisibility(View.VISIBLE);
             }
         });
     }

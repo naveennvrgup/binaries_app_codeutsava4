@@ -50,7 +50,7 @@ public class AdapterFarmerFoodgrainList extends RecyclerView.Adapter<AdapterFarm
         imgs.add(activity.getResources().getDrawable(R.drawable.f5));
 
 
-        return new AdapterFarmerFoodgrainList.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -81,10 +81,10 @@ public class AdapterFarmerFoodgrainList extends RecyclerView.Adapter<AdapterFarm
 
     @Override
     public int getItemCount() {
-        return ldata.size();
+        return ldata == null ? 0 : ldata.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView name, price;
         public ImageView foogImg;
 

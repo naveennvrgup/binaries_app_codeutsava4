@@ -19,7 +19,7 @@
             android:id="@+id/frag_far_prod_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/arrow" />
 
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_slab"
-            android:text="Your Produce"
+            android:text="My Produce"
             android:textColor="#F0F0F4"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -38,8 +38,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        android:background="@drawable/drawble_buyer_main">
+        android:background="@drawable/drawble_buyer_main"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/farm_prod_empty_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="48dp"
+            android:padding="4dp"
+            android:text="No Produce is reported by you till now.\nAdd grains to show things here."
+            android:textColor="@android:color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/farmerProduceListRecyclerView"

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,7 @@ import retrofit2.Response;
 public class ActivityFarmerBids extends BaseActivity {
     RecyclerView recyclerView;
     AdapterFarmerBids adapterFarmerBids;
+    TextView farmBulkOrdEmptyT;
 
     @Override
     protected int getLayoutResID() {
@@ -40,6 +42,7 @@ public class ActivityFarmerBids extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         recyclerView = findViewById(R.id.farmer_bids_recycler);
+        farmBulkOrdEmptyT = findViewById(R.id.farm_bulk_ord_empty_text);
 
         findViewById(R.id.act_farm_bid_back).setOnClickListener(view -> {
             Intent intent = new Intent(ActivityFarmerBids.this, ActivityFarmer.class);
@@ -62,11 +65,15 @@ public class ActivityFarmerBids extends BaseActivity {
                             recyclerView.setLayoutManager(new LinearLayoutManager(ActivityFarmerBids.this));
                             adapterFarmerBids.notifyDataSetChanged();
                         }
+
+                        if(!response.isSuccessful() || response.body() == null)
+                            farmBulkOrdEmptyT.setVisibility(View.VISIBLE);
                     }
 
                     @Override
                     public void onFailure(Call<List<FarmerActiveBidListResponse>> call, Throwable t) {
                         Toast.makeText(ActivityFarmerBids.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                        farmBulkOrdEmptyT.setVisibility(View.VISIBLE);
                     }
                 });
     }

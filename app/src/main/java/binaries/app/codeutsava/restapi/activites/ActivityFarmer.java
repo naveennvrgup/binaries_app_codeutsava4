@@ -51,7 +51,7 @@ public class ActivityFarmer extends BaseActivity {
     RecyclerView recommendationsRecycler, defRecycler;
     AdapterFarmerRecommendation rAdapter, dAdapter;
 
-    TextView csEmptyText, rsEmptyText;
+    TextView csEmptyText, rsEmptyText, graphEmptyText;
 
     @Override
     protected int getLayoutResID() {
@@ -73,6 +73,7 @@ public class ActivityFarmer extends BaseActivity {
 
         csEmptyText = findViewById(R.id.cs_empty_text);
         rsEmptyText = findViewById(R.id.rs_empty_text);
+        graphEmptyText = findViewById(R.id.graph_empty_text);
 
         recommendationsRecycler = findViewById(R.id.recycler_recommend_rec);
         recommendationsRecycler.setLayoutManager(new LinearLayoutManager(this));
@@ -157,11 +158,18 @@ public class ActivityFarmer extends BaseActivity {
                     chartView.setChart(cartesian);
                     chartView.setZoomEnabled(true);
                 }
+
+                if(!response.isSuccessful() || response.body() == null){
+                    findViewById(R.id.graph_progress).setVisibility(View.GONE);
+                    graphEmptyText.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
             public void onFailure(Call<List<List<String>>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "GetGraph Call Failed.", Toast.LENGTH_LONG).show();
+                graphEmptyText.setVisibility(View.VISIBLE);
+                findViewById(R.id.graph_progress).setVisibility(View.GONE);
             }
         });
     }
