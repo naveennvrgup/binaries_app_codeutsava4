@@ -28,9 +28,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.ViewHolder> {
-    List<BuyerOrderListResponse> orders;
-    Activity activity;
-    FragmentManager fragmentManager;
+    private List<BuyerOrderListResponse> orders;
+    private Activity activity;
+    private FragmentManager fragmentManager;
 
     public AdapterFarmerOrder(List<BuyerOrderListResponse> orders, Activity activity, FragmentManager fragmentManager) {
         this.orders = orders;
@@ -51,14 +51,14 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
         BuyerOrderListResponse orderListResponse = orders.get(position);
 
         holder.buyer.setText(orderListResponse.buyer);
-        holder.quantity.setText("Quantity: " + orderListResponse.quantity);
-        holder.price.setText("Price: " + orderListResponse.price);
+        holder.quantity.setText("Qty: " + orderListResponse.quantity);
+        holder.price.setText("₹: " + orderListResponse.price);
         holder.foodgraintype.setText(orderListResponse.foodgraintype);
-        holder.transno.setText("TN: " + orderListResponse.transno);
+        holder.transno.setText("ID: " + orderListResponse.transno);
 
         if (orderListResponse.approved) {
             holder.approved.setTextColor(activity.getResources().getColor(R.color.colorGreen));
-            holder.approved.setText("Transaction Approved");
+            holder.approved.setText("Approved");
             holder.layout.setVisibility(View.GONE);
         } else {
             holder.approved.setTextColor(activity.getResources().getColor(R.color.colorYellow));
@@ -127,7 +127,7 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
         return orders.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView buyer, quantity, price, foodgraintype, transno, approved;
         Button approve, reject;
         LinearLayout layout;

@@ -70,7 +70,7 @@ public class AdapterBuyerTop extends RecyclerView.Adapter<AdapterBuyerTop.MyView
         return items.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         CardView buyerMainCard;
         TextView buyerText;
         View view;

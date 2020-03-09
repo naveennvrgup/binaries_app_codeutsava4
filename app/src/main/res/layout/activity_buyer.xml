@@ -25,7 +25,7 @@
             android:layout_toEndOf="@id/buyer_menu_icon"
             android:fontFamily="@font/roboto_slab"
             android:text="Home"
-            android:textColor="@android:color/white"
+            android:textColor="#EBEBEF"
             android:textSize="24sp"
             android:textStyle="bold" />
 

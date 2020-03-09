@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="120dp"
                 android:layout_marginEnd="24dp"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="2dp">
@@ -62,7 +62,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/gradient_button"
                     android:text="Approve"
-                    android:textColor="@android:color/white" />
+                    android:textColor="#EBEBEF" />
             </androidx.cardview.widget.CardView>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

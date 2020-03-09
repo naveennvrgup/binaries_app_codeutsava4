@@ -24,9 +24,7 @@ import retrofit2.Response;
 
 public class FarmerOrderAcceptDialog extends Dialog {
 
-    public Activity c;
-    public Dialog d;
-    public Button fromproduce, fromwarehouse;
+    private Button fromproduce, fromwarehouse;
     AdapterFarmerOrder adapterFarmerOrder;
     OnCustomClickListener onCustomClickListener;
 
@@ -41,7 +39,6 @@ public class FarmerOrderAcceptDialog extends Dialog {
     public FarmerOrderAcceptDialog(Activity a, List<BuyerOrderListResponse> orders, int order_id, int position, AdapterFarmerOrder adapterFarmerOrder) {
         super(a);
 
-        this.c = a;
         this.adapterFarmerOrder = adapterFarmerOrder;
     }
 

@@ -38,8 +38,8 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentGetStoredWarehouse extends DialogFragment {
-    RecyclerView recyclerView;
-    AdapterFarmerGetStoredWarehouse mAdapter;
+    private RecyclerView recyclerView;
+    private AdapterFarmerGetStoredWarehouse mAdapter;
 
     private List<FarmerStorageTransactionResponse> negData = new ArrayList<>();
     private List<FarmerStorageTransactionResponse> posData = new ArrayList<>();

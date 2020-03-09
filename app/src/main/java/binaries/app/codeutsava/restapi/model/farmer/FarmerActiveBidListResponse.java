@@ -13,11 +13,11 @@ public class FarmerActiveBidListResponse implements Serializable {
     public Buyer buyer;
     public Type type;
 
-    public class Type implements  Serializable{
+    public static class Type implements Serializable{
         public String type;
     }
 
-    public class Buyer implements  Serializable{
+    public static class Buyer implements Serializable{
 
         public String name;
         public String contact;
@@ -33,7 +33,6 @@ public class FarmerActiveBidListResponse implements Serializable {
                     ", state='" + state + '\'' +
                     '}';
         }
-
     }
 
     @Override
@@ -49,6 +48,4 @@ public class FarmerActiveBidListResponse implements Serializable {
                 ", buyer=" + buyer +
                 '}';
     }
-
-
 }

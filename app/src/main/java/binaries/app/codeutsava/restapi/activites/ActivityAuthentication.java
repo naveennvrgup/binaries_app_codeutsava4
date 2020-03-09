@@ -3,19 +3,17 @@ package binaries.app.codeutsava.restapi.activites;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.preference.PreferenceManager;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -34,10 +32,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityAuthentication extends AppCompatActivity {
+public class ActivityAuthentication extends BaseActivity {
+
     private ScrollView signInScrollView, signUpScrollView;
     private TextView textSignIn, textSignUp;
-    private CardView authProceed;
     private Button authDropDown, authProceedButton;
     private boolean showSignup = true;
     private TextInputEditText signupname, signInContact, signInPass;
@@ -46,9 +44,13 @@ public class ActivityAuthentication extends AppCompatActivity {
     private Map<String, String> usertypechoices;
 
     @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_authentication;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_authentication);
 
         initViews();
         setUpOnClickListeners();
@@ -61,7 +63,6 @@ public class ActivityAuthentication extends AppCompatActivity {
         textSignIn = findViewById(R.id.auth_text_sign_in);
         textSignUp = findViewById(R.id.auth_text_sign_up);
 
-        authProceed = findViewById(R.id.auth_proceed);
         authProceedButton = findViewById(R.id.auth_proceed_btn);
 
         signupname = findViewById(R.id.signupname);

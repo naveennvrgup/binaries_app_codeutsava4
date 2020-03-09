@@ -2,14 +2,11 @@ package binaries.app.codeutsava.restapi.activites;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.preference.PreferenceManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -25,15 +22,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityBuyerBidDetail extends AppCompatActivity {
+public class ActivityBuyerBidDetail extends BaseActivity {
     TextView foodgrain, desc, quantity, transno, deadline;
     RecyclerView recyclerView;
     AdapterBuyerPlacedBid adapterBuyerPlacedBid;
 
     @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_buyer_bid_detail;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buyer_bid_detail);
 
         foodgrain = findViewById(R.id.bdetail_foodgrain);
         desc = findViewById(R.id.bdetail_description);

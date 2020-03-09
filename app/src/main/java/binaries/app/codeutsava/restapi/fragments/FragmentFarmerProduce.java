@@ -31,8 +31,8 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentFarmerProduce extends DialogFragment {
-    RecyclerView recyclerView;
-    AdapterProduce mAdapter;
+    private RecyclerView recyclerView;
+    private AdapterProduce mAdapter;
 
     public FragmentFarmerProduce() {
         // Required empty public constructor

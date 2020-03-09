@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_slab"
             android:text="Place Bid"
-            android:textColor="@android:color/white"
+            android:textColor="#EBEBEF"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>

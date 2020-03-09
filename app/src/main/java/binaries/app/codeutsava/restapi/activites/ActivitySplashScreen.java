@@ -2,18 +2,21 @@ package binaries.app.codeutsava.restapi.activites;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-
 import binaries.app.codeutsava.R;
 
-public class ActivitySplashScreen extends AppCompatActivity {
+public class ActivitySplashScreen extends BaseActivity {
+
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_splash_screen;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
 
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("logged_in", false))
             goToDash(PreferenceManager.getDefaultSharedPreferences(this).getString("role", ""));

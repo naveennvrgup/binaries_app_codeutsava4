@@ -25,24 +25,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityFarmerOrders extends AppCompatActivity {
+public class ActivityFarmerOrders extends BaseActivity {
     AdapterFarmerOrder mAdapter;
     RecyclerView recyclerView;
 
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_farmer_orders;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_farmer_orders);
 
         recyclerView = findViewById(R.id.FO_recycler);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.dashboardBg));
-        }
 
         findViewById(R.id.farm_ord_back).setOnClickListener(view -> {
             Intent myIntent = new Intent(ActivityFarmerOrders.this, ActivityFarmer.class);

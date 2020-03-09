@@ -31,8 +31,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public  class  FragmentFarmerReportProduce extends DialogFragment {
-    TextView reportProduceSubmit;
-    TextInputEditText reportProducePrice, reportProduceQuantity, reportProduceGrade;
+    private TextView reportProduceSubmit;
+    private TextInputEditText reportProducePrice, reportProduceQuantity, reportProduceGrade;
 
     public FragmentFarmerReportProduce() {
 
@@ -50,7 +50,7 @@ public  class  FragmentFarmerReportProduce extends DialogFragment {
 
         Dialog dialog = getDialog();
 
-        if (dialog != null) {
+        if (dialog != null && dialog.getWindow() != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
 

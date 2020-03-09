@@ -29,9 +29,9 @@ import retrofit2.Response;
 import static android.view.View.GONE;
 
 public class FragmentFarmerFoodGrainList extends DialogFragment {
-    RecyclerView recyclerView;
-    AdapterFarmerFoodgrainList mAdapter;
-    ProgressBar progressBar;
+    private RecyclerView recyclerView;
+    private AdapterFarmerFoodgrainList mAdapter;
+    private ProgressBar progressBar;
 
     public FragmentFarmerFoodGrainList() {
     }

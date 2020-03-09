@@ -31,8 +31,8 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentPotentialBuyerList extends DialogFragment {
-    RecyclerView recyclerView;
-    AdapterPotentialBuyerList mAdapter;
+    private RecyclerView recyclerView;
+    private AdapterPotentialBuyerList mAdapter;
     public String foodgrain;
     private boolean waste;
 

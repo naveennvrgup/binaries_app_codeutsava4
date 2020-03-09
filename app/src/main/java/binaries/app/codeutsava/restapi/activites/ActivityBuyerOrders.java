@@ -3,6 +3,7 @@ package binaries.app.codeutsava.restapi.activites;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -10,9 +11,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,24 +30,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityBuyerOrders extends AppCompatActivity {
+public class ActivityBuyerOrders extends BaseActivity {
     private RecyclerView recyclerView;
     private AdapterBuyerOrder mAdapter;
     private ImageView menu;
     private ProgressBar progressBar;
 
     @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_buyer_orders;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buyer_orders);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.dashboardBg));
-        }
-
 
         recyclerView = findViewById(R.id.bo_recycler);
         progressBar = findViewById(R.id.act_buy_order_progress);

@@ -32,22 +32,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityBuyerBidsList extends AppCompatActivity {
+public class ActivityBuyerBidsList extends BaseActivity {
     FloatingActionButton createBidBtn;
     RecyclerView recyclerView;
     AdapterPastBid adapterPastBid;
 
     @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_buyer_bids_list;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buyer_bids_list);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.dashboardBg));
-        }
 
         recyclerView = findViewById(R.id.buyer_bids_recycler);
         createBidBtn = findViewById(R.id.createbidbutton);

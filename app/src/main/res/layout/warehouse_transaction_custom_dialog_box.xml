@@ -162,7 +162,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/gradient_button"
                     android:text="YES"
-                    android:textColor="@android:color/white" />
+                    android:textColor="#EBEBEF" />
 
             </androidx.cardview.widget.CardView>
 
@@ -179,7 +179,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/gradient_button"
                     android:text="NO"
-                    android:textColor="@android:color/white" />
+                    android:textColor="#EBEBEF" />
 
             </androidx.cardview.widget.CardView>
         </LinearLayout>

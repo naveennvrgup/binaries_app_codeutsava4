@@ -25,7 +25,7 @@
             android:layout_toEndOf="@id/far_food_list_back"
             android:fontFamily="@font/roboto_slab"
             android:text="Foodgrain List"
-            android:textColor="@android:color/white"
+            android:textColor="#EBEBEF"
             android:textSize="28sp"
             android:textStyle="bold" />
 

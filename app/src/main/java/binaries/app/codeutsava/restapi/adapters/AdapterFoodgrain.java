@@ -24,17 +24,16 @@ import binaries.app.codeutsava.restapi.fragments.FragmentBuyerFoodgrainDetail;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 
 public class AdapterFoodgrain extends RecyclerView.Adapter<AdapterFoodgrain.ViewHolder> {
-    Activity activity;
-    List<BuyerFoodgrainResponse> ldata;
-    List<Drawable> imgs;
-    FragmentManager fragmentManager;
+    private Activity activity;
+    private List<BuyerFoodgrainResponse> ldata;
+    private List<Drawable> imgs;
+    private FragmentManager fragmentManager;
 
     public AdapterFoodgrain(Activity activity, List<BuyerFoodgrainResponse> ldata, FragmentManager fragmentManager) {
         this.activity = activity;
         this.ldata = ldata;
         this.fragmentManager = fragmentManager;
         imgs = new ArrayList<>();
-
     }
 
     @NonNull
@@ -54,7 +53,7 @@ public class AdapterFoodgrain extends RecyclerView.Adapter<AdapterFoodgrain.View
         imgs.add(activity.getResources().getDrawable(R.drawable.f10));
         imgs.add(activity.getResources().getDrawable(R.drawable.f11));
 
-        return new AdapterFoodgrain.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -91,7 +90,7 @@ public class AdapterFoodgrain extends RecyclerView.Adapter<AdapterFoodgrain.View
         return (ldata == null) ? 0 : ldata.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView name;
         private ImageView foodImg;
 

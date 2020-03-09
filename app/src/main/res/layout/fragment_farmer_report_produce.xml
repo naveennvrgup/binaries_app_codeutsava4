@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_slab"
             android:text="Enter Details"
-            android:textColor="@android:color/white"
+            android:textColor="#EBEBEF"
             android:textSize="28sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -107,7 +107,7 @@
                 android:background="@drawable/gradient_button"
                 android:fontFamily="@font/roboto_slab"
                 android:text="SUBMIT"
-                android:textColor="@android:color/white"
+                android:textColor="#EBEBEF"
                 android:textStyle="bold" />
 
         </androidx.cardview.widget.CardView>

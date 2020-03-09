@@ -26,21 +26,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityFarmerBids extends AppCompatActivity {
+public class ActivityFarmerBids extends BaseActivity {
     RecyclerView recyclerView;
     AdapterFarmerBids adapterFarmerBids;
 
     @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_farmer_bids;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_farmer_bids);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.dashboardBg));
-        }
 
         recyclerView = findViewById(R.id.farmer_bids_recycler);
 

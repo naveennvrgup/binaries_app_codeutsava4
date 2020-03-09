@@ -30,18 +30,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CustomDialogClass extends Dialog implements android.view.View.OnClickListener {
-    public Activity c;
     public Bundle bundle;
     public Dialog d;
-    public Button yes, no;
-    public int whid, produce_id;
+    private Button yes, no;
+    private int whid, produce_id;
     TextView whPriceText, whDistanceText, whCentreText, whSectorText, whOwnerText, whAvailText, whNameText;
     TextInputEditText produceQuantity;
 
     public CustomDialogClass(Activity a, Bundle bundle) {
         super(a);
-
-        this.c = a;
         this.bundle = bundle;
     }
 
@@ -115,9 +112,12 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
                     }
                 });
 
-                Intent i = new Intent(c, ActivityFarmer.class);
-                c.startActivity(i);
-                c.finish();
+                if(getOwnerActivity() != null){
+                    Intent i = new Intent(getOwnerActivity(), ActivityFarmer.class);
+                    getOwnerActivity().startActivity(i);
+                    getOwnerActivity().finish();
+                }
+
                 break;
 
             case R.id.btnCancelWarehouseTransaction:
