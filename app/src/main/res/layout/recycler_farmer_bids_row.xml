@@ -9,8 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:clickable="true"
-        android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp">
@@ -28,6 +26,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:src="@drawable/corn_icon" />
+
+            <View
+                android:layout_toEndOf="@id/far_bid_ico"
+                android:layout_width="0.5dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/darker_gray" />
 
             <LinearLayout
                 android:layout_width="match_parent"

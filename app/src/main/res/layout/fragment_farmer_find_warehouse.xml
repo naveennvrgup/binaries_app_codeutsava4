@@ -21,7 +21,7 @@
         android:layout_toEndOf="@id/find_ware_back"
         android:fontFamily="@font/roboto_slab"
         android:text="Suggested Warehouses"
-        android:textColor="#EBEBEF"
+        android:textColor="#F0F0F4"
         android:textSize="20sp"
         android:textStyle="bold" />
 

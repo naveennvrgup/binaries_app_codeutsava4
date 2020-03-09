@@ -7,5 +7,5 @@
 
     <padding android:top="8dp" />
 
-    <solid android:color="#EBEBEF" />
+    <solid android:color="#F0F0F4" />
 </shape>

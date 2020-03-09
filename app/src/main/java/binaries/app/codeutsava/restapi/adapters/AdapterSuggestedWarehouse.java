@@ -42,7 +42,7 @@ public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSugge
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.recyclerview_suggested_warehouse, parent, false);
 
-        return new AdapterSuggestedWarehouse.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSugge
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView warehouseName;
         TextView warehouseCost;
         TextView warehouseDist;

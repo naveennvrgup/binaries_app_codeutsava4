@@ -42,6 +42,7 @@ public class ActivityAuthentication extends BaseActivity {
     private TextInputEditText signuppassword;
     private TextInputEditText signupcontact;
     private Map<String, String> usertypechoices;
+    private CardView authProceedLay;
 
     @Override
     protected int getLayoutResID() {
@@ -64,6 +65,7 @@ public class ActivityAuthentication extends BaseActivity {
         textSignUp = findViewById(R.id.auth_text_sign_up);
 
         authProceedButton = findViewById(R.id.auth_proceed_btn);
+        authProceedLay = findViewById(R.id.auth_proceed);
 
         signupname = findViewById(R.id.signupname);
         signupcontact = findViewById(R.id.signupcontact);
@@ -84,6 +86,8 @@ public class ActivityAuthentication extends BaseActivity {
         authProceedButton.setOnClickListener(v -> {
             if (showSignup) dosignupcall();
             else dologincall();
+
+            authProceedLay.setVisibility(View.GONE);
         });
     }
 
@@ -110,6 +114,9 @@ public class ActivityAuthentication extends BaseActivity {
 
                 } else {
                     Toast.makeText(ActivityAuthentication.this, "login failed", Toast.LENGTH_LONG).show();
+
+                    if(authProceedLay.getVisibility() == View.GONE)
+                        authProceedLay.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -117,6 +124,9 @@ public class ActivityAuthentication extends BaseActivity {
             @Override
             public void onFailure(Call<SignupPayload> call, Throwable t) {
                 Toast.makeText(ActivityAuthentication.this, t.getMessage(), Toast.LENGTH_LONG).show();
+
+                if(authProceedLay.getVisibility() == View.GONE)
+                    authProceedLay.setVisibility(View.VISIBLE);
             }
         });
 
@@ -186,12 +196,18 @@ public class ActivityAuthentication extends BaseActivity {
 
                 } else {
                     Toast.makeText(ActivityAuthentication.this, "login failed", Toast.LENGTH_LONG).show();
+
+                    if(authProceedButton.getVisibility() == View.GONE)
+                        authProceedButton.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 Toast.makeText(ActivityAuthentication.this, t.getMessage(), Toast.LENGTH_LONG).show();
+
+                if(authProceedButton.getVisibility() == View.GONE)
+                    authProceedButton.setVisibility(View.VISIBLE);
             }
         });
     }

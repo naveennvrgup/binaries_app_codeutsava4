@@ -77,12 +77,14 @@ public class FragmentFarmerFoodGrainList extends DialogFragment {
         call.enqueue(new Callback<List<BuyerFoodgrainResponse>>() {
             @Override
             public void onResponse(Call<List<BuyerFoodgrainResponse>> call, Response<List<BuyerFoodgrainResponse>> response) {
-                mAdapter = new AdapterFarmerFoodgrainList(getActivity(), response.body(), getActivity().getSupportFragmentManager());
+                if(getActivity() != null && getActivity().getSupportFragmentManager() != null){
+                    mAdapter = new AdapterFarmerFoodgrainList(getActivity(), response.body(), getActivity().getSupportFragmentManager());
 
-                progressBar.setVisibility(GONE);
-                recyclerView.setAdapter(mAdapter);
-                recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                mAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(GONE);
+                    recyclerView.setAdapter(mAdapter);
+                    recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                    mAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override

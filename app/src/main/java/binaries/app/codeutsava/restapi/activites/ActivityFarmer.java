@@ -1,8 +1,10 @@
 package binaries.app.codeutsava.restapi.activites;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
@@ -46,8 +48,10 @@ public class ActivityFarmer extends BaseActivity {
     RelativeLayout bottomSheet;
     AnyChartView chartView;
     List<List<String>> graphData;
-    RecyclerView recommRecycler, defRecycler;
+    RecyclerView recommendationsRecycler, defRecycler;
     AdapterFarmerRecommendation rAdapter, dAdapter;
+
+    TextView csEmptyText, rsEmptyText;
 
     @Override
     protected int getLayoutResID() {
@@ -67,8 +71,11 @@ public class ActivityFarmer extends BaseActivity {
         menuButton = findViewById(R.id.farmer_menu_icon);
         chartView = findViewById(R.id.graph);
 
-        recommRecycler = findViewById(R.id.recycler_recommend_rec);
-        recommRecycler.setLayoutManager(new LinearLayoutManager(this));
+        csEmptyText = findViewById(R.id.cs_empty_text);
+        rsEmptyText = findViewById(R.id.rs_empty_text);
+
+        recommendationsRecycler = findViewById(R.id.recycler_recommend_rec);
+        recommendationsRecycler.setLayoutManager(new LinearLayoutManager(this));
 
         defRecycler = findViewById(R.id.recycler_recommend_def);
         defRecycler.setLayoutManager(new LinearLayoutManager(this));
@@ -172,22 +179,29 @@ public class ActivityFarmer extends BaseActivity {
                     rAdapter = new AdapterFarmerRecommendation(response.body().rec_crops, ActivityFarmer.this);
                     dAdapter = new AdapterFarmerRecommendation(response.body().def_crops, ActivityFarmer.this);
 
-                    recommRecycler.setAdapter(rAdapter);
+                    recommendationsRecycler.setAdapter(rAdapter);
                     defRecycler.setAdapter(dAdapter);
 
                     rAdapter.notifyDataSetChanged();
                     dAdapter.notifyDataSetChanged();
                 }
+
+                if(!response.isSuccessful() || response.body() == null || response.body().rec_crops == null)
+                    rsEmptyText.setVisibility(View.VISIBLE);
+
+                if(!response.isSuccessful() || response.body() == null || response.body().def_crops == null)
+                    csEmptyText.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailure(Call<FarmerDashboardRecommedationResponse> call, Throwable t) {
-
+                csEmptyText.setVisibility(View.VISIBLE);
+                rsEmptyText.setVisibility(View.VISIBLE);
             }
         });
     }
 
-    private class CustomDataEntry extends ValueDataEntry {
+    private static class CustomDataEntry extends ValueDataEntry {
         CustomDataEntry(String x, Number value, Number value2, Number value3) {
             super(x, value);
 

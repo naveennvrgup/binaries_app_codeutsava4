@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp">
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.cardview.widget.CardView
         android:id="@+id/getFarmerStoredWarehouse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:foreground="?attr/selectableItemBackground"
         android:padding="4dp"
         app:cardCornerRadius="24dp"
         app:cardElevation="4dp">
@@ -28,10 +29,18 @@
                 android:layout_marginTop="16dp"
                 android:src="@drawable/corn_icon" />
 
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/darker_gray" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="4dp"
                 android:layout_marginEnd="16dp"
                 android:orientation="vertical">
 
@@ -41,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:ellipsize="end"
-                    android:fontFamily="@font/roboto_slab"
+                    android:fontFamily="@font/average_sans"
                     android:maxLines="1"
                     android:text="Warehouse Name"
                     android:textColor="@android:color/black"
@@ -53,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:fontFamily="@font/roboto_slab"
+                    android:fontFamily="@font/average_sans"
                     android:text="Deadline is about to reach"
                     android:textColor="@android:color/black"
                     android:textSize="14sp"
@@ -70,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:ellipsize="end"
-                        android:fontFamily="@font/roboto_slab"
+                        android:fontFamily="@font/average_sans"
                         android:maxLines="1"
                         android:text="Foodgrain"
                         android:textColor="@android:color/black"
@@ -84,12 +93,12 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="4dp"
+                        android:textColor="@android:color/black"
                         android:ellipsize="end"
-                        android:fontFamily="@font/roboto_slab"
+                        android:fontFamily="@font/average_sans"
                         android:maxLines="1"
                         android:text="Price"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
                 <TextView
@@ -98,11 +107,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:ellipsize="end"
-                    android:fontFamily="@font/roboto_slab"
+                    android:fontFamily="@font/average_sans"
                     android:maxLines="1"
                     android:text="Quantity"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/fstoredWarehouseDate"
@@ -113,10 +121,7 @@
                     android:fontFamily="@font/roboto_slab"
                     android:maxLines="1"
                     android:text="Date"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

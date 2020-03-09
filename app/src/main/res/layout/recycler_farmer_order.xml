@@ -4,8 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:clickable="true"
-    android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="16dp"
     app:cardElevation="8dp">
@@ -132,7 +130,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/gradient_button"
                     android:text="Accept"
-                    android:textColor="#EBEBEF" />
+                    android:textColor="#F0F0F4" />
 
             </androidx.cardview.widget.CardView>
 
@@ -151,7 +149,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/gradient_button"
                     android:text="Reject"
-                    android:textColor="#EBEBEF" />
+                    android:textColor="#F0F0F4" />
 
             </androidx.cardview.widget.CardView>
         </LinearLayout>

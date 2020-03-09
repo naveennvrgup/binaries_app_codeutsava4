@@ -42,7 +42,7 @@ public class AdapterFarmerRecommendation extends RecyclerView.Adapter<AdapterFar
         return data == null ? 0 : data.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView text;
 
         MyViewHolder(@NonNull View itemView) {

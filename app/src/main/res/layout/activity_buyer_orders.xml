@@ -16,7 +16,7 @@
         android:layout_toEndOf="@id/bo_buyer_menu_icon"
         android:fontFamily="@font/roboto_slab"
         android:text="Orders"
-        android:textColor="#EBEBEF"
+        android:textColor="#F0F0F4"
         android:textSize="28sp"
         android:textStyle="bold" />
 
@@ -25,8 +25,8 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/menu_icon" />
 
     <RelativeLayout

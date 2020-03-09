@@ -71,12 +71,10 @@ public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Received Orders"));
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("My Warehouse Stores"));
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Active Bids"));
-        itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Manage Waste"));
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Log Out"));
 
         recyclerView = dialog.findViewById(R.id.recycler_farmer_sheet);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setNestedScrollingEnabled(true);
         recyclerView.setAdapter(new AdapterRecyclerViewBottomSheet(getActivity(), itemsList));
 
         ((TextView) view.findViewById(R.id.far_sheet_name))

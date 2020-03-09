@@ -2,6 +2,7 @@ package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHold
     public AdapterProduce.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(activity).inflate(R.layout.farmer_produce_row, null);
 
-        return new AdapterProduce.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -45,9 +46,9 @@ public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHold
             FarmerProduceResponse produce = produces.get(position);
 
             holder.fgName.setText(produce.type.type);
-            holder.fgGrade.setText("Grade: " + produce.grade);
-            holder.fgPrice.setText("Price: " + produce.price);
-            holder.fgDate.setText("Date: " + produce.date);
+            holder.fgGrade.setText(Html.fromHtml("<b>Grade: </b>" + produce.grade));
+            holder.fgPrice.setText(Html.fromHtml("<b>₹:  </b>" + produce.price));
+            holder.fgDate.setText(Html.fromHtml("<b>Date: </b>" + produce.date));
 
             holder.itemView.setOnClickListener(v -> {
                 FarmerProduceResponse currProduceData = produces.get(position);
@@ -67,7 +68,7 @@ public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHold
         return produces == null ? 0 : produces.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView fgName, fgPrice, fgGrade, fgDate;
 
         ViewHolder(@NonNull View itemView) {

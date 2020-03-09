@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBEBEF"
+    android:background="#F0F0F4"
     android:paddingTop="24dp">
 
     <LinearLayout
@@ -238,6 +238,18 @@
         </LinearLayout>
     </ScrollView>
 
+    <ProgressBar
+        android:id="@+id/auth_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="30dp"
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.Material.ProgressBar" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/auth_proceed"
         android:layout_width="match_parent"
@@ -257,7 +269,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/gradient_button"
             android:text="Proceed"
-            android:textColor="#EBEBEF" />
+            android:textColor="#F0F0F4" />
 
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

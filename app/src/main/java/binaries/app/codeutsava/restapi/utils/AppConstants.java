@@ -2,7 +2,7 @@ package binaries.app.codeutsava.restapi.utils;
 
 public class AppConstants {
     //URL's
-    public static final String BASE_URL = "http://192.168.43.151:8000/"; // naveen//    public static final String BASE_URL = "http://172.22.136.127:8000/";
+    public static final String BASE_URL = "http://787f8919.ngrok.io/"; // naveen//    public static final String BASE_URL = "http://172.22.136.127:8000/";
 
     public static final String LOGIN_URL = "user/rest-auth/login/";
     public static final String FARMER_DETAIL_URL="user/farmer-detail/";

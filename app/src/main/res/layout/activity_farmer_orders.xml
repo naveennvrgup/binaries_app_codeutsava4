@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_slab"
             android:text="Received Orders"
-            android:textColor="#EBEBEF"
+            android:textColor="#F0F0F4"
             android:textSize="24sp"
             android:textStyle="bold" />
 

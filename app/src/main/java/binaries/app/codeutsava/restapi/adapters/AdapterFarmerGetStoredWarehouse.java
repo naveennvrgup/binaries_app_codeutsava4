@@ -2,6 +2,7 @@ package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,10 +55,10 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
             FarmerStorageTransactionResponse produce = produces.get(position);
 
             holder.whName.setText(produce.whName);
-            holder.whQuantity.setText("Quantity: " + produce.quantity);
+            holder.whQuantity.setText(Html.fromHtml("<b>Qty: </b>" + produce.quantity + "kgs."));
             holder.whFoodgrain.setText(produce.foodgrain);
-            holder.whDate.setText("Date: " + produce.date);
-            holder.whCost.setText("Price: " + produce.cost);
+            holder.whDate.setText(Html.fromHtml("<b>Date: </b>" + produce.date));
+            holder.whCost.setText(Html.fromHtml("<b>₹: </b>" + produce.cost));
 
             if (waste) {
                 holder.image.setVisibility(View.GONE);

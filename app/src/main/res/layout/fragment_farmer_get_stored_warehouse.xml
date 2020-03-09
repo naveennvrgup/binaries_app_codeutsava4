@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_slab"
             android:text="Warehouse Stores"
-            android:textColor="#EBEBEF"
+            android:textColor="#F0F0F4"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -41,6 +41,13 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/drawble_buyer_main"
         android:orientation="horizontal">
+
+        <ProgressBar
+            style="@android:style/Widget.Material.ProgressBar"
+            android:id="@+id/far_get_ware_prog"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/farmerStorageTransactionListRecyclerView"

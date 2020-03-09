@@ -72,7 +72,7 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
         produceQuantity = findViewById(R.id.storageTransactionQuantityInput);
 
         whNameText.setText("Warehouse Name: " + whName);
-        whPriceText.setText("Price: " + whPrice);
+        whPriceText.setText("₹: " + whPrice);
         whDistanceText.setText("Distance: " + whDistance);
         whSectorText.setText("Sector: " + whSector);
         whCentreText.setText("Centre: " + whCentre);

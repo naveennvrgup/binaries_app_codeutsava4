@@ -25,9 +25,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/average_sans"
+            android:fontFamily="@font/roboto_slab"
             android:text="Bid Details"
-            android:textColor="#EBEBEF"
+            android:textColor="#F0F0F4"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -51,11 +51,22 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/bdetail_foodgrain"
+                    android:id="@+id/bdetail_transno"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/average_sans"
+                    android:maxLines="1"
+                    android:text="Transaction Number"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/bdetail_foodgrain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/average_sans"
                     android:maxLines="1"
@@ -97,18 +108,8 @@
                     android:maxLines="1"
                     android:text="Deadline"
                     android:textColor="@android:color/holo_red_dark"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/bdetail_transno"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/average_sans"
-                    android:maxLines="1"
-                    android:text="Transaction Number: "
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -116,7 +117,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="36dp"
                     android:ellipsize="end"
-                    android:fontFamily="@font/average_sans"
+                    android:fontFamily="@font/roboto_slab"
                     android:maxLines="1"
                     android:text="List of Farmers: "
                     android:textColor="@android:color/black"

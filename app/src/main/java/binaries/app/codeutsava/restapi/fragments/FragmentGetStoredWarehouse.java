@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,18 +41,12 @@ import retrofit2.Response;
 public class FragmentGetStoredWarehouse extends DialogFragment {
     private RecyclerView recyclerView;
     private AdapterFarmerGetStoredWarehouse mAdapter;
+    private ProgressBar progressBar;
 
-    private List<FarmerStorageTransactionResponse> negData = new ArrayList<>();
     private List<FarmerStorageTransactionResponse> posData = new ArrayList<>();
-
-    private boolean waste = false;
 
     public FragmentGetStoredWarehouse() {
         // Required empty public constructor
-    }
-
-    public void setIsWaste(boolean waste) {
-        this.waste = waste;
     }
 
     @Override
@@ -82,7 +77,9 @@ public class FragmentGetStoredWarehouse extends DialogFragment {
 
         view.findViewById(R.id.frag_far_prod_back).setOnClickListener(view1 -> dismiss());
 
-        ((TextView) view.findViewById(R.id.fragment_far_top_name)).setText(waste ? "Waste Management" : "Warehouse Stores");
+        ((TextView) view.findViewById(R.id.fragment_far_top_name)).setText("Warehouse Stores");
+
+        progressBar = view.findViewById(R.id.far_get_ware_prog);
 
         getFarmerStorageTransaction();
 
@@ -100,25 +97,12 @@ public class FragmentGetStoredWarehouse extends DialogFragment {
             public void onResponse(Call<List<FarmerStorageTransactionResponse>> call, Response<List<FarmerStorageTransactionResponse>> response) {
                 if (response.isSuccessful() && response.body() != null) {
 
-                    for (FarmerStorageTransactionResponse response1 : response.body()) {
-                        long diffDays = getDateDifference(response1.date);
+                    posData.addAll(response.body());
 
-                        Log.d("WASTE1", String.valueOf(waste));
-
-                        if (diffDays < 0) {
-                            negData.add(response1);
-
-                            Log.d("WASTE1", String.valueOf(diffDays));
-
-                        } else {
-                            posData.add(response1);
-                            Log.d("WASTE2", String.valueOf(diffDays));
-                        }
-                    }
-
-                    mAdapter = new AdapterFarmerGetStoredWarehouse(waste ? negData : posData, getActivity());
+                    mAdapter = new AdapterFarmerGetStoredWarehouse(posData, getActivity());
                     mAdapter.setFragManager(getFragmentManager());
-                    mAdapter.setIsWaste(waste);
+
+                    progressBar.setVisibility(View.GONE);
 
                     recyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
@@ -130,17 +114,5 @@ public class FragmentGetStoredWarehouse extends DialogFragment {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    private long getDateDifference(String startDate) {
-        Date endDate = Calendar.getInstance().getTime();
-
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-            return TimeUnit.MILLISECONDS.toDays(endDate.getTime() - dateFormat.parse(startDate).getTime());
-
-        } catch (Exception e) {
-            return 0;
-        }
     }
 }
