@@ -66,7 +66,7 @@ public class ActivityFarmerBids extends BaseActivity {
                             adapterFarmerBids.notifyDataSetChanged();
                         }
 
-                        if(!response.isSuccessful() || response.body() == null)
+                        if(!response.isSuccessful() || response.body() == null || response.body().isEmpty())
                             farmBulkOrdEmptyT.setVisibility(View.VISIBLE);
                     }
 

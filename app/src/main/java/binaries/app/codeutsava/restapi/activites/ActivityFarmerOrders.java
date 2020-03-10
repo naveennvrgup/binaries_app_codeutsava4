@@ -71,14 +71,17 @@ public class ActivityFarmerOrders extends BaseActivity {
                     mAdapter.notifyDataSetChanged();
                 }
 
-                if(!response.isSuccessful() || response.body() == null)
+                if(!response.isSuccessful() || response.body() == null || response.body().isEmpty())
                     recOrdEmptyText.setVisibility(View.VISIBLE);
+
+                findViewById(R.id.farm_ord_prog).setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<List<BuyerOrderListResponse>> call, Throwable t) {
                 Toast.makeText(ActivityFarmerOrders.this, t.getMessage(), Toast.LENGTH_LONG).show();
                 recOrdEmptyText.setVisibility(View.VISIBLE);
+                findViewById(R.id.farm_ord_prog).setVisibility(View.GONE);
             }
         });
     }

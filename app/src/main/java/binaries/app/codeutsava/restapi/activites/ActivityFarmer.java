@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -76,10 +77,10 @@ public class ActivityFarmer extends BaseActivity {
         graphEmptyText = findViewById(R.id.graph_empty_text);
 
         recommendationsRecycler = findViewById(R.id.recycler_recommend_rec);
-        recommendationsRecycler.setLayoutManager(new LinearLayoutManager(this));
+        recommendationsRecycler.setLayoutManager(new GridLayoutManager(this, 2));
 
         defRecycler = findViewById(R.id.recycler_recommend_def);
-        defRecycler.setLayoutManager(new LinearLayoutManager(this));
+        defRecycler.setLayoutManager(new GridLayoutManager(this, 2));
 
         menuButton.setOnClickListener(v -> {
             BottomSheetDialogFragment bottomSheetDialogFragment = new FragmentFarmerBottomSheet();
@@ -159,7 +160,7 @@ public class ActivityFarmer extends BaseActivity {
                     chartView.setZoomEnabled(true);
                 }
 
-                if(!response.isSuccessful() || response.body() == null){
+                if(!response.isSuccessful() || response.body() == null || response.body().isEmpty()){
                     findViewById(R.id.graph_progress).setVisibility(View.GONE);
                     graphEmptyText.setVisibility(View.VISIBLE);
                 }
@@ -194,17 +195,23 @@ public class ActivityFarmer extends BaseActivity {
                     dAdapter.notifyDataSetChanged();
                 }
 
-                if(!response.isSuccessful() || response.body() == null || response.body().rec_crops == null)
+                if(!response.isSuccessful() || response.body() == null || response.body().rec_crops == null || response.body().rec_crops.isEmpty())
                     rsEmptyText.setVisibility(View.VISIBLE);
 
-                if(!response.isSuccessful() || response.body() == null || response.body().def_crops == null)
+                if(!response.isSuccessful() || response.body() == null || response.body().def_crops == null || response.body().def_crops.isEmpty())
                     csEmptyText.setVisibility(View.VISIBLE);
+
+                findViewById(R.id.cs_prog).setVisibility(View.GONE);
+                findViewById(R.id.dc_prog).setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<FarmerDashboardRecommedationResponse> call, Throwable t) {
                 csEmptyText.setVisibility(View.VISIBLE);
                 rsEmptyText.setVisibility(View.VISIBLE);
+
+                findViewById(R.id.cs_prog).setVisibility(View.GONE);
+                findViewById(R.id.dc_prog).setVisibility(View.GONE);
             }
         });
     }

@@ -92,7 +92,7 @@ public class FragmentFarmerProduce extends DialogFragment {
                     mAdapter.notifyDataSetChanged();
                 }
 
-                if(!response.isSuccessful() || response.body() == null)
+                if(!response.isSuccessful() || response.body() == null || response.body().isEmpty())
                     farmProdEmptyText.setVisibility(View.VISIBLE);
             }
 

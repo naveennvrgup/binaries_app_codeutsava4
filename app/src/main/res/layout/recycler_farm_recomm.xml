@@ -4,17 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
-    app:cardCornerRadius="14dp"
-    app:cardElevation="4dp">
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="#E5E5E5"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
 
     <TextView
         android:id="@+id/recycler_farm_recommendation_text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:paddingStart="8dp"
         android:fontFamily="@font/average_sans"
         android:text="Sample Text"
-        android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold" />

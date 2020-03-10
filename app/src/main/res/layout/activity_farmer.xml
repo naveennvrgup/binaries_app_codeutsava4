@@ -66,11 +66,11 @@
                         android:id="@+id/graph_empty_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Nothing to show."
-                        android:textColor="@android:color/black"
                         android:layout_centerVertical="true"
+                        android:text="Nothing to show."
                         android:textAlignment="center"
-                        android:visibility="gone"/>
+                        android:textColor="@android:color/black"
+                        android:visibility="gone" />
 
                     <ProgressBar
                         android:id="@+id/graph_progress"
@@ -99,15 +99,28 @@
                     android:layout_margin="16dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/roboto_slab"
-                        android:text="Crop Suggestions"
-                        android:textColor="@android:color/black"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="@font/roboto_slab"
+                            android:text="Crop Suggestions"
+                            android:textColor="@android:color/black"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <ProgressBar
+                            android:id="@+id/cs_prog"
+                            style="@android:style/Widget.Material.ProgressBar"
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/cs_empty_text"
@@ -142,15 +155,29 @@
                     android:layout_margin="16dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/roboto_slab"
-                        android:text="Deficit Crops"
-                        android:textColor="@android:color/black"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="@font/roboto_slab"
+                            android:text="Deficit Crops"
+                            android:textColor="@android:color/black"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <ProgressBar
+                            android:id="@+id/dc_prog"
+                            style="@android:style/Widget.Material.ProgressBar"
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_alignParentEnd="true" />
+
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/rs_empty_text"
@@ -173,6 +200,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="40dp"
                 android:fontFamily="@font/average_sans"
                 android:text="*Deficit crops were in high demand but limited in last cycle."
                 android:textSize="12sp" />

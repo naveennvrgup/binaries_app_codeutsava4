@@ -26,14 +26,16 @@ public class AdapterFarmerRecommendation extends RecyclerView.Adapter<AdapterFar
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.recycler_farm_recomm, null);
+        View view = LayoutInflater.from(activity).inflate(R.layout.recycler_farm_recomm, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         if(data != null){
-            holder.text.setText(data.get(position));
+            String s = data.get(position);
+            s = s.substring(0, 1).toUpperCase() + s.substring(1);
+            holder.text.setText(s);
         }
     }
 
