@@ -10,14 +10,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
-import binaries.app.codeutsava.restapi.adapters.AdapterBuyerTop;
+import binaries.app.codeutsava.restapi.adapters.AdapterFilter;
 import binaries.app.codeutsava.restapi.adapters.AdapterFoodgrain;
 import binaries.app.codeutsava.restapi.fragments.FragmentBuyerBottomSheet;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
@@ -47,16 +46,21 @@ public class ActivityBuyer extends BaseActivity {
     }
 
     private void initViews() {
+        List<String> filters = new ArrayList<>();
+        filters.add("Seasonal");
+        filters.add("Regional");
+
+        AdapterFilter adapterFilter = new AdapterFilter(this);
+        adapterFilter.addFilters(filters);
+
         recyclerViewTop = findViewById(R.id.buyer_tab_strip);
         recyclerViewTop.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewTop.setAdapter(new AdapterBuyerTop(this));
         recyclerViewTop.setNestedScrollingEnabled(true);
         recyclerViewTop.setHasFixedSize(true);
-        recyclerViewTop.setAdapter(new AdapterBuyerTop(this));
+        recyclerViewTop.setAdapter(adapterFilter);
 
         recyclerViewList = findViewById(R.id.recycler_buyer_list);
         recyclerViewList.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerViewList.setAdapter(new AdapterFoodgrain(this, null, null));
 
         findViewById(R.id.buyer_menu_icon).setOnClickListener(view -> {
             BottomSheetDialogFragment bottomSheetDialogFragment = new FragmentBuyerBottomSheet();

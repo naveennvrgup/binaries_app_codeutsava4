@@ -23,12 +23,12 @@ import java.util.concurrent.TimeUnit;
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.fragments.FragmentPotentialBuyerList;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerStorageTransactionResponse;
+import binaries.app.codeutsava.restapi.utils.Misc;
 
 public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<AdapterFarmerGetStoredWarehouse.ViewHolder> {
     private List<FarmerStorageTransactionResponse> produces;
     private Activity activity;
     private FragmentManager fragManager;
-    private boolean waste = false;
     private String[] names = {"Manure Waste", "E-Waste", "Other Waste"};
 
 
@@ -46,7 +46,7 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
     public AdapterFarmerGetStoredWarehouse.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(activity).inflate(R.layout.farmer_stored_warehouse_recyclerview, null);
 
-        return new AdapterFarmerGetStoredWarehouse.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -55,26 +55,10 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
             FarmerStorageTransactionResponse produce = produces.get(position);
 
             holder.whName.setText(produce.whName);
-            holder.whQuantity.setText(Html.fromHtml("<b>Qty: </b>" + produce.quantity + "kgs."));
-            holder.whFoodgrain.setText(produce.foodgrain);
-            holder.whDate.setText(Html.fromHtml("<b>Date: </b>" + produce.date));
-            holder.whCost.setText(Html.fromHtml("<b>₹: </b>" + produce.cost));
-
-            if (waste) {
-                holder.image.setVisibility(View.GONE);
-                holder.whName.setText(names[position % 3]);
-                holder.whFoodgrain.setVisibility(View.GONE);
-                holder.whDate.setVisibility(View.GONE);
-                holder.whCost.setVisibility(View.GONE);
-                holder.whDeadline.setVisibility(View.GONE);
-
-                holder.itemView.setOnClickListener(view -> {
-                    FragmentPotentialBuyerList buyerSHGList = new FragmentPotentialBuyerList();
-
-                    buyerSHGList.setIsWaste(waste);
-                    buyerSHGList.show(fragManager, "SHGList");
-                });
-            }
+            holder.whQuantity.setText(Misc.getHTML("Qty: " + produce.quantity + "kgs."));
+            holder.whFoodgrain.setText(Misc.getUpperForm(produce.foodgrain));
+            holder.whDate.setText(Misc.getHTML("Date: " + produce.date));
+            holder.whCost.setText(Misc.getHTML("Price (₹): " + produce.cost));
 
             long diffDays = getDateDifference(produce.date);
 
@@ -107,10 +91,6 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
         }
     }
 
-    public void setIsWaste(boolean waste) {
-        this.waste = waste;
-    }
-
     private long getDateDifference(String startDate) {
         Date endDate = Calendar.getInstance().getTime();
         try {
@@ -126,7 +106,7 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
         return produces == null ? 0 : produces.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView whName, whQuantity, whCost, whDate, whFoodgrain, whDeadline;
         ImageView image;
 

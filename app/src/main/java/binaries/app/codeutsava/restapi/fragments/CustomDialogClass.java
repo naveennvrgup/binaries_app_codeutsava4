@@ -25,17 +25,17 @@ import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionRe
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
 import binaries.app.codeutsava.restapi.utils.AppConstants;
+import binaries.app.codeutsava.restapi.utils.Misc;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CustomDialogClass extends Dialog implements android.view.View.OnClickListener {
     public Bundle bundle;
-    public Dialog d;
     private Button yes, no;
     private int whid, produce_id;
-    TextView whPriceText, whDistanceText, whCentreText, whSectorText, whOwnerText, whAvailText, whNameText;
-    TextInputEditText produceQuantity;
+    private TextView whPriceText, whDistanceText, whCentreText, whSectorText, whOwnerText, whAvailText, whNameText;
+    private TextInputEditText produceQuantity;
 
     public CustomDialogClass(Activity a, Bundle bundle) {
         super(a);
@@ -71,13 +71,13 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
         whNameText = findViewById(R.id.warehouseDialogName);
         produceQuantity = findViewById(R.id.storageTransactionQuantityInput);
 
-        whNameText.setText("Warehouse Name: " + whName);
-        whPriceText.setText("₹: " + whPrice);
-        whDistanceText.setText("Distance: " + whDistance);
-        whSectorText.setText("Sector: " + whSector);
-        whCentreText.setText("Centre: " + whCentre);
-        whOwnerText.setText("Owner: " + whOwner);
-        whAvailText.setText("Space: " + whAvail);
+        whNameText.setText(whName);
+        whPriceText.setText(Misc.getHTML("Price (₹): " + whPrice + "/-"));
+        whDistanceText.setText(Misc.getHTML("Distance: " + whDistance + "kms."));
+        whSectorText.setText(Misc.getHTML("Sector: " + whSector));
+        whCentreText.setText(Misc.getHTML("Centre: " + whCentre));
+        whOwnerText.setText(Misc.getHTML("Owner: " + whOwner));
+        whAvailText.setText(Misc.getHTML("Available Space: " + whAvail + "kgs."));
 
         yes = findViewById(R.id.btnConfirmWarehouseTransaction);
         no = findViewById(R.id.btnCancelWarehouseTransaction);

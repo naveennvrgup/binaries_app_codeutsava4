@@ -1,28 +1,24 @@
 package binaries.app.codeutsava.restapi.activites;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.adapters.AdapterFilter;
 import binaries.app.codeutsava.restapi.adapters.AdapterPastBid;
 import binaries.app.codeutsava.restapi.model.buyer.BidCreatePayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
@@ -35,8 +31,10 @@ import retrofit2.Response;
 
 public class ActivityBuyerBidsList extends BaseActivity {
     Button createBidBtn;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, filterRecyclerView;
     AdapterPastBid adapterPastBid;
+    AdapterFilter adapterFilter;
+    List<FarmerActiveBidListResponse> responses = new ArrayList<>();
 
     @Override
     protected int getLayoutResID() {
@@ -50,7 +48,7 @@ public class ActivityBuyerBidsList extends BaseActivity {
         recyclerView = findViewById(R.id.buyer_bids_recycler);
         createBidBtn = findViewById(R.id.createbidbutton);
 
-        createBidBtn.setOnClickListener(v -> showdialog());
+        createBidBtn.setOnClickListener(v -> showDialog());
 
         findViewById(R.id.act_buy_bid_back).setOnClickListener(view -> {
             Intent intent = new Intent(ActivityBuyerBidsList.this, ActivityBuyer.class);
@@ -58,10 +56,29 @@ public class ActivityBuyerBidsList extends BaseActivity {
             finish();
         });
 
-        getbids();
+        // main recycler view instantiation
+        adapterPastBid = new AdapterPastBid(this);
+        recyclerView.setLayoutManager(new GridLayoutManager(ActivityBuyerBidsList.this, 1));
+        recyclerView.setAdapter(adapterPastBid);
+
+        // filter recycler view instantiation
+        filterRecyclerView = findViewById(R.id.buy_bid_list_filter);
+
+        List<String> filters = new ArrayList<>();
+        filters.add(AppConstants.FILTER_ACTIVE);
+        filters.add(AppConstants.FILTER_INACTIVE);
+
+        adapterFilter = new AdapterFilter(this);
+        adapterFilter.addFilters(filters);
+        adapterFilter.setOnFilterChangeListener(newFilter -> adapterPastBid.reflectFilterChange(responses, newFilter));
+
+        filterRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        filterRecyclerView.setAdapter(adapterFilter);
+
+        getBids();
     }
 
-    void showdialog() {
+    void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.create_bid_dialog, null);
 
@@ -86,13 +103,16 @@ public class ActivityBuyerBidsList extends BaseActivity {
                         public void onResponse(Call<FarmerActiveBidListResponse> call, Response<FarmerActiveBidListResponse> response) {
                             if (response.isSuccessful() && response.body() != null) {
                                 dialog.dismiss();
-                                getbids();
+                                getBids();
                             }
+
+                            findViewById(R.id.farm_bids_prog).setVisibility(View.GONE);
                         }
 
                         @Override
                         public void onFailure(Call<FarmerActiveBidListResponse> call, Throwable t) {
                             Toast.makeText(ActivityBuyerBidsList.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                            findViewById(R.id.farm_bids_prog).setVisibility(View.GONE);
                         }
                     });
             dialog.dismiss();
@@ -103,19 +123,16 @@ public class ActivityBuyerBidsList extends BaseActivity {
         builder.create().show();
     }
 
-    void getbids() {
-        AppClient.getInstance().createService(APIServices.class)
-                .getPastBidsList(
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("token", AppConstants.TEMP_FARM_TOKEN)
-                )
+    void getBids() {
+        AppClient.getInstance().createService(APIServices.class).getPastBidsList(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("token", AppConstants.TEMP_FARM_TOKEN))
                 .enqueue(new Callback<List<FarmerActiveBidListResponse>>() {
                     @Override
                     public void onResponse(Call<List<FarmerActiveBidListResponse>> call, Response<List<FarmerActiveBidListResponse>> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            adapterPastBid = new AdapterPastBid(ActivityBuyerBidsList.this, response.body());
-                            recyclerView.setLayoutManager(new GridLayoutManager(ActivityBuyerBidsList.this, 1));
-                            recyclerView.setAdapter(adapterPastBid);
-                            adapterPastBid.notifyDataSetChanged();
+                            responses.clear();
+                            responses.addAll(response.body());
+
+                            adapterPastBid.reflectFilterChange(responses, adapterFilter.getDefaultFilter());
                         }
                     }
 

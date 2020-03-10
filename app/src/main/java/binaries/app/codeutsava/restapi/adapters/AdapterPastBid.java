@@ -12,27 +12,41 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.activites.ActivityBuyerBidDetail;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
 
 public class AdapterPastBid extends RecyclerView.Adapter<AdapterPastBid.ViewHolder> {
     Activity activity;
-    List<FarmerActiveBidListResponse> bids;
+    List<FarmerActiveBidListResponse> bids = new ArrayList<>();
 
-    public AdapterPastBid(Activity activity, List<FarmerActiveBidListResponse> bids) {
+    public AdapterPastBid(Activity activity) {
         this.activity = activity;
-        this.bids = bids;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.recyler_past_bid, null);
-
+        View view = LayoutInflater.from(activity).inflate(R.layout.recyler_past_bid, parent, false);
         return new ViewHolder(view);
+    }
+
+    public void reflectFilterChange(List<FarmerActiveBidListResponse> responseList, String newFilter){
+        bids.clear();
+
+        for(FarmerActiveBidListResponse response : responseList){
+            if(newFilter.equals(AppConstants.FILTER_ACTIVE) && response.isActive)
+                bids.add(response);
+
+            if(newFilter.equals(AppConstants.FILTER_INACTIVE) && !response.isActive)
+                bids.add(response);
+        }
+
+        notifyDataSetChanged();
     }
 
     @Override
@@ -68,10 +82,10 @@ public class AdapterPastBid extends RecyclerView.Adapter<AdapterPastBid.ViewHold
 
     @Override
     public int getItemCount() {
-        return bids.size();
+        return bids == null ? 0 : bids.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView foodgrain, transno, quantity, deadline, isActive;
         ImageView img;
 

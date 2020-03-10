@@ -3,6 +3,7 @@ package binaries.app.codeutsava.restapi.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,9 @@ import java.util.List;
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.fragments.CustomDialogClass;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerFindWarehouseResponse;
+import binaries.app.codeutsava.restapi.utils.Misc;
 
 public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSuggestedWarehouse.ViewHolder> {
-    FarmerFindWarehouseResponse farmerFindWarehouseResponse;
     List<FarmerFindWarehouseResponse.WarehouseResponse> warehouseList;
     Context context;
     Activity activity;
@@ -50,8 +51,8 @@ public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSugge
         FarmerFindWarehouseResponse.WarehouseResponse currWarehouse = warehouseList.get(position);
 
         holder.warehouseName.setText(currWarehouse.whname);
-        holder.warehouseCost.setText("Price: " + currWarehouse.price);
-        holder.warehouseDist.setText("Distance: " + currWarehouse.distance);
+        holder.warehouseCost.setText(Misc.getHTML("Price (₹): " + currWarehouse.price + "/-"));
+        holder.warehouseDist.setText(Misc.getHTML("Distance: " + currWarehouse.distance + " kms."));
 
         holder.parent.setOnClickListener(v -> {
             Bundle args = new Bundle();

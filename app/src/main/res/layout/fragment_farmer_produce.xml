@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dashboardBg"
-    android:orientation="vertical"
-    tools:context=".restapi.fragments.FragmentFarmerBids">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,16 +40,24 @@
         android:background="@drawable/drawble_buyer_main"
         android:orientation="vertical">
 
+        <ProgressBar
+            android:id="@+id/farm_prod_prog"
+            style="@android:style/Widget.Material.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp" />
+
         <TextView
             android:id="@+id/farm_prod_empty_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginStart="16dp"
             android:layout_marginTop="48dp"
             android:padding="4dp"
             android:text="No Produce is reported by you till now.\nAdd grains to show things here."
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/farmerProduceListRecyclerView"

@@ -17,10 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.adapters.AdapterBuyerOrder;
+import binaries.app.codeutsava.restapi.adapters.AdapterFilter;
 import binaries.app.codeutsava.restapi.fragments.FragmentBuyerBottomSheet;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
@@ -31,10 +33,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ActivityBuyerOrders extends BaseActivity {
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView, filterRecyclerView;
     private AdapterBuyerOrder mAdapter;
-    private ImageView menu;
+    private AdapterFilter adapterFilter;
     private ProgressBar progressBar;
+    private List<BuyerOrderListResponse> responseList = new ArrayList<>();
 
     @Override
     protected int getLayoutResID() {
@@ -47,12 +50,26 @@ public class ActivityBuyerOrders extends BaseActivity {
 
         recyclerView = findViewById(R.id.bo_recycler);
         progressBar = findViewById(R.id.act_buy_order_progress);
-        menu = findViewById(R.id.bo_buyer_menu_icon);
-
-        menu.setOnClickListener(view -> {
-            BottomSheetDialogFragment bottomSheetDialogFragment = new FragmentBuyerBottomSheet();
-            bottomSheetDialogFragment.show(getSupportFragmentManager(), "buyerBottomSheet");
+        findViewById(R.id.bo_buyer_back_icon).setOnClickListener(v -> {
+            Intent intent = new Intent(ActivityBuyerOrders.this, ActivityBuyer.class);
+            startActivity(intent);
+            finish();
         });
+
+        mAdapter = new AdapterBuyerOrder(this);
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(ActivityBuyerOrders.this));
+
+
+        filterRecyclerView = findViewById(R.id.buy_ord_filter);
+        adapterFilter = new AdapterFilter(this);
+        List<String> filters = new ArrayList<>();
+
+        filters.add(AppConstants.FILTER_APPROVED);
+        filters.add(AppConstants.FILTER_PENDING);
+
+        adapterFilter.addFilters(filters);
+        adapterFilter.setOnFilterChangeListener(newFilter -> mAdapter.reflectFilterChange(responseList, newFilter));
 
         makeApiCall();
     }
@@ -66,14 +83,12 @@ public class ActivityBuyerOrders extends BaseActivity {
             @Override
             public void onResponse(Call<List<BuyerOrderListResponse>> call, Response<List<BuyerOrderListResponse>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-
                     progressBar.setVisibility(View.GONE);
 
-                    mAdapter = new AdapterBuyerOrder(response.body(), ActivityBuyerOrders.this, getSupportFragmentManager());
-                    recyclerView.setAdapter(mAdapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(ActivityBuyerOrders.this));
+                    responseList.clear();
+                    responseList.addAll(response.body());
 
-                    mAdapter.notifyDataSetChanged();
+                    mAdapter.reflectFilterChange(responseList, adapterFilter.getDefaultFilter());
                 }
             }
 

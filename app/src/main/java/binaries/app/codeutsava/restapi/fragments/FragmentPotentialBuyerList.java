@@ -34,7 +34,6 @@ public class FragmentPotentialBuyerList extends DialogFragment {
     private RecyclerView recyclerView;
     private AdapterPotentialBuyerList mAdapter;
     public String foodgrain;
-    private boolean waste;
 
     public FragmentPotentialBuyerList() {
         // Required empty public constructor
@@ -67,28 +66,12 @@ public class FragmentPotentialBuyerList extends DialogFragment {
         recyclerView = view.findViewById(R.id.potentialBuyerListRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
-        if (!waste) foodgrain = getArguments().getSerializable("foodgrain").toString();
+        foodgrain = getArguments().getSerializable("foodgrain").toString();
 
         view.findViewById(R.id.frag_pot_back).setOnClickListener(view1 -> dismiss());
-        ((TextView) view.findViewById(R.id.frag_pot_buy_top)).setText(waste ? "Waste Management Groups" : "Potential Buyers");
+        ((TextView) view.findViewById(R.id.frag_pot_buy_top)).setText("Potential Buyers");
 
-        if (!waste)
-            getPotentialBuyerList();
-
-        else {
-            List<PotentialBuyerResponse> responses = new ArrayList<>();
-
-            responses.add(new PotentialBuyerResponse("Green Committee", "92159378623"));
-            responses.add(new PotentialBuyerResponse("R3", "99043759623"));
-            responses.add(new PotentialBuyerResponse("Mother Earth", "95392608623"));
-            responses.add(new PotentialBuyerResponse("Waste Dispatchers", "9082638623"));
-
-            mAdapter = new AdapterPotentialBuyerList(responses, getActivity());
-            mAdapter.setFragManager(getFragmentManager());
-
-            recyclerView.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
-        }
+        getPotentialBuyerList();
 
         return view;
     }
@@ -114,9 +97,5 @@ public class FragmentPotentialBuyerList extends DialogFragment {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    public void setIsWaste(boolean waste) {
-        this.waste = waste;
     }
 }

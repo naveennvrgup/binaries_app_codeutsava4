@@ -164,7 +164,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="@font/roboto_slab"
-                            android:text="Deficit Crops"
+                            android:text="Deficit Crops*"
                             android:textColor="@android:color/black"
                             android:textSize="24sp"
                             android:textStyle="bold" />
@@ -202,7 +202,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="40dp"
                 android:fontFamily="@font/average_sans"
-                android:text="*Deficit crops were in high demand but limited in last cycle."
+                android:text="*Deficit crops were in high demand but stocks were limited in last cycle."
                 android:textSize="12sp" />
         </LinearLayout>
     </ScrollView>

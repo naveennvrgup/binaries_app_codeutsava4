@@ -17,28 +17,34 @@ import binaries.app.codeutsava.R;
 
 import static android.view.View.GONE;
 
-public class AdapterBuyerTop extends RecyclerView.Adapter<AdapterBuyerTop.MyViewHolder> {
+public class AdapterFilter extends RecyclerView.Adapter<AdapterFilter.MyViewHolder> {
 
     private Context context;
     private List<String> items = new ArrayList<>();
     private int rowIndex = 0;
+    private OnFilterChangeListener onFilterChangeListener = null;
 
-    public AdapterBuyerTop(Context context) {
+    public AdapterFilter(Context context) {
         this.context = context;
+    }
 
-        items.add("Seasonal");
-        items.add("Regional");
-        items.add("Seasonal");
-        items.add("Regional");
-        items.add("Seasonal");
-        items.add("Regional");
+    public void addFilters(List<String> filters){
+        items.addAll(filters);
+        notifyDataSetChanged();
+    }
+
+    public void setOnFilterChangeListener(OnFilterChangeListener onFilterChangeListener){
+        this.onFilterChangeListener = onFilterChangeListener;
+    }
+
+    public String getDefaultFilter(){
+        return (items != null) ? items.get(0) : null;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.recyclerview_adapter_buyer_top, null);
-
+        View view = LayoutInflater.from(context).inflate(R.layout.recyclerview_adapter_buyer_top, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -47,6 +53,8 @@ public class AdapterBuyerTop extends RecyclerView.Adapter<AdapterBuyerTop.MyView
         holder.buyerMainCard.setOnClickListener(view -> {
             rowIndex = position;
             notifyDataSetChanged();
+
+            if(onFilterChangeListener != null) onFilterChangeListener.notifyFilterStatus(holder.buyerText.getEditableText().toString());
         });
 
         if(position != 0) holder.view.setVisibility(GONE);
@@ -83,5 +91,9 @@ public class AdapterBuyerTop extends RecyclerView.Adapter<AdapterBuyerTop.MyView
 
             view = itemView.findViewById(R.id.recycler_buyer_view);
         }
+    }
+
+    public interface OnFilterChangeListener {
+        void notifyFilterStatus(String newFilter);
     }
 }

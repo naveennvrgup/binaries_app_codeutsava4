@@ -10,54 +10,69 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
+import binaries.app.codeutsava.restapi.utils.AppConstants;
+import binaries.app.codeutsava.restapi.utils.Misc;
 
 public class AdapterBuyerOrder extends RecyclerView.Adapter<AdapterBuyerOrder.ViewHolder> {
-    List<BuyerOrderListResponse> orders;
-    Activity activity;
-    FragmentManager fragmentManager;
+    private Activity activity;
+    private List<BuyerOrderListResponse> orders = new ArrayList<>();
 
-    public AdapterBuyerOrder(List<BuyerOrderListResponse> orders, Activity activity, FragmentManager fragmentManager) {
-        this.orders = orders;
+    public AdapterBuyerOrder(Activity activity) {
         this.activity = activity;
-        this.fragmentManager = fragmentManager;
+    }
+
+    public void reflectFilterChange(List<BuyerOrderListResponse> responses, String newFilter){
+        orders.clear();
+
+        for(BuyerOrderListResponse response : responses){
+            if(newFilter.equals(AppConstants.FILTER_APPROVED) && response.approved)
+                orders.add(response);
+
+            if(newFilter.equals(AppConstants.FILTER_PENDING) && !response.approved)
+                orders.add(response);
+        }
+
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public AdapterBuyerOrder.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(activity).inflate(R.layout.recyler_buyer_order_row, parent, false);
-
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdapterBuyerOrder.ViewHolder holder, int position) {
-        BuyerOrderListResponse orderListResponse = orders.get(position);
+        if(orders != null && !orders.isEmpty()){
+            BuyerOrderListResponse orderListResponse = orders.get(position);
 
-        holder.seller.setText(orderListResponse.seller);
-        holder.quantity.setText("Qty: " + orderListResponse.quantity);
-        holder.price.setText("₹: " + orderListResponse.price);
-        holder.foodgraintype.setText(orderListResponse.foodgraintype);
+            holder.seller.setText(orderListResponse.seller);
+            holder.quantity.setText(Misc.getHTML("Qty: " + orderListResponse.quantity));
+            holder.price.setText(Misc.getHTML("Price (₹): " + orderListResponse.price));
+            holder.foodgraintype.setText(orderListResponse.foodgraintype);
 
-        if (orderListResponse.approved) {
-            holder.approved.setTextColor(activity.getResources().getColor(R.color.colorGreen));
-            holder.approved.setText("Approved.");
-        } else {
-            holder.approved.setTextColor(activity.getResources().getColor(R.color.colorYellow));
-            holder.approved.setText("Awaiting Response");
+            if (orderListResponse.approved) {
+                holder.approved.setTextColor(activity.getResources().getColor(R.color.colorGreen));
+                holder.approved.setText("Approved.");
+            } else {
+                holder.approved.setTextColor(activity.getResources().getColor(R.color.colorYellow));
+                holder.approved.setText("Awaiting Response");
+            }
         }
     }
 
     @Override
     public int getItemCount() {
-        return orders.size();
+        return orders == null ? 0 :  orders.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView seller, quantity, price, foodgraintype, approved;
 
         public ViewHolder(@NonNull View itemView) {

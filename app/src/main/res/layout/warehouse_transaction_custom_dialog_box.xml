@@ -28,98 +28,89 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/warehouseDialogName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/average_sans"
+            android:text="WareHouse Name"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/warehouseDialogOwner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:fontFamily="@font/average_sans"
+            android:text="WareHouse Owner"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="24dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
             android:id="@+id/warehouseDialogCentre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
+            android:layout_marginStart="16dp"
             android:fontFamily="@font/average_sans"
             android:text="Warehouse Centre"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/warehouseDialogSector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp">
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/average_sans"
+            android:text="Warehouse Sector"
+            android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/warehouseDialogName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/average_sans"
-                android:text="WareHouse Name"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/warehouseDialogPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:fontFamily="@font/average_sans"
-                android:text="Price"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
+        <TextView
+            android:id="@+id/warehouseDialogDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp">
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/average_sans"
+            android:text="WareHouse Distance"
+            android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/warehouseDialogOwner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/average_sans"
-                android:text="WareHouse Owner"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/warehouseDialogFreeSpace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:fontFamily="@font/average_sans"
-                android:text="Free Space"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
+        <TextView
+            android:id="@+id/warehouseDialogFreeSpace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp">
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/average_sans"
+            android:text="Free Space"
+            android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/warehouseDialogDistance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/average_sans"
-                android:text="WareHouse Distance"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/warehouseDialogSector"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:fontFamily="@font/average_sans"
-                android:text="Warehouse Sector"
-                android:textSize="16dp" />
-
-
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/warehouseDialogPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/average_sans"
+            android:text="Price"
+            android:textSize="20sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="12dp">
 
@@ -143,7 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
             android:orientation="horizontal">

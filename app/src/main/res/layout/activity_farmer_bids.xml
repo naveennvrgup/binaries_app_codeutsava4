@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dashboardBg"
-    android:paddingTop="24dp"
-    tools:context=".restapi.activites.ActivityBuyerBidsList">
+    android:paddingTop="24dp">
 
     <LinearLayout
         android:id="@+id/act_farm_bid_main"
@@ -40,6 +39,13 @@
         android:layout_marginTop="40dp"
         android:orientation="vertical"
         android:background="@drawable/drawble_buyer_main">
+
+        <ProgressBar
+            android:id="@+id/farm_bids_prog"
+            android:layout_width="match_parent"
+            android:layout_marginTop="24dp"
+            android:layout_height="wrap_content"
+            style="@android:style/Widget.Material.ProgressBar"/>
 
         <TextView
             android:id="@+id/farm_bulk_ord_empty_text"

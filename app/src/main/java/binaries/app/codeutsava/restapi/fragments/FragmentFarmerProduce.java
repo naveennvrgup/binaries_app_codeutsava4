@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.view.View.GONE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -37,6 +40,7 @@ public class FragmentFarmerProduce extends DialogFragment {
     private RecyclerView recyclerView;
     private AdapterProduce mAdapter;
     private TextView farmProdEmptyText;
+    private ProgressBar bar;
 
     public FragmentFarmerProduce() {
     }
@@ -67,6 +71,7 @@ public class FragmentFarmerProduce extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_farmer_produce, container, false);
         recyclerView = view.findViewById(R.id.farmerProduceListRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        bar = view.findViewById(R.id.farm_prod_prog);
 
         view.findViewById(R.id.frag_far_prod_back).setOnClickListener(view1 -> dismiss());
         farmProdEmptyText = view.findViewById(R.id.farm_prod_empty_text);
@@ -94,12 +99,15 @@ public class FragmentFarmerProduce extends DialogFragment {
 
                 if(!response.isSuccessful() || response.body() == null || response.body().isEmpty())
                     farmProdEmptyText.setVisibility(View.VISIBLE);
+
+                bar.setVisibility(GONE);
             }
 
             @Override
             public void onFailure(Call<List<FarmerProduceResponse>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                 farmProdEmptyText.setVisibility(View.VISIBLE);
+                bar.setVisibility(GONE);
             }
         });
     }

@@ -26,7 +26,7 @@ public class FarmerProduceResponse implements Serializable {
                 '}';
     }
 
-    public class Location {
+    public static class Location {
         public int id;
         public String xloc;
         public String yloc;
@@ -43,7 +43,7 @@ public class FarmerProduceResponse implements Serializable {
         }
     }
 
-    public class FoodGrain {
+    public static class FoodGrain {
         public String type;
         public int life;
 

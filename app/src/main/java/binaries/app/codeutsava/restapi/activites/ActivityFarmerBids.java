@@ -15,10 +15,12 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.adapters.AdapterFarmerBids;
+import binaries.app.codeutsava.restapi.adapters.AdapterFilter;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
@@ -68,12 +70,15 @@ public class ActivityFarmerBids extends BaseActivity {
 
                         if(!response.isSuccessful() || response.body() == null || response.body().isEmpty())
                             farmBulkOrdEmptyT.setVisibility(View.VISIBLE);
+
+                        findViewById(R.id.farm_bids_prog).setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onFailure(Call<List<FarmerActiveBidListResponse>> call, Throwable t) {
                         Toast.makeText(ActivityFarmerBids.this, t.getMessage(), Toast.LENGTH_LONG).show();
                         farmBulkOrdEmptyT.setVisibility(View.VISIBLE);
+                        findViewById(R.id.farm_bids_prog).setVisibility(View.GONE);
                     }
                 });
     }

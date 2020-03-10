@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,10 +16,12 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.adapters.AdapterFarmerOrder;
+import binaries.app.codeutsava.restapi.adapters.AdapterFilter;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
@@ -27,10 +30,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityFarmerOrders extends BaseActivity {
+public class ActivityFarmerOrders extends BaseActivity{
     AdapterFarmerOrder mAdapter;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, filterRecyclerView;
     TextView recOrdEmptyText;
+    List<BuyerOrderListResponse> orders = new ArrayList<>();
+    AdapterFilter adapterFilter;
 
     @Override
     protected int getLayoutResID() {
@@ -42,12 +47,30 @@ public class ActivityFarmerOrders extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         recyclerView = findViewById(R.id.FO_recycler);
+        filterRecyclerView = findViewById(R.id.farm_rec_ord_filter);
 
         findViewById(R.id.farm_ord_back).setOnClickListener(view -> {
             Intent myIntent = new Intent(ActivityFarmerOrders.this, ActivityFarmer.class);
             startActivity(myIntent);
             finish();
         });
+
+        // filter recycler view instantiation
+        adapterFilter = new AdapterFilter(this);
+        List<String> filters = new ArrayList<>();
+        filters.add(AppConstants.FILTER_PENDING);
+        filters.add(AppConstants.FILTER_APPROVED);
+
+        adapterFilter.addFilters(filters);
+        adapterFilter.setOnFilterChangeListener(newFilter -> mAdapter.reflectFilterChange(orders, newFilter));
+
+        filterRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        filterRecyclerView.setAdapter(adapterFilter);
+
+        // main recycler view instantiation
+        mAdapter = new AdapterFarmerOrder(this);
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(ActivityFarmerOrders.this));
 
         recOrdEmptyText = findViewById(R.id.farm_ord_empty_text);
 
@@ -64,11 +87,10 @@ public class ActivityFarmerOrders extends BaseActivity {
             @Override
             public void onResponse(Call<List<BuyerOrderListResponse>> call, Response<List<BuyerOrderListResponse>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    mAdapter = new AdapterFarmerOrder(response.body(), ActivityFarmerOrders.this, getSupportFragmentManager());
+                    orders.clear();
+                    orders.addAll(response.body());
 
-                    recyclerView.setAdapter(mAdapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(ActivityFarmerOrders.this));
-                    mAdapter.notifyDataSetChanged();
+                    mAdapter.reflectFilterChange(orders, adapterFilter.getDefaultFilter());
                 }
 
                 if(!response.isSuccessful() || response.body() == null || response.body().isEmpty())

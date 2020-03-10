@@ -22,13 +22,14 @@ import binaries.app.codeutsava.restapi.model.farmer.FarmerPlaceBidPayload;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
 import binaries.app.codeutsava.restapi.utils.AppConstants;
+import binaries.app.codeutsava.restapi.utils.Misc;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AdapterFarmerBids extends RecyclerView.Adapter<AdapterFarmerBids.ViewHolder> {
-    Activity activity;
-    List<FarmerActiveBidListResponse> bids;
+    private Activity activity;
+    private List<FarmerActiveBidListResponse> bids;
 
     public AdapterFarmerBids(Activity activity, List<FarmerActiveBidListResponse> bids) {
         this.activity = activity;
@@ -39,7 +40,6 @@ public class AdapterFarmerBids extends RecyclerView.Adapter<AdapterFarmerBids.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(activity).inflate(R.layout.recycler_farmer_bids_row, null);
-
         return new ViewHolder(view);
     }
 
@@ -48,10 +48,11 @@ public class AdapterFarmerBids extends RecyclerView.Adapter<AdapterFarmerBids.Vi
         FarmerActiveBidListResponse bid = bids.get(position);
 
         holder.foodgrain.setText(bid.type.type);
-        holder.quantity.setText("Quantity: " + bid.quantity);
-        holder.deadline.setText("Deadline: " + bid.deadline);
-        holder.transno.setText("TN: " + bid.transno);
+        holder.quantity.setText(Misc.getHTML("Qty: " + bid.quantity));
+        holder.deadline.setText(Misc.getHTML("Deadline: " + bid.deadline));
+        holder.transno.setText(Misc.getHTML("TN: " + bid.transno));
 
+        // Open Alert in case of click.
         holder.itemView.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             View view = LayoutInflater.from(activity).inflate(R.layout.farmer_place_bid_dialog, null);
@@ -66,9 +67,9 @@ public class AdapterFarmerBids extends RecyclerView.Adapter<AdapterFarmerBids.Vi
             deadline = view.findViewById(R.id.fdialog_deadline);
 
             foodgrain.setText(bid.type.type);
-            quantity.setText("Quantity: " + bid.quantity);
+            quantity.setText(Misc.getHTML("Qty: " + bid.quantity));
             desc.setText(bid.description);
-            deadline.setText("Deadline: " + bid.deadline);
+            deadline.setText(Misc.getHTML("Deadline: " + bid.deadline));
 
             farmer_price = view.findViewById(R.id.farmer_bid_edittext);
             farmer_desc = view.findViewById(R.id.farmer_bid_description_edit_text);
@@ -111,7 +112,7 @@ public class AdapterFarmerBids extends RecyclerView.Adapter<AdapterFarmerBids.Vi
         return bids.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView foodgrain, quantity, transno, deadline;
 
         public ViewHolder(@NonNull View itemView) {

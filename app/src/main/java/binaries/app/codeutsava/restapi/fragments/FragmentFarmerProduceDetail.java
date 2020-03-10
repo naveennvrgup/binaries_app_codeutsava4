@@ -14,10 +14,11 @@ import androidx.fragment.app.DialogFragment;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
+import binaries.app.codeutsava.restapi.utils.Misc;
 
 public class FragmentFarmerProduceDetail extends DialogFragment {
 
-    private TextView produceFoodgrain, producePrice, produceDate, produceGrade, produceQuantity;
+    private TextView produceFoodgrain, producePrice, produceDate, produceGrade, produceQuantity, produceLife;
     private Button findWarehouseButton;
 
     public FragmentFarmerProduceDetail() {
@@ -54,15 +55,17 @@ public class FragmentFarmerProduceDetail extends DialogFragment {
         produceGrade = productDetailView.findViewById(R.id.produceGrade);
         produceFoodgrain = productDetailView.findViewById(R.id.produceFoodgrainName);
         produceQuantity = productDetailView.findViewById(R.id.produceQuantity);
+        produceLife = productDetailView.findViewById(R.id.produceLife);
         findWarehouseButton = productDetailView.findViewById(R.id.findWarehousebutton);
 
         if (produce != null) {
             // setting the texts
-            producePrice.setText("Price: " + produce.price);
-            produceDate.setText("Date: " + produce.date);
-            produceFoodgrain.setText("Foodgrain: " + produce.type.type);
-            produceGrade.setText("Grade: " + produce.grade);
-            produceQuantity.setText("Qty: " + produce.quantity);
+            producePrice.setText(produce.price + "/-");
+            produceDate.setText(produce.date);
+            produceFoodgrain.setText(Misc.getUpperForm(produce.type.type));
+            produceGrade.setText(produce.grade);
+            produceQuantity.setText(produce.quantity + " kgs.");
+            produceLife.setText(produce.type.life + "days");
         }
 
         productDetailView.findViewById(R.id.frag_far_prod_det_back).setOnClickListener(view -> dismiss());

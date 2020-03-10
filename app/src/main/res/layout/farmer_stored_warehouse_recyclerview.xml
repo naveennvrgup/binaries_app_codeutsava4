@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
         android:padding="4dp"
         app:cardCornerRadius="24dp"
         app:cardElevation="4dp">
@@ -83,7 +85,7 @@
                         android:maxLines="1"
                         android:text="Foodgrain"
                         android:textColor="@android:color/black"
-                        android:textSize="18sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -93,12 +95,12 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="4dp"
-                        android:textColor="@android:color/black"
                         android:ellipsize="end"
                         android:fontFamily="@font/average_sans"
                         android:maxLines="1"
                         android:text="Price"
-                        android:textSize="14sp" />
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
                 </RelativeLayout>
 
                 <TextView
@@ -106,6 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/average_sans"
                     android:maxLines="1"
@@ -117,11 +120,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="6dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/roboto_slab"
                     android:maxLines="1"
                     android:text="Date"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

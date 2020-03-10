@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
@@ -23,26 +24,23 @@ import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
 import binaries.app.codeutsava.restapi.utils.AppConstants;
+import binaries.app.codeutsava.restapi.utils.Misc;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.ViewHolder> {
-    private List<BuyerOrderListResponse> orders;
+    private List<BuyerOrderListResponse> orders = new ArrayList<>();
     private Activity activity;
-    private FragmentManager fragmentManager;
 
-    public AdapterFarmerOrder(List<BuyerOrderListResponse> orders, Activity activity, FragmentManager fragmentManager) {
-        this.orders = orders;
+    public AdapterFarmerOrder(Activity activity) {
         this.activity = activity;
-        this.fragmentManager = fragmentManager;
     }
 
     @NonNull
     @Override
     public AdapterFarmerOrder.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(activity).inflate(R.layout.recycler_farmer_order, parent, false);
-
         return new ViewHolder(view);
     }
 
@@ -51,15 +49,16 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
         BuyerOrderListResponse orderListResponse = orders.get(position);
 
         holder.buyer.setText(orderListResponse.buyer);
-        holder.quantity.setText("Qty: " + orderListResponse.quantity);
-        holder.price.setText("₹: " + orderListResponse.price);
+        holder.quantity.setText(Misc.getHTML("Qty: " + orderListResponse.quantity));
+        holder.price.setText(Misc.getHTML("Price (₹): " + orderListResponse.price));
         holder.foodgraintype.setText(orderListResponse.foodgraintype);
-        holder.transno.setText("ID: " + orderListResponse.transno);
+        holder.transno.setText(Misc.getHTML("TN: " + orderListResponse.transno));
 
         if (orderListResponse.approved) {
             holder.approved.setTextColor(activity.getResources().getColor(R.color.colorGreen));
             holder.approved.setText("Approved");
             holder.layout.setVisibility(View.GONE);
+
         } else {
             holder.approved.setTextColor(activity.getResources().getColor(R.color.colorYellow));
             holder.approved.setText("Awaiting Approval");
@@ -69,7 +68,21 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
         holder.reject.setOnClickListener(v -> rejectApiCall(orderListResponse.id, position));
     }
 
-    void approveApiCall(int id, int position) {
+    public void reflectFilterChange(List<BuyerOrderListResponse> norders, String filter){
+        orders.clear();
+
+        for(BuyerOrderListResponse response : norders){
+            if(filter.equals(AppConstants.FILTER_APPROVED) && response.approved)
+                orders.add(response);
+
+            if(filter.equals(AppConstants.FILTER_PENDING) && !response.approved)
+                orders.add(response);
+        }
+
+        notifyDataSetChanged();
+    }
+
+    private void approveApiCall(int id, int position) {
         FarmerOrderAcceptDialog dialog = new FarmerOrderAcceptDialog(activity, orders, id, position, AdapterFarmerOrder.this);
 
         dialog.setOnCustomClickListener(get_from -> {
@@ -99,7 +112,7 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
         dialog.show();
     }
 
-    void rejectApiCall(int id, int position) {
+    private void rejectApiCall(int id, int position) {
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
         Call<Boolean> call = apiServices.rejectOrder(
                 PreferenceManager.getDefaultSharedPreferences(activity).getString("token", AppConstants.TEMP_FARM_TOKEN), id);
@@ -124,7 +137,7 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
 
     @Override
     public int getItemCount() {
-        return orders.size();
+        return orders == null ? 0 : orders.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

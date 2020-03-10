@@ -74,6 +74,13 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
 
                         break;
 
+                    case "My Bids":
+                        if (!(activity instanceof ActivityBuyerBidsList)) {
+                            myIntent = new Intent(activity, ActivityBuyerBidsList.class);
+                            activity.startActivity(myIntent);
+                        }
+                        break;
+
                     case "About Us":
                         break;
 
@@ -88,19 +95,19 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
                         activity.startActivity(myIntent);
                         break;
 
-                    // FARMER PRODUCE
-                    case "Report Produce":
-                        FragmentFarmerFoodGrainList fragmentFarmerFoodGrainList = new FragmentFarmerFoodGrainList();
-                        fragmentFarmerFoodGrainList.setEnterTransition(new Slide(Gravity.RIGHT));
-                        fragmentFarmerFoodGrainList.setExitTransition(new Slide(Gravity.LEFT));
-                        fragmentFarmerFoodGrainList.show(((AppCompatActivity) activity).getSupportFragmentManager(), "farmerReportProduce");
-                        break;
-
+                    // FARMER BOTTOM SHEET
                     case "My Produce":
                         FragmentFarmerProduce frag = new FragmentFarmerProduce();
                         frag.setEnterTransition(new Slide(Gravity.END));
                         frag.setExitTransition(new Slide(Gravity.START));
                         frag.show(((AppCompatActivity) activity).getSupportFragmentManager(), "farmerProduce");
+                        break;
+
+                    case "Report Produce":
+                        FragmentFarmerFoodGrainList fragmentFarmerFoodGrainList = new FragmentFarmerFoodGrainList();
+                        fragmentFarmerFoodGrainList.setEnterTransition(new Slide(Gravity.RIGHT));
+                        fragmentFarmerFoodGrainList.setExitTransition(new Slide(Gravity.LEFT));
+                        fragmentFarmerFoodGrainList.show(((AppCompatActivity) activity).getSupportFragmentManager(), "farmerReportProduce");
                         break;
 
                     case "Received Orders":
@@ -116,13 +123,6 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
                         fragmentGetStoredWarehouse.setEnterTransition(new Slide(Gravity.END));
                         fragmentGetStoredWarehouse.setExitTransition(new Slide(Gravity.START));
                         fragmentGetStoredWarehouse.show(((AppCompatActivity) activity).getSupportFragmentManager(), "getStoredWarehouse");
-                        break;
-
-                    case "My Bids":
-                        if (!(activity instanceof ActivityBuyerBidsList)) {
-                            myIntent = new Intent(activity, ActivityBuyerBidsList.class);
-                            activity.startActivity(myIntent);
-                        }
                         break;
 
                     case "Bulk Orders":

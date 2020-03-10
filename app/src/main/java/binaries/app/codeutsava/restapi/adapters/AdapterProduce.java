@@ -20,6 +20,7 @@ import java.util.List;
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduceDetail;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerProduceResponse;
+import binaries.app.codeutsava.restapi.utils.Misc;
 
 public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHolder> {
     private List<FarmerProduceResponse> produces;
@@ -49,10 +50,10 @@ public class AdapterProduce extends RecyclerView.Adapter<AdapterProduce.ViewHold
         if (produces != null) {
             FarmerProduceResponse produce = produces.get(position);
 
-            holder.fgName.setText(produce.type.type);
-            holder.fgGrade.setText(Html.fromHtml("<b>Grade: </b>" + produce.grade));
-            holder.fgPrice.setText(Html.fromHtml("<b>₹:  </b>" + produce.price));
-            holder.fgDate.setText(Html.fromHtml("<b>Date: </b>" + produce.date));
+            holder.fgName.setText(Misc.getUpperForm(produce.type.type));
+            holder.fgGrade.setText(Misc.getHTML("Grade: " + produce.grade));
+            holder.fgPrice.setText(Misc.getHTML("Price (₹): " + produce.price));
+            holder.fgDate.setText(Misc.getHTML("Date: " + produce.date));
 
             // TODO: Add dynamic image loading from APIs URLs
 
