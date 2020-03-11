@@ -1,60 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--    active bid = AB-->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp">
 
-    <!--    active bid = AB-->
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:padding="10dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp">
+        <ImageView
+            android:id="@+id/ABfoodgrainImg"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/f1" />
 
-            <ImageView
-                android:id="@+id/ABfoodgrainImg"
-                android:layout_width="wrap_content"
-               android:layout_marginRight="10dp"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_launcher" />
+        <TextView
+            android:id="@+id/ABBuyerDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/ABfoodgrainImg"
+            android:ellipsize="end"
+            android:fontFamily="@font/average_sans"
+            android:maxLines="1"
+            android:text="Buyer details"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/ABBuyerDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/ABfoodgrainImg"
-                android:text="Buyer details" />
-
-            <TextView
-                android:id="@+id/ABBidSummary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ABBuyerDetails"
-                android:layout_toRightOf="@id/ABfoodgrainImg"
-                android:text="summary" />
+        <TextView
+            android:id="@+id/ABBidSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ABBuyerDetails"
+            android:layout_toEndOf="@id/ABfoodgrainImg"
+            android:fontFamily="@font/average_sans"
+            android:text="summary"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
 
-            <TextView
-                android:id="@+id/ABBuyerContact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ABBidSummary"
-                android:layout_toRightOf="@id/ABfoodgrainImg"
-                android:text="contact" />
+        <TextView
+            android:id="@+id/ABBuyerContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ABBidSummary"
+            android:layout_toEndOf="@id/ABfoodgrainImg"
+            android:fontFamily="@font/average_sans"
+            android:text="contact"
+            android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/ABDeadline"
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/ABBuyerContact"
-                android:layout_toRightOf="@id/ABBuyerContact"
-                android:text="deadline" />
+        <TextView
+            android:id="@+id/ABDeadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/ABBuyerContact"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/average_sans"
+            android:text="deadline"
+            android:textSize="15sp" />
 
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

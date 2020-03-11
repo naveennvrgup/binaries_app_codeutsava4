@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/far"
+        android:title="Farmer" />
+
+    <item
+        android:id="@+id/buy"
+        android:title="Buyer" />
+
+    <item
+        android:id="@+id/war"
+        android:title="Warehouse Owner" />
+
+    <item
+        android:id="@+id/admin"
+        android:title="Administrator" />
+
+    <item
+        android:id="@+id/del"
+        android:title="Delivery" />
+</menu>
