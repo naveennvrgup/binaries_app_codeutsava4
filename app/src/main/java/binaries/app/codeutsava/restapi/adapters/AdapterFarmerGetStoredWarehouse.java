@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import binaries.app.codeutsava.R;
@@ -58,18 +60,15 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
             holder.whQuantity.setText(Misc.getHTML("Qty: " + produce.quantity + "kgs."));
             holder.whFoodgrain.setText(Misc.getUpperForm(produce.foodgrain));
             holder.whDate.setText(Misc.getHTML("Date: " + produce.date));
-            holder.whCost.setText(Misc.getHTML("Price (₹): " + produce.cost));
+            holder.whCost.setText(Misc.getHTML("Price (₹): " + produce.cost + "/-"));
 
             long diffDays = getDateDifference(produce.date);
 
             if (diffDays + 60 >= produce.fgDeadline) {
-                Log.v("case1", String.valueOf(diffDays));
-
                 holder.whDeadline.setText("Grain may perish in " + (produce.fgDeadline - diffDays) + " days");
                 holder.whDeadline.setTextColor(activity.getResources().getColor(R.color.colorRed));
 
-
-                holder.itemView.setOnClickListener(v -> {
+                holder.cardView.setOnClickListener(v -> {
                     FarmerStorageTransactionResponse currProduceData = produces.get(position);
 
                     Bundle args = new Bundle();
@@ -77,17 +76,13 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
 
                     FragmentPotentialBuyerList buyerList = new FragmentPotentialBuyerList();
                     buyerList.setArguments(args);
-                    buyerList.show(fragManager, "....");
+                    buyerList.show(fragManager, "PotBuy");
                 });
 
             } else {
                 Log.v("case2", "case2");
                 holder.whDeadline.setVisibility(View.GONE);
             }
-
-        } else {
-            Log.v("case2", "case2");
-            holder.whDeadline.setVisibility(View.GONE);
         }
     }
 
@@ -109,10 +104,12 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView whName, whQuantity, whCost, whDate, whFoodgrain, whDeadline;
         ImageView image;
+        CardView cardView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            cardView = itemView.findViewById(R.id.getFarmerStoredWarehouse);
             whName = itemView.findViewById(R.id.fstoredWareHouseName);
             whCost = itemView.findViewById(R.id.fstoredWarehouseCost);
             whFoodgrain = itemView.findViewById(R.id.fstoredWarehouseFoodgrain);

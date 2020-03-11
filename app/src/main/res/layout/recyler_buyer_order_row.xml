@@ -7,8 +7,10 @@
     android:layout_marginTop="8dp"
     android:layout_marginEnd="16dp"
     android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="8dp"
+    app:cardCornerRadius="16dp"
     app:cardElevation="4dp">
 
     <RelativeLayout
@@ -57,15 +59,15 @@
             android:fontFamily="@font/average_sans"
             android:maxLines="1"
             android:text="Approved"
-            android:textColor="@color/colorGreen"
-            android:textSize="12sp"
+            android:textColor="@color/colorYellow"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/bo_farmer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/bo_approved"
+            android:layout_below="@id/bo_quantity"
             android:layout_marginStart="2dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="2dp"
@@ -75,14 +77,14 @@
             android:maxLines="1"
             android:text="Farmer Name"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/bo_graintype"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/bo_farmer"
+            android:layout_below="@id/bo_approved"
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
             android:layout_toEndOf="@id/rbo_line"
@@ -91,7 +93,7 @@
             android:maxLines="1"
             android:text="Grain"
             android:textColor="@android:color/black"
-            android:textSize="24sp"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
         <TextView
@@ -106,7 +108,7 @@
             android:maxLines="1"
             android:text="Quantity"
             android:textAlignment="viewEnd"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/bo_price"
@@ -124,8 +126,7 @@
             android:text="Price"
             android:textAlignment="textEnd"
             android:textColor="@android:color/black"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textSize="16sp" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

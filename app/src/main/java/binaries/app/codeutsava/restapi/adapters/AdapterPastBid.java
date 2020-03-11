@@ -19,6 +19,7 @@ import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.activites.ActivityBuyerBidDetail;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.utils.AppConstants;
+import binaries.app.codeutsava.restapi.utils.Misc;
 
 public class AdapterPastBid extends RecyclerView.Adapter<AdapterPastBid.ViewHolder> {
     Activity activity;
@@ -35,16 +36,19 @@ public class AdapterPastBid extends RecyclerView.Adapter<AdapterPastBid.ViewHold
         return new ViewHolder(view);
     }
 
-    public void reflectFilterChange(List<FarmerActiveBidListResponse> responseList, String newFilter){
+    public void reflectFilterChange(List<FarmerActiveBidListResponse> responseList, String newFilter) {
         bids.clear();
 
-        for(FarmerActiveBidListResponse response : responseList){
-            if(newFilter.equals(AppConstants.FILTER_ACTIVE) && response.isActive)
-                bids.add(response);
+        if (newFilter.equals(AppConstants.FILTER_ALL))
+            bids.addAll(responseList);
+        else
+            for (FarmerActiveBidListResponse response : responseList) {
+                if (newFilter.equals(AppConstants.FILTER_ACTIVE) && response.isActive)
+                    bids.add(response);
 
-            if(newFilter.equals(AppConstants.FILTER_INACTIVE) && !response.isActive)
-                bids.add(response);
-        }
+                if (newFilter.equals(AppConstants.FILTER_INACTIVE) && !response.isActive)
+                    bids.add(response);
+            }
 
         notifyDataSetChanged();
     }
@@ -54,10 +58,10 @@ public class AdapterPastBid extends RecyclerView.Adapter<AdapterPastBid.ViewHold
         if (bids != null) {
             FarmerActiveBidListResponse bid = bids.get(position);
 
-            holder.deadline.setText(bid.deadline);
+            holder.deadline.setText(Misc.getHTML("Deadline: " + bid.deadline));
             holder.foodgrain.setText(bid.type.type);
-            holder.quantity.setText(bid.quantity);
-            holder.transno.setText(bid.transno);
+            holder.quantity.setText(Misc.getHTML("Qty: " + bid.quantity + "kgs."));
+            holder.transno.setText(Misc.getHTML("TN: " + bid.transno));
 
             if (bid.isActive) {
                 holder.isActive.setText("Active");

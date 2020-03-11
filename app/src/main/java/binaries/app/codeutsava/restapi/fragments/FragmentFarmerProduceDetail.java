@@ -69,6 +69,7 @@ public class FragmentFarmerProduceDetail extends DialogFragment {
         }
 
         productDetailView.findViewById(R.id.frag_far_prod_det_back).setOnClickListener(view -> dismiss());
+        productDetailView.findViewById(R.id.gotoMainButton).setOnClickListener(view -> dismiss());
 
         findWarehouseButton.setOnClickListener(v -> {
             FragmentFarmerFindWarehouse findWareHouseFragment = new FragmentFarmerFindWarehouse(Integer.parseInt(produce.id), Double.parseDouble(produce.quantity));

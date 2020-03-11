@@ -58,6 +58,8 @@ public class ActivityFarmerOrders extends BaseActivity{
         // filter recycler view instantiation
         adapterFilter = new AdapterFilter(this);
         List<String> filters = new ArrayList<>();
+
+        filters.add(AppConstants.FILTER_ALL);
         filters.add(AppConstants.FILTER_PENDING);
         filters.add(AppConstants.FILTER_APPROVED);
 
@@ -69,6 +71,8 @@ public class ActivityFarmerOrders extends BaseActivity{
 
         // main recycler view instantiation
         mAdapter = new AdapterFarmerOrder(this);
+        mAdapter.setOnResponseClickedListener(this::fetchOrders);
+
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ActivityFarmerOrders.this));
 

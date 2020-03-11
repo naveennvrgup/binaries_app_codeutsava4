@@ -42,6 +42,7 @@ public class FragmentGetStoredWarehouse extends DialogFragment {
     private RecyclerView recyclerView;
     private AdapterFarmerGetStoredWarehouse mAdapter;
     private ProgressBar progressBar;
+    private TextView noWareText;
 
     private List<FarmerStorageTransactionResponse> posData = new ArrayList<>();
 
@@ -102,16 +103,20 @@ public class FragmentGetStoredWarehouse extends DialogFragment {
                     mAdapter = new AdapterFarmerGetStoredWarehouse(posData, getActivity());
                     mAdapter.setFragManager(getFragmentManager());
 
-                    progressBar.setVisibility(View.GONE);
-
                     recyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
                 }
+
+                if(!response.isSuccessful() || response.body() == null || response.body().isEmpty())
+                    noWareText.setVisibility(View.VISIBLE);
+
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<List<FarmerStorageTransactionResponse>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.GONE);
             }
         });
     }

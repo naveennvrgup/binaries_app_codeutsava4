@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -38,6 +39,8 @@ public class ActivityBuyerOrders extends BaseActivity {
     private AdapterFilter adapterFilter;
     private ProgressBar progressBar;
     private List<BuyerOrderListResponse> responseList = new ArrayList<>();
+    private SwipeRefreshLayout refreshLayout;
+    private boolean called = false;
 
     @Override
     protected int getLayoutResID() {
@@ -60,11 +63,18 @@ public class ActivityBuyerOrders extends BaseActivity {
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ActivityBuyerOrders.this));
 
+        refreshLayout = findViewById(R.id.buy_ord_refresh);
+        refreshLayout.setOnRefreshListener(() -> {
+            if(!called){
+                makeApiCall();
+            }
+        });
 
         filterRecyclerView = findViewById(R.id.buy_ord_filter);
         adapterFilter = new AdapterFilter(this);
         List<String> filters = new ArrayList<>();
 
+        filters.add(AppConstants.FILTER_ALL);
         filters.add(AppConstants.FILTER_APPROVED);
         filters.add(AppConstants.FILTER_PENDING);
 
@@ -78,6 +88,8 @@ public class ActivityBuyerOrders extends BaseActivity {
     }
 
     public void makeApiCall() {
+        called = true;
+
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
         Call<List<BuyerOrderListResponse>> call = apiServices.getBuyerOrders(
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("token", AppConstants.TEMP_FARM_TOKEN));
@@ -93,11 +105,18 @@ public class ActivityBuyerOrders extends BaseActivity {
 
                     mAdapter.reflectFilterChange(responseList, adapterFilter.getDefaultFilter());
                 }
+
+                if(refreshLayout.isRefreshing()) refreshLayout.setRefreshing(false);
+
+                called = false;
             }
 
             @Override
             public void onFailure(Call<List<BuyerOrderListResponse>> call, Throwable t) {
                 Toast.makeText(ActivityBuyerOrders.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                called = false;
+
+                if(refreshLayout.isRefreshing()) refreshLayout.setRefreshing(false);
             }
         });
     }

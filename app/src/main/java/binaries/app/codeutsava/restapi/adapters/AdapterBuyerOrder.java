@@ -26,16 +26,19 @@ public class AdapterBuyerOrder extends RecyclerView.Adapter<AdapterBuyerOrder.Vi
         this.activity = activity;
     }
 
-    public void reflectFilterChange(List<BuyerOrderListResponse> responses, String newFilter){
+    public void reflectFilterChange(List<BuyerOrderListResponse> responses, String newFilter) {
         orders.clear();
 
-        for(BuyerOrderListResponse response : responses){
-            if(newFilter.equals(AppConstants.FILTER_APPROVED) && response.approved)
-                orders.add(response);
+        if (newFilter.equals(AppConstants.FILTER_ALL))
+            orders.addAll(responses);
+        else
+            for (BuyerOrderListResponse response : responses) {
+                if (newFilter.equals(AppConstants.FILTER_APPROVED) && response.approved)
+                    orders.add(response);
 
-            if(newFilter.equals(AppConstants.FILTER_PENDING) && !response.approved)
-                orders.add(response);
-        }
+                if (newFilter.equals(AppConstants.FILTER_PENDING) && !response.approved)
+                    orders.add(response);
+            }
 
         notifyDataSetChanged();
     }
@@ -49,12 +52,13 @@ public class AdapterBuyerOrder extends RecyclerView.Adapter<AdapterBuyerOrder.Vi
 
     @Override
     public void onBindViewHolder(@NonNull AdapterBuyerOrder.ViewHolder holder, int position) {
-        if(orders != null && !orders.isEmpty()){
+        if (orders != null && !orders.isEmpty()) {
             BuyerOrderListResponse orderListResponse = orders.get(position);
 
+            holder.transNo.setText(Misc.getHTML("TN: " + orderListResponse.transno));
             holder.seller.setText(orderListResponse.seller);
-            holder.quantity.setText(Misc.getHTML("Qty: " + orderListResponse.quantity));
-            holder.price.setText(Misc.getHTML("Price (₹): " + orderListResponse.price));
+            holder.quantity.setText(Misc.getHTML("Qty: " + orderListResponse.quantity + "kgs."));
+            holder.price.setText(Misc.getHTML("Price (₹): " + orderListResponse.price + "/-"));
             holder.foodgraintype.setText(orderListResponse.foodgraintype);
 
             if (orderListResponse.approved) {
@@ -69,15 +73,16 @@ public class AdapterBuyerOrder extends RecyclerView.Adapter<AdapterBuyerOrder.Vi
 
     @Override
     public int getItemCount() {
-        return orders == null ? 0 :  orders.size();
+        return orders == null ? 0 : orders.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView seller, quantity, price, foodgraintype, approved;
+        TextView seller, quantity, price, foodgraintype, approved, transNo;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            transNo = itemView.findViewById(R.id.bo_trans_no);
             seller = itemView.findViewById(R.id.bo_farmer);
             quantity = itemView.findViewById(R.id.bo_quantity);
             price = itemView.findViewById(R.id.bo_price);

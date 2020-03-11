@@ -65,6 +65,7 @@ public class ActivityBuyerBidsList extends BaseActivity {
         filterRecyclerView = findViewById(R.id.buy_bid_list_filter);
 
         List<String> filters = new ArrayList<>();
+        filters.add(AppConstants.FILTER_ALL);
         filters.add(AppConstants.FILTER_ACTIVE);
         filters.add(AppConstants.FILTER_INACTIVE);
 

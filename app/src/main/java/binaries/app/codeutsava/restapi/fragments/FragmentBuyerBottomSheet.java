@@ -69,7 +69,7 @@ public class FragmentBuyerBottomSheet extends BottomSheetDialogFragment {
         }
 
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Home"));
-        itemsList.add(new AdapterRecyclerViewBottomSheet.Items("My Bids"));
+        itemsList.add(new AdapterRecyclerViewBottomSheet.Items("My Bulk Orders"));
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Orders"));
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("About Us"));
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Log Out"));
