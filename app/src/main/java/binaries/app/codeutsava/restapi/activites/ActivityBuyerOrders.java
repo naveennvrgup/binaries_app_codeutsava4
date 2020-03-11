@@ -71,6 +71,9 @@ public class ActivityBuyerOrders extends BaseActivity {
         adapterFilter.addFilters(filters);
         adapterFilter.setOnFilterChangeListener(newFilter -> mAdapter.reflectFilterChange(responseList, newFilter));
 
+        filterRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        filterRecyclerView.setAdapter(adapterFilter);
+
         makeApiCall();
     }
 

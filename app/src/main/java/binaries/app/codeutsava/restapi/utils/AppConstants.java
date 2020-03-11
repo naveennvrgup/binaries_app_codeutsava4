@@ -1,5 +1,7 @@
 package binaries.app.codeutsava.restapi.utils;
 
+import androidx.annotation.IntDef;
+
 public class AppConstants {
     //URL's
 
@@ -18,7 +20,6 @@ public class AppConstants {
 
     //TOKEN
     public static final String TEMP_FARM_TOKEN = "Token 63921eb897e84fda8925201d545ec2ce8128d264";
-
 
     // Filters
     public static final String FILTER_APPROVED = "Approved";
