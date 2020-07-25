@@ -67,8 +67,8 @@ public class AdapterFarmerBids extends RecyclerView.Adapter<AdapterFarmerBids.Vi
             deadline = view.findViewById(R.id.fdialog_deadline);
 
             foodgrain.setText(bid.type.type);
-            quantity.setText(Misc.getHTML("Qty: " + bid.quantity));
-            desc.setText(bid.description);
+            quantity.setText(Misc.getHTML("Qty: " + bid.quantity + "kgs."));
+            desc.setText(Misc.getHTML("Description: " + bid.description));
             deadline.setText(Misc.getHTML("Deadline: " + bid.deadline));
 
             farmer_price = view.findViewById(R.id.farmer_bid_edittext);
@@ -76,7 +76,7 @@ public class AdapterFarmerBids extends RecyclerView.Adapter<AdapterFarmerBids.Vi
 
             builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
 
-            builder.setPositiveButton("Place bid", (dialog, which) -> {
+            builder.setPositiveButton("Send Offer", (dialog, which) -> {
                 FarmerPlaceBidPayload payload = new FarmerPlaceBidPayload();
                 payload.bidno = bid.id;
                 payload.description = farmer_desc.getText().toString();

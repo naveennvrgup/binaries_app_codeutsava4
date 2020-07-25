@@ -41,6 +41,17 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/bpb_transno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_slab"
+                    android:maxLines="1"
+                    android:text="Trans No."
+                    android:textSize="14sp" />
+
+                <TextView
                     android:id="@+id/bpb_foodgrain"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -64,18 +75,6 @@
                     android:text="Quantity"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/bpb_transno"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/roboto_slab"
-                    android:maxLines="1"
-                    android:text="Trans No."
-                    android:textSize="14sp" />
-
 
                 <RelativeLayout
                     android:layout_width="match_parent"

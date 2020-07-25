@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dashboardBg"
-    android:orientation="vertical"
-    tools:context=".restapi.fragments.FragmentFarmerBids">
+    android:background="@color/dashboardBg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,19 +33,29 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/drawble_buyer_main"
-        android:orientation="horizontal">
+        android:layout_marginTop="120dp"
+        android:background="@drawable/drawble_buyer_main">
+
+        <TextView
+            android:id="@+id/farm_get_ware_store_not_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="24dp"
+            android:text="No Warehouse Storage found."
+            android:textColor="@android:color/black"
+            android:visibility="gone" />
 
         <ProgressBar
-            style="@android:style/Widget.Material.ProgressBar"
             android:id="@+id/far_get_ware_prog"
-            android:layout_marginTop="16dp"
+            style="@android:style/Widget.Material.ProgressBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/farmerStorageTransactionListRecyclerView"
@@ -56,5 +64,5 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp" />
-    </LinearLayout>
-</LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -63,7 +63,7 @@
             android:id="@+id/farmer_bid_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Bid price" />
+            android:hint="Your Offer" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

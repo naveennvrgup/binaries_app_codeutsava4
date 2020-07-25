@@ -5,7 +5,7 @@ import androidx.annotation.IntDef;
 public class AppConstants {
     //URL's
 
-    public static final String BASE_URL = "http://0942659c.ngrok.io/"; // naveen//    public static final String BASE_URL = "http://172.22.136.127:8000/";
+    public static final String BASE_URL = "http://192.168.43.70:8000/"; // naveen//    public static final String BASE_URL = "http://172.22.136.127:8000/";
 
     public static final String LOGIN_URL = "user/rest-auth/login/";
     public static final String FARMER_DETAIL_URL = "user/farmer-detail/";
@@ -24,6 +24,8 @@ public class AppConstants {
     // Filters
     public static final String FILTER_APPROVED = "Approved";
     public static final String FILTER_PENDING = "Pending";
+
+    public static final String FILTER_ALL = "All";
 
     public static final String FILTER_ACTIVE = "Active";
     public static final String FILTER_INACTIVE = "Inactive";

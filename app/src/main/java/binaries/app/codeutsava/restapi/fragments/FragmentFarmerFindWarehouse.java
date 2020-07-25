@@ -33,6 +33,7 @@ public class FragmentFarmerFindWarehouse extends DialogFragment {
     private AdapterSuggestedWarehouse mAdapter;
     private ProgressBar progressBar;
     private int produce_id, quantity;
+    private TextView noWareText;
 
     FragmentFarmerFindWarehouse(int produce_id, double quantity) {
         this.produce_id = produce_id;
@@ -64,6 +65,7 @@ public class FragmentFarmerFindWarehouse extends DialogFragment {
 
         recyclerView = view.findViewById(R.id.warehouseResultRecyclerView);
         progressBar = view.findViewById(R.id.frag_far_find_ware_progress);
+        noWareText = view.findViewById(R.id.no_ware_found_text);
 
         view.findViewById(R.id.find_ware_back).setOnClickListener(view1 -> dismiss());
 
@@ -88,11 +90,15 @@ public class FragmentFarmerFindWarehouse extends DialogFragment {
                     recyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
                 }
+
+                if(!response.isSuccessful() || response.body() == null || response.body().data.isEmpty())
+                    noWareText.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailure(Call<FarmerFindWarehouseResponse> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                noWareText.setVisibility(View.VISIBLE);
             }
         });
 

@@ -54,7 +54,7 @@ public class AdapterFilter extends RecyclerView.Adapter<AdapterFilter.MyViewHold
             rowIndex = position;
             notifyDataSetChanged();
 
-            if(onFilterChangeListener != null) onFilterChangeListener.notifyFilterStatus(holder.buyerText.getEditableText().toString());
+            if(onFilterChangeListener != null) onFilterChangeListener.notifyFilterStatus(holder.buyerText.getText().toString());
         });
 
         if(position != 0) holder.view.setVisibility(GONE);

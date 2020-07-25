@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ public class FragmentPotentialBuyerList extends DialogFragment {
     private RecyclerView recyclerView;
     private AdapterPotentialBuyerList mAdapter;
     public String foodgrain;
+    private ProgressBar progressBar;
+    private TextView noBuyerText;
 
     public FragmentPotentialBuyerList() {
         // Required empty public constructor
@@ -63,6 +66,9 @@ public class FragmentPotentialBuyerList extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_potential_buyer, container, false);
 
+        noBuyerText = view.findViewById(R.id.pot_buy_not_text);
+        progressBar = view.findViewById(R.id.pot_buy_prog);
+
         recyclerView = view.findViewById(R.id.potentialBuyerListRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
@@ -90,11 +96,19 @@ public class FragmentPotentialBuyerList extends DialogFragment {
                     recyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
                 }
+
+                if(!response.isSuccessful() || response.body() == null || response.body().isEmpty())
+                    noBuyerText.setVisibility(View.VISIBLE);
+
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<List<PotentialBuyerResponse>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+
+                noBuyerText.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
         });
     }

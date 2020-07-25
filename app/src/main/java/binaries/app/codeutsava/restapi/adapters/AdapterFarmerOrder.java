@@ -32,9 +32,14 @@ import retrofit2.Response;
 public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.ViewHolder> {
     private List<BuyerOrderListResponse> orders = new ArrayList<>();
     private Activity activity;
+    private OnResponseClickedListener listener;
 
     public AdapterFarmerOrder(Activity activity) {
         this.activity = activity;
+    }
+
+    public void setOnResponseClickedListener(OnResponseClickedListener listener){
+        this.listener = listener;
     }
 
     @NonNull
@@ -49,8 +54,8 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
         BuyerOrderListResponse orderListResponse = orders.get(position);
 
         holder.buyer.setText(orderListResponse.buyer);
-        holder.quantity.setText(Misc.getHTML("Qty: " + orderListResponse.quantity));
-        holder.price.setText(Misc.getHTML("Price (₹): " + orderListResponse.price));
+        holder.quantity.setText(Misc.getHTML("Qty: " + orderListResponse.quantity + "kgs."));
+        holder.price.setText(Misc.getHTML("Price (₹): " + orderListResponse.price + "/-"));
         holder.foodgraintype.setText(orderListResponse.foodgraintype);
         holder.transno.setText(Misc.getHTML("TN: " + orderListResponse.transno));
 
@@ -68,21 +73,26 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
         holder.reject.setOnClickListener(v -> rejectApiCall(orderListResponse.id, position));
     }
 
-    public void reflectFilterChange(List<BuyerOrderListResponse> norders, String filter){
+    public void reflectFilterChange(List<BuyerOrderListResponse> norders, String filter) {
         orders.clear();
 
-        for(BuyerOrderListResponse response : norders){
-            if(filter.equals(AppConstants.FILTER_APPROVED) && response.approved)
-                orders.add(response);
+        if (filter.equals(AppConstants.FILTER_ALL))
+            orders.addAll(norders);
+        else
+            for (BuyerOrderListResponse response : norders) {
+                if (filter.equals(AppConstants.FILTER_APPROVED) && response.approved)
+                    orders.add(response);
 
-            if(filter.equals(AppConstants.FILTER_PENDING) && !response.approved)
-                orders.add(response);
-        }
+                if (filter.equals(AppConstants.FILTER_PENDING) && !response.approved)
+                    orders.add(response);
+            }
 
         notifyDataSetChanged();
     }
 
     private void approveApiCall(int id, int position) {
+        if(listener != null) listener.onResponseClicked();
+
         FarmerOrderAcceptDialog dialog = new FarmerOrderAcceptDialog(activity, orders, id, position, AdapterFarmerOrder.this);
 
         dialog.setOnCustomClickListener(get_from -> {
@@ -100,7 +110,7 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
                     notifyItemChanged(position);
                     dialog.dismiss();
 
-                    Toast.makeText(activity, "You accepted the Order.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, "You Accepted the Order.", Toast.LENGTH_LONG).show();
                 }
 
                 @Override
@@ -113,6 +123,8 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
     }
 
     private void rejectApiCall(int id, int position) {
+        if(listener != null) listener.onResponseClicked();
+
         APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
         Call<Boolean> call = apiServices.rejectOrder(
                 PreferenceManager.getDefaultSharedPreferences(activity).getString("token", AppConstants.TEMP_FARM_TOKEN), id);
@@ -121,10 +133,7 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    orders.remove(position);
-                    notifyItemRemoved(position);
-
-                    Toast.makeText(activity, "You rejected the Order.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, "You Rejected the Order.", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -158,5 +167,9 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
             reject = itemView.findViewById(R.id.fo_reject_btn);
             layout = itemView.findViewById(R.id.recycler_farm_ord_lay);
         }
+    }
+
+    public interface OnResponseClickedListener {
+        void onResponseClicked();
     }
 }

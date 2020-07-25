@@ -114,9 +114,7 @@ public class ActivityAuthentication extends BaseActivity {
 
                 } else {
                     Toast.makeText(ActivityAuthentication.this, "login failed", Toast.LENGTH_LONG).show();
-
-                    if(authProceedLay.getVisibility() == View.GONE)
-                        authProceedLay.setVisibility(View.VISIBLE);
+                    authProceedLay.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -124,9 +122,7 @@ public class ActivityAuthentication extends BaseActivity {
             @Override
             public void onFailure(Call<SignupPayload> call, Throwable t) {
                 Toast.makeText(ActivityAuthentication.this, t.getMessage(), Toast.LENGTH_LONG).show();
-
-                if(authProceedLay.getVisibility() == View.GONE)
-                    authProceedLay.setVisibility(View.VISIBLE);
+                authProceedLay.setVisibility(View.VISIBLE);
             }
         });
 

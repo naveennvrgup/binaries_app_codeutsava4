@@ -74,7 +74,7 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
 
                         break;
 
-                    case "My Bids":
+                    case "My Bulk Orders":
                         if (!(activity instanceof ActivityBuyerBidsList)) {
                             myIntent = new Intent(activity, ActivityBuyerBidsList.class);
                             activity.startActivity(myIntent);
