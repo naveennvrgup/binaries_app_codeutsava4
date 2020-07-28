@@ -18,6 +18,7 @@ public class FarmerFindWarehouseResponse implements Serializable {
         public int centre;
         public String owner;
         public String sector;
+        public String description;
 
     }
 }

@@ -33,7 +33,7 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
     public Bundle bundle;
     private Button yes, no;
     private int whid, produce_id;
-    private TextView whPriceText, whDistanceText, whCentreText, whSectorText, whOwnerText, whAvailText, whNameText;
+    private TextView whPriceText, whDistanceText, whCentreText, whSectorText, whOwnerText, whAvailText, whNameText, whFacilities;
     private TextInputEditText produceQuantity;
 
     public CustomDialogClass(Activity a, Bundle bundle) {
@@ -57,6 +57,7 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
         String whSector = (String) bundle.getSerializable("whSector");
         String whOwner = (String) bundle.getSerializable("whowner");
         double whAvail = (Double) bundle.getSerializable("whavl");
+        String whDescription= (String) bundle.getSerializable("facilities");
 
         whid = (Integer) bundle.getSerializable("whid");
         produce_id = (Integer) bundle.getSerializable("produce_id");
@@ -69,6 +70,7 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
         whAvailText = findViewById(R.id.warehouseDialogFreeSpace);
         whNameText = findViewById(R.id.warehouseDialogName);
         produceQuantity = findViewById(R.id.storageTransactionQuantityInput);
+        whFacilities = findViewById(R.id.warehouseDialogFacilities);
 
         whNameText.setText(whName);
         whPriceText.setText(Misc.getHTML("Price (₹): " + whPrice + "/-"));
@@ -77,6 +79,7 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
         whCentreText.setText(Misc.getHTML("Centre: " + whCentre));
         whOwnerText.setText(Misc.getHTML("Owner: " + whOwner));
         whAvailText.setText(Misc.getHTML("Available Space: " + whAvail + "kgs."));
+        whFacilities.setText(Misc.getHTML("Facilities: \n" + whDescription));
 
         yes = findViewById(R.id.btnConfirmWarehouseTransaction);
         no = findViewById(R.id.btnCancelWarehouseTransaction);

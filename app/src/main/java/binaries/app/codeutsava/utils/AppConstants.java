@@ -5,7 +5,7 @@ import androidx.annotation.IntDef;
 public class AppConstants {
     //URL's
 
-    public static final String BASE_URL = "http://192.168.43.70:8000/"; // naveen//    public static final String BASE_URL = "http://172.22.136.127:8000/";
+    public static final String BASE_URL = "http://1aec8b2ebf4a.ngrok.io:8000/"; //"http://192.168.0.104:8000/"; // naveen//    public static final String BASE_URL = "http://172.22.136.127:8000/";
 
     public static final String LOGIN_URL = "user/rest-auth/login/";
     public static final String FARMER_DETAIL_URL = "user/farmer-detail/";

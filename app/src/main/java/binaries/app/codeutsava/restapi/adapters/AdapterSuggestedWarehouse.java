@@ -65,6 +65,7 @@ public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSugge
             args.putSerializable("whowner", currWarehouse.owner);
             args.putSerializable("whavl", currWarehouse.availstorage);
             args.putSerializable("produce_id", produce_id);
+            args.putSerializable("facilities", currWarehouse.description);
 
             CustomDialogClass cdd = new CustomDialogClass(activity, args);
             cdd.show();
