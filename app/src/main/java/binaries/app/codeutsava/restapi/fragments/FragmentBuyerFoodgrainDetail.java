@@ -90,8 +90,10 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
         layout = view.findViewById(R.id.quantity_input_lay);
         buttonCard = view.findViewById(R.id.setQuantitybtnLay);
 
+        foodgrain = (BuyerFoodgrainResponse) getArguments().getSerializable("foodgrain");
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new AdapterFarmer(getActivity().getSupportFragmentManager(), getActivity(), foodgrain, quantity);
+        mAdapter = new AdapterFarmer(getActivity().getSupportFragmentManager(), getActivity(), foodgrain, quantity, foodgrain.type);
         recyclerView.setNestedScrollingEnabled(true);
         recyclerView.setAdapter(mAdapter);
 
@@ -105,9 +107,6 @@ public class FragmentBuyerFoodgrainDetail extends DialogFragment {
 
             } else Toast.makeText(getContext(), "Empty values.", Toast.LENGTH_LONG).show();
         });
-
-
-        foodgrain = (BuyerFoodgrainResponse) getArguments().getSerializable("foodgrain");
 
         if (foodgrain != null && getActivity() != null) {
             fg_name.setText(foodgrain.type);

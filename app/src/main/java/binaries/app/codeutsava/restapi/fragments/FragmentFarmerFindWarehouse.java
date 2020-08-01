@@ -32,12 +32,15 @@ public class FragmentFarmerFindWarehouse extends DialogFragment {
     private RecyclerView recyclerView;
     private AdapterSuggestedWarehouse mAdapter;
     private ProgressBar progressBar;
-    private int produce_id, quantity;
+    private int produce_id;
+    private int quantity;
+    private String foodgrainName;
     private TextView noWareText;
 
-    FragmentFarmerFindWarehouse(int produce_id, double quantity) {
+    FragmentFarmerFindWarehouse(int produce_id, String foodgrainName, double quantity) {
         this.produce_id = produce_id;
-        this.quantity = (int) quantity + 1;
+        this.foodgrainName = foodgrainName;
+        this.quantity = (int) quantity+1;
     }
 
     @Override
@@ -85,7 +88,7 @@ public class FragmentFarmerFindWarehouse extends DialogFragment {
                 if (response.isSuccessful() && response.body() != null) {
                     progressBar.setVisibility(GONE);
 
-                    mAdapter = new AdapterSuggestedWarehouse(response.body().data, produce_id, getActivity(), getActivity(), getFragmentManager());
+                    mAdapter = new AdapterSuggestedWarehouse(response.body().data, produce_id, foodgrainName, quantity,  getActivity(), getActivity(), getFragmentManager());
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     recyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();

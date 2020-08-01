@@ -12,6 +12,10 @@ import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceBidResponse;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
+import binaries.app.codeutsava.restapi.model.delivery.FindDeliveryServicePayload;
+import binaries.app.codeutsava.restapi.model.delivery.FindDeliveryServiceResponse;
+import binaries.app.codeutsava.restapi.model.delivery.RequestDeliveryServicePayload;
+import binaries.app.codeutsava.restapi.model.delivery.RequestDeliveryServiceResponse;
 import binaries.app.codeutsava.restapi.model.farmer.ApproveOrderPayload;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerActiveBidListResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerDashboardRecommedationResponse;
@@ -24,10 +28,10 @@ import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionPa
 import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionResponse;
 import binaries.app.codeutsava.restapi.model.farmer.PotentialBuyerResponse;
 import binaries.app.codeutsava.restapi.model.farmer.ReportProducePayload;
-import binaries.app.codeutsava.restapi.utils.AppConstants;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -111,4 +115,12 @@ public interface APIServices {
 
     @GET("transaction/approveBid/{id}/")
     Call<String> approveBid(@Header("Authorization") String token, @Path("id") String id);
+
+    //Delivery Service
+    @POST("transaction/getDeliveryServiceList/")
+    Call<FindDeliveryServiceResponse> getDeliveryServiceList(@Header("Authorization") String token, @Body FindDeliveryServicePayload payload);
+
+    @POST("transaction/requestDelivery/")
+    Call<RequestDeliveryServiceResponse> submitDeliveryRequest(@Header("Authorization") String token, @Body RequestDeliveryServicePayload payload);
+
 }

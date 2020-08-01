@@ -2,6 +2,7 @@ package binaries.app.codeutsava.restapi.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.activites.ActivityBuyerOrders;
+import binaries.app.codeutsava.restapi.fragments.FragmentDeliveryChoice;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
@@ -37,12 +39,14 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
     private BuyerFoodgrainResponse foodgrain;
     private Activity activity;
     private int quantity, foodgrain_id;
+    private String foodgrainName;
 
-    public AdapterFarmer(FragmentManager fragmentManager, Activity activity, BuyerFoodgrainResponse foodgrain, int quantity) {
+    public AdapterFarmer(FragmentManager fragmentManager, Activity activity, BuyerFoodgrainResponse foodgrain, int quantity, String foodgrainName) {
         this.fragmentManager = fragmentManager;
         this.activity = activity;
         this.foodgrain = foodgrain;
         this.quantity = quantity;
+        this.foodgrainName = foodgrainName;
     }
 
     public void setData(int foodgrain_id, List<FarmerResponse> ldata, int quantity) {
@@ -78,47 +82,11 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
                         .setInterpolator(new AccelerateDecelerateInterpolator())
                         .start();
 
-                placeOrder(data, data.produce_id, holder.chooseBtn);
+                Bundle bundle = new Bundle();
+                FragmentDeliveryChoice fragmentDeliveryChoice = new FragmentDeliveryChoice(0, quantity, foodgrain_id, data.produce_id, data.farmer.contact, data.farmer.name, foodgrainName, data.price, "TD", 0, bundle, holder.chooseBtn, activity, fragmentManager);
+                fragmentDeliveryChoice.show(fragmentManager, "toDeliveryChoiceFromBuyer");
             });
         }
-    }
-
-    private void placeOrder(FarmerResponse data, int produce_id, Button buy) {
-        PlaceOrderPayload payload = new PlaceOrderPayload();
-        payload.farmer_contact = data.farmer.contact;
-        payload.foodgrain_id = foodgrain_id;
-        payload.quantity = quantity;
-        payload.produce_id = produce_id;
-
-        APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-        Call<PlaceOrderResponse> call = apiServices.placeOrderRequest(
-                PreferenceManager.getDefaultSharedPreferences(activity).getString("token", AppConstants.TEMP_FARM_TOKEN), payload);
-
-        call.enqueue(new Callback<PlaceOrderResponse>() {
-            @Override
-            public void onResponse(Call<PlaceOrderResponse> call, Response<PlaceOrderResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    fragmentManager.popBackStack();
-                    fragmentManager.popBackStack();
-
-                    activity.startActivity(new Intent(activity, ActivityBuyerOrders.class));
-                    activity.finish();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PlaceOrderResponse> call, Throwable t) {
-                Toast.makeText(activity, t.getMessage(), Toast.LENGTH_LONG).show();
-
-                buy.setEnabled(true);
-                buy.animate()
-                        .alpha(1.0f)
-                        .setDuration(200)
-                        .setInterpolator(new AccelerateDecelerateInterpolator())
-                        .start();
-            }
-        });
-
     }
 
     @Override

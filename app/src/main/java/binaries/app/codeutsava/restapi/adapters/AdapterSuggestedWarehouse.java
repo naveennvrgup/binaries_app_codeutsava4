@@ -18,7 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
-import binaries.app.codeutsava.restapi.fragments.CustomDialogClass;
+//import binaries.app.codeutsava.restapi.fragments.CustomDialogClass;
+import binaries.app.codeutsava.restapi.fragments.FragmentStorageQuantityBox;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerFindWarehouseResponse;
 import binaries.app.codeutsava.restapi.utils.Misc;
 
@@ -28,11 +29,15 @@ public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSugge
     Activity activity;
     FragmentManager fragmentManager;
     int produce_id;
+    double produceQuantity;
+    String foodgrianName;
 
-    public AdapterSuggestedWarehouse(List<FarmerFindWarehouseResponse.WarehouseResponse> warehouseList, int produce_id, Context context, Activity activity, FragmentManager fragmentManager) {
+    public AdapterSuggestedWarehouse(List<FarmerFindWarehouseResponse.WarehouseResponse> warehouseList, int produce_id, String foodgrainName, double quantity, Context context, Activity activity, FragmentManager fragmentManager) {
         this.warehouseList = warehouseList;
         this.context = context;
         this.activity = activity;
+        this.foodgrianName = foodgrainName;
+        this.produceQuantity = quantity;
         this.fragmentManager = fragmentManager;
         this.produce_id = produce_id;
     }
@@ -66,8 +71,10 @@ public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSugge
             args.putSerializable("whavl", currWarehouse.availstorage);
             args.putSerializable("produce_id", produce_id);
 
-            CustomDialogClass cdd = new CustomDialogClass(activity, args);
-            cdd.show();
+            FragmentStorageQuantityBox fragmentStorageQuantityBox = new FragmentStorageQuantityBox(args, produceQuantity, foodgrianName);
+            fragmentStorageQuantityBox.show(fragmentManager, "toQuantityBox");
+//            CustomDialogClass cdd = new CustomDialogClass(activity, args);
+//            cdd.show();
         });
 
     }
