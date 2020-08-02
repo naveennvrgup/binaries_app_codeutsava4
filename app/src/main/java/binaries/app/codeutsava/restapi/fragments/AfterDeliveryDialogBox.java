@@ -82,7 +82,7 @@ public class AfterDeliveryDialogBox extends Dialog implements android.view.View.
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        quantityInput = (Double) bundle.getSerializable("quantity");
+//        quantityInput = (Double) bundle.getSerializable("quantity");
         String deliverServiceName = (String) bundle.getSerializable("deliveryServiceName");
         deliveryCost = (Double) bundle.getSerializable("deliveryCost");
 
@@ -130,47 +130,74 @@ public class AfterDeliveryDialogBox extends Dialog implements android.view.View.
         switch (v.getId()) {
             case R.id.btnConfirmDeliverTransaction:
 
-                RequestDeliveryServicePayload deliveryServicePayload = new RequestDeliveryServicePayload(choice, whid, deliveryCost, deliverServiceID);
+                if(choice.equals("SD")) {
 
-                //Submit delivery request call
-                APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-                Call<RequestDeliveryServiceResponse> call = apiServices.submitDeliveryRequest(
-                        PreferenceManager.getDefaultSharedPreferences(getContext()).getString("token", AppConstants.TEMP_FARM_TOKEN), deliveryServicePayload);
+                    RequestDeliveryServicePayload deliveryServicePayload = new RequestDeliveryServicePayload(choice, whid, deliveryCost, deliverServiceID);
 
-                call.enqueue(new Callback<RequestDeliveryServiceResponse>() {
-                    @Override
-                    public void onResponse(Call<RequestDeliveryServiceResponse> call, Response<RequestDeliveryServiceResponse> response) {
-                        if(choice.equals("SD")) {
+                    //Submit delivery request call
+                    APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
+                    Call<RequestDeliveryServiceResponse> call = apiServices.submitDeliveryRequest(
+                            PreferenceManager.getDefaultSharedPreferences(getContext()).getString("token", AppConstants.TEMP_FARM_TOKEN), deliveryServicePayload);
+
+                    call.enqueue(new Callback<RequestDeliveryServiceResponse>() {
+                        @Override
+                        public void onResponse(Call<RequestDeliveryServiceResponse> call, Response<RequestDeliveryServiceResponse> response) {
                             FarmerWarehouseTransactionPayload payload = new FarmerWarehouseTransactionPayload();
                             payload.setProduceid(produce_id);
                             payload.setQuantiy(quantityInput);
                             payload.setWarehouseid(whid);
                             completeWarehouseTransactionApi(getContext(), payload, true);
+
                         }
-                        else {
+
+                        @Override
+                        public void onFailure(Call<RequestDeliveryServiceResponse> call, Throwable t) {
+                            Toast.makeText(getContext(), "Failed to request delivery service", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+                else {
+
+                    Log.d(TAG, "onClick: farmerId"+Integer.toString(farmerId));
+                    RequestDeliveryServicePayload deliveryServicePayload = new RequestDeliveryServicePayload(choice, farmerId, deliveryCost, deliverServiceID);
+
+                    //Submit delivery request call
+                    APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
+                    Call<RequestDeliveryServiceResponse> call = apiServices.submitDeliveryRequest(
+                            PreferenceManager.getDefaultSharedPreferences(getContext()).getString("token", AppConstants.TEMP_FARM_TOKEN), deliveryServicePayload);
+
+                    call.enqueue(new Callback<RequestDeliveryServiceResponse>() {
+                        @Override
+                        public void onResponse(Call<RequestDeliveryServiceResponse> call, Response<RequestDeliveryServiceResponse> response) {
                             PlaceOrderPayload payload = new PlaceOrderPayload();
                             payload.farmer_contact = farmer_contact;
                             payload.foodgrain_id = foodgrain_id;
-                            payload.quantity = (int)quantityInput;
+                            payload.quantity = (int) quantityInput;
                             payload.produce_id = produce_id;
 
                             AfterDeliveryApiCalls.completePlaceOrderTransaction(buyerActivity, buyerFragmentManager, placeOrderButton, true, payload);
-                            Intent i = new Intent(getOwnerActivity(), ActivityBuyer.class);
-                            getOwnerActivity().startActivity(i);
-                            getOwnerActivity().finish();
+                            if (getOwnerActivity() != null) {
+                                Intent i = new Intent(getOwnerActivity(), ActivityBuyer.class);
+                                getOwnerActivity().startActivity(i);
+                                getOwnerActivity().finish();
+                            } else {
+                                dismiss();
+                            }
+
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<RequestDeliveryServiceResponse> call, Throwable t) {
-                        Toast.makeText(getContext(), "Failed to request delivery service", Toast.LENGTH_LONG).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<RequestDeliveryServiceResponse> call, Throwable t) {
+                            Toast.makeText(getContext(), "Failed to request delivery service", Toast.LENGTH_LONG).show();
+                        }
+                    });
 
-                if (getOwnerActivity() != null) {
-                    Intent i = new Intent(getOwnerActivity(), ActivityFarmer.class);
-                    getOwnerActivity().startActivity(i);
-                    getOwnerActivity().finish();
+                    if (getOwnerActivity() != null) {
+                        Intent i = new Intent(getOwnerActivity(), ActivityFarmer.class);
+                        getOwnerActivity().startActivity(i);
+                        getOwnerActivity().finish();
+                    }
                 }
 
                 break;

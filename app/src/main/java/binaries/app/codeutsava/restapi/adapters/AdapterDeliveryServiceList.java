@@ -91,6 +91,7 @@ public class AdapterDeliveryServiceList extends RecyclerView.Adapter<AdapterDeli
             args.putSerializable("deliveryServiceName", currentDeliveryService.deliveryServiceName);
             args.putSerializable("deliveryCost", currentDeliveryService.totalPrice);
 
+            Log.d(TAG, "onBindViewHolder: farmerID"+ currentDeliveryService.destinationId);
             AfterDeliveryDialogBox cdd = new AfterDeliveryDialogBox(activity, foodgrainId, foodgrainName, farmerContact, produceId, quantity, farmerName, sellingPrice, choice, farmerId, currentDeliveryService.deliveryServiceId, args, placeOrderButton, buyerActivity, buyerFragmentManager);
             cdd.show();
         });

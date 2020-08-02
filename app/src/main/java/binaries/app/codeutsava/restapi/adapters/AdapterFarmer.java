@@ -3,6 +3,7 @@ package binaries.app.codeutsava.restapi.adapters;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.ContentValues.TAG;
+
 public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder> {
     private FragmentManager fragmentManager;
     private List<FarmerResponse> ldata;
@@ -50,6 +53,7 @@ public class AdapterFarmer extends RecyclerView.Adapter<AdapterFarmer.ViewHolder
     }
 
     public void setData(int foodgrain_id, List<FarmerResponse> ldata, int quantity) {
+        Log.d(TAG, "setData: foodgrainId" + foodgrain_id);
         this.foodgrain_id = foodgrain_id;
         this.ldata = ldata;
         this.quantity = quantity;

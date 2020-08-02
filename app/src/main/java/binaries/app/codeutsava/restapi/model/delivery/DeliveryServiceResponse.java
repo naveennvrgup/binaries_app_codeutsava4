@@ -5,4 +5,5 @@ public class DeliveryServiceResponse {
     public String deliveryServiceName;
     public double basePrice;
     public double totalPrice;
+    public int destinationId;
 }

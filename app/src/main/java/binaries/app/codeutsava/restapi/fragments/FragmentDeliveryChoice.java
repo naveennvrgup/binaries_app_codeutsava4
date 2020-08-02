@@ -127,9 +127,11 @@ public class FragmentDeliveryChoice extends DialogFragment implements View.OnCli
                     payload.produce_id = produce_id;
 
                     AfterDeliveryApiCalls.completePlaceOrderTransaction(buyerActivity, buyerFragmentManager, placeOrderButton, false, payload);
-                    Intent i = new Intent(getActivity(), ActivityBuyer.class);
-                    getActivity().startActivity(i);
-                    getActivity().finish();
+//                    Intent i = new Intent(getActivity(), ActivityBuyer.class);
+//                    getActivity().startActivity(i);
+//                    getActivity().finish();
+
+                    dismiss();
                 }
 
                 break;
