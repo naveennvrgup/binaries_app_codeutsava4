@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -84,15 +86,23 @@ public class ActivityBuyerBidsList extends BaseActivity {
         View view = LayoutInflater.from(this).inflate(R.layout.create_bid_dialog, null);
 
         EditText foodgrain, quantity, desc;
+        Spinner spinner;
         builder.setView(view);
 
-        foodgrain = view.findViewById(R.id.cb_foodgrain);
+        String[] items = new String[] {"Wheat", "Rice", "Corn"};
+
+        spinner = view.findViewById(R.id.create_bid_dialog_spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+
+        spinner.setAdapter(adapter);
+
+//        foodgrain = view.findViewById(R.id.cb_foodgrain);
         quantity = view.findViewById(R.id.cb_quantity);
         desc = view.findViewById(R.id.cb_description);
 
         builder.setPositiveButton("Submit", (dialog, which) -> {
             BidCreatePayload payload = new BidCreatePayload();
-            payload.foodgrain = foodgrain.getText().toString();
+            payload.foodgrain = items[spinner.getSelectedItemPosition()];
             payload.quantity = quantity.getText().toString();
             payload.description = desc.getText().toString();
 

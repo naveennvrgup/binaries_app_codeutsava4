@@ -21,8 +21,10 @@ import binaries.app.codeutsava.restapi.activites.ActivityAuthentication;
 import binaries.app.codeutsava.restapi.activites.ActivityBuyer;
 import binaries.app.codeutsava.restapi.activites.ActivityBuyerBidsList;
 import binaries.app.codeutsava.restapi.activites.ActivityBuyerOrders;
+import binaries.app.codeutsava.restapi.activites.ActivityFarmer;
 import binaries.app.codeutsava.restapi.activites.ActivityFarmerBids;
 import binaries.app.codeutsava.restapi.activites.ActivityFarmerOrders;
+import binaries.app.codeutsava.restapi.activites.ActivityTutorial;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerFoodGrainList;
 import binaries.app.codeutsava.restapi.fragments.FragmentFarmerProduce;
 import binaries.app.codeutsava.restapi.fragments.FragmentGetStoredWarehouse;
@@ -54,6 +56,14 @@ public class AdapterRecyclerViewBottomSheet extends RecyclerView.Adapter<Adapter
             holder.itemView.setOnClickListener(view -> {
 
                 switch (itemsList.get(position).itemName) {
+
+                    case "Tutorial":
+                        if (!(activity instanceof ActivityTutorial)) {
+                            myIntent = new Intent(activity, ActivityTutorial.class);
+                            activity.startActivity(myIntent);
+                            activity.finish();
+                        }
+                        break;
 
                     // FOR BUYER
                     case "Home":

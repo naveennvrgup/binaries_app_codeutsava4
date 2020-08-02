@@ -66,6 +66,7 @@ public class FragmentFarmerBottomSheet extends BottomSheetDialogFragment {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
         }
 
+        itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Tutorial"));
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("My Produce"));
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Report Produce"));
         itemsList.add(new AdapterRecyclerViewBottomSheet.Items("Received Orders"));

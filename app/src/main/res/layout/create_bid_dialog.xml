@@ -15,21 +15,32 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+    <Spinner
+        android:id="@+id/create_bid_dialog_spinner"
+        android:dropDownWidth="match_parent"
+        android:spinnerMode="dropdown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="4dp">
+        android:layout_marginBottom="4dp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/cb_foodgrain"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Food Grain" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
+    <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="4dp"-->
+    <!--        android:layout_marginEnd="16dp"-->
+    <!--        android:layout_marginBottom="4dp">-->
+
+    <!--        <com.google.android.material.textfield.TextInputEditText-->
+    <!--            android:id="@+id/cb_foodgrain"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:hint="Food Grain" />-->
+    <!--    </com.google.android.material.textfield.TextInputLayout>-->
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
