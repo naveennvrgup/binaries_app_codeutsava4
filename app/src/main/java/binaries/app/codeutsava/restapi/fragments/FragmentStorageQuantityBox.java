@@ -1,5 +1,6 @@
 package binaries.app.codeutsava.restapi.fragments;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -38,11 +39,13 @@ public class FragmentStorageQuantityBox extends DialogFragment implements View.O
     private String whName, foodgrainName;
     private double whPrice, produceQuantity;
     private int whid, produce_id;
+    private Activity activity;
     private TextView whPriceText, whDistanceText, whCentreText, whSectorText, whOwnerText, whAvailText, whNameText;
     private TextInputEditText produceQuantityText;
 
-    public FragmentStorageQuantityBox(Bundle bundle, double quantity, String foodgrainName ) {
+    public FragmentStorageQuantityBox(Activity activity, Bundle bundle, double quantity, String foodgrainName ) {
         this.bundle = bundle;
+        this.activity = activity;
         this.produceQuantity = quantity;
         this.foodgrainName = foodgrainName;
     }
@@ -130,7 +133,7 @@ public class FragmentStorageQuantityBox extends DialogFragment implements View.O
                         bundle.putSerializable("produce_id", produce_id);
                         bundle.putSerializable("quantity", quantityInput);
 
-                        FragmentDeliveryChoice fragmentDeliveryChoice = new FragmentDeliveryChoice(whid, quantityInput, 1, produce_id, "", "", foodgrainName, 0, "SD", 0, bundle, null, null, null);
+                        FragmentDeliveryChoice fragmentDeliveryChoice = new FragmentDeliveryChoice(whid, quantityInput, 1, produce_id, "", "", foodgrainName, 0, "SD", 0, bundle, null, getActivity(), null);
                         fragmentDeliveryChoice.show(getActivity().getSupportFragmentManager(), "toDeliveryServiceList");
                     }
                 }

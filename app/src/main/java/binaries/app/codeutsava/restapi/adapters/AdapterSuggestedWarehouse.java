@@ -71,7 +71,7 @@ public class AdapterSuggestedWarehouse extends RecyclerView.Adapter<AdapterSugge
             args.putSerializable("whavl", currWarehouse.availstorage);
             args.putSerializable("produce_id", produce_id);
 
-            FragmentStorageQuantityBox fragmentStorageQuantityBox = new FragmentStorageQuantityBox(args, produceQuantity, foodgrianName);
+            FragmentStorageQuantityBox fragmentStorageQuantityBox = new FragmentStorageQuantityBox(activity, args, produceQuantity, foodgrianName);
             fragmentStorageQuantityBox.show(fragmentManager, "toQuantityBox");
 //            CustomDialogClass cdd = new CustomDialogClass(activity, args);
 //            cdd.show();

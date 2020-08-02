@@ -14,20 +14,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceManager;
-
-import com.google.android.material.textfield.TextInputEditText;
 
 import binaries.app.codeutsava.R;
 import binaries.app.codeutsava.restapi.activites.ActivityBuyer;
 import binaries.app.codeutsava.restapi.activites.ActivityFarmer;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
-import binaries.app.codeutsava.restapi.model.delivery.DeliveryServiceResponse;
 import binaries.app.codeutsava.restapi.model.delivery.RequestDeliveryServicePayload;
 import binaries.app.codeutsava.restapi.model.delivery.RequestDeliveryServiceResponse;
 import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionPayload;
-import binaries.app.codeutsava.restapi.model.farmer.FarmerWarehouseTransactionResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
 import binaries.app.codeutsava.restapi.utils.AppConstants;
@@ -41,22 +38,22 @@ import static binaries.app.codeutsava.restapi.fragments.AfterDeliveryApiCalls.co
 
 public class AfterDeliveryDialogBox extends Dialog implements android.view.View.OnClickListener {
     public Bundle bundle;
+    double quantityInput, sellingPrice, deliveryCost; //common
+    TextView titleText, foodGrainText, quantityText, transactionPriceText, deliveryNameText, deliveryPriceText, totalPriceText;
     private Button yes, no;
     private int whid; //for SD
     private int produce_id, deliverServiceID; //common
-    double quantityInput, sellingPrice, deliveryCost; //common
     private int foodgrain_id, farmerId; //TD
     private String foodgrainName, farmer_name, farmer_contact;
     private String choice;
-
     private Button placeOrderButton;
     private Activity buyerActivity;
+    private Activity a;
     private FragmentManager buyerFragmentManager;
-
-    TextView titleText, foodGrainText, quantityText, transactionPriceText, deliveryNameText, deliveryPriceText, totalPriceText;
 
     public AfterDeliveryDialogBox(Activity a, int foodgrain_id, String foodgrainName, String farmer_contact, int produce_id, double quantity, String farmer_name, double sellingPrice, String choice, int farmerId, int deliverServiceID, Bundle bundle, Button btn, Activity activity, FragmentManager fragmentManager) {
         super(a);
+        this.a = a;
         this.quantityInput = quantity;
         this.farmer_contact = farmer_contact;
         this.farmer_name = farmer_name;
@@ -96,26 +93,25 @@ public class AfterDeliveryDialogBox extends Dialog implements android.view.View.
 
         quantityText.setText(Misc.getHTML("Quantity: " + quantityInput + "kgs."));
         foodGrainText.setText(foodgrainName);
-        deliveryNameText.setText("Delivery Partner: "+deliverServiceName);
+        deliveryNameText.setText("Delivery Partner: " + deliverServiceName);
         deliveryPriceText.setText(Misc.getHTML("Delivery Cost (₹): " + deliveryCost + "/-"));
 
-        if(choice=="SD") {
+        if (choice.equals("SD")) {
             String whName = (String) bundle.getSerializable("whName");
             double whPrice = (Double) bundle.getSerializable("whPrice");
-            double totalCost =  whPrice+deliveryCost;
+            double totalCost = whPrice + deliveryCost;
 
             whid = (Integer) bundle.getSerializable("whid");
             produce_id = (Integer) bundle.getSerializable("produce_id");
 
-            titleText.setText("Storing in Warehouse: "+whName);
+            titleText.setText("Storing in Warehouse: " + whName);
             transactionPriceText.setText(Misc.getHTML("Warehouse Cost (₹): " + whPrice + "/-"));
             totalPriceText.setText(Misc.getHTML("Total Cost (₹): " + totalCost + "/-"));
 
-        }
-        else {
-            titleText.setText("Buying from farmer: "+farmer_name);
-            transactionPriceText.setText(Misc.getHTML("Price (₹): " + sellingPrice+ "/-"));
-            totalPriceText.setText(Misc.getHTML("Price (₹): " + sellingPrice+deliveryCost + "/-"));
+        } else {
+            titleText.setText("Buying from farmer: " + farmer_name);
+            transactionPriceText.setText(Misc.getHTML("Price (₹): " + sellingPrice + "/-"));
+            totalPriceText.setText(Misc.getHTML("Price (₹): " + sellingPrice + deliveryCost + "/-"));
 
         }
         yes = findViewById(R.id.btnConfirmDeliverTransaction);
@@ -126,11 +122,11 @@ public class AfterDeliveryDialogBox extends Dialog implements android.view.View.
     }
 
     public void onClick(View v) {
-        Log.d(TAG, "choice: "+choice);
+        Log.d(TAG, "choice: " + choice);
         switch (v.getId()) {
             case R.id.btnConfirmDeliverTransaction:
 
-                if(choice.equals("SD")) {
+                if (choice.equals("SD")) {
 
                     RequestDeliveryServicePayload deliveryServicePayload = new RequestDeliveryServicePayload(choice, whid, deliveryCost, deliverServiceID);
 
@@ -156,10 +152,13 @@ public class AfterDeliveryDialogBox extends Dialog implements android.view.View.
                         }
                     });
 
-                }
-                else {
+                    Intent intent = new Intent(a, ActivityFarmer.class);
+                    a.startActivity(intent);
+                    a.finish();
 
-                    Log.d(TAG, "onClick: farmerId"+Integer.toString(farmerId));
+                } else {
+
+                    Log.d(TAG, "onClick: farmerId" + farmerId);
                     RequestDeliveryServicePayload deliveryServicePayload = new RequestDeliveryServicePayload(choice, farmerId, deliveryCost, deliverServiceID);
 
                     //Submit delivery request call

@@ -50,6 +50,7 @@ public class FragmentDeliveryChoice extends DialogFragment implements View.OnCli
         this.whid = whid;
         this.produce_id = produce_id;
         this.foodgrainId = foodgrainId;
+        this.activity = activity;
         this.quantityInput = quantityInput;
         this.sellingPrice = sellingPrice;
         this.foodgrainName = foodgrainName;
@@ -101,7 +102,7 @@ public class FragmentDeliveryChoice extends DialogFragment implements View.OnCli
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnYesDelivery:
-                FragmentFindDeliveryServices fragmentFindDeliveryServices = new FragmentFindDeliveryServices(whid, quantityInput, foodgrainId, produce_id, farmerContact, farmerName, foodgrainName, sellingPrice, choice, farmerId, bundle, placeOrderButton, buyerActivity, buyerFragmentManager);
+                FragmentFindDeliveryServices fragmentFindDeliveryServices = new FragmentFindDeliveryServices(activity, whid, quantityInput, foodgrainId, produce_id, farmerContact, farmerName, foodgrainName, sellingPrice, choice, farmerId, bundle, placeOrderButton, buyerActivity, buyerFragmentManager);
                 fragmentFindDeliveryServices.show(getActivity().getSupportFragmentManager(), "warehouseToDelivery");
 
                 break;

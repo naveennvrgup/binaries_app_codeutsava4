@@ -48,11 +48,13 @@ public class FragmentFindDeliveryServices extends DialogFragment {
     private Button placeOrderButton;
     private Activity buyerActivity;
     private FragmentManager buyerFragmentManager;
+    private Activity activity;
 
 
-    public FragmentFindDeliveryServices(int destinationId, double quantity, int foodgrainId, int produceId, String farmerContact, String farmer_name, String foodgrainName, double sellingPrice, String choice, int farmerId, Bundle bundle, Button btn, Activity activity, FragmentManager fragmentManager) {
+    public FragmentFindDeliveryServices(Activity activity, int destinationId, double quantity, int foodgrainId, int produceId, String farmerContact, String farmer_name, String foodgrainName, double sellingPrice, String choice, int farmerId, Bundle bundle, Button btn, Activity buyerActivity, FragmentManager fragmentManager) {
         this.destinationId = destinationId;
         this.quantity = quantity;
+        this.activity = activity;
         this.foodgrainId = foodgrainId;
         this.produceId = produceId;
         this.farmerContact = farmerContact;
@@ -63,7 +65,7 @@ public class FragmentFindDeliveryServices extends DialogFragment {
         this.choice = choice;
         this.farmerId = farmerId;
         this.placeOrderButton = btn;
-        this.buyerActivity = activity;
+        this.buyerActivity = buyerActivity;
         this.buyerFragmentManager = fragmentManager;
     }
 
@@ -119,8 +121,8 @@ public class FragmentFindDeliveryServices extends DialogFragment {
                     progressBar.setVisibility(GONE);
 
                     mAdapter = new AdapterDeliveryServiceList(response.body().deliveryServiceList,
-                            getActivity(),
-                            getActivity(),
+                            activity,
+                            activity,
                             getFragmentManager(),
                             destinationId,
                             choice,
