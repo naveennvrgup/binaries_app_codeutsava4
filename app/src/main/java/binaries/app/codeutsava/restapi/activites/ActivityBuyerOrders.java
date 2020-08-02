@@ -59,7 +59,7 @@ public class ActivityBuyerOrders extends BaseActivity {
             finish();
         });
 
-        mAdapter = new AdapterBuyerOrder(this);
+        mAdapter = new AdapterBuyerOrder(this, getSupportFragmentManager());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ActivityBuyerOrders.this));
 
