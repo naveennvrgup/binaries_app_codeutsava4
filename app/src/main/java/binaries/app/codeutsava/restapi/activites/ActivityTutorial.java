@@ -78,7 +78,7 @@ public class ActivityTutorial extends AppCompatActivity {
     }
 
     private void onBackPress() {
-        if(webView.getVisibility() == View.VISIBLE) {
+        if(webView!=null && webView.getVisibility() == View.VISIBLE) {
             webView.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
 

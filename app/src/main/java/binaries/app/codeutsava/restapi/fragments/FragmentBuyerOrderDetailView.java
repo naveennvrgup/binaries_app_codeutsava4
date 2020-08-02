@@ -124,7 +124,12 @@ public class FragmentBuyerOrderDetailView  extends DialogFragment{
                 logisticText.setText("You can collect the delivery once your order is approved");
             }
 
-            deliveredText.setVisibility(View.INVISIBLE);
+            if(delivered) {
+                deliveredText.setText("Delivered! Hope you had a hassle free experience using our app");
+            }
+            else {
+                deliveredText.setText("Your delivery is in process");
+            }
         }
 
         return view;
@@ -132,37 +137,3 @@ public class FragmentBuyerOrderDetailView  extends DialogFragment{
 
 }
 
-
-
-
-//    private void callAPI() {
-//        APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
-//        Call<List<FarmerResponse>> call = apiServices.getBuyerFarmerList(
-//                PreferenceManager.getDefaultSharedPreferences(getContext()).getString("token", AppConstants.TEMP_FARM_TOKEN), foodgrain.id);
-//
-//        call.enqueue(new Callback<List<FarmerResponse>>() {
-//            @Override
-//            public void onResponse(Call<List<FarmerResponse>> call, Response<List<FarmerResponse>> response) {
-//                if (response.isSuccessful() && response.body() != null && getActivity() != null) {
-//
-//                    progressBar.setVisibility(GONE);
-//                    searchText.setVisibility(View.VISIBLE);
-//
-//                    List<FarmerResponse> filteredFarmers = new ArrayList<>();
-//
-//                    for (FarmerResponse farmer : response.body()) {
-//                        if (farmer.quantity >= quantity)
-//                            filteredFarmers.add(farmer);
-//                    }
-//
-//                    mAdapter.setData(foodgrain.id, filteredFarmers, quantity);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<FarmerResponse>> call, Throwable t) {
-//                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-//            }
-//        });
-//    }
-//}

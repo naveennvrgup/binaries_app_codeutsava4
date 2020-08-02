@@ -48,18 +48,18 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-        <TextView
-            android:id="@+id/orderDetailFoodgrainName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/average_sans"
-            android:text="FoodGrain"
-            android:textColor="#383838"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/orderDetailFoodgrainName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/average_sans"
+                android:text="FoodGrain"
+                android:textColor="#383838"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/orderDetailSellerName"
@@ -137,41 +137,41 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/orderDetailApproved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:fontFamily="@font/roboto_slab"
-                android:text="Order Approved"
                 android:layout_marginTop="5dp"
-                android:id="@+id/orderDetailApproved"
+                android:fontFamily="@font/roboto_slab"
+                android:paddingVertical="20dp"
+                android:text="Order Approved"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingVertical="20dp"/>
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/orderDetailLogisticVerified"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/roboto_slab"
-                android:id="@+id/orderDetailLogisticVerified"
+                android:paddingVertical="20dp"
                 android:text="Delivery received by Logistics and verified"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingVertical="20dp"/>
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/orderDetailDelivered"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/roboto_slab"
-                android:id="@+id/orderDetailDelivered"
+                android:paddingVertical="20dp"
                 android:text="Delivered"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingVertical="20dp"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>
