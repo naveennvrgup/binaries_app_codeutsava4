@@ -1,10 +1,12 @@
 package binaries.app.codeutsava.restapi.fragments;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -26,9 +28,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import binaries.app.codeutsava.R;
+import binaries.app.codeutsava.restapi.activites.ActivityBuyerOrders;
 import binaries.app.codeutsava.restapi.adapters.AdapterFarmer;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
+import binaries.app.codeutsava.restapi.model.buyer.OrderStatusResponse;
+import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
 import binaries.app.codeutsava.restapi.utils.AppConstants;
@@ -43,7 +48,7 @@ public class FragmentBuyerOrderDetailView  extends DialogFragment{
 
     private Bundle bundle;
     private int transactionSaleId, logisticVerified=0;
-    Boolean delivered = false, ifDeliveryService = false;
+    Boolean delivered, ifDeliveryService;
 
 
     public FragmentBuyerOrderDetailView(Bundle bundle) {
@@ -99,38 +104,60 @@ public class FragmentBuyerOrderDetailView  extends DialogFragment{
         view.findViewById(R.id.frag_order_det_back).setOnClickListener(view1 -> dismiss());
 
 
-        //do api call here
+        APIServices apiServices = AppClient.getInstance().createService(APIServices.class);
+        Call<OrderStatusResponse> call = apiServices.getOrderStatus(
+                PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("token", AppConstants.TEMP_FARM_TOKEN), Integer.toString(transactionSaleId));
 
-        if(approved) {
-            approvedText.setText("Your order has been accepted by the farmer!");
-        }
-        else {
-            approvedText.setText("Your order is not yet approved!");
-        }
+        call.enqueue(new Callback<OrderStatusResponse>() {
+            @Override
+            public void onResponse(Call<OrderStatusResponse> call, Response<OrderStatusResponse> response) {
+                if (response.isSuccessful()) {
+                    logisticVerified = response.body().verified;
+                    ifDeliveryService = response.body().is_delivery_applicable;
+                    delivered = response.body().reached;
+                }
 
-        if(ifDeliveryService) {
-            if(logisticVerified==1)
-                logisticText.setText("Delivery verified and recieved by logistic partner");
-            else if(logisticVerified==2)
-                logisticText.setText("Oops there was some issue with the order. Please order again from different seller");
-            else
-                logisticText.setText("Our delivery partner will shortly verify the delivery!");
-        }
-        else {
-            if(approved) {
-                logisticText.setText("Since you have not opted for home delivery, you can collect it on your own");
-            }
-            else {
-                logisticText.setText("You can collect the delivery once your order is approved");
+                if(approved) {
+                    approvedText.setText("Your order has been accepted by the farmer!");
+                }
+                else {
+                    approvedText.setText("Your order is not yet approved!");
+                }
+
+                if(ifDeliveryService) {
+                    if(logisticVerified==1)
+                        logisticText.setText("Delivery verified and recieved by logistic partner");
+                    else if(logisticVerified==2)
+                        logisticText.setText("Oops there was some issue with the order. Please order again from different seller");
+                    else
+                        logisticText.setText("Our delivery partner will shortly verify the delivery!");
+                }
+                else {
+                    if(approved) {
+                        logisticText.setText("Since you have not opted for home delivery, you can collect it on your own");
+                    }
+                    else {
+                        logisticText.setText("You can collect the delivery once your order is approved");
+                    }
+
+                    if(delivered) {
+                        deliveredText.setText("At your door step. Once you receive the product give the delivery agent the otp.");
+                    }
+                    else {
+                        deliveredText.setText("Your delivery is in process");
+                    }
+                }
+
             }
 
-            if(delivered) {
-                deliveredText.setText("Delivered! Hope you had a hassle free experience using our app");
+            @Override
+            public void onFailure(Call<OrderStatusResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), "Error fetching details", Toast.LENGTH_LONG).show();
+                dismiss();
             }
-            else {
-                deliveredText.setText("Your delivery is in process");
-            }
-        }
+
+        });
+
 
         return view;
     }

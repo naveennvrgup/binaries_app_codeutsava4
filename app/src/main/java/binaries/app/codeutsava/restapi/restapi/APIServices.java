@@ -9,6 +9,7 @@ import binaries.app.codeutsava.restapi.model.buyer.BidCreatePayload;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
 import binaries.app.codeutsava.restapi.model.buyer.BuyerOrderListResponse;
 import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
+import binaries.app.codeutsava.restapi.model.buyer.OrderStatusResponse;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceBidResponse;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderPayload;
 import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
@@ -123,4 +124,6 @@ public interface APIServices {
     @POST("transaction/requestDelivery/")
     Call<RequestDeliveryServiceResponse> submitDeliveryRequest(@Header("Authorization") String token, @Body RequestDeliveryServicePayload payload);
 
+    @GET("transaction/order_details/{id}")
+    Call<OrderStatusResponse> getOrderStatus(@Header("Authorization") String token, @Path("id") String id);
 }
