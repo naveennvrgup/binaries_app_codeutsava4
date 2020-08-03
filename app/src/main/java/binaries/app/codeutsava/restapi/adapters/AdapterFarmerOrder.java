@@ -67,6 +67,7 @@ public class AdapterFarmerOrder extends RecyclerView.Adapter<AdapterFarmerOrder.
         } else {
             holder.approved.setTextColor(activity.getResources().getColor(R.color.colorYellow));
             holder.approved.setText("Awaiting Approval");
+            holder.layout.setVisibility(View.VISIBLE);
         }
 
         holder.approve.setOnClickListener(v -> approveApiCall(orderListResponse.id, position));
