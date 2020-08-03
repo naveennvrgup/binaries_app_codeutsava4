@@ -65,7 +65,7 @@ public class AdapterFarmerGetStoredWarehouse extends RecyclerView.Adapter<Adapte
             long diffDays = getDateDifference(produce.date);
 
             if (diffDays + 60 >= produce.fgDeadline) {
-                holder.whDeadline.setText("Grain may perish in " + (produce.fgDeadline - diffDays) + " days");
+                holder.whDeadline.setText("Grain may perish in " + (diffDays-produce.fgDeadline) + " days");
                 holder.whDeadline.setTextColor(activity.getResources().getColor(R.color.colorRed));
 
                 holder.cardView.setOnClickListener(v -> {

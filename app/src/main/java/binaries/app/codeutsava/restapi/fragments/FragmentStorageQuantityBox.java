@@ -99,8 +99,10 @@ public class FragmentStorageQuantityBox extends DialogFragment implements View.O
         whNameText.setText(whName);
         whPriceText.setText(Misc.getHTML("Price (₹): " + whPrice + "/-"));
         whDistanceText.setText(Misc.getHTML("Distance: " + whDistance + "kms."));
-        whSectorText.setText(Misc.getHTML("Sector: " + whSector));
+//        whSectorText.setText(Misc.getHTML("Sector: " + whSector));
         whCentreText.setText(Misc.getHTML("Centre: " + whCentre));
+        whCentreText.setVisibility(View.INVISIBLE);
+        whSectorText.setVisibility(View.INVISIBLE);
         whOwnerText.setText(Misc.getHTML("Owner: " + whOwner));
         whAvailText.setText(Misc.getHTML("Available Space: " + whAvail + "kgs."));
 
