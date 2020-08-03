@@ -1,39 +1,22 @@
 package binaries.app.codeutsava.restapi.fragments;
 
 import android.app.Dialog;
-import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import binaries.app.codeutsava.R;
-import binaries.app.codeutsava.restapi.activites.ActivityBuyerOrders;
-import binaries.app.codeutsava.restapi.adapters.AdapterFarmer;
-import binaries.app.codeutsava.restapi.model.buyer.BuyerFoodgrainResponse;
-import binaries.app.codeutsava.restapi.model.buyer.FarmerResponse;
 import binaries.app.codeutsava.restapi.model.buyer.OrderStatusResponse;
-import binaries.app.codeutsava.restapi.model.buyer.PlaceOrderResponse;
 import binaries.app.codeutsava.restapi.restapi.APIServices;
 import binaries.app.codeutsava.restapi.restapi.AppClient;
 import binaries.app.codeutsava.restapi.utils.AppConstants;
@@ -42,13 +25,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.view.View.GONE;
+public class FragmentBuyerOrderDetailView extends DialogFragment {
 
-public class FragmentBuyerOrderDetailView  extends DialogFragment{
-
+    private boolean delivered = false, ifDeliveryService = false;
     private Bundle bundle;
     private int transactionSaleId, logisticVerified=0;
-    Boolean delivered, ifDeliveryService;
+    private ProgressBar progressBar;
 
 
     public FragmentBuyerOrderDetailView(Bundle bundle) {
@@ -83,10 +65,12 @@ public class FragmentBuyerOrderDetailView  extends DialogFragment{
 
         transactionSaleId = (Integer) bundle.getSerializable("transactionSaleId");
         String sellerName = (String) bundle.getSerializable("sellerName");
-        String quantity = Integer.toString((Integer)bundle.getSerializable("quantity"));
+        String quantity = Integer.toString((Integer) bundle.getSerializable("quantity"));
         String price = Integer.toString((Integer) bundle.getSerializable("price"));
         String foodgrainName = (String) bundle.getSerializable("foodgrainName");
         Boolean approved = (Boolean) bundle.getSerializable("approved");
+
+//        progressBar = view.findViewById(R.id.buyer_order_detail_progress);
 
         foodgrainNameText = (TextView) view.findViewById(R.id.orderDetailFoodgrainName);
         sellerNameText = (TextView) view.findViewById(R.id.orderDetailSellerName);
@@ -99,7 +83,7 @@ public class FragmentBuyerOrderDetailView  extends DialogFragment{
         foodgrainNameText.setText(foodgrainName);
         sellerNameText.setText(sellerName);
         priceText.setText(Misc.getHTML("Cost (₹): " + price + "/-"));
-        quantityText.setText(Misc.getHTML("Quantity: "+quantity+" kgs."));
+        quantityText.setText(Misc.getHTML("Quantity: " + quantity + " kgs."));
 
         view.findViewById(R.id.frag_order_det_back).setOnClickListener(view1 -> dismiss());
 
@@ -118,36 +102,58 @@ public class FragmentBuyerOrderDetailView  extends DialogFragment{
                 }
 
                 if(approved) {
+                    deliveredText.setText("Your delivery is in process");
                     approvedText.setText("Your order has been accepted by the farmer!");
+                    if(ifDeliveryService) {
+                        if(logisticVerified==1) {
+                            logisticText.setText("Delivery verified and recieved by logistic partner");
+
+                            if (delivered) {
+                                deliveredText.setText("At your door step. Once you receive the product give the delivery agent the otp.");
+                            } else {
+                                deliveredText.setText("Your delivery is in process");
+                            }
+                        }
+                        else if(logisticVerified==2) {
+                            logisticText.setText("Oops there was some issue with the order. Please order again from different seller");
+                            deliveredText.setVisibility(View.INVISIBLE);
+                        }
+                        else {
+                            logisticText.setText("Our delivery partner will shortly verify the delivery!");
+
+                        }
+
+                    }
+                    else {
+                        if(approved) {
+                            logisticText.setText("Since you have not opted for home delivery, you can collect it on your own");
+                        }
+                        else {
+                            logisticText.setText("You can collect the delivery once your order is approved");
+                        }
+                        deliveredText.setVisibility(View.INVISIBLE);
+                    }
                 }
                 else {
                     approvedText.setText("Your order is not yet approved!");
+                    logisticText.setVisibility(View.INVISIBLE);
+                    deliveredText.setVisibility(View.INVISIBLE);
                 }
 
-                if(ifDeliveryService) {
-                    if(logisticVerified==1)
-                        logisticText.setText("Delivery verified and recieved by logistic partner");
-                    else if(logisticVerified==2)
-                        logisticText.setText("Oops there was some issue with the order. Please order again from different seller");
-                    else
-                        logisticText.setText("Our delivery partner will shortly verify the delivery!");
-                }
-                else {
-                    if(approved) {
-                        logisticText.setText("Since you have not opted for home delivery, you can collect it on your own");
-                    }
-                    else {
-                        logisticText.setText("You can collect the delivery once your order is approved");
-                    }
 
-                    if(delivered) {
-                        deliveredText.setText("At your door step. Once you receive the product give the delivery agent the otp.");
-                    }
-                    else {
-                        deliveredText.setText("Your delivery is in process");
-                    }
-                }
-
+//
+//                int count = 0;
+//                if (approved) count++;
+//                if (delivered) count++;
+//                if (ifDeliveryService && logisticVerified != 0) count++;
+//
+//                if (logisticVerified == 2)
+//                    progressBar.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+//                else
+//                    progressBar.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+//
+//                progressBar.setProgress((100 * count) / 3);
+////                deliveredText.setVisibility(View.INVISIBLE);
             }
 
             @Override
