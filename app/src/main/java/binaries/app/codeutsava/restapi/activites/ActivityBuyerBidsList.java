@@ -117,7 +117,7 @@ public class ActivityBuyerBidsList extends BaseActivity {
                                 getBids();
                             }
 
-                            findViewById(R.id.farm_bids_prog).setVisibility(View.GONE);
+//                            findViewById(R.id.farm_bids_prog).setVisibility(View.GONE);
                         }
 
                         @Override

@@ -109,9 +109,10 @@ public class AfterDeliveryDialogBox extends Dialog implements android.view.View.
             totalPriceText.setText(Misc.getHTML("Total Cost (₹): " + totalCost + "/-"));
 
         } else {
+            double totalCost = sellingPrice + deliveryCost;
             titleText.setText("Buying from farmer: " + farmer_name);
             transactionPriceText.setText(Misc.getHTML("Price (₹): " + sellingPrice + "/-"));
-            totalPriceText.setText(Misc.getHTML("Price (₹): " + sellingPrice + deliveryCost + "/-"));
+            totalPriceText.setText(Misc.getHTML("Price (₹): " + totalCost  + "/-"));
 
         }
         yes = findViewById(R.id.btnConfirmDeliverTransaction);
