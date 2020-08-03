@@ -16,11 +16,21 @@ public class AdapterTutorial extends RecyclerView.Adapter<AdapterTutorial.TutVie
     Activity activity;
     OnClickCallback callback;
     String[] items = new String[]{
+            "Overall App Tutorial",
             "My Produce",
             "Report Produce",
             "Received Orders",
             "My Warehouse Stores",
             "Bulk Orders",
+    };
+
+    String[] urls = new String[]{
+            "https://www.youtube.com/watch?v=kY7KsSKGoYA",
+            "https://www.youtube.com/watch?v=yB3AktoIiWs",
+            "https://www.youtube.com/watch?v=QsqjybJ3Q04",
+            "https://www.youtube.com/watch?v=vryE9DaPlws",
+            "https://www.youtube.com/watch?v=xn-TxwtVALQ",
+            "https://www.youtube.com/watch?v=ifb7I9ba07M",
     };
 
     public AdapterTutorial(Activity activity) {
@@ -41,8 +51,9 @@ public class AdapterTutorial extends RecyclerView.Adapter<AdapterTutorial.TutVie
     @Override
     public void onBindViewHolder(@NonNull TutViewHolder holder, int position) {
         holder.textView.setText(items[position]);
+        String url = urls[position];
         holder.itemView.setOnClickListener(view -> {
-            if (callback != null) callback.onClick();
+            if (callback != null) callback.onClick(url);
         });
     }
 
@@ -61,6 +72,6 @@ public class AdapterTutorial extends RecyclerView.Adapter<AdapterTutorial.TutVie
     }
 
     public interface OnClickCallback {
-        void onClick();
+        void onClick(String url);
     }
 }

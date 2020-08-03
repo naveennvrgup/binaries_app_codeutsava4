@@ -39,8 +39,8 @@ public class ActivityTutorial extends AppCompatActivity {
         recyclerView = findViewById(R.id.tut_recycler);
         AdapterTutorial tut = new AdapterTutorial(ActivityTutorial.this);
 
-        tut.setListener(() -> {
-            getTutorial();
+        tut.setListener((url) -> {
+            getTutorial(url);
 
             recyclerView.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
@@ -55,7 +55,7 @@ public class ActivityTutorial extends AppCompatActivity {
         onBackPress();
     }
 
-    private void getTutorial() {
+    private void getTutorial(String url) {
         webView = findViewById(R.id.tutorial_web_view);
 
         webView.getSettings().setJavaScriptEnabled(true);
@@ -71,7 +71,7 @@ public class ActivityTutorial extends AppCompatActivity {
             }
         });
 
-        webView.loadUrl("https://www.youtube.com/watch?v=AGcYApKfHuY");
+        webView.loadUrl(url);
 
         ImageView imageView = findViewById(R.id.tut_back);
         imageView.setOnClickListener(view -> onBackPress());
